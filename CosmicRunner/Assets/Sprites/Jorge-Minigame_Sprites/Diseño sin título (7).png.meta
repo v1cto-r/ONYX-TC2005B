@@ -1,25 +1,40 @@
 fileFormatVersion: 2
-guid: 9c5566f2a5208004a99af0ffa30d3a55
+guid: 3db9e52002f2c214fa0a4009af5c6776
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7705425546728500951
-    second: plataforma_lava2_0
+      213: 610379678248422071
+    second: "Dise\xF1o sin t\xEDtulo (7)_0"
   - first:
-      213: -8828971623262076802
-    second: plataforma_lava2_1
+      213: 46574260929060138
+    second: "Dise\xF1o sin t\xEDtulo (7)_1"
   - first:
-      213: 8806832661588167493
-    second: plataforma_lava2_2
+      213: -5517095694519910642
+    second: "Dise\xF1o sin t\xEDtulo (7)_2"
   - first:
-      213: -66036745724520454
-    second: plataforma_lava2_3
+      213: 5166192311354424689
+    second: "Dise\xF1o sin t\xEDtulo (7)_3"
   - first:
-      213: -1562216507659325151
-    second: plataforma_lava2_4
+      213: -5430984294433582345
+    second: "Dise\xF1o sin t\xEDtulo (7)_4"
   - first:
-      213: -7400062126225381988
-    second: plataforma_lava2_5
+      213: -5121485387423197178
+    second: "Dise\xF1o sin t\xEDtulo (7)_5"
+  - first:
+      213: -403028644969421889
+    second: "Dise\xF1o sin t\xEDtulo (7)_6"
+  - first:
+      213: 6152879367563060062
+    second: "Dise\xF1o sin t\xEDtulo (7)_7"
+  - first:
+      213: -6906657551747947664
+    second: "Dise\xF1o sin t\xEDtulo (7)_8"
+  - first:
+      213: 2240817392699125691
+    second: "Dise\xF1o sin t\xEDtulo (7)_9"
+  - first:
+      213: 4959358781886072812
+    second: "Dise\xF1o sin t\xEDtulo (7)_10"
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -167,133 +182,243 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: plataforma_lava2_0
+      name: "Dise\xF1o sin t\xEDtulo (7)_0"
       rect:
         serializedVersion: 2
-        x: 143
-        y: 746
-        width: 497
-        height: 117
+        x: 145
+        y: 835
+        width: 635
+        height: 112
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7dee8fba5bb2fea60800000000000000
-      internalID: 7705425546728500951
+      spriteID: 7ba4d1c5511887800800000000000000
+      internalID: 610379678248422071
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: plataforma_lava2_1
+      name: "Dise\xF1o sin t\xEDtulo (7)_1"
       rect:
         serializedVersion: 2
-        x: 685
-        y: 735
-        width: 496
-        height: 127
+        x: 867
+        y: 836
+        width: 324
+        height: 107
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e70c5772611397580800000000000000
-      internalID: -8828971623262076802
+      spriteID: a2d5a562b0775a000800000000000000
+      internalID: 46574260929060138
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: plataforma_lava2_2
+      name: "Dise\xF1o sin t\xEDtulo (7)_2"
       rect:
         serializedVersion: 2
-        x: 1225
-        y: 740
-        width: 497
-        height: 121
+        x: 1280
+        y: 834
+        width: 401
+        height: 109
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 54b454625a7283a70800000000000000
-      internalID: 8806832661588167493
+      spriteID: e0fbd4852b65f63b0800000000000000
+      internalID: -5517095694519910642
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: plataforma_lava2_3
+      name: "Dise\xF1o sin t\xEDtulo (7)_3"
       rect:
         serializedVersion: 2
         x: 142
-        y: 199
-        width: 499
+        y: 597
+        width: 597
+        height: 135
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 17d72a7198002b740800000000000000
+      internalID: 5166192311354424689
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Dise\xF1o sin t\xEDtulo (7)_4"
+      rect:
+        serializedVersion: 2
+        x: 808
+        y: 600
+        width: 458
+        height: 179
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7f29f8d0f8441a4b0800000000000000
+      internalID: -5430984294433582345
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Dise\xF1o sin t\xEDtulo (7)_5"
+      rect:
+        serializedVersion: 2
+        x: 1358
+        y: 599
+        width: 346
+        height: 134
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6085948cc24dce8b0800000000000000
+      internalID: -5121485387423197178
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Dise\xF1o sin t\xEDtulo (7)_6"
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 242
+        width: 530
+        height: 282
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fb36a4e2597286af0800000000000000
+      internalID: -403028644969421889
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Dise\xF1o sin t\xEDtulo (7)_7"
+      rect:
+        serializedVersion: 2
+        x: 690
+        y: 345
+        width: 604
+        height: 137
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e532d697f2b636550800000000000000
+      internalID: 6152879367563060062
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Dise\xF1o sin t\xEDtulo (7)_8"
+      rect:
+        serializedVersion: 2
+        x: 1378
+        y: 332
+        width: 327
+        height: 133
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0736bcabc8f9620a0800000000000000
+      internalID: -6906657551747947664
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Dise\xF1o sin t\xEDtulo (7)_9"
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 90
+        width: 657
         height: 136
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: af797fcfde3651ff0800000000000000
-      internalID: -66036745724520454
+      spriteID: bbf295adb8bf81f10800000000000000
+      internalID: 2240817392699125691
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: plataforma_lava2_4
+      name: "Dise\xF1o sin t\xEDtulo (7)_10"
       rect:
         serializedVersion: 2
-        x: 683
-        y: 218
-        width: 497
-        height: 125
+        x: 1085
+        y: 80
+        width: 435
+        height: 143
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 121f6befc54e15ae0800000000000000
-      internalID: -1562216507659325151
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: plataforma_lava2_5
-      rect:
-        serializedVersion: 2
-        x: 1224
-        y: 203
-        width: 495
-        height: 169
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: c95a38214b2bd4990800000000000000
-      internalID: -7400062126225381988
+      spriteID: ce7880c498e23d440800000000000000
+      internalID: 4959358781886072812
       vertices: []
       indices: 
       edges: []
@@ -302,7 +427,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: b20c2e567378471438fb5b1b7e7bf980
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -312,12 +437,17 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      plataforma_lava2_0: 7705425546728500951
-      plataforma_lava2_1: -8828971623262076802
-      plataforma_lava2_2: 8806832661588167493
-      plataforma_lava2_3: -66036745724520454
-      plataforma_lava2_4: -1562216507659325151
-      plataforma_lava2_5: -7400062126225381988
+      "Dise\xF1o sin t\xEDtulo (7)_0": 610379678248422071
+      "Dise\xF1o sin t\xEDtulo (7)_1": 46574260929060138
+      "Dise\xF1o sin t\xEDtulo (7)_10": 4959358781886072812
+      "Dise\xF1o sin t\xEDtulo (7)_2": -5517095694519910642
+      "Dise\xF1o sin t\xEDtulo (7)_3": 5166192311354424689
+      "Dise\xF1o sin t\xEDtulo (7)_4": -5430984294433582345
+      "Dise\xF1o sin t\xEDtulo (7)_5": -5121485387423197178
+      "Dise\xF1o sin t\xEDtulo (7)_6": -403028644969421889
+      "Dise\xF1o sin t\xEDtulo (7)_7": 6152879367563060062
+      "Dise\xF1o sin t\xEDtulo (7)_8": -6906657551747947664
+      "Dise\xF1o sin t\xEDtulo (7)_9": 2240817392699125691
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
