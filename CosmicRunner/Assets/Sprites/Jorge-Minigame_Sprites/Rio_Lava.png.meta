@@ -1,0 +1,1027 @@
+fileFormatVersion: 2
+guid: 7c25c570a3371844886542ae94d08704
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -2378422614819871419
+    second: Rio_Lava_0
+  - first:
+      213: 8251502113108829988
+    second: Rio_Lava_1
+  - first:
+      213: 7335175192266375576
+    second: Rio_Lava_2
+  - first:
+      213: 171210655155884585
+    second: Rio_Lava_3
+  - first:
+      213: 4672823716552507041
+    second: Rio_Lava_4
+  - first:
+      213: -8471453133177936909
+    second: Rio_Lava_5
+  - first:
+      213: 6170009117268468245
+    second: Rio_Lava_6
+  - first:
+      213: -1023996318797857635
+    second: Rio_Lava_7
+  - first:
+      213: -9015791710208050184
+    second: Rio_Lava_8
+  - first:
+      213: 3616808309359851052
+    second: Rio_Lava_9
+  - first:
+      213: -3136331814687720392
+    second: Rio_Lava_10
+  - first:
+      213: 3461322652898327624
+    second: Rio_Lava_11
+  - first:
+      213: 6560696566198537412
+    second: Rio_Lava_12
+  - first:
+      213: 7185063520488569051
+    second: Rio_Lava_13
+  - first:
+      213: -3556656759627570247
+    second: Rio_Lava_14
+  - first:
+      213: 5511323495999765183
+    second: Rio_Lava_15
+  - first:
+      213: -3465214662925628047
+    second: Rio_Lava_16
+  - first:
+      213: 7603401319150467158
+    second: Rio_Lava_17
+  - first:
+      213: 3402447832258260808
+    second: Rio_Lava_18
+  - first:
+      213: -5883633247854310289
+    second: Rio_Lava_19
+  - first:
+      213: 5386228197310879030
+    second: Rio_Lava_20
+  - first:
+      213: -274428904396505578
+    second: Rio_Lava_21
+  - first:
+      213: 8371698590232466042
+    second: Rio_Lava_22
+  - first:
+      213: -2164373939983525747
+    second: Rio_Lava_23
+  - first:
+      213: -2048360561866166908
+    second: Rio_Lava_24
+  - first:
+      213: 5639207368246256934
+    second: Rio_Lava_25
+  - first:
+      213: -7215600293161046508
+    second: Rio_Lava_26
+  - first:
+      213: -3718376703083035839
+    second: Rio_Lava_27
+  - first:
+      213: 8720856624194160210
+    second: Rio_Lava_28
+  - first:
+      213: -3315407931975710242
+    second: Rio_Lava_29
+  - first:
+      213: 3579017260798581071
+    second: Rio_Lava_30
+  - first:
+      213: 8181319792663880032
+    second: Rio_Lava_31
+  - first:
+      213: -2570649327304106244
+    second: Rio_Lava_32
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Rio_Lava_0
+      rect:
+        serializedVersion: 2
+        x: 290
+        y: 996
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 545e7e5bb352efed0800000000000000
+      internalID: -2378422614819871419
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rio_Lava_1
+      rect:
+        serializedVersion: 2
+        x: 1267
+        y: 991
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 427ac3b1479338270800000000000000
+      internalID: 8251502113108829988
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rio_Lava_2
+      rect:
+        serializedVersion: 2
+        x: 1367
+        y: 985
+        width: 12
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8918b4459f6cbc560800000000000000
+      internalID: 7335175192266375576
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rio_Lava_3
+      rect:
+        serializedVersion: 2
+        x: 1506
+        y: 990
+        width: 47
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 922145a0f23406200800000000000000
+      internalID: 171210655155884585
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rio_Lava_4
+      rect:
+        serializedVersion: 2
+        x: 368
+        y: 983
+        width: 9
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1aef12b996439d040800000000000000
+      internalID: 4672823716552507041
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rio_Lava_5
+      rect:
+        serializedVersion: 2
+        x: 1210
+        y: 976
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3f32f81524a5f6a80800000000000000
+      internalID: -8471453133177936909
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rio_Lava_6
+      rect:
+        serializedVersion: 2
+        x: 1723
+        y: 983
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 51265bf1a9640a550800000000000000
+      internalID: 6170009117268468245
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rio_Lava_7
+      rect:
+        serializedVersion: 2
+        x: 116
+        y: 971
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d9cfebef5c80ac1f0800000000000000
+      internalID: -1023996318797857635
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rio_Lava_8
+      rect:
+        serializedVersion: 2
+        x: 298
+        y: 962
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8fb3320153971e280800000000000000
+      internalID: -9015791710208050184
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rio_Lava_9
+      rect:
+        serializedVersion: 2
+        x: 363
+        y: 966
+        width: 9
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c263314aefb713230800000000000000
+      internalID: 3616808309359851052
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rio_Lava_10
+      rect:
+        serializedVersion: 2
+        x: 481
+        y: 961
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 83c38cfd4d28974d0800000000000000
+      internalID: -3136331814687720392
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rio_Lava_11
+      rect:
+        serializedVersion: 2
+        x: 516
+        y: 961
+        width: 13
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 84c740b2d96190030800000000000000
+      internalID: 3461322652898327624
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rio_Lava_12
+      rect:
+        serializedVersion: 2
+        x: 1080
+        y: 966
+        width: 12
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4cc836354c64c0b50800000000000000
+      internalID: 6560696566198537412
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rio_Lava_13
+      rect:
+        serializedVersion: 2
+        x: 1332
+        y: 971
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bd8b65b243976b360800000000000000
+      internalID: 7185063520488569051
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rio_Lava_14
+      rect:
+        serializedVersion: 2
+        x: 891
+        y: 958
+        width: 9
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9b32866658734aec0800000000000000
+      internalID: -3556656759627570247
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rio_Lava_15
+      rect:
+        serializedVersion: 2
+        x: 1092
+        y: 958
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fba7455f4872c7c40800000000000000
+      internalID: 5511323495999765183
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rio_Lava_16
+      rect:
+        serializedVersion: 2
+        x: 1276
+        y: 950
+        width: 19
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 17dc7d1af9519efc0800000000000000
+      internalID: -3465214662925628047
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rio_Lava_17
+      rect:
+        serializedVersion: 2
+        x: 1279
+        y: 962
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 65833b81735b48960800000000000000
+      internalID: 7603401319150467158
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rio_Lava_18
+      rect:
+        serializedVersion: 2
+        x: 1331
+        y: 950
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 84f2d88c64ce73f20800000000000000
+      internalID: 3402447832258260808
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rio_Lava_19
+      rect:
+        serializedVersion: 2
+        x: 1477
+        y: 953
+        width: 12
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f6c47f0ebb2295ea0800000000000000
+      internalID: -5883633247854310289
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rio_Lava_20
+      rect:
+        serializedVersion: 2
+        x: 1535
+        y: 958
+        width: 10
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 63558eb020abfba40800000000000000
+      internalID: 5386228197310879030
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rio_Lava_21
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 29
+        width: 1920
+        height: 926
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 61eb85d8d58013cf0800000000000000
+      internalID: -274428904396505578
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rio_Lava_22
+      rect:
+        serializedVersion: 2
+        x: 139
+        y: 941
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a72d17d338f3e2470800000000000000
+      internalID: 8371698590232466042
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rio_Lava_23
+      rect:
+        serializedVersion: 2
+        x: 927
+        y: 945
+        width: 16
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d885b227e5996f1e0800000000000000
+      internalID: -2164373939983525747
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rio_Lava_24
+      rect:
+        serializedVersion: 2
+        x: 987
+        y: 950
+        width: 11
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 48d2c02fbe2c293e0800000000000000
+      internalID: -2048360561866166908
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rio_Lava_25
+      rect:
+        serializedVersion: 2
+        x: 1140
+        y: 938
+        width: 13
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 625651f393d724e40800000000000000
+      internalID: 5639207368246256934
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rio_Lava_26
+      rect:
+        serializedVersion: 2
+        x: 1588
+        y: 948
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 41e6ee463c90ddb90800000000000000
+      internalID: -7215600293161046508
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rio_Lava_27
+      rect:
+        serializedVersion: 2
+        x: 1721
+        y: 945
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 143c5afd61ca56cc0800000000000000
+      internalID: -3718376703083035839
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rio_Lava_28
+      rect:
+        serializedVersion: 2
+        x: 1842
+        y: 945
+        width: 10
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 256843605e4b60970800000000000000
+      internalID: 8720856624194160210
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rio_Lava_29
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 927
+        width: 23
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ed943193d0e4df1d0800000000000000
+      internalID: -3315407931975710242
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rio_Lava_30
+      rect:
+        serializedVersion: 2
+        x: 793
+        y: 941
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f4914ea7c393ba130800000000000000
+      internalID: 3579017260798581071
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rio_Lava_31
+      rect:
+        serializedVersion: 2
+        x: 1592
+        y: 940
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0616a934103e98170800000000000000
+      internalID: 8181319792663880032
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rio_Lava_32
+      rect:
+        serializedVersion: 2
+        x: 1731
+        y: 938
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cfe11f38e08335cd0800000000000000
+      internalID: -2570649327304106244
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Rio_Lava_0: -2378422614819871419
+      Rio_Lava_1: 8251502113108829988
+      Rio_Lava_10: -3136331814687720392
+      Rio_Lava_11: 3461322652898327624
+      Rio_Lava_12: 6560696566198537412
+      Rio_Lava_13: 7185063520488569051
+      Rio_Lava_14: -3556656759627570247
+      Rio_Lava_15: 5511323495999765183
+      Rio_Lava_16: -3465214662925628047
+      Rio_Lava_17: 7603401319150467158
+      Rio_Lava_18: 3402447832258260808
+      Rio_Lava_19: -5883633247854310289
+      Rio_Lava_2: 7335175192266375576
+      Rio_Lava_20: 5386228197310879030
+      Rio_Lava_21: -274428904396505578
+      Rio_Lava_22: 8371698590232466042
+      Rio_Lava_23: -2164373939983525747
+      Rio_Lava_24: -2048360561866166908
+      Rio_Lava_25: 5639207368246256934
+      Rio_Lava_26: -7215600293161046508
+      Rio_Lava_27: -3718376703083035839
+      Rio_Lava_28: 8720856624194160210
+      Rio_Lava_29: -3315407931975710242
+      Rio_Lava_3: 171210655155884585
+      Rio_Lava_30: 3579017260798581071
+      Rio_Lava_31: 8181319792663880032
+      Rio_Lava_32: -2570649327304106244
+      Rio_Lava_4: 4672823716552507041
+      Rio_Lava_5: -8471453133177936909
+      Rio_Lava_6: 6170009117268468245
+      Rio_Lava_7: -1023996318797857635
+      Rio_Lava_8: -9015791710208050184
+      Rio_Lava_9: 3616808309359851052
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
