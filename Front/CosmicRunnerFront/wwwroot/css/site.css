@@ -1,0 +1,24 @@
+:root {
+  --yellow-100: #fde19a;
+  --yellow-200: #f0b310;
+  --gray-100: #f7f7f7;
+  --gray-600: #505050;
+  --gray-700: #313131;
+}
+
+html {
+  font-size: 14px;
+  position: relative;
+  min-height: 100%;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+body {
+  margin-bottom: 60px;
+}
+
