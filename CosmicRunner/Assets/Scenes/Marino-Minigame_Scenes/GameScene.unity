@@ -4096,7 +4096,7 @@ GameObject:
   - component: {fileID: 1079748716}
   - component: {fileID: 1079748715}
   m_Layer: 5
-  m_Name: Words_Count_Value
+  m_Name: Word_Count_Value
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7071,14 +7071,14 @@ RectTransform:
   m_GameObject: {fileID: 1795382011}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.1806777, y: 1.1806777, z: 1.1806777}
+  m_LocalScale: {x: 1.3059475, y: 1.3059475, z: 1.3059475}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 333013398}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -72, y: -0.2065}
+  m_AnchoredPosition: {x: -88, y: -0.2065}
   m_SizeDelta: {x: 81.4151, y: 87.3362}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1795382013
@@ -7599,8 +7599,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 2, y: -0.2065}
-  m_SizeDelta: {x: 183.6713, y: 56.276}
+  m_AnchoredPosition: {x: 58, y: -0.2065}
+  m_SizeDelta: {x: 173.44, y: 56.276}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2143453430
 MonoBehaviour:
@@ -7656,7 +7656,7 @@ MonoBehaviour:
   m_fontSizeMin: 24
   m_fontSizeMax: 64
   m_fontStyle: 0
-  m_HorizontalAlignment: 4
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
