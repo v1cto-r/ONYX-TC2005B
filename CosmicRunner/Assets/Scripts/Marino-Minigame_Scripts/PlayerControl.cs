@@ -174,8 +174,12 @@ public class PlayerControl : MonoBehaviour
 
         foreach (Collider2D colliderAtPoint in collidersAtPoint)
         {
-            BoxControl boxControl = colliderAtPoint.GetComponent<BoxControl>();
-            if (boxControl != null)
+            if (!colliderAtPoint.CompareTag("Box"))
+            {
+                continue;
+            }
+
+            if (colliderAtPoint.TryGetComponent<BoxControl>(out BoxControl boxControl))
             {
                 return boxControl;
             }

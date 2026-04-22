@@ -734,7 +734,7 @@ GameObject:
   - component: {fileID: 141936540}
   m_Layer: 0
   m_Name: Word_Box (2)
-  m_TagString: Untagged
+  m_TagString: Box
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5076,7 +5076,7 @@ GameObject:
   - component: {fileID: 958978121}
   m_Layer: 0
   m_Name: Word_Box (1)
-  m_TagString: Untagged
+  m_TagString: Box
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5447,7 +5447,7 @@ GameObject:
   - component: {fileID: 1092587852}
   - component: {fileID: 1092587853}
   m_Layer: 0
-  m_Name: Astronauta_0
+  m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7076,7 +7076,7 @@ Tilemap:
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
-  m_Color: {r: 1, g: 1, b: 1, a: 0.33333334}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.27450982}
   m_Origin: {x: -11, y: -7, z: 0}
   m_Size: {x: 22, y: 13, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
@@ -7348,7 +7348,7 @@ GameObject:
   - component: {fileID: 1304727344}
   m_Layer: 0
   m_Name: Word_Box
-  m_TagString: Untagged
+  m_TagString: Box
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9078,8 +9078,8 @@ GameObject:
   - component: {fileID: 1826422451}
   - component: {fileID: 1826422450}
   m_Layer: 0
-  m_Name: monster_0
-  m_TagString: Untagged
+  m_Name: Enemy
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

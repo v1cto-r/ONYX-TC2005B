@@ -22,7 +22,7 @@ public class BoxControl : MonoBehaviour
                 continue;
             }
 
-            if (colliderAtTarget.GetComponent<BoxControl>() != null)
+            if (colliderAtTarget.CompareTag("Box"))
             {
                 return false;
             }
