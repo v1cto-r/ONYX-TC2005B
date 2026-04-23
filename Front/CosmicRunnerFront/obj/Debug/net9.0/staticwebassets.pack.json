@@ -5,6 +5,42 @@
       "PackagePath": "staticwebassets/CosmicRunnerFront.qk8fk242wd.bundle.scp.css"
     },
     {
+      "Id": "/Users/victor/Documents/TEC/4/Software/ONYX-TC2005B/Front/CosmicRunnerFront/wwwroot/assets/icons/award_star.svg",
+      "PackagePath": "staticwebassets/assets/icons/award_star.svg"
+    },
+    {
+      "Id": "/Users/victor/Documents/TEC/4/Software/ONYX-TC2005B/Front/CosmicRunnerFront/wwwroot/assets/icons/book.svg",
+      "PackagePath": "staticwebassets/assets/icons/book.svg"
+    },
+    {
+      "Id": "/Users/victor/Documents/TEC/4/Software/ONYX-TC2005B/Front/CosmicRunnerFront/wwwroot/assets/icons/home.svg",
+      "PackagePath": "staticwebassets/assets/icons/home.svg"
+    },
+    {
+      "Id": "/Users/victor/Documents/TEC/4/Software/ONYX-TC2005B/Front/CosmicRunnerFront/wwwroot/assets/icons/leaderboard.svg",
+      "PackagePath": "staticwebassets/assets/icons/leaderboard.svg"
+    },
+    {
+      "Id": "/Users/victor/Documents/TEC/4/Software/ONYX-TC2005B/Front/CosmicRunnerFront/wwwroot/assets/icons/social_leaderboard.svg",
+      "PackagePath": "staticwebassets/assets/icons/social_leaderboard.svg"
+    },
+    {
+      "Id": "/Users/victor/Documents/TEC/4/Software/ONYX-TC2005B/Front/CosmicRunnerFront/wwwroot/assets/icons/star_shine.svg",
+      "PackagePath": "staticwebassets/assets/icons/star_shine.svg"
+    },
+    {
+      "Id": "/Users/victor/Documents/TEC/4/Software/ONYX-TC2005B/Front/CosmicRunnerFront/wwwroot/assets/logos/whirlpool.webp",
+      "PackagePath": "staticwebassets/assets/logos/whirlpool.webp"
+    },
+    {
+      "Id": "/Users/victor/Documents/TEC/4/Software/ONYX-TC2005B/Front/CosmicRunnerFront/wwwroot/assets/logos/whirlpool_w.png",
+      "PackagePath": "staticwebassets/assets/logos/whirlpool_w.png"
+    },
+    {
+      "Id": "/Users/victor/Documents/TEC/4/Software/ONYX-TC2005B/Front/CosmicRunnerFront/wwwroot/assets/random/image.png",
+      "PackagePath": "staticwebassets/assets/random/image.png"
+    },
+    {
       "Id": "/Users/victor/Documents/TEC/4/Software/ONYX-TC2005B/Front/CosmicRunnerFront/wwwroot/css/site.css",
       "PackagePath": "staticwebassets/css/site.css"
     },

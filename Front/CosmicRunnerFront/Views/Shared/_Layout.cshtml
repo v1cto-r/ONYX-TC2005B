@@ -9,12 +9,12 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/CosmicRunnerFront.styles.css" asp-append-version="true" />
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
-                  <img src="~/assets/logos/whirlpool.webp"/>
+                  <img src="~/assets/logos/whirlpool.webp" />
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -22,26 +22,80 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        <li class="nav-item">  
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">
+                              <img src="~/assets/icons/home.svg" />
+                              <p>Inicio</p>
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">
+                              <img src="~/assets/icons/award_star.svg" />
+                              <p>Clasificación</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">
+                              <img src="~/assets/icons/star_shine.svg" />
+                              <p>Prompts</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">
+                              <img src="~/assets/icons/book.svg" />
+                              <p>Capacitación</p>
+                            </a>
+                        </li>
+                        <li class="nav-item user-profile">
+                            <img src="~/assets/random/user.png" />
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
-    <div class="container">
+    <div class="container flex-grow-1">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
     <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2026 - Cosmic Runner - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        <div class="container row">
+            <div class="col-3">
+              <img src="~/assets/logos/whirlpool_w.png" />
+            </div>
+            <div class="col-3">
+              <h5>Productos</h5>
+              <ul>
+                <li>Lavadoras</li>
+                <li>Secadoras</li>
+                <li>Refrigeradores</li>
+                <li>Microondas</li>
+                <li>Pequeños Electrodomésticos</li>
+              </ul>
+            </div>
+            <div class="col-3">
+              <h5>Conoce a Whirlpool</h5>
+              <ul>
+                <li>Politica de Privacidad</li>
+                <li>Terminos y Condiciones</li>
+                <li>Nuestra Marca</li>
+                <li>Responsabilidad Social</li>
+                <li>Vision, Mision y Valores</li>
+                <li>Nuestra Historia</li>
+                <li>Manual de Integridad</li>
+              </ul>
+            </div>
+            <div class="col-3">
+              <h5>Atención a Clientes</h5>
+              <ul>
+                <li>Tel: +52 81 8329 2100</li>
+                <li>Email: clientes@whirlpool.com</li>
+                <li>Contactanos</li>
+                <li>Quejas y sugerencias</li>
+              </ul>
+            </div>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
