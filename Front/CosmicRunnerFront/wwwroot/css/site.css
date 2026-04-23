@@ -8,8 +8,6 @@
 
 html {
   font-size: 14px;
-  position: relative;
-  min-height: 100%;
 }
 
 @media (min-width: 768px) {
@@ -18,7 +16,75 @@ html {
   }
 }
 
-body {
-  margin-bottom: 60px;
+.navbar {
+  padding: 0px 128px;
 }
 
+.navbar-brand img {
+  width: 140px;
+  padding: 16px 0px;
+}
+
+.navbar-nav {
+  justify-content: end;
+  align-items: center;
+}
+
+.nav-item {
+  margin: 0px 8px;
+}
+
+.nav-link {
+  padding: 0px 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.nav-link p {
+  margin-bottom: 0px;
+}
+
+.user-profile {
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid var(--yellow-200);
+}
+
+.user-profile img {
+  width: 48px;
+  height: 48px;
+}
+
+footer {
+  background: var(--gray-700);
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 1rem 0;
+  position: static !important;
+  line-height: normal !important;
+}
+
+footer ul {
+  list-style: none;
+  padding: 0;
+}
+
+footer .container {
+  margin-top: 32px;
+}
+
+footer img {
+  width: 180px;
+}
+
+footer h5 {
+  color: var(--yellow-200);
+  margin-bottom: 16px;
+}
+
+footer li {
+  color: var(--gray-100);
+  margin-bottom: 8px;
+}

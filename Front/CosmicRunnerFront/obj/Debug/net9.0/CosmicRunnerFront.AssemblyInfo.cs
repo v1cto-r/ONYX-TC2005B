@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CosmicRunnerFront")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f068a0d947df7572dc2e0898ef0519dfdb43b54a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f614bb13753eb049d6042a6203365341dfd32c13")]
 [assembly: System.Reflection.AssemblyProductAttribute("CosmicRunnerFront")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CosmicRunnerFront")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
