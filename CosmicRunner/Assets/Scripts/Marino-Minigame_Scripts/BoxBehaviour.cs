@@ -12,6 +12,17 @@ public class BoxBehaviour : MonoBehaviour
     {
         if (trigger.gameObject.CompareTag("Collector"))
         {
+            PromptsControl promptsControl = PromptsControl.Instance;
+            if (promptsControl == null)
+            {
+                promptsControl = FindAnyObjectByType<PromptsControl>(FindObjectsInactive.Include);
+            }
+
+            if (promptsControl != null)
+            {
+                promptsControl.HandleBoxCollected();
+            }
+
             Destroy(gameObject);
             Debug.Log("Box Collected!");
         }
