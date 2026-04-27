@@ -3876,7 +3876,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 996041009}
   m_CullTransparentMesh: 1
---- !u!1 &1032782360
+--- !u!1 &1078512156
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3884,8 +3884,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1032782362}
-  - component: {fileID: 1032782361}
+  - component: {fileID: 1078512158}
+  - component: {fileID: 1078512157}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -3893,16 +3893,16 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1032782361
+--- !u!114 &1078512157
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1032782360}
+  m_GameObject: {fileID: 1078512156}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f441964cb1e13f48a73f9aa2438b2f6, type: 3}
+  m_Script: {fileID: 11500000, guid: afcd6c1a6bfe5dd40b699eabc228e89b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameController
   mainMenuScene: MainMenu
@@ -3911,16 +3911,16 @@ MonoBehaviour:
   time: 10
   timeRemaining: 0
   currentState: 0
---- !u!4 &1032782362
+--- !u!4 &1078512158
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1032782360}
+  m_GameObject: {fileID: 1078512156}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 623.33655, y: 394.5486, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8286,4 +8286,4 @@ SceneRoots:
   - {fileID: 862745004}
   - {fileID: 244386433}
   - {fileID: 705609612}
-  - {fileID: 1032782362}
+  - {fileID: 1078512158}
