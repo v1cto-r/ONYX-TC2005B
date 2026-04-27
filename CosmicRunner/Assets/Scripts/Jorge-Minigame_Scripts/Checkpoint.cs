@@ -2,17 +2,24 @@ using UnityEngine;
 
 public class Checkpoint : MonoBehaviour
 {
+    // referencia al manejador de preguntas
+    public UIQuestionManager uiManager;
+
+    // variable para evitar que el checkpoint se active mas de una vez
+    private bool activated = false;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Algo entró");
-
-        if (collision.CompareTag("Player"))
+        // se verifica que el objeto que entra sea el jugador
+        // y que el checkpoint no haya sido activado antes
+        if (collision.CompareTag("Player") && !activated)
         {
-            Debug.Log("Jugador detectado");
+            // se marca como activado para que no se repita
+            activated = true;
 
-            CheckpointManager.instance.respawnPoint = transform.position;
-
-            Debug.Log("Checkpoint activado");
+            // se manda la posicion del checkpoint al sistema de preguntas
+            // para que si responde bien, se guarde como respawn
+            uiManager.ShowQuestion(transform.position);
         }
     }
 }

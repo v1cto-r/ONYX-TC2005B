@@ -4,13 +4,13 @@ public class DeadZone : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        // si el jugador toca la zona de muerte
         if (collision.CompareTag("Player"))
         {
-            Rigidbody2D rb = collision.GetComponent<Rigidbody2D>();
+            // pierde una vida
+            GameControl.Instance.SpendLives();
 
-            if (rb != null)
-                rb.linearVelocity = Vector2.zero;
-
+            // vuelve al ultimo checkpoint guardado
             collision.transform.position = CheckpointManager.instance.respawnPoint;
         }
     }
