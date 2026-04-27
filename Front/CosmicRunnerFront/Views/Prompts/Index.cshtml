@@ -1,0 +1,64 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center share-prompts">
+  <h2>¿Tienes alguna idea? ¡Compartela!</h2>
+  <div>
+    <form class="prompt-form">
+      <textarea placeholder="Comparte tu prompt..."></textarea>
+      <div class="prompt-form-footer">
+        <div class="prompt-form-options">
+          <div class="prompt-categories">
+            <label>Categoría</label>
+            <select>
+              <option value=1>Excel</option>
+              <option value=2>Resumen</option>
+            </select>
+          </div>
+          <div class="prompt-departments">
+            <label>Departamento</label>
+            <select>
+              <option value=1>Inovación</option>
+              <option value=2>Finanzas</option>
+            </select>
+          </div>
+          <button class="paste-text iconed-button">
+            Pegar texto <img src="~/assets/icons/paste.svg" />
+          </button>
+          <button class="upload-text iconed-button">
+            Subir archivo <img src="~/assets/icons/upload.svg" />
+            <input type="file" />
+          </button>
+        </div>
+
+        <button class="submit-prompt iconed-button">
+          Compartir <img src="~/assets/icons/send.svg" />
+        </button>
+      </div>
+    </form>
+
+    <section class="prompts-list">
+      <div class="list-controlls">
+        <div class="prompt-categories">
+          <label>Categoría</label>
+          <select>
+            <option value=1>Excel</option>
+            <option value=2>Resumen</option>
+          </select>
+        </div>
+        <div class="prompt-departments">
+          <label>Departamento</label>
+          <select>
+            <option value=1>Inovación</option>
+            <option value=2>Finanzas</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="">
+
+      </div>
+    </section>
+  </div>
+</div>
