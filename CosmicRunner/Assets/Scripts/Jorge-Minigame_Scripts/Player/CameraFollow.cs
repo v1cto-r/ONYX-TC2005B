@@ -2,50 +2,49 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
-    // referencia al objeto que la camara va a seguir (jugador)
+    // objeto que la camara va a seguir
     [SerializeField] private Transform target;
 
-    // se usa para saber hacia donde mira el jugador (izquierda o derecha)
+    // para saber hacia donde mira el jugador
     private SpriteRenderer targetSpriteRenderer;
 
-    // tiempo de suavizado del movimiento de la camara
+    // que tan suave sigue la camara al jugador
     [SerializeField] private float smoothTime = 0.3f;
 
-    // desplazamiento de la camara respecto al jugador
+    // distancia de la camara respecto al jugador
     [SerializeField] private Vector3 offset = new Vector3(1f, 0f, -10f);
 
-    // velocidad interna usada por smoothdamp
+    // variable interna usada por smoothdamp
     private Vector3 velocity = Vector3.zero;
 
-    // limites de movimiento en x
+    // limites en el eje x para no salir del nivel
     [SerializeField] private float minX;
     [SerializeField] private float maxX;
 
     void Start()
     {
-        // obtiene el spriterenderer del jugador
+        // obtiene el sprite del jugador para saber su direccion
         targetSpriteRenderer = target.GetComponent<SpriteRenderer>();
     }
 
-    // lateupdate se usa para que la camara se mueva despues del jugador
     private void LateUpdate()
     {
-        // detecta hacia donde mira el jugador
+        // detecta si el jugador mira izquierda o derecha
         float facing = targetSpriteRenderer.flipX ? -1f : 1f;
 
-        // ajusta el offset dependiendo de la direccion
+        // invierte el offset segun la direccion
         Vector3 flippedOffset = new Vector3(offset.x * facing, offset.y, offset.z);
 
-        // calcula la posicion objetivo de la camara
+        // posicion a la que la camara quiere llegar
         Vector3 targetPosition = target.position + flippedOffset;
 
-        // suaviza el movimiento de la camara
+        // movimiento suave de la camara
         Vector3 smoothedPosition = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, smoothTime);
 
-        // limita la camara en el eje x
+        // limita la camara dentro del nivel
         float clampedX = Mathf.Clamp(smoothedPosition.x, minX, maxX);
 
-        // aplica la posicion final a la camara
+        // aplica la posicion final
         transform.position = new Vector3(clampedX, smoothedPosition.y, smoothedPosition.z);
     }
 }

@@ -2,9 +2,14 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    // velocidad de movimiento
     public float speed = 2f;
+
+    // deteccion de suelo para no caerse
     public Transform groundCheck;
     public LayerMask groundLayer;
+
+    // distancia para detectar al jugador
     public float detectionRange = 2f;
 
     private Rigidbody2D rb;
@@ -12,11 +17,11 @@ public class Enemy : MonoBehaviour
     private Transform player;
     private Animator anim;
 
-    // daño
+    // control de daño
     private float damageCooldown = 0.5f;
     private float lastDamageTime;
 
-    // ataque
+    // control de ataque
     private bool isAttackingNow = false;
     private float attackDuration = 0.4f;
     private float attackTimer = 0f;
@@ -29,6 +34,7 @@ public class Enemy : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
 
+        // busca al jugador en la escena
         GameObject p = GameObject.FindGameObjectWithTag("Player");
         if (p != null)
             player = p.transform;
@@ -47,6 +53,7 @@ public class Enemy : MonoBehaviour
 
     void Move()
     {
+        // si esta atacando no se mueve
         if (isAttackingNow)
         {
             rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
@@ -62,6 +69,7 @@ public class Enemy : MonoBehaviour
 
     void CheckGround()
     {
+        // usa raycast para detectar si hay suelo
         RaycastHit2D hit = Physics2D.Raycast(groundCheck.position, Vector2.down, 1f, groundLayer);
 
         if (hit.collider == null)
@@ -76,7 +84,7 @@ public class Enemy : MonoBehaviour
 
         float dist = Vector2.Distance(transform.position, player.position);
 
-        // iniciar ataque
+        // inicia ataque si el jugador esta cerca
         if (dist < detectionRange &&
             Time.time >= lastAttackTime + attackCooldown &&
             !isAttackingNow)
@@ -86,7 +94,7 @@ public class Enemy : MonoBehaviour
             lastAttackTime = Time.time;
         }
 
-        // controlar duración del ataque
+        // controla la duracion del ataque
         if (isAttackingNow)
         {
             attackTimer -= Time.deltaTime;
@@ -106,6 +114,7 @@ public class Enemy : MonoBehaviour
 
     void Flip()
     {
+        // cambia de direccion
         movingRight = !movingRight;
 
         Vector3 scale = transform.localScale;
@@ -115,9 +124,9 @@ public class Enemy : MonoBehaviour
 
     void OnCollisionStay2D(Collision2D collision)
     {
+        // hace daño al jugador si esta atacando
         if (collision.gameObject.CompareTag("Player"))
         {
-            // SOLO hace daño cuando está atacando
             if (isAttackingNow && Time.time >= lastDamageTime + damageCooldown)
             {
                 GameControl.Instance.SpendLives();

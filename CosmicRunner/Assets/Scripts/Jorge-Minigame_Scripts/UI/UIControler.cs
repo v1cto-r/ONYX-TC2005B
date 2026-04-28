@@ -1,48 +1,54 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class UIControler : MonoBehaviour
 {
-    // arreglo de imagenes de corazones
+    // imagenes que representan las vidas (corazones)
     public Image[] livesImages;
 
-    // sprite que se usara cuando se pierde una vida (calavera)
+    // sprite que se usa cuando se pierde una vida
     public Sprite spendLives;
+
+    // texto donde se muestran las monedas
+    public TextMeshProUGUI coinsText;
 
     void Start()
     {
-        // al iniciar se actualizan todas las vidas
+        // al iniciar actualiza todas las vidas en pantalla
         UpdateAllLives();
     }
 
-    // se llama cada vez que se pierde una vida
     public void UpdateLives()
     {
+        // obtiene las vidas actuales
         int lives = GameControl.Instance.GetCurrentLives();
 
-        // cambia solo el corazon correspondiente a calavera
+        // cambia solo el corazon correspondiente cuando pierde una vida
         if (lives >= 0 && lives < livesImages.Length)
         {
             livesImages[lives].sprite = spendLives;
         }
     }
 
-    // actualiza todos los corazones al inicio
     public void UpdateAllLives()
     {
+        // actualiza todos los corazones al iniciar el juego
         int lives = GameControl.Instance.GetCurrentLives();
 
         for (int i = 0; i < livesImages.Length; i++)
         {
-            if (i < lives)
+            if (i >= lives)
             {
-                // se queda como corazon normal
-            }
-            else
-            {
-                // se convierte en calavera
+                // los que ya no tiene se muestran como perdidos
                 livesImages[i].sprite = spendLives;
             }
         }
+    }
+
+    public void UpdateCoins(int coins)
+    {
+        // muestra la cantidad de monedas en la interfaz
+        coinsText.text = coins.ToString();
     }
 }

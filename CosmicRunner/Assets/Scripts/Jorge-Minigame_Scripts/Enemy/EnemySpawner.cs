@@ -2,12 +2,13 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
+    // prefab del enemigo
     public GameObject enemyPrefab;
 
-    // puntos donde pueden aparecer enemigos
+    // puntos donde pueden aparecer
     public Transform[] spawnPoints;
 
-    // cuantos enemigos quieres
+    // cantidad de enemigos a generar
     public int enemiesToSpawn = 3;
 
     void Start()
@@ -19,7 +20,7 @@ public class EnemySpawner : MonoBehaviour
     {
         if (spawnPoints.Length == 0) return;
 
-        // evitar repetir el mismo punto
+        // evita repetir el mismo punto
         bool[] used = new bool[spawnPoints.Length];
 
         int spawned = 0;

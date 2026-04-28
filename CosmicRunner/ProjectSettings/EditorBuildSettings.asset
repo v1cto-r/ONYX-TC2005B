@@ -5,8 +5,20 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/CosmicRunner-General_Scenes/TitleScreen_Scenes/StartGameScene.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 1
+    path: Assets/Scenes/Jorge-Minigame_Scenes/GameScene_Jorge.unity
+    guid: 83dc7b983df8688498bc45668c2c158d
+  - enabled: 1
+    path: Assets/Scenes/Jorge-Minigame_Scenes/VictoryScene.unity
+    guid: f0cdd035a23a40d40a97fec699b02c94
+  - enabled: 1
+    path: Assets/Scenes/CosmicRunner-General_Scenes/TitleScreen_Scenes/MainMenuScene.unity
+    guid: 848a0a7d112a7433487d584ec227d08b
+  - enabled: 1
+    path: Assets/Scenes/Jorge-Minigame_Scenes/LoseScene.unity
+    guid: 759dfd5e85d142e4698ab55f6b52e7b8
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
