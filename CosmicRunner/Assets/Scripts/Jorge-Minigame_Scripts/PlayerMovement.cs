@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -117,14 +118,36 @@ public class PlayerMovement : MonoBehaviour
     }
 
     // Metodo para detectar colisiones con el suelo
-    void OnCollisionEnter2D(Collision2D collision)
+void OnCollisionEnter2D(Collision2D collision)
+{
+    if (collision.gameObject.CompareTag("Ground"))
     {
-        // Verificar si el jugador ha colisionado con el suelo
-        if (collision.gameObject.CompareTag("Ground"))
-        {
-            isGrounded = true;
-        }
+        isGrounded = true;
+
+        // esperar un frame antes de hacer parent
+        StartCoroutine(SetParentNextFrame(collision.transform));
     }
+}
+
+IEnumerator SetParentNextFrame(Transform newParent)
+{
+    yield return null; // espera 1 frame
+    transform.SetParent(newParent);
+}
+
+void OnCollisionExit2D(Collision2D collision)
+{
+    if (collision.gameObject.CompareTag("Ground"))
+    {
+        StartCoroutine(RemoveParentNextFrame());
+    }
+}
+
+IEnumerator RemoveParentNextFrame()
+{
+    yield return null;
+    transform.SetParent(null);
+}
 
     // Enumeracion para los estados de animacion del jugador
     public enum PlayerAnimation
@@ -169,4 +192,6 @@ public class PlayerMovement : MonoBehaviour
                 break;
         }
     }
+
+
 }
