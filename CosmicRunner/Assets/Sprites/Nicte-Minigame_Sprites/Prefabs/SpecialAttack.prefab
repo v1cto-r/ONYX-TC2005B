@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6304965193683537741}
   - component: {fileID: 8673368156844886733}
-  - component: {fileID: 108671933471142475}
   - component: {fileID: -4512586638849115190}
   - component: {fileID: 882119558960288755}
   m_Layer: 0
@@ -94,19 +93,6 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!114 &108671933471142475
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6560684531779061900}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5846b3ae7d667364490a31e28c318c9f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BulletPlayerBehaviour
-  speed: 10
 --- !u!50 &-4512586638849115190
 Rigidbody2D:
   serializedVersion: 5

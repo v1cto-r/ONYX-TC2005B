@@ -7,13 +7,13 @@ public enum GameState
 }
 public class GameController : MonoBehaviour
 {
-    private static GameController instancia;
+    public static GameController instancia;
     public string mainMenuScene="MainMenu";
     public string gameScene="Game";
     public string resultScene="Result";
     public float time=300f;
     public float timeRemaining;
-    public GameState currentState;
+    public string currentState = "Playing";
 
     void Awake()
     {
@@ -30,12 +30,12 @@ public class GameController : MonoBehaviour
     void Start()
     {
         timeRemaining=time;
-        currentState=GameState.Playing;
+        currentState="Playing";
     }
 
     void Update()
     {
-        if (currentState!=GameState.Playing)
+        if (currentState!="Playing")
         {
             return;
         }
@@ -50,16 +50,33 @@ public class GameController : MonoBehaviour
         Debug.Log("Tiempo restante: "+timeRemaining);
     }
 
+    public void ChangeState(string newState)
+    {
+        if (currentState == newState) return;
+ 
+        currentState = newState;
+ 
+        if (newState == "Victory" || newState == "Defeat")
+        {
+            Time.timeScale = 0f;
+            Invoke("GoToResult", 2f);
+        }
+        else if (newState == "Playing")
+        {
+            Time.timeScale = 1f;
+        }
+    }
+
     public void SetVictory()
     {
-        currentState=GameState.Victory;
+        currentState="Victory";
         Debug.Log("Victoria");
         EndGame();
     }
 
     public void SetDefeat()
     {
-        currentState=GameState.Defeat;
+        currentState="Defeat";
         Debug.Log("Derrota");
         EndGame();
     }
@@ -89,7 +106,7 @@ public class GameController : MonoBehaviour
 
     public void Pause()
     {
-        if (currentState!=GameState.Playing)
+        if (currentState!="Playing")
             return;
 
         if (Time.timeScale==0f)
