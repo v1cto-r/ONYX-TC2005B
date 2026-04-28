@@ -245,6 +245,17 @@
   width: 100%;
 }
 
+.search-box button {
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  border-radius: 50%;
+}
+
+.search-box button:hover {
+  background: var(--gray-100);
+}
+
 .prompt-card {
   display: flex;
   flex-direction: column;

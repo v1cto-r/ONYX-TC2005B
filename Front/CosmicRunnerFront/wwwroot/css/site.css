@@ -110,3 +110,7 @@ footer li {
 .text-danger {
   font-size: 12px;
 }
+
+.active {
+  border-bottom: 2px solid var(--yellow-200);
+}

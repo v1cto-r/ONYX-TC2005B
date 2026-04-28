@@ -18,7 +18,7 @@ public class PromptsViewModel
     public string NewPromptTitle { get; set; }
 
     [Required(ErrorMessage = "El contenido es obligatorio.")]
-    [StringLength(200, ErrorMessage = "Máximo 200 caracteres")]
+    [StringLength(5000, ErrorMessage = "Máximo 5000 caracteres")]
     public string NewPromptDescription { get; set; }
 
     [Required(ErrorMessage = "Selecciona una categoría.")]

@@ -4,13 +4,20 @@
 }
 
 <div class="text-center share-prompts">
-  <h2>¿Tienes alguna idea? ¡Compartela!</h2>
+  <h2>¿Tienes alguna idea? ¡Compártela!</h2>
   
+  @if (TempData["SuccessMessage"] != null)
+  {
+      <div style="width: 80%; background-color: #d4edda; color: #155724; padding: 12px 20px; border: 1px solid #c3e6cb; border-radius: 8px; margin-bottom: 16px; text-align: left;">
+          @TempData["SuccessMessage"]
+      </div>
+  }
+
   <form class="prompt-form" asp-action="CreatePrompt" method="post">
     <div class="prompt-form-header">
       <div class="prompt-title">
         <label asp-for="NewPromptTitle">Título del Prompt:</label>
-        <input asp-for="NewPromptTitle" placeholder="Título del prompt..." maxlength="100" />
+        <input asp-for="NewPromptTitle" placeholder="Mi nuevo prompt para..." maxlength="100" />
         <span asp-validation-for="NewPromptTitle" class="text-danger"></span>
       </div>
 
@@ -32,18 +39,18 @@
     </div>
     
     <div class="prompt-form-body">
-      <textarea asp-for="NewPromptDescription" id="promptContent" placeholder="Comparte tu prompt..." maxlength="5000"></textarea>
+      <textarea asp-for="NewPromptDescription" id="promptContent" placeholder="Actuando como gerente, genera un reporte para..." maxlength="5000"></textarea>
       <span asp-validation-for="NewPromptDescription" class="text-danger"></span>
     </div>
     
     <div class="prompt-form-footer">
       <div class="prompt-form-options">
-        <button class="paste-text iconed-button secondary-button" type="button" onclick="">
+        <button class="paste-text iconed-button secondary-button" type="button" onclick="pasteFromClipboard(event)">
           Pegar texto <img src="~/assets/icons/paste.svg" />
         </button>
         <button class="upload-text iconed-button secondary-button" type="button">
           Subir archivo <img src="~/assets/icons/upload.svg" />
-          <input type="file" id="promptUpload" accept=".txt" onchange=""/>
+          <input type="file" id="promptUpload" accept=".txt" onchange="readFileContent(event)"/>
         </button>
       </div>
 
@@ -128,8 +135,11 @@
           <h4>Comentarios</h4>
           <form class="comment-form" asp-action="AddComment" method="post">
             <input type="hidden" name="promptId" value="@p.promptId" />
-            <input type="text" name="commentText" placeholder="Escribe un comentario..." required />
-            <button class="submit-comment iconed-button action-button" type="submit">
+            <div style="flex-grow: 1; display: flex; flex-direction: column;">
+              <input type="text" name="commentText" placeholder="Escribe un comentario..." />
+              @Html.ValidationMessage("commentText_" + p.promptId, null, new { @class = "text-danger", style = "font-size: 0.8em; margin-top: 4px;" })
+            </div>
+            <button class="submit-comment iconed-button action-button" type="submit" style="align-self: flex-start;">
               Enviar <img src="~/assets/icons/send.svg" />
             </button>
           </form>

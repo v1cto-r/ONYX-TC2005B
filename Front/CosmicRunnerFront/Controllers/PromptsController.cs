@@ -116,14 +116,41 @@ public class PromptsController : Controller
         // Agregar al principio de la lista para que aparezca primero
         _mockPrompts.Insert(0, newPrompt);
 
+        TempData["SuccessMessage"] = "¡Prompt creado exitosamente!";
+
         // Regresar a la vista
         return RedirectToAction("Index");
     }
 
     [HttpPost]
-    public IActionResult AddComment(int promptId, string commentText)
+    public IActionResult AddComment(int promptId, string? commentText)
     {
-        if (string.IsNullOrWhiteSpace(commentText)) return RedirectToAction("Index");
+        if (string.IsNullOrWhiteSpace(commentText))
+        {
+            ModelState.AddModelError("commentText_" + promptId, "El comentario no puede estar vacío.");
+            
+            // Volver a cargar la vista con el error, para eso necesitamos recargar las listas y los prompts
+            var categories = new SelectList(_dbCategories, "CategoryId", "CategoryName");
+            var departments = new SelectList(_dbDepartments, "DepartmentId", "DepartmentName");
+            var finalPrompts = _mockPrompts.ToList();
+            foreach(var p in finalPrompts)
+            {
+                p.Comments = _mockComments.Where(c => c.commentPromptId == p.promptId).ToList();
+                p.IsSaved = _mockSavedPrompts.Contains(p.promptId);
+                p.Likes = _mockRatings.Count(r => r.ratingPromptId == p.promptId && r.ratingValue == 1);
+                p.Dislikes = _mockRatings.Count(r => r.ratingPromptId == p.promptId && r.ratingValue == -1);
+                p.CurrentUserRating = _mockRatings.Find(r => r.ratingPromptId == p.promptId && r.ratingUserId == 1)?.ratingValue ?? 0;
+            }
+
+            var vm = new PromptsViewModel
+            {
+                Categories = categories,
+                Departments = departments,
+                Prompts = finalPrompts
+            };
+
+            return View("Index", vm);
+        }
 
         var newComment = new PromptComment
         {
