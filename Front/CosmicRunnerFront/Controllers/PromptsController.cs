@@ -22,8 +22,8 @@ public class PromptsController : Controller
 
     private static List<PromptModel> _mockPrompts = new List<PromptModel>
     {
-        new PromptModel { promptId = 1, promptTitle = "Mi prompt de excel", promptDescription = "Actúa como un analista financiero especializado en la industria de electrodomésticos (Whirlpool). Necesito editar un archivo de Excel con datos financieros de la empresa. Guíame paso a paso para realizar las siguientes tareas, asumiendo que tengo un nivel intermedio en Excel. No inventes datos reales de Whirlpool, sino estructura y fórmulas genéricas que pueda aplicar a mi archivo", promptCategoryId = 1, promptCategory = "Excel", promptDepartmentId = 1, promptDepartment = "Innovación" },
-        new PromptModel { promptId = 2, promptTitle = "Para generar un reporte mensual", promptDescription = "Actúa como un consultor senior en innovación corporativa. Trabajo en el departamento de innovación de una empresa de electrodomésticos (similar a Whirlpool). Necesito redactar un resumen administrativo (executive summary) de máximo una página para presentar a la dirección general. El resumen debe basarse en los siguientes elementos (puedes inventar datos realistas del sector, pero mantenlos coherentes): ...", promptCategoryId = 2, promptCategory = "Resumen", promptDepartmentId = 2, promptDepartment = "Finanzas" }
+        new PromptModel { promptId = 1, promptTitle = "Mi prompt de excel", promptDescription = "Actúa como un analista financiero especializado en la industria de electrodomésticos (Whirlpool). Necesito editar un archivo de Excel con datos financieros de la empresa. Guíame paso a paso para realizar las siguientes tareas, asumiendo que tengo un nivel intermedio en Excel. No inventes datos reales de Whirlpool, sino estructura y fórmulas genéricas que pueda aplicar a mi archivo", promptCategoryId = 1, promptCategory = "Excel", promptDepartmentId = 1, promptDepartment = "Innovación", promptCreatedAt = DateTime.Now},
+        new PromptModel { promptId = 2, promptTitle = "Para generar un reporte mensual", promptDescription = "Actúa como un consultor senior en innovación corporativa. Trabajo en el departamento de innovación de una empresa de electrodomésticos (similar a Whirlpool). Necesito redactar un resumen administrativo (executive summary) de máximo una página para presentar a la dirección general. El resumen debe basarse en los siguientes elementos (puedes inventar datos realistas del sector, pero mantenlos coherentes): ...", promptCategoryId = 2, promptCategory = "Resumen", promptDepartmentId = 2, promptDepartment = "Finanzas", promptCreatedAt = DateTime.Now.AddDays(-1) }
     };
 
     // Comentarios de mock
@@ -109,7 +109,8 @@ public class PromptsController : Controller
             promptCategoryId = model.NewPromptCategoryId ?? 0,
             promptCategory = selectedCategory?.CategoryName,
             promptDepartmentId = model.NewPromptDepartmentId ?? 0,
-            promptDepartment = selectedDepartment?.DepartmentName
+            promptDepartment = selectedDepartment?.DepartmentName,
+            promptCreatedAt = DateTime.Now
         };
 
         // Agregar al principio de la lista para que aparezca primero
@@ -119,7 +120,6 @@ public class PromptsController : Controller
         return RedirectToAction("Index");
     }
 
-    // ACTION: Comment
     [HttpPost]
     public IActionResult AddComment(int promptId, string commentText)
     {

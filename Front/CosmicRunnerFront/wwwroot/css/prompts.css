@@ -168,18 +168,23 @@
   cursor: pointer;
 }
 
-.prompt-form-options button {
+.secondary-button {
   border: 1px solid var(--yellow-200);
-  background: var(--yellow-100);
+  background: transparent;
+  transition: background 0.2s ease;
 }
 
-.prompt-form-options button:hover {
+.secondary-button:hover {
   background: var(--yellow-50);
 }
 
-.submit-prompt {
-  background: var(--yellow-200);
-  border: none;
+.action-button {
+  background: var(--yellow-50);
+  border: 1px solid var(--yellow-200);
+}
+
+.action-button:hover {
+  background: var(--yellow-100);
 }
 
 .prompts-list {
@@ -321,15 +326,6 @@
   background: transparent !important;
 }
 
-.prompt-controls button {
-  border: 1px solid var(--yellow-200);
-  background: var(--yellow-100);
-}
-
-.prompt-controls button:hover {
-  background: var(--yellow-50);
-}
-
 .prompt-comments {
   display: flex;
   flex-direction: column;
@@ -368,10 +364,6 @@
   outline: none;
   width: 100%;
   line-height: normal;
-}
-
-.comment-form button {
-  background: transparent;
 }
 
 .comment {

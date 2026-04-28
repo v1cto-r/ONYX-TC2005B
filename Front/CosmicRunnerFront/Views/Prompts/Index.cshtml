@@ -10,7 +10,7 @@
     <div class="prompt-form-header">
       <div class="prompt-title">
         <label asp-for="NewPromptTitle">Título del Prompt:</label>
-        <input asp-for="NewPromptTitle" placeholder="Título del prompt..." />
+        <input asp-for="NewPromptTitle" placeholder="Título del prompt..." maxlength="100" />
         <span asp-validation-for="NewPromptTitle" class="text-danger"></span>
       </div>
 
@@ -32,22 +32,22 @@
     </div>
     
     <div class="prompt-form-body">
-      <textarea asp-for="NewPromptDescription" id="promptContent" placeholder="Comparte tu prompt..."></textarea>
+      <textarea asp-for="NewPromptDescription" id="promptContent" placeholder="Comparte tu prompt..." maxlength="5000"></textarea>
       <span asp-validation-for="NewPromptDescription" class="text-danger"></span>
     </div>
     
     <div class="prompt-form-footer">
       <div class="prompt-form-options">
-        <button class="paste-text iconed-button" type="button" onclick="">
+        <button class="paste-text iconed-button secondary-button" type="button" onclick="">
           Pegar texto <img src="~/assets/icons/paste.svg" />
         </button>
-        <button class="upload-text iconed-button" type="button">
+        <button class="upload-text iconed-button secondary-button" type="button">
           Subir archivo <img src="~/assets/icons/upload.svg" />
           <input type="file" id="promptUpload" accept=".txt" onchange=""/>
         </button>
       </div>
 
-      <button type="submit" class="submit-prompt iconed-button">
+      <button type="submit" class="submit-prompt iconed-button action-button">
         Compartir <img src="~/assets/icons/send.svg" />
       </button>
     </div>
@@ -90,7 +90,7 @@
           <div class="prompt-data">
             <p><span>Categoría:</span> @p.promptCategory</p>
             <p><span>Departamento:</span> @p.promptDepartment</p>
-            <p>@(DateTime.Now.ToString("dd/MM/yyyy"))</p>
+            <p>@(p.promptCreatedAt.ToString("dd/MM/yyyy"))</p>
           </div>
         </div>
         <div class="prompt-content">
@@ -99,12 +99,12 @@
 
         <div class="prompt-controls">
           <div>
-            <button class="copy-button iconed-button" type="button" onclick="navigator.clipboard.writeText('@p.promptDescription')">
+            <button class="copy-button iconed-button secondary-button" type="button" onclick="navigator.clipboard.writeText('@p.promptDescription')">
               Copiar <img src="~/assets/icons/copy.svg" />
             </button>
             <form asp-action="SavePrompt" method="post">
               <input type="hidden" name="promptId" value="@p.promptId" />
-              <button class="save-button iconed-button" type="submit">
+              <button class="save-button iconed-button secondary-button" type="submit">
                 @(p.IsSaved ? "Guardado" : "Guardar") <img src="~/assets/icons/@(p.IsSaved ? "bookmark-fill.svg" : "bookmark.svg")" />
               </button>
             </form>
@@ -129,7 +129,7 @@
           <form class="comment-form" asp-action="AddComment" method="post">
             <input type="hidden" name="promptId" value="@p.promptId" />
             <input type="text" name="commentText" placeholder="Escribe un comentario..." required />
-            <button class="submit-comment iconed-button" type="submit">
+            <button class="submit-comment iconed-button action-button" type="submit">
               Enviar <img src="~/assets/icons/send.svg" />
             </button>
           </form>
