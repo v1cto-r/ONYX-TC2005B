@@ -2,9 +2,9 @@
    VARIABLES DE COLOR (Basadas en el diseño de Whirlpool Codex)
    ========================================================= */
 :root {
-    --whirlpool-yellow: #fcc917; /* Color del botón "+ Agrega tu Idea" */
+    --whirlpool-yellow: #f0b310; /* Color del botón "+ Agrega tu Idea" */
     --whirlpool-yellow-hover: #e5b615;
-    --bg-light-grey: #e9ecef;    /* Fondo de la pantalla principal */
+    --bg-light-grey: #f7f7f7;    /* Fondo de la pantalla principal */
     --card-bg: #ffffff;          /* Fondo de las tarjetas */
     --text-main: #212529;
     --text-muted: #6c757d;
@@ -14,14 +14,87 @@
 /* =========================================================
    CONTENEDORES PRINCIPALES
    ========================================================= */
-.impulsa-container {
+body{
     background-color: var(--bg-light-grey);
-    padding: 2rem 3rem;
-    min-height: 100vh;
-    border-radius: 12px; /* Opcional: si tu layout central tiene bordes curvos */
 }
 
-.header-impulsa h1 {
+.contenedor-principal {
+    display: flex;           /* Activa Flexbox */
+    gap: 2rem;               /* Espacio entre elementos */
+    background-color: #f0f0f0;
+    margin: 0 -4rem 0 -4rem;
+}
+
+.contenedor-perfil {
+    width: 20rem;
+    background-color: var(--card-bg);
+    border-top: 8rem solid var(--whirlpool-yellow);
+    border-radius: 1rem;
+    text-align: center;
+}
+
+.contenedor-perfil-foto {
+    width: 8rem;
+    height: 8rem;
+    margin: -4rem auto 0.5rem auto;
+    border-radius: 50%;
+    background-color: var(--text-muted);
+    overflow: hidden;
+    border: 6px solid var(--card-bg);
+}
+
+.contenedor-perfil-foto img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.contenedor-perfil-contenido {
+    padding: 0 1rem 1.5rem 1rem;
+}
+
+.contenedor-perfil-contenido h1 {
+    font-size: 2.5rem;
+    margin: 0.5rem 0 0.25rem 0;
+}
+
+.contenedor-perfil-contenido p {
+    margin: 0.25rem 0;
+    color: var(--text-muted);
+}
+
+.estadisticas {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin: 0.5rem 0;
+}
+
+.porcentajes {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 0.5rem 0;
+    font-size: 0.9rem;
+}
+
+.configuracion {
+    margin-top: 0.75rem;
+    font-size: 0.85rem;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.contenedor-impulsa {
+    flex: 1;
+    background-color: var(--card-bg);
+    padding: 2rem 3rem;
+    text-align: center;
+    height: 100vh;
+    border-radius: 1rem; /* Opcional: si tu layout central tiene bordes curvos */
+}
+
+.contenedor-impulsa h1 {
     font-size: 2.5rem;
     letter-spacing: -0.5px;
 }

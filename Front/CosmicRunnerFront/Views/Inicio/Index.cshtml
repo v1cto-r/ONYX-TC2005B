@@ -6,23 +6,48 @@
 @section Styles {
     <link rel="stylesheet" href="~/css/Inicio/inicio.css" />
 }
-
-<div class="impulsa-container">
-    <div class="d-flex justify-content-between align-items-center mb-4 header-impulsa">
-        <h1 class="fw-bold text-dark">Impulsa el Cambio</h1>
-        <button type="button" class="btn btn-agregar rounded-pill px-4 shadow-sm" data-bs-toggle="modal" data-bs-target="#addIdeaModal">
-            + Agrega tu Idea
-        </button>
-    </div>
-
-    <h3 class="top-semanal-title text-muted mb-4">Top Semanal Sugerencias de la Comunidad</h3>
-
-    <div class="ideas-feed">
-        
-        <partial name="Partials/_IdeaTarjeta" />
-        
+<body>
+    <div class="contenedor-principal">
+        <div class="contenedor-perfil">
+            <div class="contenedor-perfil-foto">
+                <img src="~/assets/random/user.png" alt="Foto de perfil">
+            </div>
+            <div class="contenedor-perfil-contenido">
+                <h1>César Alexandro</h1>
+                <p>Racha Whirlpool</p>
+                <div class="estadisticas">
+                    <span>24</span>
+                    <span>Posición</span>
+                </div>
+                <div class="porcentajes">
+                    <span>50% Global</span>
+                    <span>10% Departamental</span>
+                </div>
+                <p>Tiendita</p>
+                <p>Configuración</p>
+            </div>
         </div>
-</div>
+        <div class="contenedor-impulsa">
+            <div class="d-flex justify-content-between align-items-center mb-4 header-impulsa">
+                <h1 class="fw-bold text-dark">Impulsa el Cambio</h1>
+                <button type="button" class="btn btn-agregar rounded-pill px-4 shadow-sm" data-bs-toggle="modal" data-bs-target="#addIdeaModal">
+                    + Agrega tu Idea
+                </button>
+            </div>
+
+            <h3 class="top-semanal-title text-muted mb-4">Top Semanal Sugerencias de la Comunidad</h3>
+
+            <div class="ideas-feed">
+                
+                <partial name="Partials/_IdeaTarjeta" />
+                
+                </div>
+        </div>
+
+    </div>
+    
+</body>
+
 
 <partial name="Partials/_AgregarIdea" model='ViewData["NuevaIdea"] as CosmicRunnerFront.Models.InicioModels.CrearIdeaViewModel' />
 
