@@ -1,4 +1,5 @@
 :root {
+  --yellow-50: #f9e8b8;
   --yellow-100: #fde19a;
   --yellow-200: #f0b310;
   --gray-100: #f7f7f7;
@@ -87,4 +88,25 @@ footer h5 {
 footer li {
   color: var(--gray-100);
   margin-bottom: 8px;
+}
+
+.iconed-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 8px;
+  border: 1px solid var(--gray-600);
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  height: 40px;
+}
+
+.iconed-button img {
+  width: 18px;
+  height: 18px;
+}
+
+.text-danger {
+  font-size: 12px;
 }

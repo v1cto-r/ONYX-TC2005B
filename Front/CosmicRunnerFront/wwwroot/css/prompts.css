@@ -1,0 +1,391 @@
+.share-prompts {
+  background-color: #f8f8f8;
+  border-radius: 16px;
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px 0;
+}
+
+.share-prompts h2 {
+  font-size: 48px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.prompt-form-header {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  width: 100%;
+  padding: 12px 16px;
+  gap: 16px;
+  border-bottom: 1px solid #eee;
+}
+
+.prompt-select {
+  display: flex;
+  gap: 2px;
+}
+
+.prompt-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid #ccc;
+  width: 80%;
+  border-radius: 16px;
+  background: #fff;
+  padding: 8px 16px;
+}
+
+.prompt-form-body {
+  text-align: start;
+  width: 100%;
+}
+
+.prompt-form-body span {
+  margin-left: 20px;
+}
+
+.prompt-form textarea {
+  margin-bottom: 20px;
+  padding: 16px;
+  border-radius: 16px;
+  border: none;
+  resize: none;
+  width: 100%;
+  height: 180px;
+  overflow-y: auto;
+  box-sizing: border-box;
+  text-align: justify;
+}
+
+.prompt-form textarea:focus,
+.prompt-form textarea:active,
+.prompt-form textarea:focus-visible {
+  outline: none;
+  border: none;
+  box-shadow: none;
+}
+
+.prompt-form-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px 16px;
+  border-top: 1px solid #eee;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.prompt-form-options {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.prompt-title,
+.prompt-categories,
+.prompt-search,
+.prompt-departments {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+.prompt-title {
+  flex: 1;
+}
+
+.prompt-title label,
+.prompt-categories label,
+.prompt-search label,
+.prompt-departments label {
+  font-size: 11px;
+  font-weight: 700;
+  color: #555;
+  text-transform: uppercase;
+}
+
+.prompt-title input {
+  font-size: 16px;
+  font-weight: 600;
+  padding: 5px 0;
+  border: none;
+  border-bottom: 2px solid #e0e0e0;
+  background-color: transparent;
+  color: #333;
+  outline: none;
+  width: 100%;
+  line-height: normal;
+}
+
+.prompt-title input:focus,
+.prompt-title input:hover {
+  border-bottom-color: #555;
+}
+
+.prompt-categories select,
+.prompt-departments select {
+  font-size: 13px;
+  padding: 6px 10px;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  background-color: #fcfcfc;
+  color: #333;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.2s ease;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.prompt-categories select:hover,
+.prompt-departments select:hover,
+.prompt-categories select:focus,
+.prompt-departments select:focus {
+  border-color: #bbb;
+  background-color: #fff;
+}
+
+.upload-text {
+  position: relative;
+  overflow: hidden;
+}
+
+.prompt-form input[type="file"] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.prompt-form-options button {
+  border: 1px solid var(--yellow-200);
+  background: var(--yellow-100);
+}
+
+.prompt-form-options button:hover {
+  background: var(--yellow-50);
+}
+
+.submit-prompt {
+  background: var(--yellow-200);
+  border: none;
+}
+
+.prompts-list {
+  margin-top: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid #ccc;
+  width: 80%;
+  border-radius: 16px;
+  background: #fff;
+  padding: 16px 32px;
+  gap: 24px;
+}
+
+.list-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 12px 16px;
+  border-bottom: 1px solid #eee;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.filter-controls {
+  display: flex;
+  gap: 24px;
+  align-items: end;
+}
+
+.filter-controls h4 {
+  font-size: 12px;
+  font-weight: 600;
+  color: #555;
+}
+
+.prompt-search {
+  margin-right: 128px;
+}
+
+.prompt-search input {
+  font-size: 16px;
+  font-weight: 400;
+  padding: 5px 0;
+  border: none;
+  border-bottom: 2px solid #e0e0e0;
+  background-color: transparent;
+  color: #333;
+  outline: none;
+  width: 100%;
+  line-height: normal;
+}
+
+.search-box {
+  display: flex;
+  width: 100%;
+}
+
+.prompt-card {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  width: 100%;
+  border: 2px solid #eee;  
+  border-radius: 16px;
+  gap: 16px;
+}
+
+.prompt-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.prompt-name {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.prompt-header img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+
+.prompt-header h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 0;
+}
+
+.prompt-name {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.prompt-data {
+  display: flex;
+  gap: 16px;
+  font-size: 14px;
+  color: #777;
+}
+
+.prompt-data p {
+  margin: 0;
+}
+
+.prompt-data span {
+  font-weight: 600;
+  color: #555;
+}
+
+.prompt-content {
+  font-size: 16px;
+  color: #333;
+  line-height: 1.5;
+  text-align: justify;
+}
+
+.prompt-controls {
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+}
+
+.prompt-controls div {
+  display: flex;
+  gap: 12px;
+}
+
+.rate-button {
+  border: none !important;
+  background: transparent !important;
+}
+
+.prompt-controls button {
+  border: 1px solid var(--yellow-200);
+  background: var(--yellow-100);
+}
+
+.prompt-controls button:hover {
+  background: var(--yellow-50);
+}
+
+.prompt-comments {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  border-top: 1px solid #eee;
+  padding-top: 8px;
+}
+
+.prompt-comments h4 {
+  text-align: start;
+  font-size: 14px;
+  font-weight: 600;
+  color: #555;
+}
+
+.prompt-search {
+  position: relative;
+  flex: 1;
+  margin-right: 128px;
+}
+
+.comment-form {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.comment-form input {
+  font-size: 16px;
+  font-weight: 400;
+  padding: 5px 0;
+  border: none;
+  border-bottom: 2px solid #e0e0e0;
+  background-color: transparent;
+  color: #333;
+  outline: none;
+  width: 100%;
+  line-height: normal;
+}
+
+.comment-form button {
+  background: transparent;
+}
+
+.comment {
+  background: #f0f0f0;
+  border-radius: 12px;
+  padding: 12px 16px;
+}
+
+.comment p {
+  margin: 0;
+  text-align: justify;
+}
+
+.comment span {
+  font-weight: 600;
+  color: #555;
+}

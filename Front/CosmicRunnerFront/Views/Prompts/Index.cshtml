@@ -1,64 +1,147 @@
-﻿@{
+﻿@model CosmicRunnerFront.Models.PromptsViewModel
+@{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center share-prompts">
   <h2>¿Tienes alguna idea? ¡Compartela!</h2>
-  <div>
-    <form class="prompt-form">
-      <textarea placeholder="Comparte tu prompt..."></textarea>
-      <div class="prompt-form-footer">
-        <div class="prompt-form-options">
-          <div class="prompt-categories">
-            <label>Categoría</label>
-            <select>
-              <option value=1>Excel</option>
-              <option value=2>Resumen</option>
-            </select>
-          </div>
-          <div class="prompt-departments">
-            <label>Departamento</label>
-            <select>
-              <option value=1>Inovación</option>
-              <option value=2>Finanzas</option>
-            </select>
-          </div>
-          <button class="paste-text iconed-button">
-            Pegar texto <img src="~/assets/icons/paste.svg" />
-          </button>
-          <button class="upload-text iconed-button">
-            Subir archivo <img src="~/assets/icons/upload.svg" />
-            <input type="file" />
-          </button>
-        </div>
+  
+  <form class="prompt-form" asp-action="CreatePrompt" method="post">
+    <div class="prompt-form-header">
+      <div class="prompt-title">
+        <label asp-for="NewPromptTitle">Título del Prompt:</label>
+        <input asp-for="NewPromptTitle" placeholder="Título del prompt..." />
+        <span asp-validation-for="NewPromptTitle" class="text-danger"></span>
+      </div>
 
-        <button class="submit-prompt iconed-button">
-          Compartir <img src="~/assets/icons/send.svg" />
+      <div class="prompt-categories prompt-select">
+        <label asp-for="NewPromptCategoryId">Categoría:</label>
+        <select asp-for="NewPromptCategoryId" asp-items="Model.Categories">
+          <option value="">Selecciona</option>
+        </select>
+        <span asp-validation-for="NewPromptCategoryId" class="text-danger"></span>
+      </div>
+
+      <div class="prompt-departments prompt-select">
+        <label asp-for="NewPromptDepartmentId">Departamento:</label>
+        <select asp-for="NewPromptDepartmentId" asp-items="Model.Departments">
+          <option value="">Selecciona</option>
+        </select>
+        <span asp-validation-for="NewPromptDepartmentId" class="text-danger"></span>
+      </div>
+    </div>
+    
+    <div class="prompt-form-body">
+      <textarea asp-for="NewPromptDescription" id="promptContent" placeholder="Comparte tu prompt..."></textarea>
+      <span asp-validation-for="NewPromptDescription" class="text-danger"></span>
+    </div>
+    
+    <div class="prompt-form-footer">
+      <div class="prompt-form-options">
+        <button class="paste-text iconed-button" type="button" onclick="">
+          Pegar texto <img src="~/assets/icons/paste.svg" />
+        </button>
+        <button class="upload-text iconed-button" type="button">
+          Subir archivo <img src="~/assets/icons/upload.svg" />
+          <input type="file" id="promptUpload" accept=".txt" onchange=""/>
         </button>
       </div>
-    </form>
 
-    <section class="prompts-list">
-      <div class="list-controlls">
+      <button type="submit" class="submit-prompt iconed-button">
+        Compartir <img src="~/assets/icons/send.svg" />
+      </button>
+    </div>
+  </form>
+
+  <section class="prompts-list">
+    <form asp-action="Index" method="get" class="list-controls">
+      <div class="prompt-search">
+        <label asp-for="SearchText">Buscar:</label>
+        <div class="search-box">
+          <input asp-for="SearchText" placeholder="Buscar..." />
+          <button type="submit"><img src="~/assets/icons/search.svg" /></button>
+        </div>
+      </div>
+      <div class="filter-controls">
+        <h4>Filtrar por:</h4>
         <div class="prompt-categories">
-          <label>Categoría</label>
-          <select>
-            <option value=1>Excel</option>
-            <option value=2>Resumen</option>
+          <label asp-for="FilterCategoryId">Categoría</label>
+          <select asp-for="FilterCategoryId" asp-items="Model.Categories" onchange="this.form.submit()">
+            <option value="">Todas</option>
           </select>
         </div>
         <div class="prompt-departments">
-          <label>Departamento</label>
-          <select>
-            <option value=1>Inovación</option>
-            <option value=2>Finanzas</option>
+          <label asp-for="FilterDepartmentId">Departamento</label>
+          <select asp-for="FilterDepartmentId" asp-items="Model.Departments" onchange="this.form.submit()">
+            <option value="">Todos</option>
           </select>
         </div>
       </div>
+    </form>
 
-      <div class="">
+    @foreach (var p in Model.Prompts)
+    {
+      <div class="prompt-card">
+        <div class="prompt-header">
+          <div class="prompt-name">
+            <img src="~/assets/users/rando.jpg" />
+            <h3>@p.promptTitle</h3>
+          </div>
+          <div class="prompt-data">
+            <p><span>Categoría:</span> @p.promptCategory</p>
+            <p><span>Departamento:</span> @p.promptDepartment</p>
+            <p>@(DateTime.Now.ToString("dd/MM/yyyy"))</p>
+          </div>
+        </div>
+        <div class="prompt-content">
+          <p>@p.promptDescription</p>
+        </div>
 
+        <div class="prompt-controls">
+          <div>
+            <button class="copy-button iconed-button" type="button" onclick="navigator.clipboard.writeText('@p.promptDescription')">
+              Copiar <img src="~/assets/icons/copy.svg" />
+            </button>
+            <form asp-action="SavePrompt" method="post">
+              <input type="hidden" name="promptId" value="@p.promptId" />
+              <button class="save-button iconed-button" type="submit">
+                @(p.IsSaved ? "Guardado" : "Guardar") <img src="~/assets/icons/@(p.IsSaved ? "bookmark-fill.svg" : "bookmark.svg")" />
+              </button>
+            </form>
+          </div>
+          <div>
+            <form asp-action="RatePrompt" method="post">
+              <input type="hidden" name="promptId" value="@p.promptId" />
+              <button class="rate-button" type="submit" name="ratingValue" value="1">
+                @p.Likes
+                <img src="~/assets/icons/@(p.CurrentUserRating == 1 ? "thumbs-up-fill.svg" : "thumbs-up.svg")" />
+              </button>
+              <button class="rate-button" type="submit" name="ratingValue" value="-1">
+                @p.Dislikes
+                <img src="~/assets/icons/@(p.CurrentUserRating == -1 ? "thumbs-down-fill.svg" : "thumbs-down.svg")" />
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <div class="prompt-comments">
+          <h4>Comentarios</h4>
+          <form class="comment-form" asp-action="AddComment" method="post">
+            <input type="hidden" name="promptId" value="@p.promptId" />
+            <input type="text" name="commentText" placeholder="Escribe un comentario..." required />
+            <button class="submit-comment iconed-button" type="submit">
+              Enviar <img src="~/assets/icons/send.svg" />
+            </button>
+          </form>
+          
+          @foreach(var comment in p.Comments)
+          {
+            <div class="comment">
+              <p><span>Usuario @comment.commentUserId:</span> @comment.commentContent</p>
+            </div>
+          }
+        </div>
       </div>
-    </section>
-  </div>
+    }
+  </section>
 </div>
