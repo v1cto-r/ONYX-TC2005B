@@ -1,0 +1,110 @@
+/* =========================================================
+   VARIABLES DE COLOR (Basadas en el diseño de Whirlpool Codex)
+   ========================================================= */
+:root {
+    --whirlpool-yellow: #fcc917; /* Color del botón "+ Agrega tu Idea" */
+    --whirlpool-yellow-hover: #e5b615;
+    --bg-light-grey: #e9ecef;    /* Fondo de la pantalla principal */
+    --card-bg: #ffffff;          /* Fondo de las tarjetas */
+    --text-main: #212529;
+    --text-muted: #6c757d;
+    --border-color: #dee2e6;
+}
+
+/* =========================================================
+   CONTENEDORES PRINCIPALES
+   ========================================================= */
+.impulsa-container {
+    background-color: var(--bg-light-grey);
+    padding: 2rem 3rem;
+    min-height: 100vh;
+    border-radius: 12px; /* Opcional: si tu layout central tiene bordes curvos */
+}
+
+.header-impulsa h1 {
+    font-size: 2.5rem;
+    letter-spacing: -0.5px;
+}
+
+.top-semanal-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+/* =========================================================
+   BOTONES
+   ========================================================= */
+.btn-agregar {
+    background-color: var(--whirlpool-yellow);
+    color: var(--text-main);
+    font-weight: 700;
+    border: none;
+    transition: all 0.2s ease-in-out;
+}
+
+.btn-agregar:hover {
+    background-color: var(--whirlpool-yellow-hover);
+    transform: translateY(-2px);
+}
+
+/* =========================================================
+   ESTILOS PARA APLICAR EN TU PARTIAL "_IdeaTarjeta.cshtml"
+   ========================================================= */
+.idea-card {
+    background-color: var(--card-bg);
+    border-radius: 20px;
+    border: 1px solid var(--border-color);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+}
+
+.idea-card-header {
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+}
+
+.idea-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text-main);
+    margin: 0;
+}
+
+.idea-time {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.idea-metadata {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.btn-unirme {
+    background-color: var(--whirlpool-yellow);
+    color: var(--text-main);
+    font-weight: 600;
+    border-radius: 20px;
+    border: none;
+    padding: 0.4rem 1.5rem;
+}
+
+/* Botones de Likes y Comentarios de la tarjeta */
+.action-stats {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    color: var(--text-main);
+    font-weight: 600;
+}
+
+.action-stats div {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    background-color: var(--bg-light-grey);
+    padding: 0.3rem 0.8rem;
+    border-radius: 12px;
+}
