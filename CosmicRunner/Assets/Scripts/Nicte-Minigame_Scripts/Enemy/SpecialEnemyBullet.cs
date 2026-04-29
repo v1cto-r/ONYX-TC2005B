@@ -9,6 +9,7 @@ public class SpecialEnemyBullet : MonoBehaviour
 
     void Start()
     {
+        SFXManager.Instance.BulletSound();
         Destroy(gameObject, lifetime);
     }
 
@@ -17,6 +18,7 @@ public class SpecialEnemyBullet : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             collision.gameObject.GetComponent<PlayerHealth>().TakeDamage(damage);
+            SFXManager.Instance.DamageSound();
             Destroy(gameObject);
         }
     }

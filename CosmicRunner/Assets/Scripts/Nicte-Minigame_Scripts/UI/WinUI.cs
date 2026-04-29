@@ -4,11 +4,9 @@ using UnityEngine.SceneManagement;
 public class WinUI : MonoBehaviour
 {
     public TextMeshProUGUI finalWinScoreText;
-    GeneralUI generalUI;
-
     void Start()
     {
-        generalUI = FindObjectOfType<GeneralUI>();
+        SFXManager.Instance.WinSound();
         finalWinScoreText.text = GeneralUI.currentCredits.ToString();
     }
     public void playGame()

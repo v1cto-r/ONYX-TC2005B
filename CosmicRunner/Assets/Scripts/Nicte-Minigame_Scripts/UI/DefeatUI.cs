@@ -4,11 +4,10 @@ using UnityEngine.SceneManagement;
 public class DefeatUI : MonoBehaviour
 {
     public TextMeshProUGUI finalDefeatScoreText;
-    GeneralUI generalUI;
 
     void Start()
     {
-        generalUI = FindObjectOfType<GeneralUI>();
+        SFXManager.Instance.DefeatSound();
         finalDefeatScoreText.text = GeneralUI.currentCredits.ToString();
     }
     public void playGame()

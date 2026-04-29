@@ -13,6 +13,7 @@ public class PlayerBullet : MonoBehaviour
         Destroy(gameObject, lifetime);
         comboUI = FindObjectOfType<ComboUI>();
         generalUI = FindObjectOfType<GeneralUI>();
+        SFXManager.Instance.BulletSound();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -20,7 +21,7 @@ public class PlayerBullet : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemy"))
         {
             Destroy(gameObject);
-            
+            SFXManager.Instance.DamageSound();
             collision.gameObject.GetComponent<EnemyHealth>().TakeDamage(1);
             comboUI.UpdateCombo(comboUI.currentCombo + 1);
             generalUI.UpdateCredits(100);

@@ -20,6 +20,7 @@ public class PowerUp : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             Destroy(gameObject);
+            SFXManager.Instance.PowerUpSound();
             int randomIndex = Random.Range(0, powerUpTypes.Length);
             string selectedPowerUp = powerUpTypes[randomIndex];
             switch (selectedPowerUp)
