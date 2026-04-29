@@ -390,3 +390,24 @@ html, body {
     border-color: var(--whirlpool-yellow);
     box-shadow: 0 0 0 0.25rem rgba(240, 179, 16, 0.15);
 }
+
+/* =========================================================
+   SISTEMA DE RESPUESTAS (COMENTARIOS ANIDADOS)
+   ========================================================= */
+.reply-desplegable summary {
+    list-style: none; /* Oculta la flecha por defecto */
+    cursor: pointer;
+}
+
+.reply-desplegable summary::-webkit-details-marker {
+    display: none; /* Oculta la flecha en Safari/Chrome viejo */
+}
+
+/* Evitar que el acordeón empuje la UI de forma brusca */
+.reply-desplegable {
+    position: relative;
+}
+
+.reply-desplegable[open] > div {
+    animation: fadeInDown 0.2s ease-out;
+}

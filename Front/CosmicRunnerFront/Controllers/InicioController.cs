@@ -115,6 +115,38 @@ public class InicioController : Controller
         return RedirectToAction("Index");
     }
 
+    // PASO 5: Lógica para Guardar Respuestas anidadas
+    [HttpPost]
+    public IActionResult GuardarRespuesta(int comentarioPadreId, string Mensaje)
+    {
+        if (!string.IsNullOrWhiteSpace(Mensaje))
+        {
+            // Buscamos el comentario padre dentro de las ideas
+            foreach (var idea in MockDatabase.Ideas)
+            {
+                var padre = idea.ListaComentarios.FirstOrDefault(c => c.Id == comentarioPadreId);
+                if (padre != null)
+                {
+                    var nuevaRespuesta = new Respuesta
+                    {
+                        Id = padre.ListaRespuestas.Any() ? padre.ListaRespuestas.Max(r => r.Id) + 1 : 1,
+                        ComentarioPadreId = comentarioPadreId,
+                        Mensaje = Mensaje,
+                        FechaCreacion = DateTime.Now,
+                        AutorId = 1, // Simulamos a César
+                        Autor = MockDatabase.Usuarios.FirstOrDefault(u => u.Id == 1),
+                        Likes = 0,
+                        Dislikes = 0
+                    };
+                    
+                    padre.ListaRespuestas.Add(nuevaRespuesta);
+                    break; // Salimos del ciclo porque ya encontramos el comentario
+                }
+            }
+        }
+        return RedirectToAction("Index");
+    }
+
     public IActionResult Privacy() => View();
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
