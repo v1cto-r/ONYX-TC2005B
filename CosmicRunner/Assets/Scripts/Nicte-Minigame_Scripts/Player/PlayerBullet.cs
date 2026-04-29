@@ -2,12 +2,15 @@ using UnityEngine;
 
 public class PlayerBullet : MonoBehaviour
 {
+
+    ComboUI comboUI;
     public float lifetime = 3f;
     public float bulletSpeed = -10f;
 
     void Start()
     {
         Destroy(gameObject, lifetime);
+        comboUI = FindObjectOfType<ComboUI>();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -17,6 +20,7 @@ public class PlayerBullet : MonoBehaviour
             Destroy(gameObject);
             
             collision.gameObject.GetComponent<EnemyHealth>().TakeDamage(1);
+            comboUI.UpdateCombo(comboUI.currentCombo + 1);
         }
     }
 
