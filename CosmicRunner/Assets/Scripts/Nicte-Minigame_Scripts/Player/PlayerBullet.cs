@@ -4,6 +4,7 @@ public class PlayerBullet : MonoBehaviour
 {
 
     ComboUI comboUI;
+    GeneralUI generalUI;
     public float lifetime = 3f;
     public float bulletSpeed = -10f;
 
@@ -11,6 +12,7 @@ public class PlayerBullet : MonoBehaviour
     {
         Destroy(gameObject, lifetime);
         comboUI = FindObjectOfType<ComboUI>();
+        generalUI = FindObjectOfType<GeneralUI>();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -21,6 +23,9 @@ public class PlayerBullet : MonoBehaviour
             
             collision.gameObject.GetComponent<EnemyHealth>().TakeDamage(1);
             comboUI.UpdateCombo(comboUI.currentCombo + 1);
+            generalUI.UpdateCredits(100);
+        }else{
+            Destroy(gameObject);
         }
     }
 

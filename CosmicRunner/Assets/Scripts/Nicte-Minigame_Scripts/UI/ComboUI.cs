@@ -5,7 +5,7 @@ public class ComboUI : MonoBehaviour
 {
     public Image[] comboImages;
     public int currentCombo = 0;
-
+    GeneralUI generalUI;
     public TextMeshProUGUI comboText;
     public TextMeshProUGUI comboLabel;
     float timer = 0f;
@@ -91,9 +91,11 @@ public class ComboUI : MonoBehaviour
                     break;
                 case 5:
                     comboLabel.text = "¡Increible!";
+                    generalUI.UpdateCredits(200);
                     break;
                 case 8:
                     comboLabel.text = "¡Asombroso!";
+                    generalUI.UpdateCredits(300);
                     break;
                 default:
                     comboLabel.text = "";

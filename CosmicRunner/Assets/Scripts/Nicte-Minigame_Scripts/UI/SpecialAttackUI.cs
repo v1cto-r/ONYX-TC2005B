@@ -20,7 +20,7 @@ public class SpecialAttackUI : MonoBehaviour
         if(currentCharge < SpecialAttackImages.Length)
         {
             timer+= Time.deltaTime;
-            if (timer >= 1f)
+            if (timer >= 3f)
             {
                 UpdateCharge(currentCharge+1);
                 timer = 0f;

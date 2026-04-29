@@ -8,10 +8,10 @@ public enum GameState
 public class GameController : MonoBehaviour
 {
     public static GameController instancia;
-    public string mainMenuScene="MainMenu";
-    public string gameScene="Game";
-    public string DefeatScene="Defeat";
-    public string VictoryScene="Victory";
+    string mainMenuScene="AtaqueEstelarGameStart";
+    string gameScene="AtaqueEstelarGame";
+    string DefeatScene="AtaqueEstelarDefeat";
+    string VictoryScene="AtaqueEstelarVictory";
     public float time=300f;
     public float timeRemaining;
     public string currentState = "Playing";
@@ -112,18 +112,18 @@ public class GameController : MonoBehaviour
         SceneManager.LoadScene(gameScene);
     }
 
-    public void Pause()
+    public void TogglePause()
     {
-        if (currentState!="Playing")
+        if (currentState != "Playing")
             return;
 
-        if (Time.timeScale==0f)
+        if (Time.timeScale == 0f)
         {
-            Time.timeScale=1f;
+            Time.timeScale = 1f;
         }
         else
         {
-            Time.timeScale=0f;
+            Time.timeScale = 0f;
         }
     }
 }

@@ -5,7 +5,6 @@ public class PowerUp : MonoBehaviour
     float powerUpSpeed = 8f;
     float deadZoneX = 10f;
     string[] powerUpTypes = {"Shield", "Heal", "SpecialRecharge"};
-    //string[] powerUpTypes = {"Shield", "Heal", "SpecialRecharge"};
 
      void Update()
     {

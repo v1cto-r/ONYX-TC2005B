@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
    public int currentHealth = 12;
    bool inputEnabled = true;
    bool isDead = false;
-   float attackWindow = 2f;
+   float attackWindow = 1f;
    float lastAttackTime = -Mathf.Infinity;
    int attackCount = 0;
    int maxAttacks = 5;
@@ -41,7 +41,7 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        if(Keyboard.current.zKey.wasPressedThisFrame)
+        if(Keyboard.current.eKey.wasPressedThisFrame)
         {
             PlayerCombat combat = GetComponent<PlayerCombat>();
             if (combat != null && !isOnCooldown)
@@ -66,7 +66,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if(Keyboard.current.xKey.wasPressedThisFrame)
+        if(Keyboard.current.spaceKey.wasPressedThisFrame)
         {
             PlayerCombat combat = GetComponent<PlayerCombat>();
             if (combat != null)

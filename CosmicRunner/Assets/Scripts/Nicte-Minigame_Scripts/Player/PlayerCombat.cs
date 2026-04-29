@@ -68,8 +68,6 @@ public class PlayerCombat : MonoBehaviour
     public void RechargeSpecial()
     {
           currentSpecialCharges = specialChargeMax;
-    
-    // Actualizar la UI si existe
     SpecialAttackUI specialUI = FindObjectOfType<SpecialAttackUI>();
     if (specialUI != null)
     {

@@ -7,8 +7,8 @@ public class PowerUpSpawner : MonoBehaviour
     public GameObject powerUp;
     float maxHeight=2.5f;
     float minHeight= -3.5f;
-    float timeToSpawnMin=1f;
-    float timeToSpawnMax=1f;
+    float timeToSpawnMin=5f;
+    float timeToSpawnMax=10f;
 
     //float timeToSpawnMin=10f;
     //float timeToSpawnMax=20f;

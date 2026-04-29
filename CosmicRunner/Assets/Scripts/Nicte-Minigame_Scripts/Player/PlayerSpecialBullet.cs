@@ -21,6 +21,8 @@ public class PlayerSpecialBullet : MonoBehaviour
             int damage = Random.Range(1,3);
             collision.gameObject.GetComponent<EnemyHealth>().TakeDamage(damage);
             comboUI.UpdateCombo(comboUI.currentCombo + 1);
+        }else{
+            Destroy(gameObject);
         }
     }
 
