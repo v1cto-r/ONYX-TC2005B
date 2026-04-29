@@ -37,6 +37,14 @@ public class ComboUI : MonoBehaviour
         UpdateComboLabel(currentCombo);
     }
 
+    public void setComboToMax()
+    {
+        currentCombo = comboImages.Length;
+        updateComboBar(currentCombo);
+        UpdateComboText(currentCombo);
+        UpdateComboLabel(currentCombo);
+    }
+
     public void UpdateCombo(int combo)
     {
         currentCombo = combo;

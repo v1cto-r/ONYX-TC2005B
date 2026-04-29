@@ -21,6 +21,7 @@ public class GameController : MonoBehaviour
         if (instancia==null)
         {
             instancia=this;
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -32,6 +33,7 @@ public class GameController : MonoBehaviour
     {
         timeRemaining=time;
         currentState="Playing";
+        Time.timeScale=1f;
     }
 
     void Update()
@@ -55,14 +57,13 @@ public class GameController : MonoBehaviour
         if (currentState == newState) return;
  
         currentState = newState;
+    
  
         if (newState == "Victory")
         {
-            Time.timeScale = 0f;
             WinGame();
         }else if (newState == "Defeat")
         {
-            Time.timeScale = 0f;
             LoseGame();
         }
         else if (newState == "Playing")
@@ -74,6 +75,7 @@ public class GameController : MonoBehaviour
     public void SetVictory()
     {
         currentState="Victory";
+        ChangeState("Victory");
         Debug.Log("Victoria");
         WinGame();
     }
@@ -81,19 +83,20 @@ public class GameController : MonoBehaviour
     public void SetDefeat()
     {
         currentState="Defeat";
+        ChangeState("Defeat");
         Debug.Log("Derrota");
         LoseGame();
     }
 
     void LoseGame()
     {
-        Time.timeScale=0f;
+        Time.timeScale=1f;
         SceneManager.LoadScene(DefeatScene);
     }
 
     void WinGame()
     {
-        Time.timeScale=0f;
+        Time.timeScale=1f;
         SceneManager.LoadScene(VictoryScene);
     }
 

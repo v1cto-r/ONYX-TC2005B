@@ -57,7 +57,6 @@ public class PlayerCombat : MonoBehaviour
     {
         if (currentSpecialCharges <= 0 || specialBullet == null || firePoint == null) return;
         GameObject bullet = Instantiate(specialBullet, firePoint.position, Quaternion.identity);
-
     }
 
     public void ResetCombo()
@@ -66,4 +65,17 @@ public class PlayerCombat : MonoBehaviour
         comboTimer = 0f;
     }
 
+    public void RechargeSpecial()
+    {
+          currentSpecialCharges = specialChargeMax;
+    
+    // Actualizar la UI si existe
+    SpecialAttackUI specialUI = FindObjectOfType<SpecialAttackUI>();
+    if (specialUI != null)
+    {
+        specialUI.UpdateCharge(currentSpecialCharges);
+    }
+    
+    Debug.Log($"Special attack fully recharged! Charges: {currentSpecialCharges}");
+    }
 }

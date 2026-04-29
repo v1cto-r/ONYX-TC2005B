@@ -9,7 +9,7 @@ public class HealthBarUI : MonoBehaviour
     public Image[] playerLivesImage;
     public Image[] enemyLivesImage;
 
-    public void updatePlayerHealth(int currentHealth, int damage)
+    public void updatePlayerHealth(int currentHealth)
     {
         if(currentHealth>=0 && currentHealth < playerLivesImage.Length)
         {
@@ -31,6 +31,8 @@ public class HealthBarUI : MonoBehaviour
     {
         Debug.Log("Regenerating player health: " + currentHealth + " + " + regenAmount);
         int newHealth = currentHealth + regenAmount;
+        PlayerPrefs.SetInt("PlayerHealth", newHealth);
+        Debug.Log("New player health after regeneration: " + newHealth);
         if(newHealth > playerLivesImage.Length)
         {
             newHealth = playerLivesImage.Length;
@@ -49,6 +51,8 @@ public class HealthBarUI : MonoBehaviour
     {
         Debug.Log("Regenerating enemy health: " + currentHealth + " + " + regenAmount);
         int newHealth = currentHealth + regenAmount;
+        PlayerPrefs.SetInt("EnemyHealth", newHealth);
+        Debug.Log("New enemy health after regeneration: " + newHealth);
         if(newHealth > enemyLivesImage.Length)
         {
             newHealth = enemyLivesImage.Length;
@@ -63,21 +67,27 @@ public class HealthBarUI : MonoBehaviour
         }
     }
 
-    public void updateEnemyHealth(int currentHealth, int damage)
+    public void updateEnemyHealth(int currentHealth)
     {
-        Debug.Log("Updating enemy health: " + currentHealth + " - " + damage);
-        if(currentHealth>=0 && currentHealth < enemyLivesImage.Length)
+        if(currentHealth>enemyLivesImage.Length)
         {
-            for (int i = 0; i < enemyLivesImage.Length; i++)
+            currentHealth = enemyLivesImage.Length;
+        }
+
+        if(currentHealth<0)
+        {
+            currentHealth = 0;
+        }
+
+        for (int i = 0; i < enemyLivesImage.Length; i++)
+        {
+            if (i < currentHealth)
             {
-                if (i < currentHealth)
-                {
-                    enemyLivesImage[i].enabled = true;
-                }
-                else
-                {
-                    enemyLivesImage[i].enabled = false;
-                }
+                enemyLivesImage[i].enabled = true;
+            }
+            else
+            {
+                enemyLivesImage[i].enabled = false;
             }
         }
     }

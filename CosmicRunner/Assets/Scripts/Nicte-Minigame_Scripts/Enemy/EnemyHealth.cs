@@ -19,8 +19,21 @@ public class EnemyHealth : MonoBehaviour
     {
         if (!isAlive) return;
         currentHealth -= damage;
-        PlayerPrefs.SetInt("EnemyHealth", currentHealth);
-        healthBarUI.updateEnemyHealth(currentHealth, damage);
+
+        if (currentHealth < 0)
+        {
+            currentHealth = 0;
+        }
+
+        if (currentHealth > maxHealth)
+        {
+            currentHealth = maxHealth;
+        }
+
+        if (healthBarUI != null)
+        {
+            healthBarUI.updateEnemyHealth(currentHealth);
+        }
 
         if (enemyController != null)
         {
@@ -51,8 +64,16 @@ public class EnemyHealth : MonoBehaviour
         int randomValue = Random.Range(0, 10);
             if (randomValue < 5)
             {
-                PlayerPrefs.SetInt("EnemyHealth", currentHealth);
-                healthBarUI.regenerateEnemyHealth(currentHealth, 3);
+                currentHealth += 3;
+                if (currentHealth > maxHealth)
+                {
+                    currentHealth = maxHealth;
+                }
+
+                if (healthBarUI != null)
+                {
+                    healthBarUI.regenerateEnemyHealth(currentHealth, 0);
+                }
             }
     }
 }

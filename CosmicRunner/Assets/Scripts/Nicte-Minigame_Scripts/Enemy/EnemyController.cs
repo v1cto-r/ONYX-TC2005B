@@ -15,6 +15,7 @@ public class EnemyController : MonoBehaviour
     void Awake()
     {
         gameController = FindObjectOfType<GameController>();
+
         PlayerPrefs.SetInt("EnemyHealth", currentHealth);
         enemyMovement = GetComponent<EnemyMovement>();
         attack= GetComponent<EnemyAttack>();

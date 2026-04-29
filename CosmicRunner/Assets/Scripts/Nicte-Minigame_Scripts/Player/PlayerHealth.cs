@@ -4,8 +4,9 @@ public class PlayerHealth : MonoBehaviour
 {
     PlayerController playerController;
     HealthBarUI healthBarUI;
+    public GameObject shieldEffect;
     public int maxHealth = 12;
-    public float shielTimerMax = 3f;
+    public float shielTimerMax = 5f;
     public bool isAlive = true;
     public bool shieldActive = false;
     public int currentHealth;
@@ -26,14 +27,15 @@ public class PlayerHealth : MonoBehaviour
             if (shielTimerMax <= 0f)
             {
                 shieldActive = false;
-                shielTimerMax = 3f;
+                shieldEffect.SetActive(false);
+                shielTimerMax = 5f;
             }
         }
     }
 
     public void TakeDamage(int damage)
     {
-        if (!isAlive || damage <= 0) return;
+        if (!isAlive || damage <= 0|| shieldActive) return;
         currentHealth -= damage;
 
         if (currentHealth < 0)
@@ -42,10 +44,10 @@ public class PlayerHealth : MonoBehaviour
         }
 
         PlayerPrefs.SetInt("PlayerHealth", currentHealth);
+        Debug.Log("Player health after taking damage: " + currentHealth);
         if (healthBarUI != null)
         {
-            Debug.Log("Updating player health: " + currentHealth + " - " + damage);
-            healthBarUI.updatePlayerHealth(currentHealth, damage);
+            healthBarUI.updatePlayerHealth(currentHealth);
         }
 
         if (playerController != null)
@@ -54,15 +56,14 @@ public class PlayerHealth : MonoBehaviour
         }   
         if (currentHealth <= 0)
         {
-            isAlive = false;
+            Debug.Log("Player health is zero or less, player is dead.");
             Die();
         }   
     }
 
-    
-
     void Die()
     {
+        Debug.Log("Llegue a la funcion DIE");
         if (!isAlive) return;
 
         isAlive = false;
@@ -73,5 +74,31 @@ public class PlayerHealth : MonoBehaviour
         if (GameController.instancia != null)
             GameController.instancia.ChangeState("Defeat");
     }
+
+    public void ActivateShield()
+    {
+        Debug.Log("Shield activated");
+        shieldActive = true;
+        if (shieldEffect != null)
+        {
+            shieldEffect.SetActive(true);
+        }
+        shielTimerMax = 5f;
+    }
+
+    public void Heal()
+    {
+                currentHealth += 2;
+                if (currentHealth > maxHealth)
+                {
+                    currentHealth = maxHealth;
+                }
+
+                if (healthBarUI != null)
+                {
+                    healthBarUI.regeneratePlayerHealth(currentHealth, 0);
+                }
+    }
+
 
 }
