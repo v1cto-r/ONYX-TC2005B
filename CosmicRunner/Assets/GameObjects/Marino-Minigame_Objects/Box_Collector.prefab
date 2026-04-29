@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3786120801828685416}
   - component: {fileID: 6241586912864607428}
   - component: {fileID: 3811279433741362817}
+  - component: {fileID: 4069770530867631209}
   m_Layer: 0
   m_Name: Box_Collector
   m_TagString: Collector
@@ -138,3 +139,18 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1.18, y: 1.08}
   m_EdgeRadius: 0
+--- !u!114 &4069770530867631209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 436209202673508652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70e31b67efb594f7dbbc29d99dd63356, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CollectorBehaviour
+  groundTilemap: {fileID: 0}
+  wallsTilemap: {fileID: 0}
+  moveInterval: 2

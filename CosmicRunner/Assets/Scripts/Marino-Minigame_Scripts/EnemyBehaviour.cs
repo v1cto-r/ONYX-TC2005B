@@ -7,6 +7,7 @@ public class EnemyBehaviour : MonoBehaviour
     [SerializeField] private Tilemap wallsTilemap;
     [SerializeField] private float stepRepeatSeconds = 0.15f;
     [SerializeField] private GameObject player;
+    [SerializeField] private int scorePenalty = 10;
 
     private float timeUntilNextStep;
     private static readonly Vector3Int[] CardinalDirections =
@@ -117,7 +118,7 @@ public class EnemyBehaviour : MonoBehaviour
         {
             Destroy(gameObject);
             Debug.Log("Enemy collided with player!");
-            // TODO: Remove points from player
+            GameControl.Instance.RemoveScore(scorePenalty);
         }
     }
 }

@@ -5,6 +5,7 @@ using TMPro;
 public class UIControl : MonoBehaviour
 {
 	[Header("UI Labels")]
+	[SerializeField] private TMP_Text promptsProgressText;
 	[SerializeField] private TMP_Text wordsStorageText;
 	[SerializeField] private TMP_Text scoreText;
 	[SerializeField] private TextMeshProUGUI timerText;
@@ -20,24 +21,19 @@ public class UIControl : MonoBehaviour
     [SerializeField] private GameObject pausePanel;
     [SerializeField] private Button pausePanelButton;
 
-    [Header("Settings")]
-    [SerializeField] private int wordsStorageCapacity = 4;
-    [SerializeField] private float remainingTime = 120f;
+	[Header("Settings")]
 	[SerializeField] private PlayerControl playerControl;
 
 	[Header("Text Formats")]
 	[SerializeField] private string wordsStorageFormat = "Palabras: {0}/{1}";
 	[SerializeField] private string scoreFormat = "Score: {0}";
-
-	private PromptsControl promptsControl;
+	[SerializeField] private string promptsProgressFormat = "#Prompts: {0}/{1}";
 	private bool playerControlWasEnabledBeforePause;
 	private bool hasStoredPlayerControlState;
 	private bool isGamePaused;
 
 	private void Awake()
 	{
-		promptsControl = PromptsControl.Instance;
-
 		if (playerControl == null)
 		{
 			playerControl = GameObject.Find("Player").GetComponent<PlayerControl>();
@@ -65,24 +61,22 @@ public class UIControl : MonoBehaviour
 
     private void Start()
     {
-        RefreshUI();
-
 		if (promptsPanel != null)
 		{
 			SetPromptsPanelVisible(false);
+		}
+
+		if (GameControl.Instance != null)
+		{
+			SetTimer(GameControl.Instance.remainingTime);
+			SetScore(GameControl.Instance.currentScore);
+			SetPrompts(GameControl.Instance.currentPrompts, GameControl.Instance.promptsToWin);
 		}
     }
 
 	private void OnEnable()
 	{
-		if (promptsControl == null)
-		{
-			promptsControl = PromptsControl.Instance;
-		}
-
 		SetPauseState(false);
-
-		RefreshUI();
 	}
 
 	private void OnDestroy()
@@ -100,36 +94,51 @@ public class UIControl : MonoBehaviour
 		Time.timeScale = 1f;
 	}
 
-	private void Update()
+	public void SetTimer(float remainingTime)
 	{
-		if (promptsControl == null && PromptsControl.Instance != null)
+		if (timerText == null)
 		{
-			promptsControl = PromptsControl.Instance;
+			return;
 		}
 
-		// Si el tiempo restante es mayor a 0, decrementarlo con el tiempo entre frames
-		if (remainingTime > 0)
+		int minutes = Mathf.FloorToInt(remainingTime / 60f);
+		int seconds = Mathf.FloorToInt(remainingTime % 60f);
+		timerText.text = string.Format("{0:0}:{1:00}", minutes, seconds);
+	}
+
+	public void SetScore(int score)
+	{
+		if (scoreText == null)
 		{
-			remainingTime -= Time.deltaTime;
+			return;
 		}
 
-		// Si el tiempo restante es menor a 0, establecerlo en 0 para evitar valores negativos
-		else if (remainingTime < 0)
+		scoreText.text = string.Format(scoreFormat, score);
+	}
+
+	public void SetPrompts(int currentPrompts, int promptsToWin)
+	{
+		if (promptsProgressText == null)
 		{
-			remainingTime = 0;
+			return;
 		}
 
-		// Incrementa el tiempo transcurrido con el tiempo entre frames
-		int minutes = Mathf.FloorToInt(remainingTime / 60);
-		int seconds = Mathf.FloorToInt(remainingTime % 60);
+		promptsProgressText.text = string.Format(promptsProgressFormat, currentPrompts, promptsToWin);
+	}
 
-		// Actualiza el texto del temporizador con el formato MM:SS:MS
-		if (timerText != null)
+	public void SetWordsStorage(int currentWords, int maxWords)
+	{
+		if (wordsStorageText == null)
 		{
-			timerText.text = string.Format("{0:0}:{1:00}", minutes, seconds);
+			return;
 		}
 
-		RefreshUI();
+		wordsStorageText.text = string.Format(wordsStorageFormat, currentWords, maxWords);
+	}
+
+	public bool IsPromptsPanelOpen()
+	{
+		return promptsPanel != null && promptsPanel.activeSelf;
 	}
 
 	public void TogglePromptsPanel()
@@ -152,6 +161,11 @@ public class UIControl : MonoBehaviour
 		if (promptsPanel == null)
 		{
 			return;
+		}
+
+		if (!isVisible && PromptsControl.Instance != null)
+		{
+			PromptsControl.Instance.CancelAllUnsubmittedPromptFills();
 		}
 
 		promptsPanel.SetActive(isVisible);
@@ -222,25 +236,4 @@ public class UIControl : MonoBehaviour
 		}
 	}
 
-	private void RefreshUI()
-	{
-		if (promptsControl == null)
-		{
-			return;
-		}
-
-		if (wordsStorageText != null)
-		{
-			wordsStorageText.text = string.Format(
-				wordsStorageFormat,
-				promptsControl.CurrentWordCount,
-				wordsStorageCapacity
-			);
-		}
-
-		if (scoreText != null)
-		{
-			scoreText.text = string.Format(scoreFormat, promptsControl.TotalScore);
-		}
-	}
 }

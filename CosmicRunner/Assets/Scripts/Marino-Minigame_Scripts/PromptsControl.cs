@@ -4,28 +4,36 @@ using UnityEngine.InputSystem;
 
 public class PromptsControl : MonoBehaviour
 {
+    public static PromptsControl Instance;
+
+    [Header("Word Configuration")]
     [SerializeField] private string[] boxWords;
     [SerializeField] private DraggableWord[] wordSlots;
+
+    [HideInInspector] public int currentWordCount;
+    [HideInInspector] public int wordStorageCapacity;
+
+    [Header("Prompt Configuration")]
     [SerializeField] private PromptEntry[] promptPool;
     [SerializeField] private PromptSlot[] promptSlots;
-    [SerializeField] private bool clearSlotsOnStart = true;
-    [SerializeField] private bool assignRandomPromptsOnStart = true;
+    
+    [Header("Scoring Configuration")]
     [SerializeField] private int mehPoints = 5;
     [SerializeField] private int okPoints = 10;
     [SerializeField] private int goodPoints = 15;
+
+    [Header("Testing Settings")]
+    [SerializeField] private bool clearSlotsOnStart = true;
+    [SerializeField] private bool assignRandomPromptsOnStart = true;
+
+    [Header("Input Settings")]
     [SerializeField] private string clickActionName = "Drag";
     [SerializeField] private string pointerActionName = "Point";
     [SerializeField] private Camera worldCamera;
 
     private InputAction clickAction;
     private InputAction pointerAction;
-    private int currentWordCount;
-
-    public int TotalScore { get; private set; }
-    public int CurrentWordCount => currentWordCount;
-    public int WordStorageCapacity => wordSlots != null ? wordSlots.Length : 0;
-
-    public static PromptsControl Instance { get; private set; }
+    
 
     private void Awake()
     {
@@ -36,6 +44,11 @@ public class PromptsControl : MonoBehaviour
         }
 
         Instance = this;
+
+        if (wordSlots != null)
+        {
+            wordStorageCapacity = wordSlots.Length;
+        }
 
         if (worldCamera == null)
         {
@@ -138,6 +151,24 @@ public class PromptsControl : MonoBehaviour
         RefreshWordCount();
     }
 
+    public void CancelAllUnsubmittedPromptFills()
+    {
+        if (promptSlots == null)
+        {
+            return;
+        }
+
+        foreach (PromptSlot slot in promptSlots)
+        {
+            if (slot == null || !slot.isFilled || slot.isSubmitted)
+            {
+                continue;
+            }
+
+            slot.CancelFill();
+        }
+    }
+
     public void NotifyWordSlotsChanged()
     {
         RefreshWordCount();
@@ -203,7 +234,12 @@ public class PromptsControl : MonoBehaviour
 
         if (hasScoringMatch)
         {
-            TotalScore += GetPointsForQuality(matchQuality);
+            GameControl gameControl = GameControl.Instance;
+            if (gameControl != null)
+            {
+                gameControl.AddScore(GetPointsForQuality(matchQuality));
+                gameControl.AddCompletedPrompt();
+            }
         }
 
         PromptEntry currentPrompt = slot.assignedPrompt;
@@ -457,6 +493,12 @@ public class PromptsControl : MonoBehaviour
         if (wordSlots == null || wordSlots.Length == 0)
         {
             currentWordCount = 0;
+
+            if (GameControl.Instance != null && GameControl.Instance.uiControl != null)
+            {
+                GameControl.Instance.uiControl.SetWordsStorage(currentWordCount, 0);
+            }
+
             return;
         }
 
@@ -470,5 +512,10 @@ public class PromptsControl : MonoBehaviour
         }
 
         currentWordCount = count;
+
+        if (GameControl.Instance != null && GameControl.Instance.uiControl != null)
+        {
+            GameControl.Instance.uiControl.SetWordsStorage(currentWordCount, wordStorageCapacity);
+        }
     }
 }

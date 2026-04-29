@@ -865,7 +865,7 @@ MonoBehaviour:
   groundTilemap: {fileID: 1168883055}
   wallsTilemap: {fileID: 785078936}
   boxPrefab: {fileID: 6886119063528486782, guid: c5488fddaaece4c1b9bea48d7c329cbb, type: 3}
-  boxCount: 4
+  refreshSeconds: 1
 --- !u!1 &266779632
 GameObject:
   m_ObjectHideFlags: 0
@@ -1168,7 +1168,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '#Prompts: 2'
+  m_text: '#Prompts: X/8'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b633915a7eab00342a258e5c2f50a75f, type: 2}
   m_sharedMaterial: {fileID: -5571592025542048100, guid: b633915a7eab00342a258e5c2f50a75f, type: 2}
@@ -1195,14 +1195,14 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 31.15
+  m_fontSize: 26
   m_fontSizeBase: 14
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 24
   m_fontSizeMax: 64
   m_fontStyle: 1
-  m_HorizontalAlignment: 4
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -1234,7 +1234,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 0, z: 0.000022888184, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -1365,15 +1365,25 @@ MonoBehaviour:
   - {fileID: 1446744810}
   - {fileID: 705181837}
   - {fileID: 1932181446}
+  currentWordCount: 0
+  wordStorageCapacity: 0
   promptPool:
   - incompletePrompt: "Crea una campa\xF1a para promocionar una lavadora inteligente
       destacando su eficiencia y ______."
-    goodAnswers: []
+    goodAnswers:
+    - a
+    - b
+    - c
+    - d
     okAnswers: []
     mehAnswers: []
   - incompletePrompt: Analiza el impacto de un refrigerador inteligente en el hogar
       moderno y destaca su ______.
-    goodAnswers: []
+    goodAnswers:
+    - a
+    - b
+    - c
+    - d
     okAnswers: []
     mehAnswers: []
   promptSlots:
@@ -1405,11 +1415,11 @@ MonoBehaviour:
     sourceWord: {fileID: 0}
     isFilled: 0
     isSubmitted: 0
+  mehPoints: 10
+  okPoints: 25
+  goodPoints: 50
   clearSlotsOnStart: 1
   assignRandomPromptsOnStart: 1
-  mehPoints: 5
-  okPoints: 10
-  goodPoints: 15
   clickActionName: Drag
   pointerActionName: Point
   worldCamera: {fileID: 1816648660}
@@ -2349,7 +2359,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -71.88877, y: -1.7332916}
+  m_AnchoredPosition: {x: -53, y: 0}
   m_SizeDelta: {x: 300, y: 72}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &718108384
@@ -2579,7 +2589,7 @@ Transform:
   m_GameObject: {fileID: 782847449}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 450.00668, y: 227.31854, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4756,6 +4766,7 @@ MonoBehaviour:
   playerControl: {fileID: 1228552754938000022}
   bulletPrefab: {fileID: 7817828094459547053, guid: 01ec67a2e80c349c2aaee08ae99d5c59, type: 3}
   muzzleOffset: 0.35
+  shootActionName: Shoot
 --- !u!1 &882172403
 GameObject:
   m_ObjectHideFlags: 0
@@ -5473,7 +5484,7 @@ MonoBehaviour:
   m_fontSizeMin: 24
   m_fontSizeMax: 64
   m_fontStyle: 0
-  m_HorizontalAlignment: 4
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -5545,7 +5556,7 @@ RectTransform:
   m_GameObject: {fileID: 1080390604}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.7678199, y: 0.7678199, z: 0.7678199}
+  m_LocalScale: {x: 0.7851952, y: 0.7851952, z: 0.7851952}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 288937532}
@@ -5553,7 +5564,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -314.46634, y: -0.38563538}
+  m_AnchoredPosition: {x: -305, y: -1}
   m_SizeDelta: {x: 300, y: 72}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1080390606
@@ -7891,21 +7902,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ac26c99c97f0498c9c34e481d8326ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIControl
+  promptsProgressText: {fileID: 288937533}
   wordsStorageText: {fileID: 1079748715}
   scoreText: {fileID: 2143453430}
   timerText: {fileID: 223472792}
   promptsPanel: {fileID: 300470791}
   promptsPanelButton: {fileID: 132634070}
-  promptsPanelIconImage: {fileID: 0}
+  promptsPanelIconImage: {fileID: 654688884}
   showPromptsSprite: {fileID: -208242079398429808, guid: aeeac18489c8246ada873943cada91b9, type: 3}
   hidePromptsSprite: {fileID: 1676322361899298638, guid: 3c598f8469d994d8fb74c5d6bf6f108c, type: 3}
   pausePanel: {fileID: 1590817569}
   pausePanelButton: {fileID: 1211180034}
-  wordsStorageCapacity: 4
-  remainingTime: 120
-  playerControl: {fileID: 0}
+  playerControl: {fileID: 1228552754938000022}
   wordsStorageFormat: 'Palabras: {0}/{1}'
   scoreFormat: '{0}'
+  promptsProgressFormat: '#Prompts: {0}/{1}'
 --- !u!1 &1446744808
 GameObject:
   m_ObjectHideFlags: 0
@@ -8828,6 +8839,7 @@ GameObject:
   - component: {fileID: 1816648661}
   - component: {fileID: 1816648660}
   - component: {fileID: 1816648659}
+  - component: {fileID: 1816648662}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -8910,6 +8922,50 @@ Transform:
   - {fileID: 1390113908}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1816648662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1816648658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.UniversalAdditionalCameraData
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_AllowHDROutput: 1
+  m_UseScreenCoordOverride: 0
+  m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_TaaSettings:
+    m_Quality: 3
+    m_FrameInfluence: 0.1
+    m_JitterScale: 1
+    m_MipBias: 0
+    m_VarianceClampScale: 0.9
+    m_ContrastAdaptiveSharpening: 0
+  m_Version: 2
 --- !u!1 &1892276138
 GameObject:
   m_ObjectHideFlags: 0
@@ -9379,6 +9435,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1961164200}
+  - component: {fileID: 1961164201}
   m_Layer: 0
   m_Name: GameControl
   m_TagString: Untagged
@@ -9401,6 +9458,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1961164201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1961164199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ce4e2e268c544517b8c4e11814c1ae2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameControl
+  promptsToWin: 8
+  currentPrompts: 0
+  currentScore: 0
+  totalGameTime: 120
+  remainingTime: 0
+  uiControl: {fileID: 1439094378}
 --- !u!1 &1971564395
 GameObject:
   m_ObjectHideFlags: 0
@@ -9883,7 +9958,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 182
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b633915a7eab00342a258e5c2f50a75f, type: 2}
   m_sharedMaterial: {fileID: -5571592025542048100, guid: b633915a7eab00342a258e5c2f50a75f, type: 2}
@@ -10099,6 +10174,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4069770530867631209, guid: e3e8bfc56d5bb4f51be8a410fa29a47c, type: 3}
+      propertyPath: moveInterval
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4069770530867631209, guid: e3e8bfc56d5bb4f51be8a410fa29a47c, type: 3}
+      propertyPath: wallsTilemap
+      value: 
+      objectReference: {fileID: 785078936}
+    - target: {fileID: 4069770530867631209, guid: e3e8bfc56d5bb4f51be8a410fa29a47c, type: 3}
+      propertyPath: groundTilemap
+      value: 
+      objectReference: {fileID: 1168883055}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10109,9 +10196,9 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1816648661}
+  - {fileID: 782847451}
   - {fileID: 25455112}
   - {fileID: 1439094377}
-  - {fileID: 782847451}
   - {fileID: 300470793}
   - {fileID: 1098297022}
   - {fileID: 1228552754938000018}

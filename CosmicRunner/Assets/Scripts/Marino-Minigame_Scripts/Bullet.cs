@@ -4,6 +4,7 @@ using UnityEngine.Tilemaps;
 public class Bullet : MonoBehaviour
 {
     [SerializeField] private float travelSpeed = 7f;
+    [SerializeField] private int killScoreValue = 5;
 
     private Rigidbody2D projectileBody;
 
@@ -46,7 +47,7 @@ public class Bullet : MonoBehaviour
         {
             Destroy(collision.gameObject);
             Destroy(gameObject);
-            // TODO: award points to player
+            GameControl.Instance.AddScore(killScoreValue);
         }
 
         if (collision.CompareTag("Box")) {
