@@ -13,6 +13,11 @@ public class PlayerControl : MonoBehaviour
     private InputAction pullAction;
     private float timeUntilNextStep;
     private bool isMoveHeld;
+    private Vector2 facingDirection = Vector2.down;
+
+    public Vector2 FacingDirection => facingDirection;
+    public Tilemap GroundTilemap => groundTilemap;
+    public Tilemap CollisionTilemap => collisionTilemap;
 
     private void Awake()
     {
@@ -70,6 +75,11 @@ public class PlayerControl : MonoBehaviour
         Vector2 moveVector = moveAction.ReadValue<Vector2>();
         Vector2 moveDirection = GetCardinalDirection(moveVector);
         bool isPullButtonHeld = pullAction != null && pullAction.IsPressed();
+
+        if (moveDirection != Vector2.zero)
+        {
+            facingDirection = moveDirection;
+        }
 
         if (moveDirection == Vector2.zero)
         {

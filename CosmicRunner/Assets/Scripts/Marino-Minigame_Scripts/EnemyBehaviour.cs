@@ -9,7 +9,13 @@ public class EnemyBehaviour : MonoBehaviour
     [SerializeField] private GameObject player;
 
     private float timeUntilNextStep;
-    private Vector3Int[] cardinalDirections = { Vector3Int.up, Vector3Int.down, Vector3Int.left, Vector3Int.right };
+    private static readonly Vector3Int[] CardinalDirections =
+    {
+        Vector3Int.up,
+        Vector3Int.down,
+        Vector3Int.left,
+        Vector3Int.right
+    };
 
     public void Initialize(Tilemap ground, Tilemap walls)
     {
@@ -17,54 +23,61 @@ public class EnemyBehaviour : MonoBehaviour
         wallsTilemap = walls;
     }
 
-    void Start()
+    private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         timeUntilNextStep = stepRepeatSeconds;
     }
 
-    void Update()
+    private void Update()
     {
         timeUntilNextStep -= Time.deltaTime;
 
-        if (timeUntilNextStep <= 0f)
+        if (timeUntilNextStep > 0f)
         {
-            MoveTowardPlayer();
-            timeUntilNextStep = stepRepeatSeconds;
+            return;
         }
+
+        MoveTowardPlayer();
+        timeUntilNextStep = stepRepeatSeconds;
     }
 
     private void MoveTowardPlayer()
     {
-        if (player == null)
+        if (player == null || groundTilemap == null || wallsTilemap == null)
+        {
             return;
+        }
 
         Vector3Int playerCell = groundTilemap.WorldToCell(player.transform.position);
         Vector3Int enemyCell = groundTilemap.WorldToCell(transform.position);
 
         Vector3Int bestMove = enemyCell;
-        float closestDistToPlayer = Vector3Int.Distance(enemyCell, playerCell);
+        float bestDistance = Vector3Int.Distance(enemyCell, playerCell);
 
-        foreach (Vector3Int direction in cardinalDirections)
+        foreach (Vector3Int direction in CardinalDirections)
         {
             Vector3Int nextCell = enemyCell + direction;
 
-            if (CanMoveToCell(nextCell))
+            if (!CanMoveToCell(nextCell))
             {
-                float distToPlayer = Vector3Int.Distance(nextCell, playerCell);
-                if (distToPlayer < closestDistToPlayer)
-                {
-                    closestDistToPlayer = distToPlayer;
-                    bestMove = nextCell;
-                }
+                continue;
+            }
+
+            float candidateDistance = Vector3Int.Distance(nextCell, playerCell);
+            if (candidateDistance < bestDistance)
+            {
+                bestDistance = candidateDistance;
+                bestMove = nextCell;
             }
         }
 
-        if (bestMove != enemyCell)
+        if (bestMove == enemyCell)
         {
-            Vector3 nextWorldPos = groundTilemap.GetCellCenterWorld(bestMove);
-            transform.position = nextWorldPos;
+            return;
         }
+
+        transform.position = groundTilemap.GetCellCenterWorld(bestMove);
     }
 
     private bool CanMoveToCell(Vector3Int cell)
@@ -74,7 +87,28 @@ public class EnemyBehaviour : MonoBehaviour
             return false;
         }
 
+        if (IsBoxAtCell(cell))
+        {
+            return false;
+        }
+
         return true;
+    }
+
+    private bool IsBoxAtCell(Vector3Int cell)
+    {
+        Vector3 cellCenterWorld = groundTilemap.GetCellCenterWorld(cell);
+        Collider2D[] collidersAtPoint = Physics2D.OverlapPointAll(cellCenterWorld);
+
+        foreach (Collider2D colliderAtPoint in collidersAtPoint)
+        {
+            if (colliderAtPoint != null && colliderAtPoint.CompareTag("Box"))
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
