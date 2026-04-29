@@ -160,8 +160,8 @@
                                     </details>
                                     
                                     <div class="d-flex align-items-center border rounded-pill bg-white px-3 py-1 text-dark">
-                                        <span class="me-3 fw-bold"><span class="fs-6 me-1">👍</span> @comentario.Likes</span>
-                                        <span class="border-start ps-3 fw-bold"><span class="fs-6 me-1">👎</span> @comentario.Dislikes</span>
+                                        <span class="me-3 fw-bold"><img src="~/assets/icons/thumbs-up.svg" /> @comentario.Likes</span>
+                                        <span class="border-start ps-3 fw-bold"><img src="~/assets/icons/thumbs-down.svg" /> @comentario.Dislikes</span>
                                     </div>
                                 </div>
 
@@ -202,19 +202,19 @@
             <form method="post" action="/Inicio/DarLike" class="m-0">
                 <input type="hidden" name="ideaId" value="@Model.Id" />
                 <button type="submit" class="btn-interaccion-pill">
-                    <span class="fs-4 me-2">👍</span> <span class="fw-bold text-dark fs-5">@Model.Likes</span>
+                    <img src="~/assets/icons/thumbs-up.svg" /> <span class="fw-bold text-dark fs-5">@Model.Likes</span>
                 </button>
             </form>
 
             <form method="post" action="/Inicio/DarDislike" class="m-0">
                 <input type="hidden" name="ideaId" value="@Model.Id" />
                 <button type="submit" class="btn-interaccion-pill">
-                    <span class="fs-4 me-2">👎</span> <span class="fw-bold text-dark fs-5">@Model.Dislikes</span>
+                    <img src="~/assets/icons/thumbs-down.svg" /> <span class="fw-bold text-dark fs-5">@Model.Dislikes</span>
                 </button>
             </form>
 
             <div class="btn-interaccion-pill bg-light mx-auto" style="cursor: default;">
-                <span class="fs-4 me-2">💬</span> <span class="fw-bold text-dark fs-5">@(Model.ListaComentarios?.Count ?? 0)</span>
+                <img src="~/assets/icons/thumbs-down.svg" /> <span class="fw-bold text-dark fs-5">@(Model.ListaComentarios?.Count ?? 0)</span>
             </div>
             
         </div>

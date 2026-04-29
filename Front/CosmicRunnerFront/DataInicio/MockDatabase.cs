@@ -24,12 +24,12 @@ namespace CosmicRunnerFront.DataInicio
 
             // 3. Usuarios (Basados en el mockup)
             var cesar = new Usuario { Id = 1, Nombre = "César", Apellido = "Alexandro", DepartamentoId = 1, Racha = 24, PosicionGlobalPorcentaje = 50, PosicionDepartamentalPorcentaje = 10, FotoPerfilUrl = "/assets/random/user.png" };
-            var adriana = new Usuario { Id = 2, Nombre = "Adriana", Apellido = "Díaz", DepartamentoId = 1, FotoPerfilUrl = "/assets/random/user.png" };
-            var jacobo = new Usuario { Id = 3, Nombre = "Jacobo", Apellido = "Pérez", DepartamentoId = 2, FotoPerfilUrl = "/assets/random/user.png" };
-            var julia = new Usuario { Id = 4, Nombre = "Julia", Apellido = "Fernández", DepartamentoId = 3, FotoPerfilUrl = "/assets/random/user.png" };
-            var mario = new Usuario { Id = 5, Nombre = "Mario", Apellido = "López", DepartamentoId = 3, FotoPerfilUrl = "/assets/random/user.png" };
+            var adriana = new Usuario { Id = 2, Nombre = "Adriana", Apellido = "Díaz", DepartamentoId = 1, FotoPerfilUrl = "/assets/random/5.png" };
+            var jacobo = new Usuario { Id = 3, Nombre = "Jacobo", Apellido = "Pérez", DepartamentoId = 2, FotoPerfilUrl = "/assets/random/4.png" };
+            var julia = new Usuario { Id = 4, Nombre = "Julia", Apellido = "Fernández", DepartamentoId = 3, FotoPerfilUrl = "/assets/random/1.png" };
+            var mario = new Usuario { Id = 5, Nombre = "Mario", Apellido = "López", DepartamentoId = 3, FotoPerfilUrl = "/assets/random/3.png" };
 
-            var elena = new Usuario { Id = 6, Nombre = "Elena", Apellido = "González", DepartamentoId = 3, FotoPerfilUrl = "/assets/random/user.png" };
+            var elena = new Usuario { Id = 6, Nombre = "Elena", Apellido = "González", DepartamentoId = 3, FotoPerfilUrl = "/assets/random/2.png" };
             Usuarios.AddRange(new[] { cesar, adriana, jacobo, julia, mario, elena });
             // 4. Ideas
             var idea1 = new Idea

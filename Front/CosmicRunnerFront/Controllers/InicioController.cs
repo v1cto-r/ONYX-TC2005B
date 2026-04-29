@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using CosmicRunnerFront.Models;
 using CosmicRunnerFront.Models.InicioModels;
 using CosmicRunnerFront.DataInicio;
-using Microsoft.VisualBasic.FileIO; // Asegúrate de que apunte a tu carpeta DataInicio
+using Microsoft.VisualBasic.FileIO; 
 
 namespace CosmicRunnerFront.Controllers;
 
@@ -17,18 +17,14 @@ public class InicioController : Controller
         var ideasGuardadas = MockDatabase.Ideas.OrderBy(i => i.Id).ToList();
         
         ViewBag.ListaIdeas = ideasGuardadas;
-        ViewData["NuevaIdea"] = new Idea(); 
+        ViewData["NuevaIdea"] = new Idea();
         
         return View();
     }
 
     [HttpPost]
-    public IActionResult CrearIdea(Idea nuevaIdea, bool? cancelar)
+    public IActionResult CrearIdea(Idea nuevaIdea)
     {
-        if (cancelar == true)
-        { 
-            return RedirectToAction("Index");
-        }
         nuevaIdea.Id = MockDatabase.Ideas.Any() ? MockDatabase.Ideas.Max(i => i.Id) + 1 : 1; 
         nuevaIdea.FechaPublicacion = DateTime.Now;
         nuevaIdea.Estado = EstadoIniciativa.EnRevisionInicial;
@@ -67,7 +63,7 @@ public class InicioController : Controller
         return RedirectToAction("Index");
     }
 
-    // PASO 2: Lógica de Likes
+    // Likes
     [HttpPost]
     public IActionResult DarLike(int ideaId)
     {
@@ -79,7 +75,7 @@ public class InicioController : Controller
         return RedirectToAction("Index");
     }
 
-    // PASO 2: Lógica de Dislikes
+    // Dislikes
     [HttpPost]
     public IActionResult DarDislike(int ideaId)
     {
@@ -91,7 +87,7 @@ public class InicioController : Controller
         return RedirectToAction("Index");
     }
 
-    // PASO 3: Lógica para Guardar Comentarios
+    // Guardar Comentarios
     [HttpPost]
     public IActionResult GuardarComentario(int ideaId, string Mensaje)
     {
@@ -119,7 +115,7 @@ public class InicioController : Controller
         return RedirectToAction("Index");
     }
 
-    // PASO 5: Lógica para Guardar Respuestas anidadas
+    // Guardar Respuestas anidadas
     [HttpPost]
     public IActionResult GuardarRespuesta(int comentarioPadreId, string Mensaje)
     {
