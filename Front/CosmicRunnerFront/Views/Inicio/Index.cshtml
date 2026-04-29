@@ -2,7 +2,11 @@
     ViewData["Title"] = "Impulsa el Cambio - Codex";
     Layout = "~/Views/Shared/_Layout.cshtml"; 
 }
-
+@using CosmicRunnerFront.DataInicio
+@{
+    // Obtenemos los datos del usuario activo (César) desde nuestra memoria RAM
+    var usuarioActual = MockDatabase.Usuarios.FirstOrDefault(u => u.Id == 1);
+}
 @section Styles {
     <link rel="stylesheet" href="~/css/Inicio/inicio.css" />
 }
@@ -10,67 +14,69 @@
     <div class="container-fluid">
         <div class="row g-4">
             <div class="col-12 col-md-3">
-                <div class="contenedor-perfil">
+                <div class="contenedor-perfil pb-3">
                     <div class="contenedor-perfil-foto">
-                        <img src="~/assets/random/user.png" alt="Foto de perfil">
+                        <img src="@(string.IsNullOrEmpty(usuarioActual?.FotoPerfilUrl) ? "/assets/random/user.png" : usuarioActual.FotoPerfilUrl)" alt="Foto de perfil">
                     </div>
                     <div class="contenedor-perfil-contenido">
-                        <h1>César Alexandro</h1>
+                        <h1>@(usuarioActual?.Nombre) @(usuarioActual?.Apellido)</h1>
                         
                         <div class="estadisticas container my-4">
-                            <div class="row mb-2"> <!-- mb-3 = margen inferior -->
-                                <div class="col-12 text-center"> <!-- text-center = texto centrado -->
-                                    <p>Racha Whirlpool</p>
+                            <div class="row mb-2"> 
+                                <div class="col-12 text-center"> 
+                                    <p class="fw-bold text-dark">Racha Whirlpool</p>
                                 </div>
                             </div>
-                            <div class="row mb-3"> <!-- mb-3 = margen inferior -->
-                                <div class="col-3 text-center"></div>
-                                <div class="col-3 text-center"> <!-- text-center = texto centrado -->
-                                    <h3 class="numero-denso">U</h3>
+                            <div class="row mb-3"> 
+                                
+                                <div class="col-6 text-center"> 
+                                    <h3 class="numero-denso">🔥</h3>
                                 </div>
-                                <div class="col-3 text-center"> <!-- text-center = texto centrado -->
-                                    <h3 class="numero-denso">24</h3>
+                                <div class="col-6 text-center"> 
+                                    <h3 class="numero-denso">@(usuarioActual?.Racha)</h3>
                                 </div>
-                                <div class="col-3 text-center"></div>
+                                
                             </div>
                         </div>
 
                         <div class="estadisticas container my-4 ">
                             <div class="row mb-1"> 
                                 <div class="col-12 text-center"> 
-                                    <p>Posición</p>
+                                    <p class="fw-bold text-dark">Posición</p>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-6 text-center"> 
-                                    <h3 class="numero-denso-posicion">50%</h3>
+                                    <h3 class="numero-denso-posicion">@(usuarioActual?.PosicionGlobalPorcentaje)%</h3>
                                 </div>
                                 <div class="col-6 text-center"> 
-                                    <h3 class="numero-denso-posicion">10%</h3>
+                                    <h3 class="numero-denso-posicion">@(usuarioActual?.PosicionDepartamentalPorcentaje)%</h3>
                                 </div>
                             </div>
                             <div class="row mb-3 pb-4">
                                 <div class="col-6 text-center"> 
-                                    <span>Global</span>
+                                    <span class="text-dark fw-bold">Global</span>
                                 </div>
                                 <div class="col-6 text-center"> 
-                                    <span>Departamental</span>
+                                    <span class="text-dark fw-bold">Departamental</span>
                                 </div>
                             </div>
                         </div>
 
-
-                        
-                        <div class="my-4">
+                        <div class="my-3">
                             <a href="#" class="boton-pildora">
-                                <p class="text-center ms-2">Tiendita</p>
-                                <p class="icono-emoji ms-2">⚙️</p>
+                                <p class="text-center ms-2 mb-0">Tiendita</p>
+                                <p class="icono-emoji ms-2 mb-0">🏪</p>
                             </a>
                         </div>
+                        <div class="my-3">
+                            <a href="#" class="boton-pildora">
+                                <p class="text-center ms-2 mb-0">Configuración</p>
+                                <p class="icono-emoji ms-2 mb-0">⚙️</p>
+                            </a>
+                        </div>
+
                     </div>
-                    <button class="boton-border-bottom">
-                            Opciones
-                    </button>
                 </div>
             </div>
             <div class="col-12 col-md-9">
