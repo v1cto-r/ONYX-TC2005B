@@ -85,10 +85,23 @@
                     <h3 class="top-semanal-title text-muted mb-4">Top Semanal Sugerencias de la Comunidad</h3>
 
                     <div class="ideas-feed">
+    
+                        @if(ViewBag.ListaIdeas != null && ((IEnumerable<CosmicRunnerFront.Models.InicioModels.Idea>)ViewBag.ListaIdeas).Any())
+                        {
+                            foreach (var idea in ViewBag.ListaIdeas)
+                            {
+                                <partial name="Partials/_IdeaTarjeta" model="idea" />
+                            }
+                        }
+                        else
+                        {
+                            <div class="text-center py-5">
+                                <h4 class="text-muted">Aún no hay sugerencias en la comunidad.</h4>
+                                <p class="text-muted">¡Sé el primero en impulsar el cambio agregando tu idea!</p>
+                            </div>
+                        }
                         
-                        <partial name="Partials/_IdeaTarjeta" />
-                        
-                        </div>
+                    </div>
                 </div>
             </div>
             
@@ -100,18 +113,3 @@
 </body>
 
 
-<partial name="Partials/_AgregarIdea" model='ViewData["NuevaIdea"] as CosmicRunnerFront.Models.InicioModels.CrearIdeaViewModel' />
-
-<partial name="Partials/_ConfirmarColab" />
-
-@section Scripts {
-    @if (TempData["ReabrirModalNuevaIdea"] as bool? == true)
-    {
-        <script>
-            document.addEventListener("DOMContentLoaded", function() {
-                var myModal = new bootstrap.Modal(document.getElementById('addIdeaModal'));
-                myModal.show();
-            });
-        </script>
-    }
-}

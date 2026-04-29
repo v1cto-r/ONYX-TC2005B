@@ -179,63 +179,187 @@ html, body {
     transform: translateY(-2px);
 }
 
+
 /* =========================================================
-   ESTILOS PARA APLICAR EN TU PARTIAL "_IdeaTarjeta.cshtml"
+   TARJETAS DE IDEAS (TOP SEMANAL)
    ========================================================= */
-.idea-card {
+.tarjeta-idea {
     background-color: var(--card-bg);
-    border-radius: 20px;
     border: 1px solid var(--border-color);
+    border-radius: 1rem;
     padding: 1.5rem;
-    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+    text-align: left;
 }
 
-.idea-card-header {
-    border-bottom: 1px solid var(--border-color);
-    padding-bottom: 1rem;
-    margin-bottom: 1rem;
+.tarjeta-info-box {
+    border: 1px solid var(--border-color);
+    border-radius: 50px;
+    padding: 0.5rem 1.5rem;
 }
 
-.idea-title {
-    font-size: 1.15rem;
-    font-weight: 700;
+.avatar-autora {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--border-color);
+}
+
+/* =========================================================
+   LÍNEA DE TIEMPO (TIMELINE)
+   ========================================================= */
+.timeline-container {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    padding: 0 2rem;
+    margin-top: 1rem;
+}
+
+.timeline-track {
+    position: absolute;
+    top: 10px; /* Alineado al centro de los nodos (20px / 2) */
+    left: 2rem;
+    right: 2rem;
+    height: 2px;
+    background-color: #e9ecef;
+    z-index: 1;
+}
+
+.timeline-step {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80px;
+}
+
+.timeline-node {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-bottom: 0.5rem;
+    background-color: #e9ecef; /* Default Grey */
+    border: 2px solid #fff; /* Pequeño borde blanco para separarlo de la línea */
+}
+
+/* Colores de estado basados en el mockup */
+.node-yellow { background-color: var(--whirlpool-yellow); }
+.node-black { background-color: var(--text-main); }
+.node-grey { background-color: #e9ecef; }
+
+.timeline-label {
+    font-size: 0.7rem;
+    text-align: center;
+    line-height: 1.1;
+}
+
+/* =========================================================
+   ACORDEÓN SIN JS (DETAILS & SUMMARY)
+   ========================================================= */
+.tarjeta-details > summary {
+    list-style: none; /* Oculta la flecha por defecto de HTML */
+    cursor: pointer;
+}
+
+.tarjeta-details > summary::-webkit-details-marker {
+    display: none; /* Para Safari */
+}
+
+.btn-ver-mas {
+    display: inline-block;
+    background-color: #e9ecef;
     color: var(--text-main);
-    margin: 0;
-}
-
-.idea-time {
+    padding: 2px 16px;
+    border-radius: 20px;
     font-size: 0.85rem;
-    color: var(--text-muted);
+    font-weight: 600;
+    transition: background-color 0.2s;
 }
 
-.idea-metadata {
-    font-size: 0.9rem;
-    color: var(--text-muted);
+.btn-ver-mas:hover {
+    background-color: #dde1e5;
+}
+
+/* Gira la flecha cuando el <details> está abierto */
+.tarjeta-details[open] summary .btn-ver-mas span {
+    display: inline-block;
+    transform: rotate(180deg);
+}
+
+/* =========================================================
+   BOTONES Y FOOTER TARJETA
+   ========================================================= */
+.btn-unirme {
+    background-color: #ffe69c; /* Amarillo más tenue que el botón principal */
+    color: var(--text-main);
+    border: none;
+    transition: all 0.2s;
+}
+
+.btn-unirme:hover {
+    background-color: var(--whirlpool-yellow);
+}
+
+/* Utilidades para los bordes en pantallas medianas hacia arriba */
+@media (min-width: 768px) {
+    .border-md-end {
+        border-right: 1px solid var(--border-color);
+    }
+}
+
+/* =========================================================
+   PASTILLAS DE COLABORADORES Y BOTONES (Blindado)
+   ========================================================= */
+.colaborador-pill {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid var(--border-color);
+    border-radius: 50px !important; /* Forzar pastilla */
+    padding: 6px 20px 6px 6px;
+    background-color: var(--card-bg);
+}
+
+.colaborador-pill img {
+    width: 40px !important;
+    height: 40px !important;
+    border-radius: 50% !important; /* Círculo perfecto */
+    object-fit: cover !important; /* Recorta la imagen sobrante */
+    aspect-ratio: 1/1; /* Evita que la imagen se deforme */
+    margin-right: 12px;
 }
 
 .btn-unirme {
-    background-color: var(--whirlpool-yellow);
+    background-color: #ffe69c; 
     color: var(--text-main);
-    font-weight: 600;
-    border-radius: 20px;
     border: none;
-    padding: 0.4rem 1.5rem;
+    transition: all 0.2s;
+    min-width: 200px; /* Tamaño consistente, pero no el 100% de la pantalla */
 }
 
-/* Botones de Likes y Comentarios de la tarjeta */
-.action-stats {
-    display: flex;
-    gap: 1rem;
-    align-items: center;
-    color: var(--text-main);
-    font-weight: 600;
+.btn-unirme:hover {
+    background-color: var(--whirlpool-yellow);
 }
 
-.action-stats div {
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-    background-color: var(--bg-light-grey);
-    padding: 0.3rem 0.8rem;
-    border-radius: 12px;
+/* Pastillas Interactivas Blindadas */
+.btn-interaccion-pill {
+    display: inline-flex !important; /* Forzar comportamiento de caja flex */
+    align-items: center !important;
+    justify-content: center !important;
+    background-color: transparent !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: 50px !important; /* Forzar la forma de pastilla */
+    padding: 6px 20px !important; /* Ajuste del "largo" de la pastilla */
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+    box-shadow: none; /* Quitar sombras por defecto del <button> */
+}
+
+.btn-interaccion-pill:hover {
+    background-color: #f8f9fa !important;
+    border-color: #ced4da !important;
+    transform: translateY(-2px);
 }
