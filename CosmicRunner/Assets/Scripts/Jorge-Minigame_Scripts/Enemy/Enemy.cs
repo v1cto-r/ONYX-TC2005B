@@ -12,6 +12,9 @@ public class Enemy : MonoBehaviour
     // distancia para detectar al jugador
     public float detectionRange = 2f;
 
+    // distancia real para poder atacar
+    public float attackRange = 1f;
+
     private Rigidbody2D rb;
     private bool movingRight = true;
     private Transform player;
@@ -84,8 +87,8 @@ public class Enemy : MonoBehaviour
 
         float dist = Vector2.Distance(transform.position, player.position);
 
-        // inicia ataque si el jugador esta cerca
-        if (dist < detectionRange &&
+        // inicia ataque si el jugador esta dentro del rango
+        if (dist < attackRange &&
             Time.time >= lastAttackTime + attackCooldown &&
             !isAttackingNow)
         {
@@ -99,6 +102,22 @@ public class Enemy : MonoBehaviour
         {
             attackTimer -= Time.deltaTime;
 
+            // hace daño mientras esta atacando y el jugador esta cerca
+            if (dist < attackRange &&
+                Time.time >= lastDamageTime + damageCooldown)
+            {
+                GameControl.Instance.SpendLives();
+
+                // desparentar para evitar bugs con plataformas
+                player.SetParent(null);
+
+                // regresar al ultimo checkpoint
+                player.position = CheckpointManager.instance.respawnPoint + Vector3.up * 1f;
+
+                lastDamageTime = Time.time;
+            }
+
+            // termina el ataque
             if (attackTimer <= 0)
             {
                 isAttackingNow = false;
@@ -120,18 +139,5 @@ public class Enemy : MonoBehaviour
         Vector3 scale = transform.localScale;
         scale.x *= -1;
         transform.localScale = scale;
-    }
-
-    void OnCollisionStay2D(Collision2D collision)
-    {
-        // hace daño al jugador si esta atacando
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            if (isAttackingNow && Time.time >= lastDamageTime + damageCooldown)
-            {
-                GameControl.Instance.SpendLives();
-                lastDamageTime = Time.time;
-            }
-        }
     }
 }

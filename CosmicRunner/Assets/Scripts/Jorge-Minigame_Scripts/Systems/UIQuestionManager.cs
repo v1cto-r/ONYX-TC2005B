@@ -8,6 +8,9 @@ public class UIQuestionManager : MonoBehaviour
     // guarda la posicion del checkpoint pendiente
     private Vector3 pendingCheckpoint;
 
+    // referencia al checkpoint actual para poder cambiar su estado
+    private Checkpoint currentCheckpoint;
+
     void Start()
     {
         // al iniciar oculta el panel de preguntas
@@ -15,12 +18,16 @@ public class UIQuestionManager : MonoBehaviour
             questionPanel.SetActive(false);
     }
 
-    public void ShowQuestion(Vector3 checkpointPos)
+    // muestra la pregunta y guarda el checkpoint que la activo
+    public void ShowQuestion(Vector3 checkpointPos, Checkpoint checkpoint)
     {
-        // guarda la posicion del checkpoint tocado
+        // guarda la posicion del checkpoint
         pendingCheckpoint = checkpointPos;
 
-        // muestra el panel de pregunta
+        // guarda referencia del checkpoint actual
+        currentCheckpoint = checkpoint;
+
+        // muestra el panel
         if (questionPanel != null)
             questionPanel.SetActive(true);
 
@@ -33,6 +40,10 @@ public class UIQuestionManager : MonoBehaviour
         // guarda el checkpoint como respawn
         CheckpointManager.instance.respawnPoint = pendingCheckpoint;
 
+        // cambia el color del checkpoint a correcto
+        if (currentCheckpoint != null)
+            currentCheckpoint.SetCorrect();
+
         // oculta el panel y reanuda el juego
         if (questionPanel != null)
             questionPanel.SetActive(false);
@@ -42,8 +53,12 @@ public class UIQuestionManager : MonoBehaviour
 
     public void WrongAnswer()
     {
-        // si responde mal pierde una vida
+        // pierde una vida
         GameControl.Instance.SpendLives();
+
+        // cambia el color del checkpoint a incorrecto
+        if (currentCheckpoint != null)
+            currentCheckpoint.SetWrong();
 
         // oculta el panel y reanuda el juego
         if (questionPanel != null)
