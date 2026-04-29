@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class UIControl : MonoBehaviour
@@ -19,7 +20,6 @@ public class UIControl : MonoBehaviour
 
     [Header("Pause Panel")]
     [SerializeField] private GameObject pausePanel;
-    [SerializeField] private Button pausePanelButton;
 
 	[Header("Settings")]
 	[SerializeField] private PlayerControl playerControl;
@@ -52,11 +52,6 @@ public class UIControl : MonoBehaviour
 				}
 			}
 		}
-
-		if (pausePanelButton != null)
-		{
-			pausePanelButton.onClick.AddListener(PauseGame);
-		}
 	}
 
     private void Start()
@@ -84,11 +79,6 @@ public class UIControl : MonoBehaviour
 		if (promptsPanelButton != null)
 		{
 			promptsPanelButton.onClick.RemoveListener(TogglePromptsPanel);
-		}
-
-		if (pausePanelButton != null)
-		{
-			pausePanelButton.onClick.RemoveListener(PauseGame);
 		}
 
 		Time.timeScale = 1f;
@@ -203,6 +193,18 @@ public class UIControl : MonoBehaviour
 	public void ResumeGame()
 	{
 		SetPauseState(false);
+	}
+
+	public void RestartGame()
+	{
+		SetPauseState(false);
+		SceneManager.LoadScene("GameScene");
+	}
+
+	public void QuitGame()
+	{
+		SetPauseState(false);
+		// SceneManager.LoadScene("MainMenuScene");
 	}
 
 	private void SetPauseState(bool isPaused)
