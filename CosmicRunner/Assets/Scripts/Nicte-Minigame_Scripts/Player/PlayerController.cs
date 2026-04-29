@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
    GameController gameController;
    PlayerMovement playermovement;
    PlayerCombat combat;
+   SpecialAttackUI specialAttackUI;
    public int currentHealth = 12;
    bool inputEnabled = true;
    bool isDead = false;
@@ -13,6 +14,7 @@ public class PlayerController : MonoBehaviour
    {
        playermovement = GetComponent<PlayerMovement>();
        combat=GetComponent<PlayerCombat>();
+       specialAttackUI = FindObjectOfType<SpecialAttackUI>();
        PlayerPrefs.SetInt("PlayerHealth", currentHealth);
    }
    
@@ -44,7 +46,13 @@ public class PlayerController : MonoBehaviour
             PlayerCombat combat = GetComponent<PlayerCombat>();
             if (combat != null)
             {
-                //combat.specialShoot();
+                if (specialAttackUI.CanUseSpecialAttack()==true)
+                {
+                    combat.SpecialAttack();
+                    specialAttackUI.resetAttack();
+                }else{
+                    Debug.Log("Special Attack not ready yet!");
+                }
             }
         }
         

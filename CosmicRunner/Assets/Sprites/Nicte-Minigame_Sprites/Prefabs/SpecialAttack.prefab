@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8673368156844886733}
   - component: {fileID: -4512586638849115190}
   - component: {fileID: 882119558960288755}
+  - component: {fileID: -6135775922625639821}
   m_Layer: 0
   m_Name: SpecialAttack
   m_TagString: Untagged
@@ -157,3 +158,17 @@ CapsuleCollider2D:
   m_Offset: {x: -3, y: 0}
   m_Size: {x: 5, y: 5}
   m_Direction: 0
+--- !u!114 &-6135775922625639821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6560684531779061900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 361914e26edc3ac40bc9bbe2a91abf6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerSpecialBullet
+  lifetime: 4
+  bulletSpeed: 15

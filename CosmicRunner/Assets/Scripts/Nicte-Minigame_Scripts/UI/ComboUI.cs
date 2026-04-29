@@ -18,7 +18,7 @@ public class ComboUI : MonoBehaviour
 
     void Update()
     {
-        Debug.Log("timer: " + timer);
+
         timer+= Time.deltaTime;
         if (timer >= 5f)
         {
@@ -45,11 +45,11 @@ public class ComboUI : MonoBehaviour
 
     public void updateComboBar(int combo)
     {
-        if(currentCombo>=0 && currentCombo <= comboImages.Length)
+        if(combo>=0 && combo <= comboImages.Length)
         {
             for (int i = 0; i < comboImages.Length; i++)
             {
-                if (i < currentCombo)
+                if (i < combo)
                 {
                     comboImages[i].enabled = true;
                 }
@@ -76,13 +76,13 @@ public class ComboUI : MonoBehaviour
             switch (combo)
             {
                 case 2:
-                    comboLabel.text = "Bien!";
+                    comboLabel.text = "¡Bien!";
                     break;
                 case 5:
-                    comboLabel.text = "Ostias que increible!";
+                    comboLabel.text = "¡Increible!";
                     break;
                 case 8:
-                    comboLabel.text = "Asombroso!";
+                    comboLabel.text = "¡Asombroso!";
                     break;
                 default:
                     comboLabel.text = "";

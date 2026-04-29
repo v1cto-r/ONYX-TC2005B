@@ -55,6 +55,13 @@ public class PlayerCombat : MonoBehaviour
 
     }
 
+    public void SpecialAttack()
+    {
+        if (currentSpecialCharges <= 0 || specialBullet == null || firePoint == null) return;
+        GameObject bullet = Instantiate(specialBullet, firePoint.position, Quaternion.identity);
+
+    }
+
     public void ResetCombo()
     {
         currentCombo = 0;
