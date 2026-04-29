@@ -5,8 +5,14 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/CosmicRunner-General_Scenes/TitleScreen_Scenes/StartGameScene.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 1
+    path: Assets/Scenes/Nicte-Minigame_Scenes/Victory.unity
+    guid: 20aa6414465591644a925bc9fbaf473e
+  - enabled: 1
+    path: Assets/Scenes/Nicte-Minigame_Scenes/Defeat.unity
+    guid: 40fe64aa1f2de984083d202688f0376a
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}

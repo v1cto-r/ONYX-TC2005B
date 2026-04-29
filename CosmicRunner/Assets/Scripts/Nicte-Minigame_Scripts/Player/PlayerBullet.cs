@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerBullet : MonoBehaviour
 {
     public float lifetime = 3f;
-    public float bulletSpeed = 10f;
+    public float bulletSpeed = -10f;
 
     void Start()
     {
@@ -15,6 +15,8 @@ public class PlayerBullet : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemy"))
         {
             Destroy(gameObject);
+            
+            collision.gameObject.GetComponent<EnemyHealth>().TakeDamage(1);
         }
     }
 
@@ -22,5 +24,4 @@ public class PlayerBullet : MonoBehaviour
     {
         transform.position+= Vector3.left*Time.deltaTime*bulletSpeed;
     }
-
 }

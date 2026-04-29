@@ -1529,10 +1529,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 898564801f5879c4f9b42c106acfa81c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyAttack
-  bullets:
-  - {fileID: 1578943862422913827, guid: 841354f5c72e1274fa96f3daaa37e511, type: 3}
-  - {fileID: 4681477162375000786, guid: 43d9a92d523b1eb4997e19a9e4d216f0, type: 3}
-  - {fileID: 3724414353640079233, guid: 4944db32957e43042ae12e028674e1b1, type: 3}
+  bullet: {fileID: 1578943862422913827, guid: 841354f5c72e1274fa96f3daaa37e511, type: 3}
   firePoint: {fileID: 203564588}
   normalCooldown: 2
   aggressiveCooldown: 1
@@ -4091,9 +4088,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameController
   mainMenuScene: MainMenu
   gameScene: Game
-  DefeatScene: Defeat
-  VictoryScene: Victory
-  time: 10
+  resultScene: Result
+  time: 100
   timeRemaining: 0
   currentState: 
 --- !u!4 &1078512158

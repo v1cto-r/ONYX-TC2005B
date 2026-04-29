@@ -10,7 +10,8 @@ public class GameController : MonoBehaviour
     public static GameController instancia;
     public string mainMenuScene="MainMenu";
     public string gameScene="Game";
-    public string resultScene="Result";
+    public string DefeatScene="Defeat";
+    public string VictoryScene="Victory";
     public float time=300f;
     public float timeRemaining;
     public string currentState = "Playing";
@@ -47,7 +48,6 @@ public class GameController : MonoBehaviour
             timeRemaining=0f;
             SetDefeat();
         }
-        Debug.Log("Tiempo restante: "+timeRemaining);
     }
 
     public void ChangeState(string newState)
@@ -56,10 +56,14 @@ public class GameController : MonoBehaviour
  
         currentState = newState;
  
-        if (newState == "Victory" || newState == "Defeat")
+        if (newState == "Victory")
         {
             Time.timeScale = 0f;
-            Invoke("GoToResult", 2f);
+            WinGame();
+        }else if (newState == "Defeat")
+        {
+            Time.timeScale = 0f;
+            LoseGame();
         }
         else if (newState == "Playing")
         {
@@ -71,20 +75,26 @@ public class GameController : MonoBehaviour
     {
         currentState="Victory";
         Debug.Log("Victoria");
-        EndGame();
+        WinGame();
     }
 
     public void SetDefeat()
     {
         currentState="Defeat";
         Debug.Log("Derrota");
-        EndGame();
+        LoseGame();
     }
 
-    void EndGame()
+    void LoseGame()
     {
         Time.timeScale=0f;
-        Invoke("GoToResult", 2f);
+        SceneManager.LoadScene(DefeatScene);
+    }
+
+    void WinGame()
+    {
+        Time.timeScale=0f;
+        SceneManager.LoadScene(VictoryScene);
     }
 
     public void GoToMainMenu()
@@ -97,11 +107,6 @@ public class GameController : MonoBehaviour
     {
         Time.timeScale=1f;
         SceneManager.LoadScene(gameScene);
-    }
-
-    public void GoToResult()
-    {
-        SceneManager.LoadScene(resultScene);
     }
 
     public void Pause()

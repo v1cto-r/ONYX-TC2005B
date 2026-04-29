@@ -29,6 +29,24 @@ public class HealthBarUI : MonoBehaviour
         }
     }
 
+    public void updateEnemyHealth(int currentHealth, int damage)
+    {
+        if(currentHealth>=0 && currentHealth < enemyLivesImage.Length)
+        {
+            for (int i = 0; i < enemyLivesImage.Length; i++)
+            {
+                if (i < currentHealth)
+                {
+                    enemyLivesImage[i].enabled = true;
+                }
+                else
+                {
+                    enemyLivesImage[i].enabled = false;
+                }
+            }
+        }
+    }
+
 
     
 }
