@@ -14,9 +14,7 @@
     color: var(--text-main)
 }
 
-/* =========================================================
-   CONTENEDORES PRINCIPALES
-   ========================================================= */
+/*  CONTENEDORES PRINCIPALES  */
 body{
     background-color: var(--bg-light-grey);
 }
@@ -94,8 +92,8 @@ html, body {
     display: inline-flex;
     align-items: center;
     justify-content: space-between;
-    background-color: var(--text-main);
-    color: var(--bg-light-grey);
+    background-color: var(--bg-light-grey);
+    color: var(--text-main);   
     border: 1px solid var(--border-color);
     padding: 8px 1rem;
     border-radius: 50px;
@@ -107,14 +105,14 @@ html, body {
 }
 
 .boton-pildora span {
-    color: var(--bg-light-grey);
+    color: var(--text-main);
     font-weight: 500;
 }
 
 .boton-pildora:hover {
-    background-color: var(--bg-light-grey);
-    color: var(--text-main);   
-    border: 1px solid var(--border-color);
+    background-color: var(--whirlpool-yellow-hover);
+    color: var(--bg-light-grey);
+    border: 1px solid var(--whirlpool-yellow);
     transform: translateY(-2px);
 }
 
@@ -147,6 +145,31 @@ html, body {
 .top-semanal-title span {
     font-size: 2rem;
     font-weight: 600;
+}
+
+.racha {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+  height: 60px;
+}
+
+.chiquito p{
+    font-size: 0.75rem;
+}
+
+.btn-icon{
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
+    height: 30px;
+}
+
+.mini-like{
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
+    height: 10px;
 }
 
 /*  BOTONES*/
@@ -246,20 +269,36 @@ html, body {
 
 .btn-ver-mas {
     display: inline-block;
-    background-color: var(--text-main);
-    color: var(--bg-light-grey);
+    background-color: var(--bg-light-grey);
+    color: var(--text-main);   
+    border: 1px solid var(--border-color);
     padding: 2px 16px;
     border-radius: 20px;
     font-size: 0.85rem;
     font-weight: 600;
-    border: 1px solid var(--border-color);
     transition: background-color 0.2s;
 }
 
 .btn-ver-mas:hover {
+    background-color: var(--card-bg);
+    border: 1px solid var(--text-main);
+}
+
+.btn-interacciones {
+    display: inline-block;
     background-color: var(--bg-light-grey);
     color: var(--text-main);   
     border: 1px solid var(--border-color);
+    padding: 2px 16px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: background-color 0.2s;
+    transition: all 0.2s ease-in-out;
+}
+.btn-interacciones:hover {
+    background-color: var(--card-bg);
+    transform: translateY(-2px);
 }
 
 /* Gira la flecha cuando el <details> está abierto */

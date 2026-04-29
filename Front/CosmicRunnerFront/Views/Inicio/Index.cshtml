@@ -27,9 +27,9 @@
                                     <p>Racha Whirlpool</p>
                                 </div>
                             </div>
-                            <div class="d-flex justify-content-center align-items-center gap-0 flex-wrap"> 
-                                <div class="flex-shrink-0"> 
-                                    <img src="~/assets/icons/award_star.svg" class="img-fluid" />
+                            <div class="d-flex justify-content-center align-items-center gap-2 flex-wrap"> 
+                                <div class="flex-shrink-0 pb-1"> 
+                                    <img src="~/assets/icons/fire.svg" class="racha" />
                                 </div>
                                 <div class="flex-shrink-0"> 
                                     <h3 class="numero-denso">@(usuarioActual?.Racha)</h3>
@@ -40,7 +40,7 @@
                         <div class="container my-4 ">
                             <div class="row"> 
                                 <div class="col-12 text-center"> 
-                                    <p>Posición</p>
+                                    <p>Perteneces al Top:</p>
                                 </div>
                             </div>
                             <div class="d-flex justify-content-center align-items-center gap-0 flex-wrap">
@@ -48,7 +48,7 @@
                                     <div class="row">
                                         <h3 class="numero-denso-posicion">@(usuarioActual?.PosicionGlobalPorcentaje)%</h3>
                                     </div>
-                                    <div class="row">
+                                    <div class="row chiquito">
                                         <p>Global</p>
                                     </div>
                                     
@@ -57,7 +57,7 @@
                                     <div class="row">
                                         <h3 class="numero-denso-posicion">@(usuarioActual?.PosicionDepartamentalPorcentaje)%</h3>
                                     </div>
-                                    <div class="row">
+                                    <div class="row chiquito">
                                         <p>Departamental</p>
                                     </div>
                                 </div>
@@ -67,13 +67,13 @@
                         <div class="my-3">
                             <a href="#" class="boton-pildora">
                                 <span class="text-center ms-2 mb-0">Tiendita</span>
-                                <img src="~/assets/icons/home.svg" />
+                                <img src="~/assets/icons/shop.svg" class="btn-icon" />
                             </a>
                         </div>
                         <div class="my-3">
                             <a href="#" class="boton-pildora">
                                 <span class="text-center ms-2 mb-0">Configuración</span>
-                                <img src="~/assets/icons/home.svg" />
+                                <img src="~/assets/icons/gear.svg" class="btn-icon"/>
                             </a>
                         </div>
 
