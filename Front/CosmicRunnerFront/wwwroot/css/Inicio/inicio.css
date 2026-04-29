@@ -6,9 +6,22 @@
     --whirlpool-yellow-hover: #e5b615;
     --bg-light-grey: #f7f7f7;    /* Fondo de la pantalla principal */
     --card-bg: #ffffff;          /* Fondo de las tarjetas */
-    --text-main: #212529;
-    --text-muted: #6c757d;
+    --text-main: #313131;
+    --text-muted: #505050;
     --border-color: #dee2e6;
+}
+
+*{
+    font-family: 'Helvetica Now', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+/* Forzar que el contenido ocupe todo el ancho */
+.contenedor-principal {
+    justify-self: center;
+    margin: 0 calc(-50vw + 50%);
+    width: 110rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
 }
 
 /* =========================================================
@@ -18,25 +31,24 @@ body{
     background-color: var(--bg-light-grey);
 }
 
-.contenedor-principal {
-    display: flex;           /* Activa Flexbox */
-    gap: 2rem;               /* Espacio entre elementos */
-    background-color: #f0f0f0;
-    margin: 0 -4rem 0 -4rem;
+html, body {
+    overflow-x: hidden !important;
+    width: 100%;
 }
 
 .contenedor-perfil {
-    width: 20rem;
+    margin: 0 2rem 0 0;
     background-color: var(--card-bg);
-    border-top: 8rem solid var(--whirlpool-yellow);
+    border-top: 10rem solid var(--whirlpool-yellow);
     border-radius: 1rem;
     text-align: center;
+    padding: 1rem;
 }
 
 .contenedor-perfil-foto {
-    width: 8rem;
-    height: 8rem;
-    margin: -4rem auto 0.5rem auto;
+    width: 12rem;
+    height: 12rem;
+    margin: -7rem auto 0.5rem auto;
     border-radius: 50%;
     background-color: var(--text-muted);
     overflow: hidden;
@@ -60,37 +72,84 @@ body{
 
 .contenedor-perfil-contenido p {
     margin: 0.25rem 0;
+    color: var(--text-main);
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.contenedor-perfil-contenido span {
+    margin: 0.25rem 0;
     color: var(--text-muted);
+    font-size: 1rem;
 }
 
-.estadisticas {
-    display: flex;
-    justify-content: center;
-    gap: 0.5rem;
-    margin: 0.5rem 0;
+.numero-denso {
+    font-weight: 700;                 /* Negro puro */
+    font-size: 5rem;         /* Ajusta según necesidad */
+    margin: 0.5rem 0 0.25rem 0;
 }
 
-.porcentajes {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    margin: 0.5rem 0;
-    font-size: 0.9rem;
+.numero-denso-posicion{
+    font-weight: 700;                 /* Negro puro */
+    font-size: 3rem;         /* Ajusta según necesidad */
+    margin: 0.5rem 0 0.25rem 0;
 }
 
-.configuracion {
-    margin-top: 0.75rem;
-    font-size: 0.85rem;
-    text-decoration: underline;
+.boton-pildora {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--text-main);
+    padding: 8px 4rem;
+    border-radius: 50px;
+    text-decoration: none;
+    width: 90%;
+    height: auto;
+    min-width: 180px;
+}
+
+.boton-pildora p {
+    color: var(--bg-light-grey);
+    font-weight: 500;
+}
+
+.boton-pildora:hover {
+    background-color: #dee2e6;
+}
+
+.boton-pildora:hover p{
+    background-color: #dee2e6;
+    color: #000000
+}
+
+.boton-border-bottom {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-top: 2px solid #dee2e6;
+    padding: 12px;
+    text-align: center;
+    font-weight: 500;
+    color: #6c757d;
     cursor: pointer;
 }
 
+.boton-border-bottom:hover {
+    border-top-color: #0d6efd;
+    color: #0d6efd;
+    background-color: #f8f9fa;
+}
+
+/* Para el área de iconos */
+.icono-emoji, .icono-real {
+    margin-left: 8px;
+    font-size: 1.1em;
+}
+
 .contenedor-impulsa {
-    flex: 1;
     background-color: var(--card-bg);
     padding: 2rem 3rem;
     text-align: center;
-    height: 100vh;
     border-radius: 1rem; /* Opcional: si tu layout central tiene bordes curvos */
 }
 
@@ -129,7 +188,6 @@ body{
     border: 1px solid var(--border-color);
     padding: 1.5rem;
     margin-bottom: 1.5rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
 }
 
 .idea-card-header {

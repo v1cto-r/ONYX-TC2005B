@@ -7,44 +7,95 @@
     <link rel="stylesheet" href="~/css/Inicio/inicio.css" />
 }
 <body>
-    <div class="contenedor-principal">
-        <div class="contenedor-perfil">
-            <div class="contenedor-perfil-foto">
-                <img src="~/assets/random/user.png" alt="Foto de perfil">
-            </div>
-            <div class="contenedor-perfil-contenido">
-                <h1>César Alexandro</h1>
-                <p>Racha Whirlpool</p>
-                <div class="estadisticas">
-                    <span>24</span>
-                    <span>Posición</span>
+    <div class="container-fluid">
+        <div class="row g-4 contenedor-principal">
+            <div class="col-12 col-md-3">
+                <div class="contenedor-perfil">
+                    <div class="contenedor-perfil-foto">
+                        <img src="~/assets/random/user.png" alt="Foto de perfil">
+                    </div>
+                    <div class="contenedor-perfil-contenido">
+                        <h1>César Alexandro</h1>
+                        
+                        <div class="estadisticas container my-4">
+                            <div class="row mb-2"> <!-- mb-3 = margen inferior -->
+                                <div class="col-12 text-center"> <!-- text-center = texto centrado -->
+                                    <p>Racha Whirlpool</p>
+                                </div>
+                            </div>
+                            <div class="row mb-3"> <!-- mb-3 = margen inferior -->
+                                <div class="col-3 text-center"></div>
+                                <div class="col-3 text-center"> <!-- text-center = texto centrado -->
+                                    <h3 class="numero-denso">U</h3>
+                                </div>
+                                <div class="col-3 text-center"> <!-- text-center = texto centrado -->
+                                    <h3 class="numero-denso">24</h3>
+                                </div>
+                                <div class="col-3 text-center"></div>
+                            </div>
+                        </div>
+
+                        <div class="estadisticas container my-4 ">
+                            <div class="row mb-1"> 
+                                <div class="col-12 text-center"> 
+                                    <p>Posición</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6 text-center"> 
+                                    <h3 class="numero-denso-posicion">50%</h3>
+                                </div>
+                                <div class="col-6 text-center"> 
+                                    <h3 class="numero-denso-posicion">10%</h3>
+                                </div>
+                            </div>
+                            <div class="row mb-3 pb-4">
+                                <div class="col-6 text-center"> 
+                                    <span>Global</span>
+                                </div>
+                                <div class="col-6 text-center"> 
+                                    <span>Departamental</span>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        
+                        <div class="my-4">
+                            <a href="#" class="boton-pildora">
+                                <p class="text-center ms-2">Tiendita</p>
+                                <p class="icono-emoji ms-2">⚙️</p>
+                            </a>
+                        </div>
+                    </div>
+                    <button class="boton-border-bottom">
+                            Opciones
+                    </button>
                 </div>
-                <div class="porcentajes">
-                    <span>50% Global</span>
-                    <span>10% Departamental</span>
-                </div>
-                <p>Tiendita</p>
-                <p>Configuración</p>
             </div>
+            <div class="col-12 col-md-9">
+                <div class="contenedor-impulsa">
+                    <div class="d-flex justify-content-between align-items-center mb-4 header-impulsa">
+                        <h1 class="fw-bold text-dark">Impulsa el Cambio</h1>
+                        <button type="button" class="btn btn-agregar rounded-pill px-4 shadow-sm" data-bs-toggle="modal" data-bs-target="#addIdeaModal">
+                            + Agrega tu Idea
+                        </button>
+                    </div>
+
+                    <h3 class="top-semanal-title text-muted mb-4">Top Semanal Sugerencias de la Comunidad</h3>
+
+                    <div class="ideas-feed">
+                        
+                        <partial name="Partials/_IdeaTarjeta" />
+                        
+                        </div>
+                </div>
+            </div>
+            
+
         </div>
-        <div class="contenedor-impulsa">
-            <div class="d-flex justify-content-between align-items-center mb-4 header-impulsa">
-                <h1 class="fw-bold text-dark">Impulsa el Cambio</h1>
-                <button type="button" class="btn btn-agregar rounded-pill px-4 shadow-sm" data-bs-toggle="modal" data-bs-target="#addIdeaModal">
-                    + Agrega tu Idea
-                </button>
-            </div>
-
-            <h3 class="top-semanal-title text-muted mb-4">Top Semanal Sugerencias de la Comunidad</h3>
-
-            <div class="ideas-feed">
-                
-                <partial name="Partials/_IdeaTarjeta" />
-                
-                </div>
-        </div>
-
     </div>
+    
     
 </body>
 

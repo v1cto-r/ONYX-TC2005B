@@ -15,19 +15,6 @@ public class InicioController : Controller
         return View();
     }
 
-    [HttpPost]
-    [ValidateAntiForgeryToken]
-    public IActionResult CrearIdea(CrearIdeaViewModel modelo)
-    {
-        if (ModelState.IsValid)
-        {
-            return RedirectToAction(nameof(Index));
-        }
-        TempData["ReabrirModalNuevaIdea"] = true;
-        ViewData["NuevaIdea"] = modelo;
-        return View(Index);
-    }
-
     public IActionResult Privacy()
     {
         return View();
