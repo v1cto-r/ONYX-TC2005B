@@ -1,11 +1,9 @@
-/* =========================================================
-   VARIABLES DE COLOR (Basadas en el diseño de Whirlpool Codex)
-   ========================================================= */
+/*  VARIABLES DE COLOR (Basadas en el diseño de Whirlpool Codex)    */
 :root {
-    --whirlpool-yellow: #f0b310; /* Color del botón "+ Agrega tu Idea" */
+    --whirlpool-yellow: #f0b310; 
     --whirlpool-yellow-hover: #fde19a;
-    --bg-light-grey: #f7f7f7;    /* Fondo de la pantalla principal */
-    --card-bg: #ffffff;          /* Fondo de las tarjetas */
+    --bg-light-grey: #f7f7f7;    
+    --card-bg: #ffffff;          
     --text-main: #313131;
     --text-muted: #505050;
     --border-color: #dee2e6;
@@ -30,9 +28,9 @@ html, body {
 
  .custom-container {
     width: 64rem;
-    max-width: 100%; /* Para que sea responsive en móviles */
+    max-width: 100%; 
     margin-left: auto;
-    margin-right: auto; /* Centrado */
+    margin-right: auto; 
   }
 
 
@@ -41,7 +39,7 @@ html, body {
     border-top: 6rem solid var(--whirlpool-yellow);
     border-radius: 1rem;
     text-align: center;
-    height: 100%; /* Para que ocupe toda la altura */
+    height: 100%; 
     display: flex;
     flex-direction: column;
 }
@@ -151,9 +149,7 @@ html, body {
     font-weight: 600;
 }
 
-/* =========================================================
-   BOTONES
-   ========================================================= */
+/*  BOTONES*/
 .btn-agregar {
     background-color: var(--whirlpool-yellow-hover);
     color: var(--text-main);
@@ -167,9 +163,7 @@ html, body {
     transform: translateY(-2px);
 }
 
-/* =========================================================
-   TARJETAS DE IDEAS (TOP SEMANAL)
-   ========================================================= */
+/* TARJETAS DE IDEAS (TOP SEMANAL)    */
 .tarjeta-idea {
     background-color: var(--card-bg);
     border: 1px solid var(--border-color);
@@ -193,9 +187,7 @@ html, body {
     border: 2px solid var(--border-color);
 }
 
-/* =========================================================
-   LÍNEA DE TIEMPO (TIMELINE)
-   ========================================================= */
+/*   LÍNEA DE TIEMPO     */
 .timeline-container {
     display: flex;
     justify-content: space-between;
@@ -242,9 +234,7 @@ html, body {
     line-height: 1.1;
 }
 
-/* =========================================================
-   ACORDEÓN SIN JS (DETAILS & SUMMARY)
-   ========================================================= */
+/* ACORDEÓN SIN JS (DETAILS & SUMMARY) */
 .tarjeta-details > summary {
     list-style: none; /* Oculta la flecha por defecto de HTML */
     cursor: pointer;
@@ -278,9 +268,7 @@ html, body {
     transform: rotate(180deg);
 }
 
-/* =========================================================
-   BOTONES Y FOOTER TARJETA
-   ========================================================= */
+/*  BOTONES Y FOOTER TARJETA */
 
 /* Utilidades para los bordes en pantallas medianas hacia arriba */
 @media (min-width: 768px) {
@@ -289,9 +277,7 @@ html, body {
     }
 }
 
-/* =========================================================
-   PASTILLAS DE COLABORADORES Y BOTONES (Blindado)
-   ========================================================= */
+/*   PASTILLAS DE COLABORADORES Y BOTONES */
 .colaborador-pill {
     display: inline-flex;
     align-items: center;
@@ -347,21 +333,19 @@ html, body {
     transform: translateY(-2px);
 }
 
-/* =========================================================
-   FORMULARIO INLINE (REEMPLAZO DE MODAL)
-   ========================================================= */
+/* FORMULARIO INLINE (REEMPLAZO DE MODAL)    */
 .agregar-idea-desplegable summary {
-    list-style: none; /* Oculta flecha en Chrome/Firefox */
+    list-style: none; 
     cursor: pointer;
 }
 
 .agregar-idea-desplegable summary::-webkit-details-marker {
-    display: none; /* Oculta flecha en Safari */
+    display: none; 
 }
 
 .contenedor-formulario-inline {
     border-color: var(--border-color) !important;
-    animation: fadeInDown 0.3s ease-out; /* Pequeña animación de entrada */
+    animation: fadeInDown 0.3s ease-out; 
 }
 
 @keyframes fadeInDown {
@@ -382,19 +366,14 @@ html, body {
     box-shadow: 0 0 0 0.25rem rgba(240, 179, 16, 0.15);
 }
 
-/* =========================================================
-   SISTEMA DE RESPUESTAS (COMENTARIOS ANIDADOS)
-   ========================================================= */
 .reply-desplegable summary {
-    list-style: none; /* Oculta la flecha por defecto */
+    list-style: none; 
     cursor: pointer;
 }
 
 .reply-desplegable summary::-webkit-details-marker {
-    display: none; /* Oculta la flecha en Safari/Chrome viejo */
-}
-
-/* Evitar que el acordeón empuje la UI de forma brusca */
+    display: none; 
+}    
 .reply-desplegable {
     position: relative;
 }
