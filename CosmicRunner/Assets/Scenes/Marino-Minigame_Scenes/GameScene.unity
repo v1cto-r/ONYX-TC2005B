@@ -1356,10 +1356,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PromptsControl
   boxWords:
-  - a
-  - b
-  - c
-  - d
+  - eficiencia
+  - "innovaci\xF3n"
+  - conectividad
+  - sostenibilidad
+  - "automatizaci\xF3n"
+  - durabilidad
+  - rendimiento
+  - "optimizaci\xF3n"
+  - "tecnolog\xEDa"
+  - inteligencia
+  - rapidez
+  - comodidad
+  - "dise\xF1o"
+  - calidad
+  - funcionalidad
+  - ahorro
+  - practicidad
+  - control
+  - seguridad
+  - versatilidad
+  - color
+  - "tama\xF1o"
+  - forma
+  - peso
+  - estilo
+  - apariencia
+  - marca
+  - precio
+  - material
+  - etiqueta
   wordSlots:
   - {fileID: 552049416}
   - {fileID: 1446744810}
@@ -1368,24 +1394,212 @@ MonoBehaviour:
   currentWordCount: 0
   wordStorageCapacity: 0
   promptPool:
-  - incompletePrompt: "Crea una campa\xF1a para promocionar una lavadora inteligente
-      destacando su eficiencia y ______."
+  - incompletePrompt: Describe una lavadora inteligente destacando su ______.
     goodAnswers:
-    - a
-    - b
-    - c
-    - d
-    okAnswers: []
-    mehAnswers: []
-  - incompletePrompt: Analiza el impacto de un refrigerador inteligente en el hogar
-      moderno y destaca su ______.
+    - eficiencia
+    - "automatizaci\xF3n"
+    - "tecnolog\xEDa"
+    - rendimiento
+    - "optimizaci\xF3n"
+    - inteligencia
+    okAnswers:
+    - rapidez
+    - comodidad
+    - calidad
+    - funcionalidad
+    - ahorro
+    - control
+    - versatilidad
+    mehAnswers:
+    - "innovaci\xF3n"
+    - conectividad
+    - sostenibilidad
+    - durabilidad
+    - "dise\xF1o"
+    - practicidad
+    - seguridad
+    - color
+    - "tama\xF1o"
+    - forma
+    - peso
+    - estilo
+    - apariencia
+    - marca
+    - precio
+    - material
+    - etiqueta
+  - incompletePrompt: "Explica por qu\xE9 este refrigerador mejora la ______ del
+      hogar."
     goodAnswers:
-    - a
-    - b
-    - c
-    - d
-    okAnswers: []
-    mehAnswers: []
+    - eficiencia
+    - comodidad
+    - funcionalidad
+    - ahorro
+    - practicidad
+    okAnswers:
+    - calidad
+    - control
+    - seguridad
+    - versatilidad
+    - "dise\xF1o"
+    - "tecnolog\xEDa"
+    mehAnswers:
+    - "innovaci\xF3n"
+    - conectividad
+    - sostenibilidad
+    - "automatizaci\xF3n"
+    - durabilidad
+    - rendimiento
+    - "optimizaci\xF3n"
+    - inteligencia
+    - rapidez
+    - color
+    - "tama\xF1o"
+    - forma
+    - peso
+    - estilo
+    - apariencia
+    - marca
+    - precio
+    - material
+    - etiqueta
+  - incompletePrompt: Crea un slogan que resalte la ______ de una secadora moderna.
+    goodAnswers:
+    - rapidez
+    - eficiencia
+    - "innovaci\xF3n"
+    - "tecnolog\xEDa"
+    okAnswers:
+    - comodidad
+    - "dise\xF1o"
+    - calidad
+    - funcionalidad
+    - practicidad
+    mehAnswers:
+    - conectividad
+    - sostenibilidad
+    - "automatizaci\xF3n"
+    - durabilidad
+    - rendimiento
+    - "optimizaci\xF3n"
+    - inteligencia
+    - ahorro
+    - control
+    - seguridad
+    - versatilidad
+    - color
+    - "tama\xF1o"
+    - forma
+    - peso
+    - estilo
+    - apariencia
+    - marca
+    - precio
+    - material
+    - etiqueta
+  - incompletePrompt: "Analiza c\xF3mo un electrodom\xE9stico puede aumentar la ______."
+    goodAnswers:
+    - eficiencia
+    - rendimiento
+    - "optimizaci\xF3n"
+    okAnswers:
+    - practicidad
+    - comodidad
+    - funcionalidad
+    - versatilidad
+    mehAnswers:
+    - "innovaci\xF3n"
+    - conectividad
+    - sostenibilidad
+    - "automatizaci\xF3n"
+    - durabilidad
+    - "tecnolog\xEDa"
+    - inteligencia
+    - rapidez
+    - calidad
+    - ahorro
+    - control
+    - seguridad
+    - "dise\xF1o"
+    - color
+    - "tama\xF1o"
+    - forma
+    - peso
+    - estilo
+    - apariencia
+    - marca
+    - precio
+    - material
+    - etiqueta
+  - incompletePrompt: "Describe una caracter\xEDstica clave basada en la ______ del
+      producto."
+    goodAnswers:
+    - "innovaci\xF3n"
+    - "tecnolog\xEDa"
+    - calidad
+    - funcionalidad
+    okAnswers:
+    - "dise\xF1o"
+    - durabilidad
+    - rendimiento
+    - versatilidad
+    mehAnswers:
+    - eficiencia
+    - conectividad
+    - sostenibilidad
+    - "automatizaci\xF3n"
+    - "optimizaci\xF3n"
+    - inteligencia
+    - rapidez
+    - comodidad
+    - ahorro
+    - practicidad
+    - control
+    - seguridad
+    - color
+    - "tama\xF1o"
+    - forma
+    - peso
+    - estilo
+    - apariencia
+    - marca
+    - precio
+    - material
+    - etiqueta
+  - incompletePrompt: Explica el impacto de la ______ en un hogar inteligente.
+    goodAnswers:
+    - conectividad
+    - "automatizaci\xF3n"
+    - "tecnolog\xEDa"
+    - inteligencia
+    - control
+    okAnswers:
+    - seguridad
+    - eficiencia
+    - comodidad
+    - funcionalidad
+    - "optimizaci\xF3n"
+    - versatilidad
+    mehAnswers:
+    - "innovaci\xF3n"
+    - sostenibilidad
+    - durabilidad
+    - rendimiento
+    - rapidez
+    - calidad
+    - ahorro
+    - practicidad
+    - "dise\xF1o"
+    - color
+    - "tama\xF1o"
+    - forma
+    - peso
+    - estilo
+    - apariencia
+    - marca
+    - precio
+    - material
+    - etiqueta
   promptSlots:
   - promptCollider: {fileID: 1670610833}
     submitCollider: {fileID: 480231449}
@@ -4790,6 +5004,7 @@ MonoBehaviour:
   playerControl: {fileID: 1228552754938000022}
   bulletPrefab: {fileID: 7817828094459547053, guid: 01ec67a2e80c349c2aaee08ae99d5c59, type: 3}
   muzzleOffset: 0.35
+  shootCooldown: 0.3
   shootActionName: Shoot
 --- !u!1 &882172403
 GameObject:

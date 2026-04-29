@@ -6,9 +6,11 @@ public class PlayerShoot : MonoBehaviour
     [SerializeField] private PlayerControl playerControl;
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private float muzzleOffset = 0.35f;
+    [SerializeField] private float shootCooldown = 0.5f;
 
     [SerializeField] private string shootActionName = "Shoot";
     private InputAction shootAction;
+    private float nextShootTime;
 
     private void Awake()
     {
@@ -55,9 +57,10 @@ public class PlayerShoot : MonoBehaviour
             return;
         }
 
-        if (shootAction.WasPressedThisFrame())
+        if (shootAction.WasPressedThisFrame() && Time.time >= nextShootTime)
         {
             FirePlasmaShot();
+            nextShootTime = Time.time + shootCooldown;
         }
     }
 

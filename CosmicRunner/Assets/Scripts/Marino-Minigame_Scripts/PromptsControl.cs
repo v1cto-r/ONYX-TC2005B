@@ -385,9 +385,7 @@ public class PromptsControl : MonoBehaviour
             return;
         }
 
-        // For testing: allow repeats by selecting directly from promptPool.
-        // Repeat-prevention logic is intentionally disabled below.
-        // List<PromptEntry> availablePrompts = new List<PromptEntry>(promptPool);
+        List<PromptEntry> availablePrompts = new List<PromptEntry>(promptPool);
 
         for (int i = 0; i < promptSlots.Length; i++)
         {
@@ -397,17 +395,15 @@ public class PromptsControl : MonoBehaviour
                 continue;
             }
 
-            // if (availablePrompts.Count == 0)
-            // {
-            //     Debug.LogWarning("Not enough unique prompts for all slots.", this);
-            //     break;
-            // }
+            if (availablePrompts.Count == 0)
+            {
+                Debug.LogWarning("Not enough unique prompts for all slots.", this);
+                break;
+            }
 
-            // int randomIndex = Random.Range(0, availablePrompts.Count);
-            // PromptEntry randomPrompt = availablePrompts[randomIndex];
-            // availablePrompts.RemoveAt(randomIndex);
-
-            PromptEntry randomPrompt = promptPool[Random.Range(0, promptPool.Length)];
+            int randomIndex = Random.Range(0, availablePrompts.Count);
+            PromptEntry randomPrompt = availablePrompts[randomIndex];
+            availablePrompts.RemoveAt(randomIndex);
             slot.SetPrompt(randomPrompt);
         }
     }

@@ -204,7 +204,7 @@ public class UIControl : MonoBehaviour
 	public void QuitGame()
 	{
 		SetPauseState(false);
-		// SceneManager.LoadScene("MainMenuScene");
+		SceneManager.LoadScene("MainMenuScene");
 	}
 
 	private void SetPauseState(bool isPaused)

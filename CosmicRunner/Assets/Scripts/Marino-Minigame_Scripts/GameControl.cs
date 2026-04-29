@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameControl : MonoBehaviour
 {
@@ -124,11 +125,6 @@ public class GameControl : MonoBehaviour
     private void EndGame()
     {
         gameOver = true;
-
-        bool wonGame = currentPrompts >= promptsToWin;
-
-        Debug.Log($"Game Ended - Prompts: {currentPrompts}/{promptsToWin} - Score: {currentScore} - Result: {(wonGame ? "WON" : "LOST")}");
-
-        // TODO: Display end game UI with results
+        SceneManager.LoadScene("EndScene");
     }
 }
