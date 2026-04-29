@@ -1,0 +1,119 @@
+@{
+    ViewData["Title"] = "Impulsa el Cambio - Codex";
+    Layout = "~/Views/Shared/_Layout.cshtml"; 
+}
+@using CosmicRunnerFront.DataInicio
+@{
+    // Obtenemos los datos del usuario activo (César) desde nuestra memoria RAM
+    var usuarioActual = MockDatabase.Usuarios.FirstOrDefault(u => u.Id == 1);
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/Inicio/inicio.css" />
+}
+<body>
+    <div class="container-fluid">
+        <div class="row g-4">
+            <div class="col-12 col-md-3">
+                <div class="contenedor-perfil pb-3">
+                    <div class="contenedor-perfil-foto">
+                        <img src="@(string.IsNullOrEmpty(usuarioActual?.FotoPerfilUrl) ? "/assets/random/user.png" : usuarioActual.FotoPerfilUrl)" alt="Foto de perfil">
+                    </div>
+                    <div class="contenedor-perfil-contenido">
+                        <h1>@(usuarioActual?.Nombre) @(usuarioActual?.Apellido)</h1>
+                        
+                        <div class="estadisticas container my-4">
+                            <div class="row mb-2"> 
+                                <div class="col-12 text-center"> 
+                                    <p class="fw-bold text-dark">Racha Whirlpool</p>
+                                </div>
+                            </div>
+                            <div class="row mb-3"> 
+                                
+                                <div class="col-6 text-center"> 
+                                    <h3 class="numero-denso">🔥</h3>
+                                </div>
+                                <div class="col-6 text-center"> 
+                                    <h3 class="numero-denso">@(usuarioActual?.Racha)</h3>
+                                </div>
+                                
+                            </div>
+                        </div>
+
+                        <div class="estadisticas container my-4 ">
+                            <div class="row mb-1"> 
+                                <div class="col-12 text-center"> 
+                                    <p class="fw-bold text-dark">Posición</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6 text-center"> 
+                                    <h3 class="numero-denso-posicion">@(usuarioActual?.PosicionGlobalPorcentaje)%</h3>
+                                </div>
+                                <div class="col-6 text-center"> 
+                                    <h3 class="numero-denso-posicion">@(usuarioActual?.PosicionDepartamentalPorcentaje)%</h3>
+                                </div>
+                            </div>
+                            <div class="row mb-3 pb-4">
+                                <div class="col-6 text-center"> 
+                                    <span class="text-dark fw-bold">Global</span>
+                                </div>
+                                <div class="col-6 text-center"> 
+                                    <span class="text-dark fw-bold">Departamental</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="my-3">
+                            <a href="#" class="boton-pildora">
+                                <p class="text-center ms-2 mb-0">Tiendita</p>
+                                <p class="icono-emoji ms-2 mb-0">🏪</p>
+                            </a>
+                        </div>
+                        <div class="my-3">
+                            <a href="#" class="boton-pildora">
+                                <p class="text-center ms-2 mb-0">Configuración</p>
+                                <p class="icono-emoji ms-2 mb-0">⚙️</p>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-9">
+                <div class="contenedor-impulsa">
+                    
+                    <div class="mb-5 clearfix header-impulsa">
+                        <h1 class="fw-bold text-dark float-start m-0 pt-1">Impulsa el Cambio</h1>
+                        
+                        <partial name="Partials/_AgregarIdea" model='ViewData["NuevaIdea"] as CosmicRunnerFront.Models.InicioModels.Idea' />
+                    </div>
+
+                    <h3 class="top-semanal-title text-muted mb-4 clear-both">Top Semanal Sugerencias de la Comunidad</h3>
+
+                    <div class="ideas-feed">
+                        @if(ViewBag.ListaIdeas != null && ((IEnumerable<CosmicRunnerFront.Models.InicioModels.Idea>)ViewBag.ListaIdeas).Any())
+                        {
+                            foreach (var idea in ViewBag.ListaIdeas)
+                            {
+                                <partial name="Partials/_IdeaTarjeta" model="idea" />
+                            }
+                        }
+                        else
+                        {
+                            <div class="text-center py-5">
+                                <h4 class="text-muted">Aún no hay sugerencias en la comunidad.</h4>
+                                <p class="text-muted">¡Sé el primero en impulsar el cambio agregando tu idea!</p>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            
+
+        </div>
+    </div>
+    
+    
+</body>
+
+

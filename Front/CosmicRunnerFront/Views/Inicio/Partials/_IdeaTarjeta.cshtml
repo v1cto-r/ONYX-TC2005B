@@ -1,0 +1,223 @@
+@model CosmicRunnerFront.Models.InicioModels.Idea
+@using CosmicRunnerFront.Models.InicioModels
+
+<div class="tarjeta-idea mb-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h3 class="mb-0 fw-bold text-dark">@Model.Id. @Model.Titulo</h3>
+        <span class="text-muted fs-6">• @Model.DiasTranscurridos días</span>
+    </div>
+
+    <div class="tarjeta-info-box mb-4">
+        <div class="row text-center text-md-start align-items-center">
+            <div class="col-12 col-md-4 d-flex align-items-center justify-content-center justify-content-md-start mb-3 mb-md-0 border-md-end py-2">
+                <img src="@(string.IsNullOrEmpty(Model.Autor?.FotoPerfilUrl) ? "/assets/random/user.png" : Model.Autor.FotoPerfilUrl)" alt="Autor" class="avatar-autora me-3">
+                <div>
+                    <span class="d-block text-muted small">Autor(a):</span>
+                    <span class="fw-bold fs-5 text-dark">@(Model.Autor?.Nombre ?? "Usuario") @(Model.Autor?.Apellido ?? "")</span>
+                </div>
+            </div>
+            <div class="col-6 col-md-4 border-md-end py-2 ps-md-4">
+                <span class="d-block text-muted small">Departamento</span>
+                <span class="fw-bold fs-5 text-dark">@(Model.Departamento?.Nombre ?? "Sin asignar")</span>
+            </div>
+            <div class="col-6 col-md-4 py-2 ps-md-4">
+                <span class="d-block text-muted small">Área de Impacto</span>
+                <span class="fw-bold fs-5 text-dark">@(Model.AreaImpacto?.Nombre ?? "Optimización")</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center mb-3 mt-4">
+        <span class="text-muted fs-6">Estado de la Iniciativa</span>
+    </div>
+    
+    <div class="timeline-container mb-4">
+        <div class="timeline-track"></div>
+        
+        <div class="timeline-step">
+            <div class="timeline-node @(Model.Estado == EstadoIniciativa.EnRevisionInicial ? "node-yellow" : (Model.Estado > EstadoIniciativa.EnRevisionInicial ? "node-black" : "node-grey"))"></div>
+            <span class="timeline-label @(Model.Estado == EstadoIniciativa.EnRevisionInicial ? "fw-bold text-dark" : "text-muted")">En Revisión</span>
+        </div>
+        <div class="timeline-step">
+            <div class="timeline-node @(Model.Estado == EstadoIniciativa.Reclutamiento ? "node-yellow" : (Model.Estado > EstadoIniciativa.Reclutamiento ? "node-black" : "node-grey"))"></div>
+            <span class="timeline-label @(Model.Estado == EstadoIniciativa.Reclutamiento ? "fw-bold text-dark" : "text-muted")">Reclutamiento</span>
+        </div>
+        <div class="timeline-step">
+            <div class="timeline-node @(Model.Estado == EstadoIniciativa.EnDesarrollo ? "node-yellow" : (Model.Estado > EstadoIniciativa.EnDesarrollo ? "node-black" : "node-grey"))"></div>
+            <span class="timeline-label @(Model.Estado == EstadoIniciativa.EnDesarrollo ? "fw-bold text-dark" : "text-muted")">En Desarrollo</span>
+        </div>
+        <div class="timeline-step">
+            <div class="timeline-node @(Model.Estado == EstadoIniciativa.PruebasPiloto ? "node-yellow" : (Model.Estado > EstadoIniciativa.PruebasPiloto ? "node-black" : "node-grey"))"></div>
+            <span class="timeline-label @(Model.Estado == EstadoIniciativa.PruebasPiloto ? "fw-bold text-dark" : "text-muted")">Pruebas Piloto</span>
+        </div>
+        <div class="timeline-step">
+            <div class="timeline-node @(Model.Estado == EstadoIniciativa.EnRevisionFinal ? "node-yellow" : (Model.Estado > EstadoIniciativa.EnRevisionFinal ? "node-black" : "node-grey"))"></div>
+            <span class="timeline-label @(Model.Estado == EstadoIniciativa.EnRevisionFinal ? "fw-bold text-dark" : "text-muted")">En Revisión</span>
+        </div>
+        <div class="timeline-step">
+            <div class="timeline-node @(Model.Estado == EstadoIniciativa.Implementado ? "node-yellow" : "node-grey")"></div>
+            <span class="timeline-label @(Model.Estado == EstadoIniciativa.Implementado ? "fw-bold text-dark" : "text-muted")">Implementado</span>
+        </div>
+    </div>
+
+    <details class="tarjeta-details mb-4">
+        <summary class="btn-ver-mas-container text-start text-md-center">
+            <div class="btn-ver-mas d-inline-block">Ver más <span>▼</span></div>
+        </summary>
+        
+        <div class="details-content mt-3 p-4 bg-white border rounded-4">
+            <h4 class="fw-bold mb-3 text-dark">Puntos Clave:</h4>
+            <ul class="text-dark fs-5 mb-4 ms-3">
+                @if(Model.PuntosClave != null && Model.PuntosClave.Any())
+                {
+                    foreach(var punto in Model.PuntosClave)
+                    {
+                        <li class="mb-2">@punto</li>
+                    }
+                }
+                else
+                {
+                    <li class="mb-2 text-muted fst-italic">No se definieron puntos clave.</li>
+                }
+            </ul>
+            
+            <hr class="text-muted border-1 opacity-25 my-4">
+            
+            <h4 class="fw-bold mb-3 text-dark">Descripción:</h4>
+            <p class="text-dark fs-5 mb-4 lh-base">@(string.IsNullOrEmpty(Model.Descripcion) ? "Sin descripción detallada." : Model.Descripcion)</p>
+            
+            <hr class="text-muted border-1 opacity-25 my-4">
+
+            <h4 class="fw-bold mb-3 text-dark">Colaboradores:</h4>
+            <div class="d-flex flex-wrap gap-3">
+                @if(Model.ListaColaboradores != null && Model.ListaColaboradores.Any())
+                {
+                    foreach(var colab in Model.ListaColaboradores)
+                    {
+                        <div class="colaborador-pill">
+                            <img src="@(string.IsNullOrEmpty(colab.FotoPerfilUrl) ? "/assets/random/user.png" : colab.FotoPerfilUrl)" alt="@colab.Nombre">
+                            <span class="fw-bold text-dark">@colab.Nombre @colab.Apellido</span>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <span class="text-muted fs-6">Aún no hay colaboradores en este proyecto.</span>
+                }
+            </div>
+        </div>
+        <hr class="text-muted border-1 opacity-25 my-5">
+
+            <div class="d-flex align-items-center mb-4 gap-3">
+                <img src="~/assets/random/user.png" alt="César" class="avatar-autora rounded-circle" style="width: 45px; height: 45px;">
+                <form method="post" action="/Inicio/GuardarComentario" class="flex-grow-1 m-0 d-flex gap-2">
+                    <input type="hidden" name="ideaId" value="@Model.Id" />
+                    <input type="text" class="form-control rounded-pill bg-white border border-secondary px-4 py-2 text-dark" name="Mensaje" placeholder="Escribe tu recomendación..." required>
+                    <button type="submit" class="d-none">Enviar</button>
+                </form>
+            </div>
+
+            <div class="d-flex align-items-center mb-4">
+                <span class="fw-bold text-dark fs-5">Más relevantes <span class="fs-6 ms-1">▼</span></span>
+            </div>
+
+            <div class="comentarios-lista">
+                @if(Model.ListaComentarios != null && Model.ListaComentarios.Any())
+                {
+                    // Ordenamos de más reciente a más antiguo
+                    foreach(var comentario in Model.ListaComentarios.OrderByDescending(c => c.FechaCreacion))
+                    {
+                        var diasTranscurridos = (DateTime.Now - comentario.FechaCreacion).Days;
+                        var tiempoTexto = diasTranscurridos > 0 ? $"{diasTranscurridos} días" : "Hoy";
+
+                        <div class="comentario-item d-flex gap-3 mb-4">
+                            <img src="@(string.IsNullOrEmpty(comentario.Autor?.FotoPerfilUrl) ? "/assets/random/user.png" : comentario.Autor.FotoPerfilUrl)" alt="Avatar" class="avatar-autora rounded-circle flex-shrink-0" style="width: 45px; height: 45px;">
+                            
+                            <div class="comentario-contenido flex-grow-1">
+                                
+                                <div class="d-flex align-items-center mb-2">
+                                    <span class="fw-bold text-dark fs-5 me-3">@(comentario.Autor?.Nombre) @(comentario.Autor?.Apellido)</span>
+                                    <span class="text-muted small fw-bold">• @tiempoTexto</span>
+                                </div>
+                                
+                                <p class="text-dark fs-5 mb-3 lh-sm">@comentario.Mensaje</p>
+                                
+                                <div class="d-flex align-items-center gap-3">
+                                    
+                                    <details class="reply-desplegable">
+                                        <summary class="btn btn-light rounded-pill border px-4 py-1 fw-bold text-muted bg-white">
+                                            Responder
+                                        </summary>
+                                        
+                                        <div class="mt-3 p-3 bg-light border rounded-4 shadow-sm">
+                                            <form method="post" action="/Inicio/GuardarRespuesta" class="d-flex gap-2 align-items-center m-0">
+                                                <input type="hidden" name="comentarioPadreId" value="@comentario.Id" />
+                                                <img src="~/assets/random/user.png" class="rounded-circle" style="width: 35px; height: 35px;">
+                                                <input type="text" name="Mensaje" class="form-control rounded-pill border-secondary px-3 py-1 fs-6" placeholder="Escribe una respuesta..." required>
+                                                <button type="submit" class="btn btn-dark rounded-pill px-4 fw-bold">Enviar</button>
+                                            </form>
+                                        </div>
+                                    </details>
+                                    
+                                    <div class="d-flex align-items-center border rounded-pill bg-white px-3 py-1 text-dark">
+                                        <span class="me-3 fw-bold"><span class="fs-6 me-1">👍</span> @comentario.Likes</span>
+                                        <span class="border-start ps-3 fw-bold"><span class="fs-6 me-1">👎</span> @comentario.Dislikes</span>
+                                    </div>
+                                </div>
+
+                                @if(comentario.ListaRespuestas != null && comentario.ListaRespuestas.Any())
+                                {
+                                    <div class="respuestas-contenedor ms-3 ms-md-4 mt-3 ps-3 border-start border-2 border-secondary border-opacity-25">
+                                        @foreach(var respuesta in comentario.ListaRespuestas.OrderBy(r => r.FechaCreacion))
+                                        {
+                                            <div class="respuesta-item d-flex gap-2 mb-3">
+                                                <img src="@(string.IsNullOrEmpty(respuesta.Autor?.FotoPerfilUrl) ? "/assets/random/user.png" : respuesta.Autor.FotoPerfilUrl)" class="rounded-circle flex-shrink-0" style="width: 35px; height: 35px; object-fit: cover;">
+                                                <div>
+                                                    <div class="d-flex align-items-center mb-1">
+                                                        <span class="fw-bold text-dark fs-6 me-2">@(respuesta.Autor?.Nombre) @(respuesta.Autor?.Apellido)</span>
+                                                        <span class="text-muted" style="font-size: 0.75rem;">• Respuesta</span>
+                                                    </div>
+                                                    <p class="text-dark mb-0" style="font-size: 0.95rem;">@respuesta.Mensaje</p>
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+                                }
+
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+    </details>
+
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mt-4 gap-3">
+        
+        <form method="post" action="/Inicio/UnirseProyecto" class="m-0 align-self-start align-self-md-center">
+            <input type="hidden" name="ideaId" value="@Model.Id" />
+            <button type="submit" class="btn btn-unirme rounded-pill fw-bold fs-5 py-2 px-5">Unirme al Proyecto</button>
+        </form>
+
+        <div class="d-flex align-items-center gap-3 contadores-interaccion">
+            
+            <div class="btn-interaccion-pill bg-light" style="cursor: default;">
+                <span class="fs-4 me-2">💬</span> <span class="fw-bold text-dark fs-5">@(Model.ListaComentarios?.Count ?? 0)</span>
+            </div>
+
+            <form method="post" action="/Inicio/DarLike" class="m-0">
+                <input type="hidden" name="ideaId" value="@Model.Id" />
+                <button type="submit" class="btn-interaccion-pill">
+                    <span class="fs-4 me-2">👍</span> <span class="fw-bold text-dark fs-5">@Model.Likes</span>
+                </button>
+            </form>
+
+            <form method="post" action="/Inicio/DarDislike" class="m-0">
+                <input type="hidden" name="ideaId" value="@Model.Id" />
+                <button type="submit" class="btn-interaccion-pill">
+                    <span class="fs-4 me-2">👎</span> <span class="fw-bold text-dark fs-5">@Model.Dislikes</span>
+                </button>
+            </form>
+            
+        </div>
+    </div>
+</div>

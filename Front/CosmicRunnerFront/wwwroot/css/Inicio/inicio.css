@@ -1,0 +1,413 @@
+/* =========================================================
+   VARIABLES DE COLOR (Basadas en el diseño de Whirlpool Codex)
+   ========================================================= */
+:root {
+    --whirlpool-yellow: #f0b310; /* Color del botón "+ Agrega tu Idea" */
+    --whirlpool-yellow-hover: #e5b615;
+    --bg-light-grey: #f7f7f7;    /* Fondo de la pantalla principal */
+    --card-bg: #ffffff;          /* Fondo de las tarjetas */
+    --text-main: #313131;
+    --text-muted: #505050;
+    --border-color: #dee2e6;
+}
+
+*{
+    font-family: 'Helvetica Now', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+/* =========================================================
+   CONTENEDORES PRINCIPALES
+   ========================================================= */
+body{
+    background-color: var(--bg-light-grey);
+}
+
+html, body {
+    overflow-x: hidden !important;
+    width: 100%;
+}
+
+.contenedor-perfil {
+    background-color: var(--card-bg);
+    border-top: 10rem solid var(--whirlpool-yellow);
+    border-radius: 1rem;
+    text-align: center;
+    height: 100%; /* Para que ocupe toda la altura */
+    display: flex;
+    flex-direction: column;
+}
+
+.contenedor-perfil-foto {
+    width: 12rem;
+    height: 12rem;
+    margin: -7rem auto 0.5rem auto;
+    border-radius: 50%;
+    background-color: var(--text-muted);
+    overflow: hidden;
+    border: 6px solid var(--card-bg);
+}
+
+.contenedor-perfil-foto img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.contenedor-perfil-contenido {
+    padding: 0 1rem 1.5rem 1rem;
+}
+
+.contenedor-perfil-contenido h1 {
+    font-size: 2.5rem;
+    margin: 0.5rem 0 0.25rem 0;
+}
+
+.contenedor-perfil-contenido p {
+    margin: 0.25rem 0;
+    color: var(--text-main);
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.contenedor-perfil-contenido span {
+    margin: 0.25rem 0;
+    color: var(--text-muted);
+    font-size: 1rem;
+}
+
+.numero-denso {
+    font-weight: 700;                 /* Negro puro */
+    font-size: 5rem;         /* Ajusta según necesidad */
+    margin: 0.5rem 0 0.25rem 0;
+}
+
+.numero-denso-posicion{
+    font-weight: 700;                 /* Negro puro */
+    font-size: 3rem;         /* Ajusta según necesidad */
+    margin: 0.5rem 0 0.25rem 0;
+}
+
+.boton-pildora {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--text-main);
+    padding: 8px 1rem;
+    border-radius: 50px;
+    text-decoration: none;
+    width: 90%;
+    height: auto;
+    min-width: 180px;
+}
+
+.boton-pildora p {
+    color: var(--bg-light-grey);
+    font-weight: 500;
+}
+
+.boton-pildora:hover {
+    background-color: #dee2e6;
+}
+
+.boton-pildora:hover p{
+    background-color: #dee2e6;
+    color: #000000
+}
+
+.boton-border-bottom {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-top: 2px solid #dee2e6;
+    padding: 12px;
+    text-align: center;
+    font-weight: 500;
+    color: #6c757d;
+    cursor: pointer;
+}
+
+.boton-border-bottom:hover {
+    border-top-color: #0d6efd;
+    color: #0d6efd;
+    background-color: #f8f9fa;
+}
+
+/* Para el área de iconos */
+.icono-emoji, .icono-real {
+    margin-left: 8px;
+    font-size: 1.1em;
+}
+
+.contenedor-impulsa {
+    background-color: var(--card-bg);
+    padding: 2rem 3rem;
+    text-align: center;
+    border-radius: 1rem; /* Opcional: si tu layout central tiene bordes curvos */
+}
+
+.contenedor-impulsa h1 {
+    font-size: 2.5rem;
+    letter-spacing: -0.5px;
+}
+
+.top-semanal-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+/* =========================================================
+   BOTONES
+   ========================================================= */
+.btn-agregar {
+    background-color: var(--whirlpool-yellow);
+    color: var(--text-main);
+    font-weight: 700;
+    border: none;
+    transition: all 0.2s ease-in-out;
+}
+
+.btn-agregar:hover {
+    background-color: var(--whirlpool-yellow-hover);
+    transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   TARJETAS DE IDEAS (TOP SEMANAL)
+   ========================================================= */
+.tarjeta-idea {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+    text-align: left;
+}
+
+.tarjeta-info-box {
+    border: 1px solid var(--border-color);
+    border-radius: 50px;
+    padding: 0.5rem 1.5rem;
+}
+
+.avatar-autora {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--border-color);
+}
+
+/* =========================================================
+   LÍNEA DE TIEMPO (TIMELINE)
+   ========================================================= */
+.timeline-container {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    padding: 0 2rem;
+    margin-top: 1rem;
+}
+
+.timeline-track {
+    position: absolute;
+    top: 10px; /* Alineado al centro de los nodos (20px / 2) */
+    left: 2rem;
+    right: 2rem;
+    height: 2px;
+    background-color: #e9ecef;
+    z-index: 1;
+}
+
+.timeline-step {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80px;
+}
+
+.timeline-node {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-bottom: 0.5rem;
+    background-color: #e9ecef; /* Default Grey */
+    border: 2px solid #fff; /* Pequeño borde blanco para separarlo de la línea */
+}
+
+/* Colores de estado basados en el mockup */
+.node-yellow { background-color: var(--whirlpool-yellow); }
+.node-black { background-color: var(--text-main); }
+.node-grey { background-color: #e9ecef; }
+
+.timeline-label {
+    font-size: 0.7rem;
+    text-align: center;
+    line-height: 1.1;
+}
+
+/* =========================================================
+   ACORDEÓN SIN JS (DETAILS & SUMMARY)
+   ========================================================= */
+.tarjeta-details > summary {
+    list-style: none; /* Oculta la flecha por defecto de HTML */
+    cursor: pointer;
+}
+
+.tarjeta-details > summary::-webkit-details-marker {
+    display: none; /* Para Safari */
+}
+
+.btn-ver-mas {
+    display: inline-block;
+    background-color: #e9ecef;
+    color: var(--text-main);
+    padding: 2px 16px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: background-color 0.2s;
+}
+
+.btn-ver-mas:hover {
+    background-color: #dde1e5;
+}
+
+/* Gira la flecha cuando el <details> está abierto */
+.tarjeta-details[open] summary .btn-ver-mas span {
+    display: inline-block;
+    transform: rotate(180deg);
+}
+
+/* =========================================================
+   BOTONES Y FOOTER TARJETA
+   ========================================================= */
+.btn-unirme {
+    background-color: #ffe69c; /* Amarillo más tenue que el botón principal */
+    color: var(--text-main);
+    border: none;
+    transition: all 0.2s;
+}
+
+.btn-unirme:hover {
+    background-color: var(--whirlpool-yellow);
+}
+
+/* Utilidades para los bordes en pantallas medianas hacia arriba */
+@media (min-width: 768px) {
+    .border-md-end {
+        border-right: 1px solid var(--border-color);
+    }
+}
+
+/* =========================================================
+   PASTILLAS DE COLABORADORES Y BOTONES (Blindado)
+   ========================================================= */
+.colaborador-pill {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid var(--border-color);
+    border-radius: 50px !important; /* Forzar pastilla */
+    padding: 6px 20px 6px 6px;
+    background-color: var(--card-bg);
+}
+
+.colaborador-pill img {
+    width: 40px !important;
+    height: 40px !important;
+    border-radius: 50% !important; /* Círculo perfecto */
+    object-fit: cover !important; /* Recorta la imagen sobrante */
+    aspect-ratio: 1/1; /* Evita que la imagen se deforme */
+    margin-right: 12px;
+}
+
+.btn-unirme {
+    background-color: #ffe69c; 
+    color: var(--text-main);
+    border: none;
+    transition: all 0.2s;
+    min-width: 200px; /* Tamaño consistente, pero no el 100% de la pantalla */
+}
+
+.btn-unirme:hover {
+    background-color: var(--whirlpool-yellow);
+}
+
+/* Pastillas Interactivas Blindadas */
+.btn-interaccion-pill {
+    display: inline-flex !important; /* Forzar comportamiento de caja flex */
+    align-items: center !important;
+    justify-content: center !important;
+    background-color: transparent !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: 50px !important; /* Forzar la forma de pastilla */
+    padding: 6px 20px !important; /* Ajuste del "largo" de la pastilla */
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+    box-shadow: none; /* Quitar sombras por defecto del <button> */
+}
+
+.btn-interaccion-pill:hover {
+    background-color: #f8f9fa !important;
+    border-color: #ced4da !important;
+    transform: translateY(-2px);
+}
+
+/* =========================================================
+   FORMULARIO INLINE (REEMPLAZO DE MODAL)
+   ========================================================= */
+.agregar-idea-desplegable summary {
+    list-style: none; /* Oculta flecha en Chrome/Firefox */
+    cursor: pointer;
+}
+
+.agregar-idea-desplegable summary::-webkit-details-marker {
+    display: none; /* Oculta flecha en Safari */
+}
+
+.contenedor-formulario-inline {
+    border-color: var(--border-color) !important;
+    animation: fadeInDown 0.3s ease-out; /* Pequeña animación de entrada */
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Ajuste para que el input del título se vea más limpio */
+.contenedor-formulario-inline .form-control:focus, 
+.contenedor-formulario-inline .form-select:focus {
+    border-color: var(--whirlpool-yellow);
+    box-shadow: 0 0 0 0.25rem rgba(240, 179, 16, 0.15);
+}
+
+/* =========================================================
+   SISTEMA DE RESPUESTAS (COMENTARIOS ANIDADOS)
+   ========================================================= */
+.reply-desplegable summary {
+    list-style: none; /* Oculta la flecha por defecto */
+    cursor: pointer;
+}
+
+.reply-desplegable summary::-webkit-details-marker {
+    display: none; /* Oculta la flecha en Safari/Chrome viejo */
+}
+
+/* Evitar que el acordeón empuje la UI de forma brusca */
+.reply-desplegable {
+    position: relative;
+}
+
+.reply-desplegable[open] > div {
+    animation: fadeInDown 0.2s ease-out;
+}
