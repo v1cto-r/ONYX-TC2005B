@@ -4,7 +4,8 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using CosmicRunnerFront.Models;
 using CosmicRunnerFront.Models.InicioModels;
-using CosmicRunnerFront.DataInicio; // Asegúrate de que apunte a tu carpeta DataInicio
+using CosmicRunnerFront.DataInicio;
+using Microsoft.VisualBasic.FileIO; 
 
 namespace CosmicRunnerFront.Controllers;
 
@@ -16,7 +17,7 @@ public class InicioController : Controller
         var ideasGuardadas = MockDatabase.Ideas.OrderBy(i => i.Id).ToList();
         
         ViewBag.ListaIdeas = ideasGuardadas;
-        ViewData["NuevaIdea"] = new Idea(); 
+        ViewData["NuevaIdea"] = new Idea();
         
         return View();
     }
@@ -39,21 +40,20 @@ public class InicioController : Controller
         MockDatabase.Ideas.Add(nuevaIdea);
         return RedirectToAction("Index");
     }
-
-    // PASO 1: Lógica para unirse a un proyecto
+   
     [HttpPost]
     public IActionResult UnirseProyecto(int ideaId)
     {
-        // 1. Buscamos la idea en nuestra "Base de Datos"
+        // idea en nuestra "Base de Datos"
         var idea = MockDatabase.Ideas.FirstOrDefault(i => i.Id == ideaId);
         
         if (idea != null)
         {
-            // 2. Simulamos obtener al usuario logueado (César - Id 1)
+            // usuario logueado (César - Id 1)
             var usuarioActual = MockDatabase.Usuarios.FirstOrDefault(u => u.Id == 1);
             
             // 3. Verificamos que el usuario no sea ya un colaborador para no duplicarlo
-            if (usuarioActual != null && !idea.ListaColaboradores.Any(c => c.Id == usuarioActual.Id))
+            if (usuarioActual != null && !idea.ListaColaboradores.Any(c => c.Id == usuarioActual.Id) && usuarioActual.Id != idea.AutorId)
             {
                 idea.ListaColaboradores.Add(usuarioActual);
             }
@@ -63,7 +63,7 @@ public class InicioController : Controller
         return RedirectToAction("Index");
     }
 
-    // PASO 2: Lógica de Likes
+    // Likes
     [HttpPost]
     public IActionResult DarLike(int ideaId)
     {
@@ -75,7 +75,7 @@ public class InicioController : Controller
         return RedirectToAction("Index");
     }
 
-    // PASO 2: Lógica de Dislikes
+    // Dislikes
     [HttpPost]
     public IActionResult DarDislike(int ideaId)
     {
@@ -87,7 +87,7 @@ public class InicioController : Controller
         return RedirectToAction("Index");
     }
 
-    // PASO 3: Lógica para Guardar Comentarios
+    // Guardar Comentarios
     [HttpPost]
     public IActionResult GuardarComentario(int ideaId, string Mensaje)
     {
@@ -115,7 +115,7 @@ public class InicioController : Controller
         return RedirectToAction("Index");
     }
 
-    // PASO 5: Lógica para Guardar Respuestas anidadas
+    // Guardar Respuestas anidadas
     [HttpPost]
     public IActionResult GuardarRespuesta(int comentarioPadreId, string Mensaje)
     {

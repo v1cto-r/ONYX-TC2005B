@@ -13,16 +13,16 @@
                 <img src="@(string.IsNullOrEmpty(Model.Autor?.FotoPerfilUrl) ? "/assets/random/user.png" : Model.Autor.FotoPerfilUrl)" alt="Autor" class="avatar-autora me-3">
                 <div>
                     <span class="d-block text-muted small">Autor(a):</span>
-                    <span class="fw-bold fs-5 text-dark">@(Model.Autor?.Nombre ?? "Usuario") @(Model.Autor?.Apellido ?? "")</span>
+                    <span class="fw-bold fs-6 text-dark">@(Model.Autor?.Nombre ?? "Usuario") @(Model.Autor?.Apellido ?? "")</span>
                 </div>
             </div>
             <div class="col-6 col-md-4 border-md-end py-2 ps-md-4">
                 <span class="d-block text-muted small">Departamento</span>
-                <span class="fw-bold fs-5 text-dark">@(Model.Departamento?.Nombre ?? "Sin asignar")</span>
+                <span class="fw-bold fs-6 text-dark">@(Model.Departamento?.Nombre ?? "Sin asignar")</span>
             </div>
             <div class="col-6 col-md-4 py-2 ps-md-4">
                 <span class="d-block text-muted small">Área de Impacto</span>
-                <span class="fw-bold fs-5 text-dark">@(Model.AreaImpacto?.Nombre ?? "Optimización")</span>
+                <span class="fw-bold fs-6 text-dark">@(Model.AreaImpacto?.Nombre ?? "Optimización")</span>
             </div>
         </div>
     </div>
@@ -60,14 +60,14 @@
         </div>
     </div>
 
-    <details class="tarjeta-details mb-4">
+    <details class="tarjeta-details my-4">
         <summary class="btn-ver-mas-container text-start text-md-center">
             <div class="btn-ver-mas d-inline-block">Ver más <span>▼</span></div>
         </summary>
         
         <div class="details-content mt-3 p-4 bg-white border rounded-4">
             <h4 class="fw-bold mb-3 text-dark">Puntos Clave:</h4>
-            <ul class="text-dark fs-5 mb-4 ms-3">
+            <ul class="fs-6 mb-4 ms-3">
                 @if(Model.PuntosClave != null && Model.PuntosClave.Any())
                 {
                     foreach(var punto in Model.PuntosClave)
@@ -84,7 +84,7 @@
             <hr class="text-muted border-1 opacity-25 my-4">
             
             <h4 class="fw-bold mb-3 text-dark">Descripción:</h4>
-            <p class="text-dark fs-5 mb-4 lh-base">@(string.IsNullOrEmpty(Model.Descripcion) ? "Sin descripción detallada." : Model.Descripcion)</p>
+            <p class="fs-6 mb-4 lh-base">@(string.IsNullOrEmpty(Model.Descripcion) ? "Sin descripción detallada." : Model.Descripcion)</p>
             
             <hr class="text-muted border-1 opacity-25 my-4">
 
@@ -160,8 +160,8 @@
                                     </details>
                                     
                                     <div class="d-flex align-items-center border rounded-pill bg-white px-3 py-1 text-dark">
-                                        <span class="me-3 fw-bold"><span class="fs-6 me-1">👍</span> @comentario.Likes</span>
-                                        <span class="border-start ps-3 fw-bold"><span class="fs-6 me-1">👎</span> @comentario.Dislikes</span>
+                                        <span class="me-3 fw-bold"><img src="~/assets/icons/thumbs-up.svg" /> @comentario.Likes</span>
+                                        <span class="border-start ps-3 fw-bold"><img src="~/assets/icons/thumbs-down.svg" /> @comentario.Dislikes</span>
                                     </div>
                                 </div>
 
@@ -191,33 +191,39 @@
             </div>
     </details>
 
-    <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mt-4 gap-3">
-        
-        <form method="post" action="/Inicio/UnirseProyecto" class="m-0 align-self-start align-self-md-center">
-            <input type="hidden" name="ideaId" value="@Model.Id" />
-            <button type="submit" class="btn btn-unirme rounded-pill fw-bold fs-5 py-2 px-5">Unirme al Proyecto</button>
-        </form>
+    
 
-        <div class="d-flex align-items-center gap-3 contadores-interaccion">
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mt-4 gap-3">
+
+        <div class="d-flex align-items-center gap-1 contadores-interaccion">
             
-            <div class="btn-interaccion-pill bg-light" style="cursor: default;">
-                <span class="fs-4 me-2">💬</span> <span class="fw-bold text-dark fs-5">@(Model.ListaComentarios?.Count ?? 0)</span>
-            </div>
+            
 
             <form method="post" action="/Inicio/DarLike" class="m-0">
                 <input type="hidden" name="ideaId" value="@Model.Id" />
                 <button type="submit" class="btn-interaccion-pill">
-                    <span class="fs-4 me-2">👍</span> <span class="fw-bold text-dark fs-5">@Model.Likes</span>
+                    <img src="~/assets/icons/thumbs-up.svg" /> <span class="fw-bold text-dark fs-5">@Model.Likes</span>
                 </button>
             </form>
 
             <form method="post" action="/Inicio/DarDislike" class="m-0">
                 <input type="hidden" name="ideaId" value="@Model.Id" />
                 <button type="submit" class="btn-interaccion-pill">
-                    <span class="fs-4 me-2">👎</span> <span class="fw-bold text-dark fs-5">@Model.Dislikes</span>
+                    <img src="~/assets/icons/thumbs-down.svg" /> <span class="fw-bold text-dark fs-5">@Model.Dislikes</span>
                 </button>
             </form>
+
+            <div class="btn-interaccion-pill bg-light mx-auto" style="cursor: default;">
+                <img src="~/assets/icons/thumbs-down.svg" /> <span class="fw-bold text-dark fs-5">@(Model.ListaComentarios?.Count ?? 0)</span>
+            </div>
             
         </div>
+        
+        <form method="post" action="/Inicio/UnirseProyecto" class="m-0 align-self-start align-self-md-center">
+            <input type="hidden" name="ideaId" value="@Model.Id" />
+            <button type="submit" class="btn btn-unirme rounded-pill fw-bold fs-5 py-2 px-4">Unirme al Proyecto</button>
+        </form>
+
+        
     </div>
 </div>
