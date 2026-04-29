@@ -39,21 +39,20 @@ public class InicioController : Controller
         MockDatabase.Ideas.Add(nuevaIdea);
         return RedirectToAction("Index");
     }
-
-    // PASO 1: Lógica para unirse a un proyecto
+   
     [HttpPost]
     public IActionResult UnirseProyecto(int ideaId)
     {
-        // 1. Buscamos la idea en nuestra "Base de Datos"
+        // idea en nuestra "Base de Datos"
         var idea = MockDatabase.Ideas.FirstOrDefault(i => i.Id == ideaId);
         
         if (idea != null)
         {
-            // 2. Simulamos obtener al usuario logueado (César - Id 1)
+            // usuario logueado (César - Id 1)
             var usuarioActual = MockDatabase.Usuarios.FirstOrDefault(u => u.Id == 1);
             
             // 3. Verificamos que el usuario no sea ya un colaborador para no duplicarlo
-            if (usuarioActual != null && !idea.ListaColaboradores.Any(c => c.Id == usuarioActual.Id))
+            if (usuarioActual != null && !idea.ListaColaboradores.Any(c => c.Id == usuarioActual.Id) && usuarioActual.Id != idea.AutorId)
             {
                 idea.ListaColaboradores.Add(usuarioActual);
             }
