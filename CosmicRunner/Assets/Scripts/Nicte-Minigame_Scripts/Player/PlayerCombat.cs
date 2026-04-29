@@ -15,7 +15,7 @@ public class PlayerCombat : MonoBehaviour
     public float specialRechargeTimer = 0f;
     float shootTimer = 0f;
     float comboTimer = 0f;
-    public float shootCooldown = 0.2f;
+    private float shootCooldown = 0.1f;
     public float baseCooldown;
 
     void Start()

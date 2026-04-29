@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections;
 
 public class PlayerController : MonoBehaviour
 {
@@ -7,14 +8,24 @@ public class PlayerController : MonoBehaviour
    PlayerMovement playermovement;
    PlayerCombat combat;
    SpecialAttackUI specialAttackUI;
+   SpriteRenderer spriteRenderer;
+   string colorCooldown="#FFA3A3";
    public int currentHealth = 12;
    bool inputEnabled = true;
    bool isDead = false;
+   float attackWindow = 2f;
+   float lastAttackTime = -Mathf.Infinity;
+   int attackCount = 0;
+   int maxAttacks = 5;
+   float cooldownTime = 2f;
+   bool isOnCooldown = false;
+
    void Awake()
    {
        playermovement = GetComponent<PlayerMovement>();
        combat=GetComponent<PlayerCombat>();
        specialAttackUI = FindObjectOfType<SpecialAttackUI>();
+       spriteRenderer = GetComponent<SpriteRenderer>();
        PlayerPrefs.SetInt("PlayerHealth", currentHealth);
    }
    
@@ -35,9 +46,25 @@ public class PlayerController : MonoBehaviour
         if(Keyboard.current.zKey.wasPressedThisFrame)
         {
             PlayerCombat combat = GetComponent<PlayerCombat>();
-            if (combat != null)
+            if (combat != null && !isOnCooldown)
             {
+                float currentTime = Time.time;
+                if (currentTime-lastAttackTime <= attackWindow)
+                {
+                    attackCount ++;
+                }
+                else
+                {
+                    attackCount = 1;
+                }
+
+                lastAttackTime = currentTime;
+                
                 combat.shoot();
+                if (attackCount >= maxAttacks)
+                {
+                    StartCoroutine(AttackCooldown());
+                }
             }
         }
 
@@ -50,8 +77,6 @@ public class PlayerController : MonoBehaviour
                 {
                     combat.SpecialAttack();
                     specialAttackUI.resetAttack();
-                }else{
-                    Debug.Log("Special Attack not ready yet!");
                 }
             }
         }
@@ -65,5 +90,22 @@ public class PlayerController : MonoBehaviour
         if (playermovement != null)
             playermovement.SetInputEnabled(false);
     }
+
+    IEnumerator AttackCooldown()
+   {
+       isOnCooldown = true;
+       Debug.Log("Cooldown activado");
+       if (ColorUtility.TryParseHtmlString(colorCooldown, out Color cooldownColor))
+       {
+        spriteRenderer.color = cooldownColor;
+         } 
+
+       yield return new WaitForSeconds(cooldownTime);
+
+       attackCount = 0;
+       isOnCooldown = false;
+       spriteRenderer.color = Color.white;
+       Debug.Log("Cooldown finalizado");
+   }
 
 }
