@@ -45,4 +45,14 @@ public class EnemyHealth : MonoBehaviour
             GameController.instancia.ChangeState("Victory");
         }
     }
+
+    public void Heal()
+    {
+        int randomValue = Random.Range(0, 10);
+            if (randomValue < 5)
+            {
+                PlayerPrefs.SetInt("EnemyHealth", currentHealth);
+                healthBarUI.regenerateEnemyHealth(currentHealth, 3);
+            }
+    }
 }

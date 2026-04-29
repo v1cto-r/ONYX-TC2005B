@@ -807,6 +807,18 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3407610798542079976, guid: a8fb6ccd4e3489a4b9fcbb80e156d376, type: 3}
+      propertyPath: m_Color.b
+      value: 0.99595684
+      objectReference: {fileID: 0}
+    - target: {fileID: 3407610798542079976, guid: a8fb6ccd4e3489a4b9fcbb80e156d376, type: 3}
+      propertyPath: m_Color.g
+      value: 0.99595684
+      objectReference: {fileID: 0}
+    - target: {fileID: 3407610798542079976, guid: a8fb6ccd4e3489a4b9fcbb80e156d376, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3407610798542079976, guid: a8fb6ccd4e3489a4b9fcbb80e156d376, type: 3}
       propertyPath: m_SortingOrder
       value: 10
       objectReference: {fileID: 0}
@@ -885,6 +897,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3904193540649558666, guid: a8fb6ccd4e3489a4b9fcbb80e156d376, type: 3}
       insertIndex: -1
       addedObject: {fileID: 163021832}
+    - targetCorrespondingSourceObject: {fileID: 3904193540649558666, guid: a8fb6ccd4e3489a4b9fcbb80e156d376, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 163021836}
+    - targetCorrespondingSourceObject: {fileID: 3904193540649558666, guid: a8fb6ccd4e3489a4b9fcbb80e156d376, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 163021839}
   m_SourcePrefab: {fileID: 100100000, guid: a8fb6ccd4e3489a4b9fcbb80e156d376, type: 3}
 --- !u!1 &132468191
 GameObject:
@@ -997,7 +1015,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &163021830
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1026,14 +1044,11 @@ MonoBehaviour:
   bullet: {fileID: 6560684531779061900, guid: 7a5c969b304f7114aad90303bcdbfac2, type: 3}
   firePoint: {fileID: 1628629073}
   specialBullet: {fileID: 6560684531779061900, guid: 2ab4c1f5fdc36f042adac6371039ce7b, type: 3}
-  specialBulletSpeed: 15
-  specialChargeRechargeTime: 5
   specialChargeMax: 3
   comboResetTime: 2
   currentCombo: 0
   currentSpecialCharges: 3
   specialRechargeTimer: 0
-  shootCooldown: 0.2
   baseCooldown: 0
 --- !u!114 &163021833
 MonoBehaviour:
@@ -1052,6 +1067,60 @@ MonoBehaviour:
   minY: -3.7
   maxY: 2.54
   inputEnabled: 1
+--- !u!70 &163021836
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 163021824}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 6, y: 15}
+  m_Direction: 0
+--- !u!114 &163021839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 163021824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0daf4f5baf1d8c54eafad81622563abd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
+  maxHealth: 12
+  shielTimerMax: 3
+  isAlive: 1
+  shieldActive: 0
+  currentHealth: 0
 --- !u!1 &191887968
 GameObject:
   m_ObjectHideFlags: 0
@@ -1153,8 +1222,8 @@ Transform:
   m_GameObject: {fileID: 203564587}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -2.23, y: -0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalPosition: {x: -2.07, y: -1.01, z: 0}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2122813739}
@@ -1318,7 +1387,6 @@ GameObject:
   - component: {fileID: 244386440}
   - component: {fileID: 244386439}
   - component: {fileID: 244386438}
-  - component: {fileID: 244386437}
   - component: {fileID: 244386441}
   m_Layer: 0
   m_Name: Enemy
@@ -1487,22 +1555,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 3
---- !u!114 &244386437
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 244386431}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bbfea849f2d07704c85ba048d08b02a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyPowerUp
-  enableRegeneration: 1
-  regenAmountNormal: 5
-  regenAmountAggressive: 2
-  regenTickInterval: 3
 --- !u!114 &244386438
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1533,10 +1585,8 @@ MonoBehaviour:
   - {fileID: 1578943862422913827, guid: 841354f5c72e1274fa96f3daaa37e511, type: 3}
   - {fileID: 4681477162375000786, guid: 43d9a92d523b1eb4997e19a9e4d216f0, type: 3}
   - {fileID: 3724414353640079233, guid: 4944db32957e43042ae12e028674e1b1, type: 3}
+  specialBullet: {fileID: 551475039875725810, guid: 148ea174449be2b458eb9d08e0533839, type: 3}
   firePoint: {fileID: 203564588}
-  normalCooldown: 2
-  aggressiveCooldown: 1
-  enragedCooldown: 0.4
   specialBulletCount: 8
 --- !u!114 &244386440
 MonoBehaviour:

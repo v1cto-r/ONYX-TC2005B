@@ -1,11 +1,11 @@
 using UnityEngine;
 
-public class EnemyBullet : MonoBehaviour
+public class SpecialEnemyBullet : MonoBehaviour
 {
     public float lifetime = 3f;
-    public float bulletSpeed = 8f;
+    public float bulletSpeed = 10f;
 
-    private int damage = 1;
+    private int damage = 2;
 
     void Start()
     {

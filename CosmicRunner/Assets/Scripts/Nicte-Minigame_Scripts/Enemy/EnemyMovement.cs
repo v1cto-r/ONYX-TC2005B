@@ -3,8 +3,8 @@ using UnityEngine;
 public class EnemyMovement : MonoBehaviour
 {
     private float normalSpeed =2f;
-    private float aggressiveSpeed=8f;
-    private float enragedSpeed=10f;
+    private float aggressiveSpeed=6f;
+    private float enragedSpeed=8f;
     float direction = 1f;
     private float minY = -3f;
     private float maxY =  2f;

@@ -32,6 +32,9 @@ public class ComboUI : MonoBehaviour
             {
                 comboImages[i].enabled = false;
             }
+        currentCombo = 0;
+        UpdateComboText(currentCombo);
+        UpdateComboLabel(currentCombo);
     }
 
     public void UpdateCombo(int combo)

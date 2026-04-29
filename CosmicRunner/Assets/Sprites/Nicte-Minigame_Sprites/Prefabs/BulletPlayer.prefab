@@ -171,3 +171,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerBullet
   lifetime: 3
+  bulletSpeed: 10

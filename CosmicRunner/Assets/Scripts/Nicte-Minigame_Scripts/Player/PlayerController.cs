@@ -6,7 +6,6 @@ public class PlayerController : MonoBehaviour
 {
    GameController gameController;
    PlayerMovement playermovement;
-   PlayerCombat combat;
    SpecialAttackUI specialAttackUI;
    SpriteRenderer spriteRenderer;
    string colorCooldown="#FFA3A3";
@@ -23,7 +22,6 @@ public class PlayerController : MonoBehaviour
    void Awake()
    {
        playermovement = GetComponent<PlayerMovement>();
-       combat=GetComponent<PlayerCombat>();
        specialAttackUI = FindObjectOfType<SpecialAttackUI>();
        spriteRenderer = GetComponent<SpriteRenderer>();
        PlayerPrefs.SetInt("PlayerHealth", currentHealth);
@@ -80,7 +78,6 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
-        
    }
 
    public void DisableInput()

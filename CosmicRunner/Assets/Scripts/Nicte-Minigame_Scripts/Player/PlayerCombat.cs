@@ -6,8 +6,6 @@ public class PlayerCombat : MonoBehaviour
     public Transform firePoint;
     public GameObject specialBullet;
     //PlayerFatigueSystem fatigueSystem;
-    public float specialBulletSpeed = 15f;
-    public float specialChargeRechargeTime = 5f;
     public int specialChargeMax = 3;
     public float comboResetTime = 2f;
     public int currentCombo = 0;

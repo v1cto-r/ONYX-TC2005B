@@ -8,10 +8,14 @@ public class PlayerHealth : MonoBehaviour
     public float shielTimerMax = 3f;
     public bool isAlive = true;
     public bool shieldActive = false;
+    public int currentHealth;
 
     void Awake()
     {
         playerController = GetComponent<PlayerController>();
+        healthBarUI = FindObjectOfType<HealthBarUI>();
+        currentHealth = maxHealth;
+        PlayerPrefs.SetInt("PlayerHealth", currentHealth);
     }
 
     void Update()
@@ -29,12 +33,30 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        if (shieldActive || !isAlive) return;
-        healthBarUI.updatePlayerHealth(PlayerPrefs.GetInt("PlayerHealth"), damage);
-        if (PlayerPrefs.GetInt("PlayerHealth") <= 0)
+        if (!isAlive || damage <= 0) return;
+        currentHealth -= damage;
+
+        if (currentHealth < 0)
         {
-            Die();
+            currentHealth =0;
         }
+
+        PlayerPrefs.SetInt("PlayerHealth", currentHealth);
+        if (healthBarUI != null)
+        {
+            Debug.Log("Updating player health: " + currentHealth + " - " + damage);
+            healthBarUI.updatePlayerHealth(currentHealth, damage);
+        }
+
+        if (playerController != null)
+        {
+            playerController.currentHealth = currentHealth;
+        }   
+        if (currentHealth <= 0)
+        {
+            isAlive = false;
+            Die();
+        }   
     }
 
     

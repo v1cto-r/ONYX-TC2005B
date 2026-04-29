@@ -6,7 +6,7 @@ public class EnemyController : MonoBehaviour
     EnemyMovement enemyMovement;
     EnemyAttack attack;
     EnemyHealth health;
-    EnemyPowerUp powerUp;
+    
     public string currentState = "Normal";
     public int aggressiveThreshold = 6;
     public int enragedThreshold = 2;
@@ -19,7 +19,6 @@ public class EnemyController : MonoBehaviour
         enemyMovement = GetComponent<EnemyMovement>();
         attack= GetComponent<EnemyAttack>();
         health= GetComponent<EnemyHealth>();
-        powerUp = GetComponent<EnemyPowerUp>();
     }
 
     void Start()
@@ -40,11 +39,13 @@ public class EnemyController : MonoBehaviour
         if (healthRatio <= enragedThreshold)
         {
             ChangeState("Enraged");
+            health.Heal();
             Debug.Log("Enraged");
         }
         else if (healthRatio <= aggressiveThreshold)
         {
             ChangeState("Aggressive");
+            health.Heal();
             Debug.Log("Aggressive");
         }
         else
