@@ -11,6 +11,8 @@ public class UIQuestionManager : MonoBehaviour
     // referencia al checkpoint actual para poder cambiar su estado
     private Checkpoint currentCheckpoint;
 
+    private GameObject currentPanel;
+
     void Start()
     {
         // al iniciar oculta el panel de preguntas
@@ -19,34 +21,31 @@ public class UIQuestionManager : MonoBehaviour
     }
 
     // muestra la pregunta y guarda el checkpoint que la activo
-    public void ShowQuestion(Vector3 checkpointPos, Checkpoint checkpoint)
-    {
-        // guarda la posicion del checkpoint
-        pendingCheckpoint = checkpointPos;
 
-        // guarda referencia del checkpoint actual
-        currentCheckpoint = checkpoint;
+public void ShowQuestion(Vector3 checkpointPos, Checkpoint checkpoint, GameObject panel)
+{
+    pendingCheckpoint = checkpointPos;
+    currentCheckpoint = checkpoint;
+    currentPanel = panel;
 
-        // muestra el panel
-        if (questionPanel != null)
-            questionPanel.SetActive(true);
+    if (currentPanel != null)
+        currentPanel.SetActive(true);
 
-        // pausa el juego mientras responde
-        Time.timeScale = 0f;
-    }
+    Time.timeScale = 0f;
+}
 
     public void CorrectAnswer()
     {
         // guarda el checkpoint como respawn
-        CheckpointManager.instance.respawnPoint = pendingCheckpoint;
+        SpawnPoint.instance.respawnPoint = pendingCheckpoint;
 
         // cambia el color del checkpoint a correcto
         if (currentCheckpoint != null)
             currentCheckpoint.SetCorrect();
 
         // oculta el panel y reanuda el juego
-        if (questionPanel != null)
-            questionPanel.SetActive(false);
+        if (currentPanel != null)
+            currentPanel.SetActive(false);
 
         Time.timeScale = 1f;
     }
@@ -61,8 +60,8 @@ public class UIQuestionManager : MonoBehaviour
             currentCheckpoint.SetWrong();
 
         // oculta el panel y reanuda el juego
-        if (questionPanel != null)
-            questionPanel.SetActive(false);
+        if (currentPanel != null)
+            currentPanel.SetActive(false);
 
         Time.timeScale = 1f;
     }

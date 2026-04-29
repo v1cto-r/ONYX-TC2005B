@@ -10,7 +10,7 @@ public class Checkpoint : MonoBehaviour
 
     // renderer del sprite
     private SpriteRenderer sr;
-
+    public GameObject myQuestionPanel;
     // colores
     public Color normalColor = Color.white;
     public Color correctColor = new Color(0.4f, 1f, 0.4f); // verde suave
@@ -34,7 +34,7 @@ public class Checkpoint : MonoBehaviour
             activated = true;
 
             // muestra la pregunta y guarda la posicion del checkpoint
-        uiManager.ShowQuestion(transform.position, this);        }
+        uiManager.ShowQuestion(transform.position, this, myQuestionPanel);}
     }
 
     // se pondra verde cuando responda bien

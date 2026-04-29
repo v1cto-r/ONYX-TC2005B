@@ -8,7 +8,7 @@ public class DeadZone : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             GameControl.Instance.SpendLives();
-            collision.transform.position = CheckpointManager.instance.respawnPoint;
+            collision.transform.position = SpawnPoint.instance.respawnPoint;
         }
     }
 }

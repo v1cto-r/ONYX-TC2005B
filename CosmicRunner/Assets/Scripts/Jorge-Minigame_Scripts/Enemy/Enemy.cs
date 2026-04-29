@@ -112,7 +112,7 @@ public class Enemy : MonoBehaviour
                 player.SetParent(null);
 
                 // regresar al ultimo checkpoint
-                player.position = CheckpointManager.instance.respawnPoint + Vector3.up * 1f;
+                player.position = SpawnPoint.instance.respawnPoint + Vector3.up * 1f;
 
                 lastDamageTime = Time.time;
             }
