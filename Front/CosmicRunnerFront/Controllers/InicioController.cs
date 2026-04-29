@@ -4,24 +4,18 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using CosmicRunnerFront.Models;
 using CosmicRunnerFront.Models.InicioModels;
-using CosmicRunnerFront.DataInicio;
+using CosmicRunnerFront.DataInicio; // Asegúrate de que apunte a tu carpeta DataInicio
 
 namespace CosmicRunnerFront.Controllers;
 
 public class InicioController : Controller
 {
-    // GET: Carga la página principal y envía las ideas guardadas
     public IActionResult Index()
     {
-        // 1. Obtenemos las ideas de la "base de datos" ordenadas por la más reciente
-        // Ordenamos por Id de menor a mayor (1, 2, 3...)
-var ideasGuardadas = MockDatabase.Ideas.OrderBy(i => i.Id).ToList();
+        // Obtenemos las ideas ordenadas por ID para mantener el orden del mockup
+        var ideasGuardadas = MockDatabase.Ideas.OrderBy(i => i.Id).ToList();
         
-        // 2. Pasamos las ideas a la vista mediante ViewBag para iterarlas en el HTML
         ViewBag.ListaIdeas = ideasGuardadas;
-
-        // 3. Inicializamos el modelo vacío para el formulario de crear idea
-        // Nota: Cambié CrearIdeaViewModel por Idea para simplificar, pero puedes usar tu ViewModel si lo prefieres.
         ViewData["NuevaIdea"] = new Idea(); 
         
         return View();
@@ -30,54 +24,99 @@ var ideasGuardadas = MockDatabase.Ideas.OrderBy(i => i.Id).ToList();
     [HttpPost]
     public IActionResult CrearIdea(Idea nuevaIdea)
     {
-        // Asignamos valores base
         nuevaIdea.Id = MockDatabase.Ideas.Any() ? MockDatabase.Ideas.Max(i => i.Id) + 1 : 1; 
         nuevaIdea.FechaPublicacion = DateTime.Now;
         nuevaIdea.Estado = EstadoIniciativa.EnRevisionInicial;
         
-        // Simulamos que el usuario logueado es César (Id = 1)
         nuevaIdea.AutorId = 1; 
         nuevaIdea.Autor = MockDatabase.Usuarios.FirstOrDefault(u => u.Id == 1);
-
-        // Enlazamos los objetos completos para que la vista pueda leer sus nombres
         nuevaIdea.Departamento = MockDatabase.Departamentos.FirstOrDefault(d => d.Id == nuevaIdea.DepartamentoId);
         nuevaIdea.AreaImpacto = MockDatabase.AreasImpacto.FirstOrDefault(a => a.Id == nuevaIdea.AreaImpactoId);
 
-        // Inicializamos las listas vacías para evitar errores nulos
         nuevaIdea.ListaColaboradores = new List<Usuario>();
         nuevaIdea.ListaComentarios = new List<Comentario>();
 
-        // Guardamos en la memoria RAM
         MockDatabase.Ideas.Add(nuevaIdea);
-
         return RedirectToAction("Index");
     }
 
-    // POST: Ejemplo para simular la acción de unirse a un proyecto sin JS
+    // PASO 1: Lógica para unirse a un proyecto
     [HttpPost]
     public IActionResult UnirseProyecto(int ideaId)
     {
+        // 1. Buscamos la idea en nuestra "Base de Datos"
         var idea = MockDatabase.Ideas.FirstOrDefault(i => i.Id == ideaId);
+        
         if (idea != null)
         {
+            // 2. Simulamos obtener al usuario logueado (César - Id 1)
             var usuarioActual = MockDatabase.Usuarios.FirstOrDefault(u => u.Id == 1);
-            if (usuarioActual != null && !idea.ListaColaboradores.Contains(usuarioActual))
+            
+            // 3. Verificamos que el usuario no sea ya un colaborador para no duplicarlo
+            if (usuarioActual != null && !idea.ListaColaboradores.Any(c => c.Id == usuarioActual.Id))
             {
                 idea.ListaColaboradores.Add(usuarioActual);
             }
         }
         
+        // Devolvemos al usuario al feed para que vea su pastilla de colaborador
         return RedirectToAction("Index");
     }
 
-    public IActionResult Privacy()
+    // PASO 2: Lógica de Likes
+    [HttpPost]
+    public IActionResult DarLike(int ideaId)
     {
-        return View();
+        var idea = MockDatabase.Ideas.FirstOrDefault(i => i.Id == ideaId);
+        if (idea != null)
+        {
+            idea.Likes++;
+        }
+        return RedirectToAction("Index");
     }
 
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
+    // PASO 2: Lógica de Dislikes
+    [HttpPost]
+    public IActionResult DarDislike(int ideaId)
     {
-        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        var idea = MockDatabase.Ideas.FirstOrDefault(i => i.Id == ideaId);
+        if (idea != null)
+        {
+            idea.Dislikes++;
+        }
+        return RedirectToAction("Index");
     }
+
+    // PASO 3: Lógica para Guardar Comentarios
+    [HttpPost]
+    public IActionResult GuardarComentario(int ideaId, string Mensaje)
+    {
+        if (!string.IsNullOrWhiteSpace(Mensaje))
+        {
+            var idea = MockDatabase.Ideas.FirstOrDefault(i => i.Id == ideaId);
+            if (idea != null)
+            {
+                var nuevoComentario = new Comentario
+                {
+                    Id = idea.ListaComentarios.Any() ? idea.ListaComentarios.Max(c => c.Id) + 1 : 1,
+                    IdeaId = ideaId,
+                    Mensaje = Mensaje,
+                    FechaCreacion = DateTime.Now,
+                    // Asignamos a César (Id = 1) como el autor de la recomendación
+                    AutorId = 1,
+                    Autor = MockDatabase.Usuarios.FirstOrDefault(u => u.Id == 1),
+                    Likes = 0,
+                    Dislikes = 0
+                };
+                
+                idea.ListaComentarios.Add(nuevoComentario);
+            }
+        }
+        return RedirectToAction("Index");
+    }
+
+    public IActionResult Privacy() => View();
+
+    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+    public IActionResult Error() => View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
 }

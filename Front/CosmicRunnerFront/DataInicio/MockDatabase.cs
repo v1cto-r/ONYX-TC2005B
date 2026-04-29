@@ -29,8 +29,8 @@ namespace CosmicRunnerFront.DataInicio
             var julia = new Usuario { Id = 4, Nombre = "Julia", Apellido = "Fernández", DepartamentoId = 3, FotoPerfilUrl = "/assets/random/user.png" };
             var mario = new Usuario { Id = 5, Nombre = "Mario", Apellido = "López", DepartamentoId = 3, FotoPerfilUrl = "/assets/random/user.png" };
 
-            Usuarios.AddRange(new[] { cesar, adriana, jacobo, julia, mario });
-
+            var elena = new Usuario { Id = 6, Nombre = "Elena", Apellido = "González", DepartamentoId = 3, FotoPerfilUrl = "/assets/random/user.png" };
+            Usuarios.AddRange(new[] { cesar, adriana, jacobo, julia, mario, elena });
             // 4. Ideas
             var idea1 = new Idea
             {
@@ -55,7 +55,21 @@ namespace CosmicRunnerFront.DataInicio
                 },
                 ListaColaboradores = new List<Usuario> { jacobo, julia, mario },
                 // Simulamos los 40 comentarios (creando una lista ficticia con 40 elementos o forzando un count. Para simplificar, llenamos una pequeña lista)
-                ListaComentarios = new List<Comentario>(new Comentario[40]) 
+                ListaComentarios = new List<Comentario> 
+                {
+                    new Comentario { 
+                        Id = 1, IdeaId = 1, AutorId = 3, Autor = jacobo, 
+                        FechaCreacion = DateTime.Now.AddDays(-5), 
+                        Mensaje = "Deberíamos hacer que cada elemento debe estar en perfecta armonía.", 
+                        Likes = 684, Dislikes = 78 
+                    },
+                    new Comentario { 
+                        Id = 2, IdeaId = 1, AutorId = 6, Autor = elena, 
+                        FechaCreacion = DateTime.Now.AddHours(-1), 
+                        Mensaje = "¡Muy buena idea! ¡Estaré al pendiente si necesitan personal de Innovación Tecnológica!", 
+                        Likes = 684, Dislikes = 78 
+                    }
+                } 
             };
             
             // Idea secundaria para comprobar el bucle
