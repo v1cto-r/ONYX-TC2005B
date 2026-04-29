@@ -27,23 +27,29 @@ var ideasGuardadas = MockDatabase.Ideas.OrderBy(i => i.Id).ToList();
         return View();
     }
 
-    // POST: Este método es llamado por el formulario HTML al hacer "Publicar Idea"
     [HttpPost]
     public IActionResult CrearIdea(Idea nuevaIdea)
     {
-        // Asignamos los valores que no vienen del formulario directamente
-        // Simulamos un autoincremental para el ID
+        // Asignamos valores base
         nuevaIdea.Id = MockDatabase.Ideas.Any() ? MockDatabase.Ideas.Max(i => i.Id) + 1 : 1; 
         nuevaIdea.FechaPublicacion = DateTime.Now;
         nuevaIdea.Estado = EstadoIniciativa.EnRevisionInicial;
         
-        // Simulamos que el usuario logueado (César) es el autor
+        // Simulamos que el usuario logueado es César (Id = 1)
         nuevaIdea.AutorId = 1; 
+        nuevaIdea.Autor = MockDatabase.Usuarios.FirstOrDefault(u => u.Id == 1);
+
+        // Enlazamos los objetos completos para que la vista pueda leer sus nombres
+        nuevaIdea.Departamento = MockDatabase.Departamentos.FirstOrDefault(d => d.Id == nuevaIdea.DepartamentoId);
+        nuevaIdea.AreaImpacto = MockDatabase.AreasImpacto.FirstOrDefault(a => a.Id == nuevaIdea.AreaImpactoId);
+
+        // Inicializamos las listas vacías para evitar errores nulos
+        nuevaIdea.ListaColaboradores = new List<Usuario>();
+        nuevaIdea.ListaComentarios = new List<Comentario>();
 
         // Guardamos en la memoria RAM
         MockDatabase.Ideas.Add(nuevaIdea);
 
-        // Patrón PRG (Post-Redirect-Get): Redirigimos al Index para refrescar la pantalla y evitar reenvíos de formulario
         return RedirectToAction("Index");
     }
 

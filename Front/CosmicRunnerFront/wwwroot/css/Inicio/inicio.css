@@ -15,15 +15,6 @@
     font-family: 'Helvetica Now', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
-/* Forzar que el contenido ocupe todo el ancho */
-.contenedor-principal {
-    justify-self: center;
-    margin: 0 calc(-50vw + 50%);
-    width: 110rem;
-    padding-left: 2rem;
-    padding-right: 2rem;
-}
-
 /* =========================================================
    CONTENEDORES PRINCIPALES
    ========================================================= */
@@ -37,12 +28,13 @@ html, body {
 }
 
 .contenedor-perfil {
-    margin: 0 2rem 0 0;
     background-color: var(--card-bg);
     border-top: 10rem solid var(--whirlpool-yellow);
     border-radius: 1rem;
     text-align: center;
-    padding: 1rem;
+    height: 100%; /* Para que ocupe toda la altura */
+    display: flex;
+    flex-direction: column;
 }
 
 .contenedor-perfil-foto {
@@ -362,4 +354,39 @@ html, body {
     background-color: #f8f9fa !important;
     border-color: #ced4da !important;
     transform: translateY(-2px);
+}
+
+/* =========================================================
+   FORMULARIO INLINE (REEMPLAZO DE MODAL)
+   ========================================================= */
+.agregar-idea-desplegable summary {
+    list-style: none; /* Oculta flecha en Chrome/Firefox */
+    cursor: pointer;
+}
+
+.agregar-idea-desplegable summary::-webkit-details-marker {
+    display: none; /* Oculta flecha en Safari */
+}
+
+.contenedor-formulario-inline {
+    border-color: var(--border-color) !important;
+    animation: fadeInDown 0.3s ease-out; /* Pequeña animación de entrada */
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Ajuste para que el input del título se vea más limpio */
+.contenedor-formulario-inline .form-control:focus, 
+.contenedor-formulario-inline .form-select:focus {
+    border-color: var(--whirlpool-yellow);
+    box-shadow: 0 0 0 0.25rem rgba(240, 179, 16, 0.15);
 }

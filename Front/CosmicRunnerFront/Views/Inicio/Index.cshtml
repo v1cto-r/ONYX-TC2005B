@@ -75,17 +75,16 @@
             </div>
             <div class="col-12 col-md-9">
                 <div class="contenedor-impulsa">
-                    <div class="d-flex justify-content-between align-items-center mb-4 header-impulsa">
-                        <h1 class="fw-bold text-dark">Impulsa el Cambio</h1>
-                        <button type="button" class="btn btn-agregar rounded-pill px-4 shadow-sm" data-bs-toggle="modal" data-bs-target="#addIdeaModal">
-                            + Agrega tu Idea
-                        </button>
+                    
+                    <div class="mb-5 clearfix header-impulsa">
+                        <h1 class="fw-bold text-dark float-start m-0 pt-1">Impulsa el Cambio</h1>
+                        
+                        <partial name="Partials/_AgregarIdea" model='ViewData["NuevaIdea"] as CosmicRunnerFront.Models.InicioModels.Idea' />
                     </div>
 
-                    <h3 class="top-semanal-title text-muted mb-4">Top Semanal Sugerencias de la Comunidad</h3>
+                    <h3 class="top-semanal-title text-muted mb-4 clear-both">Top Semanal Sugerencias de la Comunidad</h3>
 
                     <div class="ideas-feed">
-    
                         @if(ViewBag.ListaIdeas != null && ((IEnumerable<CosmicRunnerFront.Models.InicioModels.Idea>)ViewBag.ListaIdeas).Any())
                         {
                             foreach (var idea in ViewBag.ListaIdeas)
@@ -100,7 +99,6 @@
                                 <p class="text-muted">¡Sé el primero en impulsar el cambio agregando tu idea!</p>
                             </div>
                         }
-                        
                     </div>
                 </div>
             </div>
