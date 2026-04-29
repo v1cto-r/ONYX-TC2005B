@@ -1168,7 +1168,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '#Prompts: X/8'
+  m_text: '#Prompts: 0/8'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b633915a7eab00342a258e5c2f50a75f, type: 2}
   m_sharedMaterial: {fileID: -5571592025542048100, guid: b633915a7eab00342a258e5c2f50a75f, type: 2}
@@ -1195,7 +1195,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 26
+  m_fontSize: 26.25
   m_fontSizeBase: 14
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1713,7 +1713,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 383178833}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1439094378}
+        m_TargetAssemblyTypeName: UIControl, Assembly-CSharp
+        m_MethodName: ResumeGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &383178833
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4543,7 +4555,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 823538342}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1439094378}
+        m_TargetAssemblyTypeName: UIControl, Assembly-CSharp
+        m_MethodName: RestartGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &823538342
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5450,7 +5474,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Palabras: X/4'
+  m_text: 'Palabras: 0/4'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b633915a7eab00342a258e5c2f50a75f, type: 2}
   m_sharedMaterial: {fileID: -5571592025542048100, guid: b633915a7eab00342a258e5c2f50a75f, type: 2}
@@ -5477,7 +5501,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 31.35
+  m_fontSize: 31.75
   m_fontSizeBase: 14
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -5564,7 +5588,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -305, y: -1}
+  m_AnchoredPosition: {x: -300, y: -1}
   m_SizeDelta: {x: 300, y: 72}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1080390606
@@ -7346,7 +7370,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1211180035}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1439094378}
+        m_TargetAssemblyTypeName: UIControl, Assembly-CSharp
+        m_MethodName: PauseGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1211180035
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7912,7 +7948,6 @@ MonoBehaviour:
   showPromptsSprite: {fileID: -208242079398429808, guid: aeeac18489c8246ada873943cada91b9, type: 3}
   hidePromptsSprite: {fileID: 1676322361899298638, guid: 3c598f8469d994d8fb74c5d6bf6f108c, type: 3}
   pausePanel: {fileID: 1590817569}
-  pausePanelButton: {fileID: 1211180034}
   playerControl: {fileID: 1228552754938000022}
   wordsStorageFormat: 'Palabras: {0}/{1}'
   scoreFormat: '{0}'
@@ -8692,7 +8727,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -88, y: -0.2065}
+  m_AnchoredPosition: {x: -92, y: -0.2065}
   m_SizeDelta: {x: 81.4151, y: 87.3362}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1795382013
@@ -9230,7 +9265,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1920106676}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1439094378}
+        m_TargetAssemblyTypeName: UIControl, Assembly-CSharp
+        m_MethodName: QuitGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1920106676
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9935,7 +9982,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 58, y: -0.2065}
+  m_AnchoredPosition: {x: 61, y: -0.2065}
   m_SizeDelta: {x: 173.44, y: 56.276}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2143453430
