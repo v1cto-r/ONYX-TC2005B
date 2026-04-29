@@ -4,7 +4,8 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using CosmicRunnerFront.Models;
 using CosmicRunnerFront.Models.InicioModels;
-using CosmicRunnerFront.DataInicio; // Asegúrate de que apunte a tu carpeta DataInicio
+using CosmicRunnerFront.DataInicio;
+using Microsoft.VisualBasic.FileIO; // Asegúrate de que apunte a tu carpeta DataInicio
 
 namespace CosmicRunnerFront.Controllers;
 
@@ -22,8 +23,12 @@ public class InicioController : Controller
     }
 
     [HttpPost]
-    public IActionResult CrearIdea(Idea nuevaIdea)
+    public IActionResult CrearIdea(Idea nuevaIdea, bool? cancelar)
     {
+        if (cancelar == true)
+        { 
+            return RedirectToAction("Index");
+        }
         nuevaIdea.Id = MockDatabase.Ideas.Any() ? MockDatabase.Ideas.Max(i => i.Id) + 1 : 1; 
         nuevaIdea.FechaPublicacion = DateTime.Now;
         nuevaIdea.Estado = EstadoIniciativa.EnRevisionInicial;

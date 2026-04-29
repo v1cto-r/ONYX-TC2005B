@@ -3,7 +3,7 @@
 
 <details class="agregar-idea-desplegable">
     
-    <summary class="btn-agregar-trigger float-end">
+    <summary class="btn-agregar-trigger">
         <div class="btn btn-agregar rounded-pill px-4 py-2 shadow-sm">
             + Agrega tu Idea
         </div>
@@ -50,10 +50,20 @@
                 <label class="form-label fw-bold text-muted small mt-2">Descripción Detallada</label>
                 <textarea class="form-control rounded-3" name="Descripcion" rows="4" placeholder="Explica tu propuesta..." required></textarea>
             </div>
-
-            <div class="d-flex justify-content-end mt-4">
-                <button type="submit" class="btn btn-agregar rounded-pill px-5 py-2 fw-bold shadow-sm">Publicar</button>
+            <div class="row mt-3">
+                <!-- Este NO debe ser summary, usa un div normal -->
+                 <div class="col-6 d-flex justify-content-start">
+                    <button type="submit" name="CerrarDesplegable" value="true" class="btn btn-secondary rounded-pill px-4 py-2 fw-bold shadow-sm">
+                        Cancelar
+                    </button>
+                </div>
+                <div class="col-6 d-flex justify-content-end">
+                    <button type="submit" class="btn btn-agregar rounded-pill px-5 py-2 fw-bold shadow-sm">
+                        Publicar
+                    </button>
+                </div>
             </div>
+            
         </form>
     </div>
 </details>
