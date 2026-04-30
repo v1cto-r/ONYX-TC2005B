@@ -31,7 +31,7 @@ namespace MECS
         // Metodos para reproducir los sonidos en base a la accion del juego
         public void PlayEnemySpawnSound()
         {
-            audioSource.PlayOneShot(enemySpawnSound, 0.55f);
+            audioSource.PlayOneShot(enemySpawnSound, 0.6f);
         }
 
         public void PlayShootSound()
@@ -41,32 +41,32 @@ namespace MECS
 
         public void PlayHurtSound()
         {
-            audioSource.PlayOneShot(hurtSound, 0.6f);
+            audioSource.PlayOneShot(hurtSound, 1.5f);
         }
 
         public void PlayPushBlockSound()
         {
-            audioSource.PlayOneShot(pushBlockSound, 0.5f);
+            audioSource.PlayOneShot(pushBlockSound, 0.6f);
         }
 
         public void PlayBoxCollectSound()
         {
-            audioSource.PlayOneShot(boxCollectSound, 0.5f);
+            audioSource.PlayOneShot(boxCollectSound, 1.5f);
         }
 
         public void PlayGoodSound()
         {
-            audioSource.PlayOneShot(goodSound, 0.6f);
+            audioSource.PlayOneShot(goodSound, 0.8f);
         }
 
         public void PlayLoseSound()
         {
-            audioSource.PlayOneShot(loseSound, 0.35f);
+            audioSource.PlayOneShot(loseSound, 0.8f);
         }
 
         public void PlayWinSound()
         {
-            audioSource.PlayOneShot(winSound, 0.7f);
+            audioSource.PlayOneShot(winSound, 0.55f);
         }
     }
 }

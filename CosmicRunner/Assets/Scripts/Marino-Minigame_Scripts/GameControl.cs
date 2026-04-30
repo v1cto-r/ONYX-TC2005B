@@ -166,7 +166,7 @@ namespace MECS
         private void EndGame()
         {
             gameOver = true;
-            SceneManager.LoadScene("EndScene");
+            SceneManager.LoadScene("EndScene_MECS");
         }
     }
 }

@@ -16,6 +16,10 @@ namespace MECS
         // Zona muerta para ignorar input muy pequeno
         [SerializeField] private float inputDeadzone = 0.5f;
 
+        // Componentes de animacion del jugador
+        private Animator animator;
+        private SpriteRenderer spriteRenderer;
+
         // Accion de movimiento del sistema de input
         private InputAction moveAction;
         // Accion para empujar o arrastrar cajas
@@ -37,6 +41,10 @@ namespace MECS
         // Busca acciones de input y valida la configuracion
         private void Awake()
         {
+            // Buscamos el Animator del jugador para cambiar animaciones
+            animator = GetComponent<Animator>();
+            spriteRenderer = GetComponent<SpriteRenderer>();
+
             // Cargamos las acciones desde el Input System global
             moveAction = InputSystem.actions.FindAction("Move");
             pullAction = InputSystem.actions.FindAction("Pull");
@@ -87,6 +95,25 @@ namespace MECS
             }
         }
 
+        // Reinicia estado interno e input actions tras pausar/reanudar para evitar input bloqueado
+        public void RefreshInputAfterPause()
+        {
+            isMoveHeld = false;
+            timeUntilNextStep = 0f;
+
+            if (moveAction != null)
+            {
+                moveAction.Disable();
+                moveAction.Enable();
+            }
+
+            if (pullAction != null)
+            {
+                pullAction.Disable();
+                pullAction.Enable();
+            }
+        }
+
         // Lee el input y decide si el jugador puede dar un paso
         private void Update()
         {
@@ -106,7 +133,11 @@ namespace MECS
             // La ultima direccion valida tambien actualiza hacia donde mira el jugador
             if (moveDirection != Vector2.zero)
             {
-                facingDirection = moveDirection;
+                if (!isPullButtonHeld)
+                {
+                    facingDirection = moveDirection;
+                    UpdateAnimation(moveDirection);
+                }
             }
 
             // Si no hay input, reiniciamos el estado de paso continuo
@@ -246,6 +277,50 @@ namespace MECS
             }
 
             return null;
+        }
+
+        // Cambia la animacion del jugador segun la direccion a la que mira
+        private void UpdateAnimation(Vector2 direction)
+        {
+            // Sin animador no hay nada que cambiar
+            if (animator == null)
+            {
+                return;
+            }
+
+            // Determinamos que animacion reproducir segun la direccion
+            if (direction == Vector2.down)
+            {
+                animator.SetTrigger("idle_down");
+                if (spriteRenderer != null)
+                {
+                    spriteRenderer.flipX = false;
+                }
+            }
+            else if (direction == Vector2.up)
+            {
+                animator.SetTrigger("idle_up");
+                if (spriteRenderer != null)
+                {
+                    spriteRenderer.flipX = false;
+                }
+            }
+            else if (direction == Vector2.left)
+            {
+                animator.SetTrigger("idle_side");
+                if (spriteRenderer != null)
+                {
+                    spriteRenderer.flipX = false;
+                }
+            }
+            else if (direction == Vector2.right)
+            {
+                animator.SetTrigger("idle_side");
+                if (spriteRenderer != null)
+                {
+                    spriteRenderer.flipX = true;
+                }
+            }
         }
     }
 }

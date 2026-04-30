@@ -10,13 +10,13 @@ namespace MECS
         {
             // Dejamos el tiempo normal antes de cargar la escena de juego
             Time.timeScale = 1f;
-            SceneManager.LoadScene("GameScene");
+            SceneManager.LoadScene("GameScene_MECS");
         }
 
         // Boton para abrir el tutorial o pantalla de ayuda
         public void HelpButton()
         {
-            SceneManager.LoadScene("TutorialScene");
+            SceneManager.LoadScene("TutorialScene_MECS");
         }
 
         // Boton para salir del juego
@@ -25,8 +25,8 @@ namespace MECS
             // Mensaje util para probar el boton en el editor
             Debug.Log("Game Quitted");
 
-            // Aqui iria Application.Quit si quisieramos cerrar la app real
-            // SceneManager.LoadScene("LevelSelectScene");
+            // Volver a la pantalla de seleccion de nivel
+            SceneManager.LoadScene("GameSelectScene");
         }
     }
-    }
+}

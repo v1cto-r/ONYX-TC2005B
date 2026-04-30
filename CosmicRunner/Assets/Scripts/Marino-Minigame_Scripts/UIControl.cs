@@ -251,14 +251,14 @@ namespace MECS
 		public void RestartGame()
 		{
 			SetPauseState(false);
-			SceneManager.LoadScene("GameScene");
+			SceneManager.LoadScene("GameScene_MECS");
 		}
 
 		// Vuelve al menu principal
 		public void QuitGame()
 		{
 			SetPauseState(false);
-			SceneManager.LoadScene("MainMenuScene");
+			SceneManager.LoadScene("MainMenuScene_MECS");
 		}
 
 		// Guarda y aplica el estado de pausa en un solo punto
@@ -286,6 +286,10 @@ namespace MECS
 				else if (hasStoredPlayerControlState)
 				{
 					playerControl.enabled = playerControlWasEnabledBeforePause;
+					if (playerControl.enabled)
+					{
+						playerControl.RefreshInputAfterPause();
+					}
 					hasStoredPlayerControlState = false;
 				}
 			}

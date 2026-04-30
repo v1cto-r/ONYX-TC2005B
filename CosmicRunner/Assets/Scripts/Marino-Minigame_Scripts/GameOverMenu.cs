@@ -10,13 +10,13 @@ namespace MECS
         {
             // Nos aseguramos de que el juego vuelva a velocidad normal antes de cargar la escena
             Time.timeScale = 1f;
-            SceneManager.LoadScene("GameScene");
+            SceneManager.LoadScene("GameScene_MECS");
         }
 
         // Boton para volver al menu principal
         public void MainMenuButton()
         {
-            SceneManager.LoadScene("MainMenuScene");
+            SceneManager.LoadScene("MainMenuScene_MECS");
         }
     }
 }
