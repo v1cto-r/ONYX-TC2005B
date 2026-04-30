@@ -1,5 +1,7 @@
 using UnityEngine;
+using Nicte.Minigame;
 
+namespace Nicte.Minigame{
 public class PlayerHealth : MonoBehaviour
 {
     PlayerController playerController;
@@ -95,4 +97,5 @@ public class PlayerHealth : MonoBehaviour
             healthBarUI.regeneratePlayerHealth(currentHealth, 0);
         }
     }
+}
 }

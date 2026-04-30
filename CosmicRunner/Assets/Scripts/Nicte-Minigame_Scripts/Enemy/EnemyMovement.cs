@@ -1,5 +1,6 @@
 using UnityEngine;
 
+namespace Nicte.Minigame{
 public class EnemyMovement : MonoBehaviour
 {
     private float normalSpeed =2f;
@@ -132,4 +133,5 @@ public class EnemyMovement : MonoBehaviour
             currentSpeed = enragedSpeed;
         }
     }
+}
 }

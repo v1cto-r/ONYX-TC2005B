@@ -1,6 +1,8 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+
+namespace Nicte.Minigame{
 public class WinUI : MonoBehaviour
 {
     public TextMeshProUGUI finalWinScoreText;
@@ -18,4 +20,5 @@ public class WinUI : MonoBehaviour
     {
             SceneManager.LoadScene("AtaqueEstelarGameStart");
     }
+}
 }

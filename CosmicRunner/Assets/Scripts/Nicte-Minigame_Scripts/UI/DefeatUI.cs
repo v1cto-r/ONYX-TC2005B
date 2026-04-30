@@ -1,6 +1,8 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+
+namespace Nicte.Minigame{
 public class DefeatUI : MonoBehaviour
 {
     public TextMeshProUGUI finalDefeatScoreText;
@@ -20,4 +22,5 @@ public class DefeatUI : MonoBehaviour
     {
             SceneManager.LoadScene("AtaqueEstelarGameStart");
     }
+}
 }

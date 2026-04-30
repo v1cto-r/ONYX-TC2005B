@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+namespace Nicte.Minigame{
 public enum GameState
 {
     Playing,Victory,Defeat
@@ -120,4 +120,5 @@ public class GameController : MonoBehaviour
             Time.timeScale = 0f;
         }
     }
+}
 }

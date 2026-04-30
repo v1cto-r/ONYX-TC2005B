@@ -1,6 +1,8 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+
+namespace Nicte.Minigame{
 public class ComboUI : MonoBehaviour
 {
     public Image[] comboImages;
@@ -105,6 +107,5 @@ public class ComboUI : MonoBehaviour
             }
         }
     }
-
-
+}
 }

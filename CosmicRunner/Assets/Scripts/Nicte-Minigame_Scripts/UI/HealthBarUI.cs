@@ -1,9 +1,7 @@
-using System.Collections;
-using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+namespace Nicte.Minigame{
 public class HealthBarUI : MonoBehaviour
 {
     public Image[] playerLivesImage;
@@ -89,4 +87,5 @@ public class HealthBarUI : MonoBehaviour
             }
         }
     }    
+}
 }

@@ -1,6 +1,9 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+
+
+namespace Nicte.Minigame{
 public class GeneralUI : MonoBehaviour
 {
     public TextMeshProUGUI timerText;
@@ -81,4 +84,5 @@ public class GeneralUI : MonoBehaviour
     {
         SceneManager.LoadScene("AtaqueEstelarGameStart");
     }
+}
 }

@@ -1,6 +1,8 @@
-using TMPro;
+
 using UnityEngine;
 using UnityEngine.UI;
+
+namespace Nicte.Minigame{
 public class SpecialAttackUI : MonoBehaviour
 {
     public Image[] SpecialAttackImages;
@@ -63,4 +65,5 @@ public class SpecialAttackUI : MonoBehaviour
     {
         return currentCharge >= SpecialAttackImages.Length;
     }
+}
 }

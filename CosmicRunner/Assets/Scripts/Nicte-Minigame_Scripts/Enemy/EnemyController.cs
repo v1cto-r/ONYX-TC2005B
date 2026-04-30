@@ -1,5 +1,6 @@
 using UnityEngine;
 
+namespace Nicte.Minigame{
 public class EnemyController : MonoBehaviour
 {
     GameController gameController;
@@ -64,4 +65,5 @@ public class EnemyController : MonoBehaviour
             Debug.Log("Normal");
         }
     }
+}
 }

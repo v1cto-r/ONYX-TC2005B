@@ -1,5 +1,6 @@
 using UnityEngine;
 
+namespace Nicte.Minigame{
 public class PlayerCombat : MonoBehaviour
 {
     public GameObject bullet;
@@ -69,4 +70,5 @@ public class PlayerCombat : MonoBehaviour
             specialUI.UpdateCharge(currentSpecialCharges);
         }
     }
+}
 }

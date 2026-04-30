@@ -1,5 +1,6 @@
 using UnityEngine;
 
+namespace Nicte.Minigame{
 public class PlayerSpecialBullet : MonoBehaviour
 {
 
@@ -35,4 +36,5 @@ public class PlayerSpecialBullet : MonoBehaviour
     {
         transform.position+= Vector3.left*Time.deltaTime*bulletSpeed;
     }
+}
 }

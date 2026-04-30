@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+namespace Nicte.Minigame{
 public class GameStartUI : MonoBehaviour
 {
     public GameObject startScreen;
@@ -54,4 +55,5 @@ public class GameStartUI : MonoBehaviour
     {
         //Para regresar al menu con los demas minijuegos
     }
+}
 }

@@ -1,5 +1,6 @@
 using UnityEngine;
 
+namespace Nicte.Minigame{
 public class PowerUp : MonoBehaviour
 {
     float powerUpSpeed = 8f;
@@ -37,5 +38,5 @@ public class PowerUp : MonoBehaviour
             }
         }
     }
- 
+}
 }

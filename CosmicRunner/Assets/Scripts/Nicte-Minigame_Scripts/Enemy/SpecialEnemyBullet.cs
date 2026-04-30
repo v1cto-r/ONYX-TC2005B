@@ -1,5 +1,6 @@
 using UnityEngine;
 
+namespace Nicte.Minigame{
 public class SpecialEnemyBullet : MonoBehaviour
 {
     public float lifetime = 3f;
@@ -26,5 +27,5 @@ public class SpecialEnemyBullet : MonoBehaviour
     {
         transform.position+= Vector3.right*Time.deltaTime*bulletSpeed;
     }
-
+}
 }

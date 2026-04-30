@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+namespace Nicte.Minigame{
 public class PlayerMovement : MonoBehaviour
 {
     public Rigidbody2D rig;
@@ -58,4 +59,5 @@ public class PlayerMovement : MonoBehaviour
             rig.linearVelocity = Vector2.zero;
         }
     }
+}
 }

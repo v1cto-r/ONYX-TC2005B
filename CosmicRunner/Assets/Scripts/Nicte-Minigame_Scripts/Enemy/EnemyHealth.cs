@@ -1,5 +1,6 @@
 using UnityEngine;
 
+namespace Nicte.Minigame{
 public class EnemyHealth : MonoBehaviour
 {
     HealthBarUI healthBarUI;
@@ -76,4 +77,5 @@ public class EnemyHealth : MonoBehaviour
                 }
             }
     }
+}
 }

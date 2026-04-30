@@ -1,5 +1,6 @@
 using UnityEngine;
 
+namespace Nicte.Minigame{
 public class EnemyAttack : MonoBehaviour
 {
     public GameObject[] bullets;
@@ -68,4 +69,5 @@ public class EnemyAttack : MonoBehaviour
                 currentCooldown = enragedCooldown; 
                 }
     }
+}
 }

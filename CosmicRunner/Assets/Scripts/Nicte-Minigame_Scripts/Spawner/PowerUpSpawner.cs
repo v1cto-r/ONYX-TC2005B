@@ -1,7 +1,7 @@
 using UnityEngine;
-
 using System.Collections;
 
+namespace Nicte.Minigame{
 public class PowerUpSpawner : MonoBehaviour
 {
     public GameObject powerUp;
@@ -23,4 +23,5 @@ public class PowerUpSpawner : MonoBehaviour
 
         StartCoroutine(SpawnerTime());
     }
+}
 }

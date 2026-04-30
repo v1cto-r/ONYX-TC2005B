@@ -2,13 +2,13 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
 
+namespace Nicte.Minigame{
 public class PlayerController : MonoBehaviour
 {
    GameController gameController;
    PlayerMovement playermovement;
    SpecialAttackUI specialAttackUI;
    SpriteRenderer spriteRenderer;
-   PlayerHealth playerHealth;
    string colorCooldown="#FFA3A3";
    //public int currentHealth = 12;
    bool inputEnabled = true;
@@ -26,8 +26,6 @@ public class PlayerController : MonoBehaviour
        specialAttackUI = FindObjectOfType<SpecialAttackUI>();
        spriteRenderer = GetComponent<SpriteRenderer>();
        gameController = FindObjectOfType<GameController>();
-       playerHealth = GetComponent<PlayerHealth>();
-       //PlayerPrefs.SetInt("PlayerHealth", currentHealth);
    }
    
    void Update()
@@ -105,4 +103,5 @@ public class PlayerController : MonoBehaviour
        isOnCooldown = false;
        spriteRenderer.color = Color.white;
    }
+}
 }
