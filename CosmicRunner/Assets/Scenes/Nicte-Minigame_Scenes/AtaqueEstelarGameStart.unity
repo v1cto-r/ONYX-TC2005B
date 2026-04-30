@@ -354,8 +354,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Ataque especial
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 0d8833b78a4446545ba1d604f5f3c5c8, type: 2}
-  m_sharedMaterial: {fileID: -8273719093865096114, guid: 0d8833b78a4446545ba1d604f5f3c5c8, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -625,8 +625,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "Este es tu ataque b\xE1sico; cada impacto reduce 1 punto de vida del enemigo."
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 0d8833b78a4446545ba1d604f5f3c5c8, type: 2}
-  m_sharedMaterial: {fileID: -8273719093865096114, guid: 0d8833b78a4446545ba1d604f5f3c5c8, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -938,8 +938,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Subir
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 0d8833b78a4446545ba1d604f5f3c5c8, type: 2}
-  m_sharedMaterial: {fileID: -8273719093865096114, guid: 0d8833b78a4446545ba1d604f5f3c5c8, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2091,8 +2091,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "Ataque b\xE1sico"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 0d8833b78a4446545ba1d604f5f3c5c8, type: 2}
-  m_sharedMaterial: {fileID: -8273719093865096114, guid: 0d8833b78a4446545ba1d604f5f3c5c8, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2231,8 +2231,8 @@ MonoBehaviour:
     \n\n\xA1Usa potenciadores para recuperar vida o mejorar tu poder y cambia el
     rumbo de la batalla!"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 0d8833b78a4446545ba1d604f5f3c5c8, type: 2}
-  m_sharedMaterial: {fileID: -8273719093865096114, guid: 0d8833b78a4446545ba1d604f5f3c5c8, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2266,7 +2266,7 @@ MonoBehaviour:
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
-  m_characterSpacing: 0
+  m_characterSpacing: 1
   m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 10
@@ -2701,8 +2701,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Escudo durante 5 segundos.
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 0d8833b78a4446545ba1d604f5f3c5c8, type: 2}
-  m_sharedMaterial: {fileID: -8273719093865096114, guid: 0d8833b78a4446545ba1d604f5f3c5c8, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3578,8 +3578,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Bajar
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 0d8833b78a4446545ba1d604f5f3c5c8, type: 2}
-  m_sharedMaterial: {fileID: -8273719093865096114, guid: 0d8833b78a4446545ba1d604f5f3c5c8, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3930,8 +3930,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Recarga de ataque especial.
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 0d8833b78a4446545ba1d604f5f3c5c8, type: 2}
-  m_sharedMaterial: {fileID: -8273719093865096114, guid: 0d8833b78a4446545ba1d604f5f3c5c8, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4467,8 +4467,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Aumenta 2 puntos de vida.
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 0d8833b78a4446545ba1d604f5f3c5c8, type: 2}
-  m_sharedMaterial: {fileID: -8273719093865096114, guid: 0d8833b78a4446545ba1d604f5f3c5c8, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -5097,8 +5097,8 @@ MonoBehaviour:
   m_text: 'Cuidado: el uso excesivo de ataques activa un estado de fatiga que impide 
     atacar temporalmente.'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 0d8833b78a4446545ba1d604f5f3c5c8, type: 2}
-  m_sharedMaterial: {fileID: -8273719093865096114, guid: 0d8833b78a4446545ba1d604f5f3c5c8, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -5787,8 +5787,8 @@ MonoBehaviour:
   m_text: "Ataque especial, requiere 12 segundos de carga antes de poder ejecutarse
     y puede infligir entre 1 y 3 puntos de da\xF1o."
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 0d8833b78a4446545ba1d604f5f3c5c8, type: 2}
-  m_sharedMaterial: {fileID: -8273719093865096114, guid: 0d8833b78a4446545ba1d604f5f3c5c8, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
