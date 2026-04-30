@@ -64,7 +64,7 @@ public class GameControl : MonoBehaviour
         if (newLives <= 0)
         {
             Time.timeScale = 1f;
-            SceneManager.LoadScene(3);
+            SceneManager.LoadScene("LoseScene_Jorge");
         }
     }
 

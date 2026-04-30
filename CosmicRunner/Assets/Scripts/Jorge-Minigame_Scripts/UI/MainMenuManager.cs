@@ -8,7 +8,12 @@ public class MainMenuManager : MonoBehaviour
     // carga la escena principal del minijuego
     public void StartGame()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene("GameScene_Jorge");
+    }
+
+    public void ExitGame()
+    {
+        SceneManager.LoadScene("GameSelectScene");
     }
 }
 }

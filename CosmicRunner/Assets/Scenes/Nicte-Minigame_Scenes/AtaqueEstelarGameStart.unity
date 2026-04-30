@@ -4359,7 +4359,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1897714968}
-        m_TargetAssemblyTypeName: GameStartUI, Assembly-CSharp
+        m_TargetAssemblyTypeName: Nicte.Minigame.GameStartUI, Assembly-CSharp
         m_MethodName: exitGame
         m_Mode: 1
         m_Arguments:

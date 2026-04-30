@@ -14608,8 +14608,8 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9d602d30b0e590443b4c8bddad837d16, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TimerManager
-  timeRemaining: 181
+  m_EditorClassIdentifier: Assembly-CSharp::JorgeGame.TimerManager
+  timeRemaining: 180
   timerText: {fileID: 129999955}
 --- !u!4 &1565109795
 Transform:

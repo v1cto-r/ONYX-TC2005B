@@ -14,7 +14,7 @@ public class Goal : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             Time.timeScale = 1f;
-            SceneManager.LoadScene(victorySceneIndex);
+            SceneManager.LoadScene("VictoryScene_Jorge");
         }
     }
 }

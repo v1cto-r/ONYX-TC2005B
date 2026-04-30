@@ -31,7 +31,7 @@ public class TimerManager : MonoBehaviour
             isRunning = false;
 
             Time.timeScale = 1f;
-            SceneManager.LoadScene(3);
+            SceneManager.LoadScene("LoseScene_Jorge");
         }
     }
 

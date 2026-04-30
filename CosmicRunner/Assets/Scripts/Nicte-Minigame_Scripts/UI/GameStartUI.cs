@@ -53,7 +53,7 @@ public class GameStartUI : MonoBehaviour
 
     public void exitGame()
     {
-        //Para regresar al menu con los demas minijuegos
+        SceneManager.LoadScene("GameSelectScene");
     }
 }
 }

@@ -37,14 +37,14 @@ public class EndGameManager : MonoBehaviour
     {
         // reinicia el nivel actual
         Time.timeScale = 1f;
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene("GameScene_Jorge");
     }
 
     public void GoToMenu()
     {
         // regresa al menu principal
         Time.timeScale = 1f;
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene("MainMenuScene_Jorge");
     }
 }
 }

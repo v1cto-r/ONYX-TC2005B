@@ -52,7 +52,7 @@ public class PauseManager : MonoBehaviour
     {
         // regresa al menu principal
         Time.timeScale = 1f;
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene("MainMenuScene_Jorge");
     }
 }
 }
