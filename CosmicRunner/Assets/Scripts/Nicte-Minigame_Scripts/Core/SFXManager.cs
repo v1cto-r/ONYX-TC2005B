@@ -1,5 +1,6 @@
 using UnityEngine;
 
+namespace Nicte.Minigame{
 public class SFXManager : MonoBehaviour
 {
     public static SFXManager Instance;
@@ -58,4 +59,5 @@ public class SFXManager : MonoBehaviour
     {
         AudioSource.PlayClipAtPoint(coin, Camera.main.transform.position, 0.5f);
     }
+}
 }
