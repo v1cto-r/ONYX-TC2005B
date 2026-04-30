@@ -10,6 +10,7 @@ public class SpawnPoint : MonoBehaviour
     // posicion donde reaparece el jugador
     public Vector3 respawnPoint;
 
+    // guarda esta instancia para acceso global
     void Awake()
     {
         instance = this;

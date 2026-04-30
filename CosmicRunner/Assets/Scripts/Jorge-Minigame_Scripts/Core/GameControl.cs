@@ -17,6 +17,14 @@ public class GameControl : MonoBehaviour
     // contador de monedas
     public int coins = 0;
 
+    void Start()
+    {
+        if (SFXManager.instance != null)
+        {
+            SFXManager.instance.PlayMusic();
+        }
+    }
+
     void Awake()
     {
         // guarda la instancia unica
@@ -41,7 +49,8 @@ public class GameControl : MonoBehaviour
 
     // reduce una vida al jugador
     public void SpendLives()
-    {
+    {   
+        SFXManager.instance.PlaySFX(SFXManager.instance.deadSound, 0.5f);
         int newLives = GetCurrentLives() - 1;
 
         // guarda el nuevo valor

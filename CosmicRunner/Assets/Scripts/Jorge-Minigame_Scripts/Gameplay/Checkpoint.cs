@@ -12,7 +12,10 @@ public class Checkpoint : MonoBehaviour
 
     // renderer del sprite
     private SpriteRenderer sr;
+
+    // panel de pregunta asociado a este checkpoint
     public GameObject myQuestionPanel;
+
     // colores
     public Color normalColor = Color.white;
     public Color correctColor = new Color(0.4f, 1f, 0.4f); // verde suave

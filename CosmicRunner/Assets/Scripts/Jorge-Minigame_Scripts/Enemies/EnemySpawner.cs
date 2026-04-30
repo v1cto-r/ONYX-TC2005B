@@ -18,6 +18,7 @@ public class EnemySpawner : MonoBehaviour
         SpawnEnemies();
     }
 
+    // genera enemigos en puntos aleatorios sin repetir posiciones
     void SpawnEnemies()
     {
         if (spawnPoints.Length == 0) return;

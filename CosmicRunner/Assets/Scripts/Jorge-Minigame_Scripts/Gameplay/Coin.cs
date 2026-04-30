@@ -13,6 +13,7 @@ public class Coin : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             GameControl.Instance.AddCoin(value);
+            SFXManager.instance.PlaySFX(SFXManager.instance.coinSound, 0.4f);
             Destroy(gameObject);
         }
     }

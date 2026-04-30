@@ -1135,7 +1135,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 2, y: -0.2065}
+  m_AnchoredPosition: {x: 233, y: -5.152623}
   m_SizeDelta: {x: 183.6713, y: 56.276}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &129999955
@@ -1160,8 +1160,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: '-'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: b633915a7eab00342a258e5c2f50a75f, type: 2}
-  m_sharedMaterial: {fileID: -5571592025542048100, guid: b633915a7eab00342a258e5c2f50a75f, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1185,7 +1185,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 49.1
+  m_fontSize: 50.35
   m_fontSizeBase: 14
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1295,10 +1295,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: B) Muy corto sin detalle
+  m_text: "B) Dar instrucciones claras a un modelo para obtener una respuesta espec\xEDfica"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 0d8833b78a4446545ba1d604f5f3c5c8, type: 2}
-  m_sharedMaterial: {fileID: -8273719093865096114, guid: 0d8833b78a4446545ba1d604f5f3c5c8, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1322,8 +1322,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 23
+  m_fontSizeBase: 23
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2756,7 +2756,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 354.3, y: 0.80337524}
+  m_AnchoredPosition: {x: 389, y: 0.80337524}
   m_SizeDelta: {x: 300, y: 72}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &214302780
@@ -2933,8 +2933,8 @@ RectTransform:
   - {fileID: 1201702839}
   - {fileID: 896430950}
   - {fileID: 1777885306}
-  - {fileID: 220047109}
   - {fileID: 407723553}
+  - {fileID: 220047109}
   - {fileID: 858651880}
   m_Father: {fileID: 770557731}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3038,10 +3038,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: C) Palabras complicadas
+  m_text: "C) Que sea espec\xEDfico y detallado para guiar mejor la respuesta"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 0d8833b78a4446545ba1d604f5f3c5c8, type: 2}
-  m_sharedMaterial: {fileID: -8273719093865096114, guid: 0d8833b78a4446545ba1d604f5f3c5c8, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3065,8 +3065,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 23
+  m_fontSizeBase: 23
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -3637,8 +3637,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: '-'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: b633915a7eab00342a258e5c2f50a75f, type: 2}
-  m_sharedMaterial: {fileID: -5571592025542048100, guid: b633915a7eab00342a258e5c2f50a75f, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3662,7 +3662,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 49.1
+  m_fontSize: 50.35
   m_fontSizeBase: 14
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -3728,7 +3728,7 @@ GameObject:
   - component: {fileID: 312195706}
   - component: {fileID: 312195705}
   m_Layer: 5
-  m_Name: Correct
+  m_Name: Wrong
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3798,8 +3798,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1981157537}
-        m_TargetAssemblyTypeName: UIQuestionManager, Assembly-CSharp
-        m_MethodName: CorrectAnswer
+        m_TargetAssemblyTypeName: JorgeGame.UIQuestionManager, Assembly-CSharp
+        m_MethodName: WrongAnswer
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4219,7 +4219,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -112, y: -0.2065}
+  m_AnchoredPosition: {x: -382, y: -0.2065}
   m_SizeDelta: {x: 81.4151, y: 87.3362}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &344809061
@@ -5654,10 +5654,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: C) Palabras complicadas
+  m_text: "C) Traducir c\xF3digo a diferentes lenguajes de programaci\xF3n"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 0d8833b78a4446545ba1d604f5f3c5c8, type: 2}
-  m_sharedMaterial: {fileID: -8273719093865096114, guid: 0d8833b78a4446545ba1d604f5f3c5c8, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -5681,8 +5681,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 23
+  m_fontSizeBase: 23
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -6721,10 +6721,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\xBFQu\xE9 hace un buen prompt?"
+  m_text: "\xBFCu\xE1l es el objetivo principal de un prompt en inteligencia artificial?"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: dd143b5675b331b40913928aed833e3c, type: 2}
-  m_sharedMaterial: {fileID: 9051935570326131884, guid: dd143b5675b331b40913928aed833e3c, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -6748,13 +6748,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 40.4
+  m_fontSize: 22.05
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
@@ -6858,10 +6858,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\xBFculo bata caca"
+  m_text: "\xBFCu\xE1l es una buena pr\xE1ctica al dise\xF1ar prompts para obtener
+    mejores resultados en IA?"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: dd143b5675b331b40913928aed833e3c, type: 2}
-  m_sharedMaterial: {fileID: 9051935570326131884, guid: dd143b5675b331b40913928aed833e3c, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -6885,13 +6886,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 41.65
+  m_fontSize: 21.35
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
@@ -7984,7 +7985,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -235.16214, y: 17.528732}
+  m_AnchoredPosition: {x: -268.53595, y: 17.528732}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &790222869
@@ -8126,7 +8127,6 @@ GameObject:
   - component: {fileID: 796689398}
   - component: {fileID: 796689402}
   - component: {fileID: 796689401}
-  - component: {fileID: 796689400}
   - component: {fileID: 796689399}
   m_Layer: 0
   m_Name: Spikes (3)
@@ -8169,18 +8169,6 @@ PlatformEffector2D:
   m_UseSideFriction: 0
   m_UseSideBounce: 0
   m_SideArc: 1
---- !u!114 &796689400
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 796689397}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01b6941cfde902b4387baa380a8c62c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DeadZone
 --- !u!61 &796689401
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -9218,10 +9206,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\xBFculo bata caca"
+  m_text: "\xBFQu\xE9 caracter\xEDstica hace que un prompt sea m\xE1s efectivo al
+    usar IA generativa?"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: dd143b5675b331b40913928aed833e3c, type: 2}
-  m_sharedMaterial: {fileID: 9051935570326131884, guid: dd143b5675b331b40913928aed833e3c, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -9245,13 +9234,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 41.65
+  m_fontSize: 22.05
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
@@ -9487,10 +9476,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: B) Muy corto sin detalle
+  m_text: B) Proporcionar contexto, ejemplos y formato esperado en la respuesta
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 0d8833b78a4446545ba1d604f5f3c5c8, type: 2}
-  m_sharedMaterial: {fileID: -8273719093865096114, guid: 0d8833b78a4446545ba1d604f5f3c5c8, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -9514,8 +9503,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 23
+  m_fontSizeBase: 23
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -10104,7 +10093,7 @@ MonoBehaviour:
   - {fileID: 1589729667}
   - {fileID: 1955618302}
   - {fileID: 335412468}
-  enemiesToSpawn: 6
+  enemiesToSpawn: 5
 --- !u!4 &976848481
 Transform:
   m_ObjectHideFlags: 0
@@ -10785,10 +10774,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: B) Muy corto sin detalle
+  m_text: "B) Que sea ambiguo para permitir m\xFAltiples interpretaciones"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 0d8833b78a4446545ba1d604f5f3c5c8, type: 2}
-  m_sharedMaterial: {fileID: -8273719093865096114, guid: 0d8833b78a4446545ba1d604f5f3c5c8, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -10812,8 +10801,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 23
+  m_fontSizeBase: 23
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -11285,6 +11274,7 @@ RectTransform:
   m_Children:
   - {fileID: 344809060}
   - {fileID: 129999954}
+  - {fileID: 1912813591}
   m_Father: {fileID: 1574006698}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -11906,10 +11896,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "A) Claro y espec\xEDfico"
+  m_text: A) Evitar dar contexto para no limitar a la IA
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 0d8833b78a4446545ba1d604f5f3c5c8, type: 2}
-  m_sharedMaterial: {fileID: -8273719093865096114, guid: 0d8833b78a4446545ba1d604f5f3c5c8, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -11933,8 +11923,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 23
+  m_fontSizeBase: 23
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -13908,6 +13898,254 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!1 &1510119124
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1510119128}
+  - component: {fileID: 1510119127}
+  - component: {fileID: 1510119126}
+  - component: {fileID: 1510119125}
+  m_Layer: 0
+  m_Name: SFXManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!82 &1510119125
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1510119124}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!82 &1510119126
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1510119124}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &1510119127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1510119124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36ee0d137198d68458db73f0275527ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SFXManager
+  musicSource: {fileID: 1510119126}
+  sfxSource: {fileID: 1510119125}
+  winSound: {fileID: 8300000, guid: 29eedacc7614ae44f85a82b54a2241db, type: 3}
+  loseSound: {fileID: 8300000, guid: 3ffd20a0b43e9884bab7bda0148de357, type: 3}
+  backgroundMusic: {fileID: 8300000, guid: b47d41f6f2c9d7e4e808a22813e04e5f, type: 3}
+  coinSound: {fileID: 8300000, guid: b7168b0bb933a794eb9628973597ac6c, type: 3}
+  checkpointSound: {fileID: 8300000, guid: 2991263c540e466488bb920be1e2e894, type: 3}
+  deadSound: {fileID: 8300000, guid: 90e3a3307611bd344ab9d9dc50810340, type: 3}
+--- !u!4 &1510119128
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1510119124}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 107.68, y: 27.07, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1514673855
 GameObject:
   m_ObjectHideFlags: 0
@@ -14371,7 +14609,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d602d30b0e590443b4c8bddad837d16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TimerManager
-  timeRemaining: 301
+  timeRemaining: 181
   timerText: {fileID: 129999955}
 --- !u!4 &1565109795
 Transform:
@@ -14597,8 +14835,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -40.6532, y: 216.672}
-  m_SizeDelta: {x: -84.27283, y: -446.656}
+  m_AnchoredPosition: {x: -40.613983, y: 216.672}
+  m_SizeDelta: {x: -68.9594, y: -446.656}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1574006699
 MonoBehaviour:
@@ -15492,7 +15730,7 @@ GameObject:
   - component: {fileID: 1699408784}
   - component: {fileID: 1699408783}
   m_Layer: 5
-  m_Name: Wrong
+  m_Name: Correct
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15562,8 +15800,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1981157537}
-        m_TargetAssemblyTypeName: UIQuestionManager, Assembly-CSharp
-        m_MethodName: WrongAnswer
+        m_TargetAssemblyTypeName: JorgeGame.UIQuestionManager, Assembly-CSharp
+        m_MethodName: CorrectAnswer
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -15716,7 +15954,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -281.29333, y: 17.528732}
+  m_AnchoredPosition: {x: -314.66714, y: 17.528732}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1744114362
@@ -15753,7 +15991,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -423.62622, y: 17.528732}
+  m_AnchoredPosition: {x: -457, y: 17.528732}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1744114364
@@ -15851,10 +16089,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "A) Claro y espec\xEDfico"
+  m_text: "A) Ejecutar autom\xE1ticamente un programa sin intervenci\xF3n humana"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 0d8833b78a4446545ba1d604f5f3c5c8, type: 2}
-  m_sharedMaterial: {fileID: -8273719093865096114, guid: 0d8833b78a4446545ba1d604f5f3c5c8, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -15878,8 +16116,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 23
+  m_fontSizeBase: 23
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -16079,10 +16317,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: C) Palabras complicadas
+  m_text: C) Usar solo palabras clave sin estructura
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 0d8833b78a4446545ba1d604f5f3c5c8, type: 2}
-  m_sharedMaterial: {fileID: -8273719093865096114, guid: 0d8833b78a4446545ba1d604f5f3c5c8, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -16106,8 +16344,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 23
+  m_fontSizeBase: 23
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -16387,23 +16625,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6780372324027429252, guid: a8fb6ccd4e3489a4b9fcbb80e156d376, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.1966856
+      value: 0.2759499
       objectReference: {fileID: 0}
     - target: {fileID: 6780372324027429252, guid: a8fb6ccd4e3489a4b9fcbb80e156d376, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.1966856
+      value: 0.2759499
       objectReference: {fileID: 0}
     - target: {fileID: 6780372324027429252, guid: a8fb6ccd4e3489a4b9fcbb80e156d376, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.1966856
+      value: 0.2759499
       objectReference: {fileID: 0}
     - target: {fileID: 6780372324027429252, guid: a8fb6ccd4e3489a4b9fcbb80e156d376, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 137.15
+      value: 137.98
       objectReference: {fileID: 0}
     - target: {fileID: 6780372324027429252, guid: a8fb6ccd4e3489a4b9fcbb80e156d376, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 19.36
+      value: 16.9
       objectReference: {fileID: 0}
     - target: {fileID: 6780372324027429252, guid: a8fb6ccd4e3489a4b9fcbb80e156d376, type: 3}
       propertyPath: m_LocalPosition.z
@@ -16663,10 +16901,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "A) Claro y espec\xEDfico"
+  m_text: A) Que sea corto y general para que la IA decida libremente
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 0d8833b78a4446545ba1d604f5f3c5c8, type: 2}
-  m_sharedMaterial: {fileID: -8273719093865096114, guid: 0d8833b78a4446545ba1d604f5f3c5c8, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -16690,8 +16928,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 23
+  m_fontSizeBase: 23
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -16779,7 +17017,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 489, y: 0.0000035167}
+  m_AnchoredPosition: {x: 493, y: 0.0000035167}
   m_SizeDelta: {x: 28.8503, y: 28.58}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1816633397
@@ -16926,7 +17164,7 @@ GameObject:
   - component: {fileID: 1855376001}
   - component: {fileID: 1855376000}
   m_Layer: 5
-  m_Name: Correct
+  m_Name: Wrong
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16996,8 +17234,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1981157537}
-        m_TargetAssemblyTypeName: UIQuestionManager, Assembly-CSharp
-        m_MethodName: CorrectAnswer
+        m_TargetAssemblyTypeName: JorgeGame.UIQuestionManager, Assembly-CSharp
+        m_MethodName: WrongAnswer
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -17381,6 +17619,143 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3904193540649558666, guid: a8fb6ccd4e3489a4b9fcbb80e156d376, type: 3}
   m_PrefabInstance: {fileID: 1806902747}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1912813590
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1912813591}
+  - component: {fileID: 1912813593}
+  - component: {fileID: 1912813592}
+  m_Layer: 5
+  m_Name: Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1912813591
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1912813590}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.3085933, y: 1.3085933, z: 1.3085933}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1055316145}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -85.65927, y: -5.152623}
+  m_SizeDelta: {x: 448, y: 50}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1912813592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1912813590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: 'Colapso del Planeta en:'
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4293125094
+  m_fontColor: {r: 0.90188676, g: 0.889975, b: 0.889975, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 30
+  m_fontSizeBase: 30
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 1
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_characterHorizontalScale: 1
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_TextWrappingMode: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 0
+  m_ActiveFontFeatures: 6e72656b
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_EmojiFallbackSupport: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &1912813593
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1912813590}
+  m_CullTransparentMesh: 1
 --- !u!1 &1930754792
 GameObject:
   m_ObjectHideFlags: 0
@@ -17525,7 +17900,7 @@ GameObject:
   - component: {fileID: 1953092976}
   - component: {fileID: 1953092975}
   m_Layer: 5
-  m_Name: Wrong
+  m_Name: Correct
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17595,8 +17970,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1981157537}
-        m_TargetAssemblyTypeName: UIQuestionManager, Assembly-CSharp
-        m_MethodName: WrongAnswer
+        m_TargetAssemblyTypeName: JorgeGame.UIQuestionManager, Assembly-CSharp
+        m_MethodName: CorrectAnswer
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -18315,7 +18690,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -327.73553, y: 17.528732}
+  m_AnchoredPosition: {x: -361.10934, y: 17.528732}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2099018768
@@ -18966,7 +19341,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -376.35474, y: 17.528732}
+  m_AnchoredPosition: {x: -409.72855, y: 17.528732}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2140926629
@@ -19182,6 +19557,7 @@ SceneRoots:
   - {fileID: 1981157538}
   - {fileID: 1388319153}
   - {fileID: 976848481}
+  - {fileID: 1510119128}
   - {fileID: 1012296879}
   - {fileID: 1844194971}
   - {fileID: 2105164986}

@@ -13,6 +13,7 @@ public class UIQuestionManager : MonoBehaviour
     // referencia al checkpoint actual para poder cambiar su estado
     private Checkpoint currentCheckpoint;
 
+    // panel de la pregunta activa en este checkpoint
     private GameObject currentPanel;
 
     void Start()
@@ -22,7 +23,7 @@ public class UIQuestionManager : MonoBehaviour
             questionPanel.SetActive(false);
     }
 
-    // muestra la pregunta y guarda el checkpoint que la activo
+    // muestra la pregunta del checkpoint y pausa el juego
 
 public void ShowQuestion(Vector3 checkpointPos, Checkpoint checkpoint, GameObject panel)
 {
@@ -36,8 +37,11 @@ public void ShowQuestion(Vector3 checkpointPos, Checkpoint checkpoint, GameObjec
     Time.timeScale = 0f;
 }
 
+    // guarda progreso del checkpoint al responder correctamente
     public void CorrectAnswer()
     {
+
+        SFXManager.instance.PlaySFX(SFXManager.instance.checkpointSound, 0.5f);
         // guarda el checkpoint como respawn
         SpawnPoint.instance.respawnPoint = pendingCheckpoint;
 
@@ -52,6 +56,7 @@ public void ShowQuestion(Vector3 checkpointPos, Checkpoint checkpoint, GameObjec
         Time.timeScale = 1f;
     }
 
+    // descuenta vida y marca el checkpoint como incorrecto
     public void WrongAnswer()
     {
         // pierde una vida
