@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+namespace JorgeGame
+{
 public class GameControl : MonoBehaviour
 {
     // instancia global para acceder desde otros scripts
@@ -14,6 +16,14 @@ public class GameControl : MonoBehaviour
 
     // contador de monedas
     public int coins = 0;
+
+    void Start()
+    {
+        if (SFXManager.instance != null)
+        {
+            SFXManager.instance.PlayMusic();
+        }
+    }
 
     void Awake()
     {
@@ -39,7 +49,8 @@ public class GameControl : MonoBehaviour
 
     // reduce una vida al jugador
     public void SpendLives()
-    {
+    {   
+        SFXManager.instance.PlaySFX(SFXManager.instance.deadSound, 0.5f);
         int newLives = GetCurrentLives() - 1;
 
         // guarda el nuevo valor
@@ -65,4 +76,5 @@ public class GameControl : MonoBehaviour
         if (uiControler != null)
             uiControler.UpdateCoins(coins);
     }
+}
 }

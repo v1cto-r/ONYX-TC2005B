@@ -1,5 +1,7 @@
 using UnityEngine;
 
+namespace JorgeGame
+{
 public class CameraFollow : MonoBehaviour
 {
     // objeto que la camara va a seguir
@@ -47,4 +49,5 @@ public class CameraFollow : MonoBehaviour
         // aplica la posicion final
         transform.position = new Vector3(clampedX, smoothedPosition.y, smoothedPosition.z);
     }
+}
 }

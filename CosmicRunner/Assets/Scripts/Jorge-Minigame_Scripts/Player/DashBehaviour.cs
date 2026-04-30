@@ -2,6 +2,8 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+namespace JorgeGame
+{
 public class DashBehaviour : MonoBehaviour
 {
     // accion de dash del input system
@@ -70,7 +72,7 @@ public class DashBehaviour : MonoBehaviour
         }
     }
 
-    // detiene el dash despues de un tiempo
+    // corrutina que termina el dash y restaura la gravedad
     private IEnumerator StopDash()
     {
         yield return new WaitForSeconds(dashDuration);
@@ -82,6 +84,7 @@ public class DashBehaviour : MonoBehaviour
         rb.gravityScale = originalGravityScale;
     }
 
+    // reactiva el dash cuando vuelve a tocar el suelo
     void OnCollisionEnter2D(Collision2D collision)
     {
         // permite volver a usar dash al tocar el suelo
@@ -90,4 +93,5 @@ public class DashBehaviour : MonoBehaviour
             canDash = true;
         }
     }
+}
 }

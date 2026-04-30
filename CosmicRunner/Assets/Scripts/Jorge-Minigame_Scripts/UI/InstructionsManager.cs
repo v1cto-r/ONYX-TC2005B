@@ -1,5 +1,7 @@
 using UnityEngine;
 
+namespace JorgeGame
+{
 public class InstructionsManager : MonoBehaviour
 {
     // panel de instrucciones
@@ -15,6 +17,7 @@ public class InstructionsManager : MonoBehaviour
         Time.timeScale = 0f;
     }
 
+    // cierra el panel de instrucciones y reanuda el juego
     public void CloseInstructions()
     {
         // oculta instrucciones
@@ -24,6 +27,7 @@ public class InstructionsManager : MonoBehaviour
         Time.timeScale = 1f;
     }
 
+    // abre el panel de instrucciones y pausa la partida
     public void OpenInstructions()
     {
         // muestra instrucciones
@@ -35,4 +39,5 @@ public class InstructionsManager : MonoBehaviour
 
         Time.timeScale = 0f;
     }
+}
 }

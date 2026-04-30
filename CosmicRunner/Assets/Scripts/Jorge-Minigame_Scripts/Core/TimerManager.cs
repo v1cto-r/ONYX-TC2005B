@@ -2,6 +2,8 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 
+namespace JorgeGame
+{
 public class TimerManager : MonoBehaviour
 {
     // tiempo inicial en segundos (300 = 5 minutos)
@@ -41,4 +43,5 @@ public class TimerManager : MonoBehaviour
 
         timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
+}
 }

@@ -2,6 +2,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
 
+namespace JorgeGame
+{
 public class PlayerMovement : MonoBehaviour
 {
     // acciones de movimiento y salto
@@ -86,6 +88,7 @@ public class PlayerMovement : MonoBehaviour
         jumpQueue = false;
     }
 
+    // detecta contacto con suelo y se vincula a plataformas moviles
     void OnCollisionEnter2D(Collision2D collision)
     {
         // detecta cuando toca el suelo
@@ -98,6 +101,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    // aplica el parent en el siguiente frame para evitar conflictos de fisicas
     IEnumerator SetParentNextFrame(Transform newParent)
     {
         // espera un frame para evitar errores de fisicas
@@ -106,6 +110,7 @@ public class PlayerMovement : MonoBehaviour
         transform.SetParent(newParent);
     }
 
+    // detecta salida del suelo y elimina el parent de plataforma
     void OnCollisionExit2D(Collision2D collision)
     {
         // cuando deja de tocar el suelo se separa de la plataforma
@@ -118,6 +123,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    // elimina el parent en el siguiente frame para estabilidad
     IEnumerator RemoveParentNextFrame()
     {
         yield return null;
@@ -134,6 +140,7 @@ public class PlayerMovement : MonoBehaviour
         Idle, Run, Jump
     }
 
+    // decide la animacion segun movimiento horizontal y estado de suelo
     void UpdatePlayerAnimation()
     {
         // decide que animacion usar segun el estado del jugador
@@ -151,6 +158,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    // aplica banderas del animator para el estado de animacion indicado
     void UpdatePlayerAnimation(PlayerAnimation nameAnimation)
     {
         // cambia los parametros del animator
@@ -170,4 +178,5 @@ public class PlayerMovement : MonoBehaviour
                 break;
         }
     }
+}
 }

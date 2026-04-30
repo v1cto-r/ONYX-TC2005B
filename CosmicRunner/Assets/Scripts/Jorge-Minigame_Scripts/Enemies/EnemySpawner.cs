@@ -1,5 +1,7 @@
 using UnityEngine;
 
+namespace JorgeGame
+{
 public class EnemySpawner : MonoBehaviour
 {
     // prefab del enemigo
@@ -16,6 +18,7 @@ public class EnemySpawner : MonoBehaviour
         SpawnEnemies();
     }
 
+    // genera enemigos en puntos aleatorios sin repetir posiciones
     void SpawnEnemies()
     {
         if (spawnPoints.Length == 0) return;
@@ -37,4 +40,5 @@ public class EnemySpawner : MonoBehaviour
             }
         }
     }
+}
 }

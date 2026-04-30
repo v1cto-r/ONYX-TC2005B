@@ -1,5 +1,7 @@
 using UnityEngine;
 
+namespace JorgeGame
+{
 public class Enemy : MonoBehaviour
 {
     // velocidad de movimiento
@@ -20,17 +22,16 @@ public class Enemy : MonoBehaviour
     private Transform player;
     private Animator anim;
 
-    // control de daño
-    private float damageCooldown = 0.5f;
-    private float lastDamageTime;
-
     // control de ataque
     private bool isAttackingNow = false;
-    private float attackDuration = 0.4f;
+    private float attackDuration = 0.8f;
     private float attackTimer = 0f;
 
-    private float attackCooldown = 1.5f;
+    private float attackCooldown = 1f;
     private float lastAttackTime = -999f;
+
+    // indica si ya golpeo durante este ataque (para no pegar varias veces)
+    private bool hasHit = false;
 
     void Start()
     {
@@ -54,6 +55,7 @@ public class Enemy : MonoBehaviour
         DetectPlayer();
     }
 
+    // mueve al enemigo en la direccion actual mientras no ataca
     void Move()
     {
         // si esta atacando no se mueve
@@ -70,6 +72,7 @@ public class Enemy : MonoBehaviour
             anim.SetBool("isMoving", true);
     }
 
+    // detecta si hay suelo delante para evitar caerse
     void CheckGround()
     {
         // usa raycast para detectar si hay suelo
@@ -81,6 +84,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    // controla deteccion, ataque con cooldown y dano unico por ataque
     void DetectPlayer()
     {
         if (player == null) return;
@@ -95,6 +99,9 @@ public class Enemy : MonoBehaviour
             isAttackingNow = true;
             attackTimer = attackDuration;
             lastAttackTime = Time.time;
+
+            // reinicia el golpe para este ataque
+            hasHit = false;
         }
 
         // controla la duracion del ataque
@@ -102,19 +109,24 @@ public class Enemy : MonoBehaviour
         {
             attackTimer -= Time.deltaTime;
 
-            // hace daño mientras esta atacando y el jugador esta cerca
-            if (dist < attackRange &&
-                Time.time >= lastDamageTime + damageCooldown)
+            // hace daño UNA sola vez en medio del ataque
+            // esto evita que el daño sea constante o random
+            if (!hasHit && attackTimer <= attackDuration * 0.2f)
             {
-                GameControl.Instance.SpendLives();
+                // solo hace daño si el jugador sigue dentro del rango
+                if (dist < attackRange)
+                {
+                    GameControl.Instance.SpendLives();
 
-                // desparentar para evitar bugs con plataformas
-                player.SetParent(null);
+                    // desparentar para evitar bugs con plataformas
+                    player.SetParent(null);
 
-                // regresar al ultimo checkpoint
-                player.position = SpawnPoint.instance.respawnPoint + Vector3.up * 1f;
+                    // regresar al ultimo checkpoint
+                    player.position = SpawnPoint.instance.respawnPoint + Vector3.up * 1f;
+                }
 
-                lastDamageTime = Time.time;
+                // marca que ya golpeo para no repetir el daño
+                hasHit = true;
             }
 
             // termina el ataque
@@ -131,6 +143,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    // invierte direccion de movimiento y orientacion visual
     void Flip()
     {
         // cambia de direccion
@@ -140,4 +153,5 @@ public class Enemy : MonoBehaviour
         scale.x *= -1;
         transform.localScale = scale;
     }
+}
 }

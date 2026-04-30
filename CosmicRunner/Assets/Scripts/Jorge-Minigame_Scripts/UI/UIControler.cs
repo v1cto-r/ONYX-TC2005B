@@ -2,6 +2,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+namespace JorgeGame
+{
 public class UIControler : MonoBehaviour
 {
     // imagenes que representan las vidas (corazones)
@@ -19,6 +21,7 @@ public class UIControler : MonoBehaviour
         UpdateAllLives();
     }
 
+    // actualiza el corazon que corresponde a la vida perdida
     public void UpdateLives()
     {
         // obtiene las vidas actuales
@@ -31,6 +34,7 @@ public class UIControler : MonoBehaviour
         }
     }
 
+    // sincroniza todos los corazones al estado actual de vidas
     public void UpdateAllLives()
     {
         // actualiza todos los corazones al iniciar el juego
@@ -46,9 +50,11 @@ public class UIControler : MonoBehaviour
         }
     }
 
+    // actualiza el texto del contador de monedas
     public void UpdateCoins(int coins)
     {
         // muestra la cantidad de monedas en la interfaz
         coinsText.text = coins.ToString();
     }
+}
 }

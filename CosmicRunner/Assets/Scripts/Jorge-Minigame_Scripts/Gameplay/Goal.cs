@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+namespace JorgeGame
+{
 public class Goal : MonoBehaviour
 {
     // indice de la escena de victoria
@@ -15,4 +17,5 @@ public class Goal : MonoBehaviour
             SceneManager.LoadScene(victorySceneIndex);
         }
     }
+}
 }

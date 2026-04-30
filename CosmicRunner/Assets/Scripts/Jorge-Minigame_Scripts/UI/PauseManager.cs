@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+namespace JorgeGame
+{
 public class PauseManager : MonoBehaviour
 {
     // panel del menu de pausa
@@ -8,6 +10,7 @@ public class PauseManager : MonoBehaviour
 
     private bool isPaused = false;
 
+    // alterna entre pausar y reanudar el juego
     public void TogglePause()
     {
         // cambia entre pausa y juego normal
@@ -17,6 +20,7 @@ public class PauseManager : MonoBehaviour
         Time.timeScale = isPaused ? 0f : 1f;
     }
 
+    // cierra el menu de pausa y continua la partida
     public void Resume()
     {
         // reanuda el juego
@@ -25,6 +29,7 @@ public class PauseManager : MonoBehaviour
         Time.timeScale = 1f;
     }
 
+    // reinicia la escena actual en estado de juego normal
     public void Restart()
     {
         // asegura que el tiempo vuelva a la normalidad
@@ -42,10 +47,12 @@ public class PauseManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
+    // vuelve al menu principal del juego
     public void QuitToMenu()
     {
         // regresa al menu principal
         Time.timeScale = 1f;
         SceneManager.LoadScene(2);
     }
+}
 }

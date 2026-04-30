@@ -1,5 +1,7 @@
 using UnityEngine;
 
+namespace JorgeGame
+{
 public class DeadZone : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D collision)
@@ -11,4 +13,5 @@ public class DeadZone : MonoBehaviour
             collision.transform.position = SpawnPoint.instance.respawnPoint;
         }
     }
+}
 }
