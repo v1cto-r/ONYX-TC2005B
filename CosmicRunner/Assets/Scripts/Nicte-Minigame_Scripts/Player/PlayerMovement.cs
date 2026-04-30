@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     public Rigidbody2D rig;
-    public float moveSpeed = 4f;
+    float moveSpeed = 6f;
     public float minY = -3.70f;    
     public float maxY = 2.54f;  
     private float yInput;
@@ -13,6 +13,11 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         yInput = 0f;
+
+        if (!inputEnabled)
+        {
+            return;
+        }
 
         if (Keyboard.current.upArrowKey.isPressed)
         {
@@ -27,6 +32,12 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate()
     {
         float currentY = rig.position.y;
+
+        if (!inputEnabled)
+        {
+            rig.linearVelocity = Vector2.zero;
+            return;
+        }
 
         if ((yInput > 0 && currentY<maxY) ||
             (yInput < 0 && currentY > minY))
@@ -43,6 +54,8 @@ public class PlayerMovement : MonoBehaviour
     {
         inputEnabled = enabled;
         if (!enabled)
+        {
             rig.linearVelocity = Vector2.zero;
+        }
     }
 }

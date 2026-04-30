@@ -982,7 +982,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69e59a0b54997ad4998a968e01f49de3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  currentHealth: 12
 --- !u!114 &163021832
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1002,8 +1001,6 @@ MonoBehaviour:
   comboResetTime: 2
   currentCombo: 0
   currentSpecialCharges: 3
-  specialRechargeTimer: 0
-  baseCooldown: 0
 --- !u!114 &163021833
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1017,7 +1014,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   rig: {fileID: 163021829}
-  moveSpeed: 4
   minY: -3.7
   maxY: 2.54
   inputEnabled: 1
@@ -1072,7 +1068,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
   shieldEffect: {fileID: 1284261880}
   maxHealth: 12
-  shielTimerMax: 3
+  shieldTimerMax: 5
   isAlive: 1
   shieldActive: 0
   currentHealth: 0
@@ -1763,7 +1759,7 @@ GameObject:
   - component: {fileID: 298550163}
   - component: {fileID: 298550162}
   m_Layer: 5
-  m_Name: Timer_Value
+  m_Name: TimerValue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2072,7 +2068,7 @@ GameObject:
   - component: {fileID: 485798344}
   - component: {fileID: 485798343}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: Charge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3174,7 +3170,7 @@ GameObject:
   - component: {fileID: 826518250}
   - component: {fileID: 826518249}
   m_Layer: 5
-  m_Name: Message
+  m_Name: Label
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3311,7 +3307,7 @@ GameObject:
   - component: {fileID: 854386857}
   - component: {fileID: 854386856}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Title
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3531,10 +3527,10 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 452843112}
+  - {fileID: 1470740148}
   - {fileID: 2111908642}
   - {fileID: 1797053078}
-  - {fileID: 1470740148}
-  - {fileID: 452843112}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -4012,7 +4008,7 @@ GameObject:
   - component: {fileID: 996041012}
   - component: {fileID: 996041011}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: Battery
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4185,7 +4181,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afcd6c1a6bfe5dd40b699eabc228e89b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameController
-  time: 100
+  time: 240
   timeRemaining: 0
   currentState: 
 --- !u!4 &1078512158
@@ -4653,7 +4649,7 @@ GameObject:
   - component: {fileID: 1196574769}
   - component: {fileID: 1196574768}
   m_Layer: 5
-  m_Name: Timer_Icon
+  m_Name: TimerIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6092,7 +6088,7 @@ GameObject:
   - component: {fileID: 1611222022}
   - component: {fileID: 1611222021}
   m_Layer: 5
-  m_Name: Button
+  m_Name: PauseButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6314,7 +6310,7 @@ GameObject:
   - component: {fileID: 1648440630}
   - component: {fileID: 1648440629}
   m_Layer: 5
-  m_Name: Credit_Score_Value
+  m_Name: CreditAmount
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6453,7 +6449,7 @@ GameObject:
   - component: {fileID: 1715349163}
   - component: {fileID: 1715349162}
   m_Layer: 5
-  m_Name: Credit_Icon
+  m_Name: CreditIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7226,7 +7222,7 @@ GameObject:
   - component: {fileID: 1798377758}
   - component: {fileID: 1798377757}
   m_Layer: 5
-  m_Name: xCount
+  m_Name: xCountText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7666,7 +7662,7 @@ GameObject:
   - component: {fileID: 1881050115}
   - component: {fileID: 1881050114}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Title
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8448,8 +8444,6 @@ MonoBehaviour:
   timerText: {fileID: 298550162}
   creditsText: {fileID: 1648440629}
   pauseScreen: {fileID: 1825296579}
-  startScreen: {fileID: 0}
-  menuScreen: {fileID: 0}
 --- !u!1 &2118663196
 GameObject:
   m_ObjectHideFlags: 0

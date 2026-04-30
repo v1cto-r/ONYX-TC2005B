@@ -5,7 +5,7 @@ public class PlayerSpecialBullet : MonoBehaviour
 
     ComboUI comboUI;
     public float lifetime = 4f;
-    public float bulletSpeed = 15f;
+    public float bulletSpeed = 10f;
 
     void Start()
     {
@@ -20,10 +20,13 @@ public class PlayerSpecialBullet : MonoBehaviour
         {
             Destroy(gameObject);
             SFXManager.Instance.DamageSound();
+            
             int damage = Random.Range(1,3);
             collision.gameObject.GetComponent<EnemyHealth>().TakeDamage(damage);
             comboUI.UpdateCombo(comboUI.currentCombo + 1);
-        }else{
+        }
+        else
+        {
             Destroy(gameObject);
         }
     }

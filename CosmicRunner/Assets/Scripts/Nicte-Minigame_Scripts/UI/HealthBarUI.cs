@@ -29,10 +29,9 @@ public class HealthBarUI : MonoBehaviour
 
     public void regeneratePlayerHealth(int currentHealth, int regenAmount)
     {
-        Debug.Log("Regenerating player health: " + currentHealth + " + " + regenAmount);
         int newHealth = currentHealth + regenAmount;
         PlayerPrefs.SetInt("PlayerHealth", newHealth);
-        Debug.Log("New player health after regeneration: " + newHealth);
+
         if(newHealth > playerLivesImage.Length)
         {
             newHealth = playerLivesImage.Length;
@@ -49,10 +48,9 @@ public class HealthBarUI : MonoBehaviour
 
     public void regenerateEnemyHealth(int currentHealth, int regenAmount)
     {
-        Debug.Log("Regenerating enemy health: " + currentHealth + " + " + regenAmount);
         int newHealth = currentHealth + regenAmount;
         PlayerPrefs.SetInt("EnemyHealth", newHealth);
-        Debug.Log("New enemy health after regeneration: " + newHealth);
+
         if(newHealth > enemyLivesImage.Length)
         {
             newHealth = enemyLivesImage.Length;
@@ -90,8 +88,5 @@ public class HealthBarUI : MonoBehaviour
                 enemyLivesImage[i].enabled = false;
             }
         }
-    }
-
-
-    
+    }    
 }

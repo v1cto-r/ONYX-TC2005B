@@ -6,7 +6,7 @@ public class PlayerHealth : MonoBehaviour
     HealthBarUI healthBarUI;
     public GameObject shieldEffect;
     public int maxHealth = 12;
-    public float shielTimerMax = 5f;
+    public float shieldTimerMax = 5f;
     public bool isAlive = true;
     public bool shieldActive = false;
     public int currentHealth;
@@ -23,12 +23,12 @@ public class PlayerHealth : MonoBehaviour
     {
         if (shieldActive)
         {
-            shielTimerMax -= Time.deltaTime;
-            if (shielTimerMax <= 0f)
+            shieldTimerMax -= Time.deltaTime;
+            if (shieldTimerMax <= 0f)
             {
                 shieldActive = false;
                 shieldEffect.SetActive(false);
-                shielTimerMax = 5f;
+                shieldTimerMax = 5f;
             }
         }
     }
@@ -49,11 +49,7 @@ public class PlayerHealth : MonoBehaviour
         {
             healthBarUI.updatePlayerHealth(currentHealth);
         }
-
-        if (playerController != null)
-        {
-            playerController.currentHealth = currentHealth;
-        }   
+ 
         if (currentHealth <= 0)
         {
             Debug.Log("Player health is zero or less, player is dead.");
@@ -83,22 +79,20 @@ public class PlayerHealth : MonoBehaviour
         {
             shieldEffect.SetActive(true);
         }
-        shielTimerMax = 5f;
+        shieldTimerMax = 5f;
     }
 
     public void Heal()
     {
-                currentHealth += 2;
-                if (currentHealth > maxHealth)
-                {
-                    currentHealth = maxHealth;
-                }
+        currentHealth += 2;
+        if (currentHealth > maxHealth)
+        {
+            currentHealth = maxHealth;
+        }
 
-                if (healthBarUI != null)
-                {
-                    healthBarUI.regeneratePlayerHealth(currentHealth, 0);
-                }
+        if (healthBarUI != null)
+        {
+            healthBarUI.regeneratePlayerHealth(currentHealth, 0);
+        }
     }
-
-
 }

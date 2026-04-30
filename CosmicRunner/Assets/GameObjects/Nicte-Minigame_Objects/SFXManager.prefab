@@ -50,3 +50,4 @@ MonoBehaviour:
   defeat: {fileID: 8300000, guid: f346db06a4fca144a96fdb9d98e39819, type: 3}
   game: {fileID: 8300000, guid: 92914f2e30974144da4fea12365e23ad, type: 3}
   powerUp: {fileID: 8300000, guid: 187afc7c50383c741b1360dee2ff28ef, type: 3}
+  coin: {fileID: 8300000, guid: 08341b78f4504d646ae7c44122c6ff3f, type: 3}

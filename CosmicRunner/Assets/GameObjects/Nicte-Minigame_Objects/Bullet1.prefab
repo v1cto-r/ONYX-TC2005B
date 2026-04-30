@@ -86,7 +86,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyBullet
   lifetime: 3
   bulletSpeed: 8
-  damage: 1
 --- !u!1 &2872493942078599302
 GameObject:
   m_ObjectHideFlags: 0

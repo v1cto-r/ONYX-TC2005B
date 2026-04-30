@@ -5,23 +5,18 @@ public class PlayerCombat : MonoBehaviour
     public GameObject bullet;
     public Transform firePoint;
     public GameObject specialBullet;
-    //PlayerFatigueSystem fatigueSystem;
     public int specialChargeMax = 3;
     public float comboResetTime = 2f;
     public int currentCombo = 0;
     public int currentSpecialCharges = 3;
-    public float specialRechargeTimer = 0f;
     float shootTimer = 0f;
     float comboTimer = 0f;
     private float shootCooldown = 0.1f;
-    public float baseCooldown;
+
 
     void Start()
     {
-        baseCooldown = shootCooldown;
-        //fatigueSystem = GetComponent<PlayerFatigueSystem>();
         currentSpecialCharges = specialChargeMax;
-        specialRechargeTimer = 0f;
     }
 
     void Update()
@@ -41,7 +36,7 @@ public class PlayerCombat : MonoBehaviour
         }
     }
 
-    public void shoot()
+    public void Shoot()
     {
         if (shootTimer > 0f || bullet == null || firePoint == null) return;
         GameObject bulletShoot = Instantiate(bullet, firePoint.position, Quaternion.identity);
@@ -67,13 +62,11 @@ public class PlayerCombat : MonoBehaviour
 
     public void RechargeSpecial()
     {
-          currentSpecialCharges = specialChargeMax;
-    SpecialAttackUI specialUI = FindObjectOfType<SpecialAttackUI>();
-    if (specialUI != null)
-    {
-        specialUI.UpdateCharge(currentSpecialCharges);
-    }
-    
-    Debug.Log($"Special attack fully recharged! Charges: {currentSpecialCharges}");
+        currentSpecialCharges = specialChargeMax;
+        SpecialAttackUI specialUI = FindObjectOfType<SpecialAttackUI>();
+        if (specialUI != null)
+        {
+            specialUI.UpdateCharge(currentSpecialCharges);
+        }
     }
 }

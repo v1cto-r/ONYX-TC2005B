@@ -1,5 +1,5 @@
 using UnityEngine;
-using Unity.Mathematics;
+
 using System.Collections;
 
 public class PowerUpSpawner : MonoBehaviour
@@ -10,9 +10,6 @@ public class PowerUpSpawner : MonoBehaviour
     float timeToSpawnMin=5f;
     float timeToSpawnMax=10f;
 
-    //float timeToSpawnMin=10f;
-    //float timeToSpawnMax=20f;
-
     void Start()
     {
         StartCoroutine(SpawnerTime());
@@ -22,7 +19,7 @@ public class PowerUpSpawner : MonoBehaviour
     {
         yield return new WaitForSeconds(UnityEngine.Random.Range(timeToSpawnMin, timeToSpawnMax));
 
-        Instantiate(powerUp, new Vector3(transform.position.x,transform.position.y+UnityEngine.Random.Range(minHeight, maxHeight), 0), quaternion.identity);
+        Instantiate(powerUp, new Vector3(transform.position.x,transform.position.y+UnityEngine.Random.Range(minHeight, maxHeight), 0), Quaternion.identity);
 
         StartCoroutine(SpawnerTime());
     }

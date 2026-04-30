@@ -14,6 +14,7 @@ public class ComboUI : MonoBehaviour
      void Awake()
     {
         resetCombo();
+        generalUI = FindObjectOfType<GeneralUI>();
     }
 
     void Update()
@@ -88,6 +89,7 @@ public class ComboUI : MonoBehaviour
             {
                 case 2:
                     comboLabel.text = "¡Bien!";
+                    generalUI.UpdateCredits(100);
                     break;
                 case 5:
                     comboLabel.text = "¡Increible!";

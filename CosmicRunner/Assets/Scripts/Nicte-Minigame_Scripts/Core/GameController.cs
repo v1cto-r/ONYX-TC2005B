@@ -12,7 +12,7 @@ public class GameController : MonoBehaviour
     string gameScene="AtaqueEstelarGame";
     string DefeatScene="AtaqueEstelarDefeat";
     string VictoryScene="AtaqueEstelarVictory";
-    public float time=300f;
+    public float time=240f;
     public float timeRemaining;
     public string currentState = "Playing";
 
@@ -74,18 +74,12 @@ public class GameController : MonoBehaviour
 
     public void SetVictory()
     {
-        currentState="Victory";
         ChangeState("Victory");
-        Debug.Log("Victoria");
-        WinGame();
     }
 
     public void SetDefeat()
     {
-        currentState="Defeat";
         ChangeState("Defeat");
-        Debug.Log("Derrota");
-        LoseGame();
     }
 
     void LoseGame()

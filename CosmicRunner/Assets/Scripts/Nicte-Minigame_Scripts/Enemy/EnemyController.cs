@@ -17,6 +17,7 @@ public class EnemyController : MonoBehaviour
         gameController = FindObjectOfType<GameController>();
 
         PlayerPrefs.SetInt("EnemyHealth", currentHealth);
+
         enemyMovement = GetComponent<EnemyMovement>();
         attack= GetComponent<EnemyAttack>();
         health= GetComponent<EnemyHealth>();
@@ -31,8 +32,16 @@ public class EnemyController : MonoBehaviour
     {
         if (currentState == newState) return;
         currentState = newState;
-        if (attack != null) attack.StateChanged(newState);
-        if (enemyMovement != null) enemyMovement.StateChanged(newState);
+        
+        if (attack != null)
+        {
+             attack.StateChanged(newState);
+        }
+
+        if (enemyMovement != null)
+        { 
+            enemyMovement.StateChanged(newState);
+        }
     }
 
     public void EvaluateStateFromHealth(float healthRatio)

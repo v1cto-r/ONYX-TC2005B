@@ -3,8 +3,8 @@ using UnityEngine;
 public class EnemyMovement : MonoBehaviour
 {
     private float normalSpeed =2f;
-    private float aggressiveSpeed=6f;
-    private float enragedSpeed=8f;
+    private float aggressiveSpeed=4f;
+    private float enragedSpeed=6f;
     float direction = 1f;
     private float minY = -3f;
     private float maxY =  2f;
@@ -48,10 +48,8 @@ public class EnemyMovement : MonoBehaviour
             velocity = MoveEnraged();
         }
 
-        // Aplicar velocidad suavemente
         rb.linearVelocity = Vector2.Lerp(rb.linearVelocity, velocity, Time.fixedDeltaTime * 5f);
 
-        // Limitar posición vertical
         Vector3 pos = transform.position;
         if (pos.y >= maxY)
         {
@@ -62,7 +60,15 @@ public class EnemyMovement : MonoBehaviour
             direction = 1f;
         }
 
-        pos.y = Mathf.Clamp(pos.y, minY, maxY);
+        if (pos.y > maxY)
+        {
+            pos.y = maxY;
+        }
+        else if (pos.y < minY)
+        {
+            pos.y = minY;
+        }
+
         transform.position = pos;
     }
 
@@ -113,8 +119,17 @@ public class EnemyMovement : MonoBehaviour
     {
         currentState = state;
 
-        if (state == "Normal")         currentSpeed = normalSpeed;
-        else if (state == "Aggressive") currentSpeed = aggressiveSpeed;
-        else if (state == "Enraged")    currentSpeed = enragedSpeed;
+        if (state == "Normal")
+        {         
+            currentSpeed = normalSpeed;
+        }
+        else if (state == "Aggressive")
+        {
+            currentSpeed = aggressiveSpeed;
+        }
+        else if (state == "Enraged")
+        {
+            currentSpeed = enragedSpeed;
+        }
     }
 }

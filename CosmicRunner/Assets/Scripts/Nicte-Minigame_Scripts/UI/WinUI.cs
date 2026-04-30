@@ -12,7 +12,6 @@ public class WinUI : MonoBehaviour
     public void playGame()
     {
             SceneManager.LoadScene("AtaqueEstelarGame");
-
     }
     
     public void backToMenu()

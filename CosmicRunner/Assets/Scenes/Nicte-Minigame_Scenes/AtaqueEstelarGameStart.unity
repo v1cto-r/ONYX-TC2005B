@@ -1028,7 +1028,7 @@ GameObject:
   - component: {fileID: 281169480}
   - component: {fileID: 281169479}
   m_Layer: 5
-  m_Name: Bullet
+  m_Name: BulletImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1622,7 +1622,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 735472250}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1630,11 +1630,11 @@ RectTransform:
   - {fileID: 124162653}
   - {fileID: 1622770879}
   - {fileID: 1645830414}
-  m_Father: {fileID: 1131866253}
+  m_Father: {fileID: 1718140539}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -169.99992}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &737835920
@@ -1649,7 +1649,7 @@ GameObject:
   - component: {fileID: 737835923}
   - component: {fileID: 737835922}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: MainPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2442,7 +2442,7 @@ GameObject:
   - component: {fileID: 1105128498}
   - component: {fileID: 1105128497}
   m_Layer: 5
-  m_Name: SpecialBullet
+  m_Name: SpecialBulletImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2505,42 +2505,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1105128495}
   m_CullTransparentMesh: 1
---- !u!1 &1131866252
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1131866253}
-  m_Layer: 5
-  m_Name: Store_Container
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1131866253
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1131866252}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 735472251}
-  m_Father: {fileID: 1718140539}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -169.99994}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1171831536
 GameObject:
   m_ObjectHideFlags: 0
@@ -2828,7 +2792,7 @@ GameObject:
   - component: {fileID: 1285130175}
   - component: {fileID: 1285130174}
   m_Layer: 5
-  m_Name: Control1
+  m_Name: ArrowControl1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3095,7 +3059,7 @@ GameObject:
   - component: {fileID: 1329874406}
   - component: {fileID: 1329874405}
   m_Layer: 0
-  m_Name: home-background-medium_0
+  m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3187,7 +3151,7 @@ GameObject:
   - component: {fileID: 1392156415}
   - component: {fileID: 1392156414}
   m_Layer: 5
-  m_Name: Player
+  m_Name: PlayerImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4191,7 +4155,7 @@ GameObject:
   - component: {fileID: 1644369215}
   - component: {fileID: 1644369214}
   m_Layer: 5
-  m_Name: control2
+  m_Name: Arrowcontrol2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4613,7 +4577,7 @@ RectTransform:
   m_Children:
   - {fileID: 1429156594}
   - {fileID: 1003487465}
-  - {fileID: 1131866253}
+  - {fileID: 735472251}
   m_Father: {fileID: 1897714967}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -4671,7 +4635,7 @@ GameObject:
   - component: {fileID: 1829736557}
   - component: {fileID: 1829736556}
   m_Layer: 5
-  m_Name: Controls
+  m_Name: Description
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5486,7 +5450,7 @@ GameObject:
   - component: {fileID: 2040614918}
   - component: {fileID: 2040614917}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: MainPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5914,7 +5878,7 @@ GameObject:
   - component: {fileID: 2134046571}
   - component: {fileID: 2134046570}
   m_Layer: 5
-  m_Name: Exit
+  m_Name: ExitButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

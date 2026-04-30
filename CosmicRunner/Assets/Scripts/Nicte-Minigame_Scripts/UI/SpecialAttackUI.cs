@@ -7,8 +7,6 @@ public class SpecialAttackUI : MonoBehaviour
     public int currentCharge = 0;
     float timer = 0f;
 
-    bool activeSpecialAttack = false;
-
 
      void Awake()
     {
@@ -29,9 +27,7 @@ public class SpecialAttackUI : MonoBehaviour
     }
     public void resetAttack()
     {
-        activeSpecialAttack = false;
         currentCharge = 0;
-        Debug.Log ("Special Attack reset"+ activeSpecialAttack);
         for (int i = 0; i < SpecialAttackImages.Length; i++)
             {
                 SpecialAttackImages[i].enabled = false;

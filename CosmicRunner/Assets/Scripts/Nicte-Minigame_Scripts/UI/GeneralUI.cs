@@ -6,10 +6,7 @@ public class GeneralUI : MonoBehaviour
     public TextMeshProUGUI timerText;
     public TextMeshProUGUI creditsText;
     public GameObject pauseScreen;
-    public GameObject startScreen;
-    public GameObject menuScreen;
      bool gamePaused = false;
-     public static int finalScore; 
     public static int currentCredits = 0;
     void Update()
     {
@@ -26,27 +23,31 @@ public class GeneralUI : MonoBehaviour
 
     public void UpdateCredits(int credits)
     {
+        SFXManager.Instance.CoinSound();
         currentCredits += credits;
         creditsText.text =currentCredits.ToString();
-        Debug.Log("Créditos actualizados: " + currentCredits);
     }
 
     public void pause()
-    {
-        Debug.Log("Pausa activada");
-        
+    {   
         if (GameController.instancia == null)
+        {
             return;
+        }
 
         if (GameController.instancia.currentState != "Playing")
+        {
             return;
+        }
 
         GameController.instancia.TogglePause();
 
         gamePaused = !gamePaused;
 
         if (pauseScreen != null)
+        {
             pauseScreen.SetActive(gamePaused);
+        }
     }
 
     public void resumeGame()
@@ -57,8 +58,9 @@ public class GeneralUI : MonoBehaviour
         }
 
         if (pauseScreen != null)
+        {
             pauseScreen.SetActive(false);
-
+        }
         gamePaused = false;
     }
 
@@ -69,15 +71,14 @@ public class GeneralUI : MonoBehaviour
         {
             GameController.instancia.currentState = "Playing";
             GameController.instancia.timeRemaining = GameController.instancia.time;
-            }
+        }
         currentCredits = 0;
         pauseScreen.SetActive(false);
         SceneManager.LoadScene("AtaqueEstelarGame");
-        }
+    }
 
     public void backToMenu()
     {
-  
-            SceneManager.LoadScene("AtaqueEstelarGameStart");
+        SceneManager.LoadScene("AtaqueEstelarGameStart");
     }
 }

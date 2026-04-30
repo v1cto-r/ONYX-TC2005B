@@ -9,6 +9,7 @@ public class SFXManager : MonoBehaviour
     public AudioClip defeat;
     public AudioClip game;
     public AudioClip powerUp;
+    public AudioClip coin;
 
     private void Awake()
     {
@@ -51,5 +52,10 @@ public class SFXManager : MonoBehaviour
     public void PowerUpSound()
     {
         AudioSource.PlayClipAtPoint(powerUp, Camera.main.transform.position, 0.5f);
+    }
+
+    public void CoinSound()
+    {
+        AudioSource.PlayClipAtPoint(coin, Camera.main.transform.position, 0.5f);
     }
 }

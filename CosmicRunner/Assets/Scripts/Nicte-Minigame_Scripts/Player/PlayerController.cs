@@ -8,8 +8,9 @@ public class PlayerController : MonoBehaviour
    PlayerMovement playermovement;
    SpecialAttackUI specialAttackUI;
    SpriteRenderer spriteRenderer;
+   PlayerHealth playerHealth;
    string colorCooldown="#FFA3A3";
-   public int currentHealth = 12;
+   //public int currentHealth = 12;
    bool inputEnabled = true;
    bool isDead = false;
    float attackWindow = 1f;
@@ -24,7 +25,9 @@ public class PlayerController : MonoBehaviour
        playermovement = GetComponent<PlayerMovement>();
        specialAttackUI = FindObjectOfType<SpecialAttackUI>();
        spriteRenderer = GetComponent<SpriteRenderer>();
-       PlayerPrefs.SetInt("PlayerHealth", currentHealth);
+       gameController = FindObjectOfType<GameController>();
+       playerHealth = GetComponent<PlayerHealth>();
+       //PlayerPrefs.SetInt("PlayerHealth", currentHealth);
    }
    
    void Update()
@@ -58,7 +61,7 @@ public class PlayerController : MonoBehaviour
 
                 lastAttackTime = currentTime;
                 
-                combat.shoot();
+                combat.Shoot();
                 if (attackCount >= maxAttacks)
                 {
                     StartCoroutine(AttackCooldown());
@@ -91,18 +94,15 @@ public class PlayerController : MonoBehaviour
     IEnumerator AttackCooldown()
    {
        isOnCooldown = true;
-       Debug.Log("Cooldown activado");
        if (ColorUtility.TryParseHtmlString(colorCooldown, out Color cooldownColor))
        {
         spriteRenderer.color = cooldownColor;
-         } 
+    } 
 
        yield return new WaitForSeconds(cooldownTime);
 
        attackCount = 0;
        isOnCooldown = false;
        spriteRenderer.color = Color.white;
-       Debug.Log("Cooldown finalizado");
    }
-
 }
