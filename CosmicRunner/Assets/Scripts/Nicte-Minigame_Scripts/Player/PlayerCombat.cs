@@ -1,0 +1,74 @@
+using UnityEngine;
+
+namespace Nicte.Minigame{
+public class PlayerCombat : MonoBehaviour
+{
+    public GameObject bullet;
+    public Transform firePoint;
+    public GameObject specialBullet;
+    public int specialChargeMax = 3;
+    public float comboResetTime = 2f;
+    public int currentCombo = 0;
+    public int currentSpecialCharges = 3;
+    float shootTimer = 0f;
+    float comboTimer = 0f;
+    private float shootCooldown = 0.1f;
+
+
+    void Start()
+    {
+        currentSpecialCharges = specialChargeMax;
+    }
+
+    void Update()
+    {
+        if (shootTimer > 0f)
+        {
+            shootTimer -= Time.deltaTime;
+        }
+
+       
+        if (currentCombo > 0)
+        {
+            comboTimer -= Time.deltaTime;
+            if (comboTimer <= 0f){
+                ResetCombo();
+            }
+        }
+    }
+
+    public void Shoot()
+    {
+        if (shootTimer > 0f || bullet == null || firePoint == null) return;
+        GameObject bulletShoot = Instantiate(bullet, firePoint.position, Quaternion.identity);
+
+        shootTimer = shootCooldown;
+
+        currentCombo++;
+        comboTimer = comboResetTime;
+
+    }
+
+    public void SpecialAttack()
+    {
+        if (currentSpecialCharges <= 0 || specialBullet == null || firePoint == null) return;
+        GameObject bullet = Instantiate(specialBullet, firePoint.position, Quaternion.identity);
+    }
+
+    public void ResetCombo()
+    {
+        currentCombo = 0;
+        comboTimer = 0f;
+    }
+
+    public void RechargeSpecial()
+    {
+        currentSpecialCharges = specialChargeMax;
+        SpecialAttackUI specialUI = FindObjectOfType<SpecialAttackUI>();
+        if (specialUI != null)
+        {
+            specialUI.UpdateCharge(currentSpecialCharges);
+        }
+    }
+}
+}
