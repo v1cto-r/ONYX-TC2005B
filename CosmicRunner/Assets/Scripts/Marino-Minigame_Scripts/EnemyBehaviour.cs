@@ -1,124 +1,158 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class EnemyBehaviour : MonoBehaviour
+namespace MECS
 {
-    [SerializeField] private Tilemap groundTilemap;
-    [SerializeField] private Tilemap wallsTilemap;
-    [SerializeField] private float stepRepeatSeconds = 0.15f;
-    [SerializeField] private GameObject player;
-    [SerializeField] private int scorePenalty = 10;
-
-    private float timeUntilNextStep;
-    private static readonly Vector3Int[] CardinalDirections =
+    // Enemigo que se mueve hacia jugador en rejilla
+    public class EnemyBehaviour : MonoBehaviour
     {
-        Vector3Int.up,
-        Vector3Int.down,
-        Vector3Int.left,
-        Vector3Int.right
-    };
+        // Tilemap transitable donde el enemigo puede caminar
+        [SerializeField] private Tilemap groundTilemap;
+        // Tilemap con paredes o zonas bloqueadas
+        [SerializeField] private Tilemap wallsTilemap;
+        // Tiempo entre cada intento de movimiento
+        [SerializeField] private float stepRepeatSeconds = 0.15f;
+        // Referencia al jugador objetivo
+        [SerializeField] private GameObject player;
+        // Puntos que se restan al chocar con el jugador
+        [SerializeField] private int scorePenalty = 10;
 
-    public void Initialize(Tilemap ground, Tilemap walls)
-    {
-        groundTilemap = ground;
-        wallsTilemap = walls;
-    }
-
-    private void Start()
-    {
-        player = GameObject.FindGameObjectWithTag("Player");
-        timeUntilNextStep = stepRepeatSeconds;
-    }
-
-    private void Update()
-    {
-        timeUntilNextStep -= Time.deltaTime;
-
-        if (timeUntilNextStep > 0f)
+        // Cuenta regresiva hasta el siguiente paso
+        private float timeUntilNextStep;
+        // Direcciones cardinales que se prueban para acercarse al jugador
+        private static readonly Vector3Int[] CardinalDirections =
         {
-            return;
+            Vector3Int.up,
+            Vector3Int.down,
+            Vector3Int.left,
+            Vector3Int.right
+        };
+
+        // Recibe referencias de tilemap cuando el spawner crea este enemigo
+        public void Initialize(Tilemap ground, Tilemap walls)
+        {
+            groundTilemap = ground;
+            wallsTilemap = walls;
         }
 
-        MoveTowardPlayer();
-        timeUntilNextStep = stepRepeatSeconds;
-    }
-
-    private void MoveTowardPlayer()
-    {
-        if (player == null || groundTilemap == null || wallsTilemap == null)
+        // Busca al jugador y arranca el temporizador de movimiento
+        private void Start()
         {
-            return;
+            // El objetivo siempre es el objeto con tag Player
+            player = GameObject.FindGameObjectWithTag("Player");
+            timeUntilNextStep = stepRepeatSeconds;
         }
 
-        Vector3Int playerCell = groundTilemap.WorldToCell(player.transform.position);
-        Vector3Int enemyCell = groundTilemap.WorldToCell(transform.position);
-
-        Vector3Int bestMove = enemyCell;
-        float bestDistance = Vector3Int.Distance(enemyCell, playerCell);
-
-        foreach (Vector3Int direction in CardinalDirections)
+        // Controla el ritmo de movimiento del enemigo
+        private void Update()
         {
-            Vector3Int nextCell = enemyCell + direction;
+            // Reducimos el tiempo hasta el siguiente paso
+            timeUntilNextStep -= Time.deltaTime;
 
-            if (!CanMoveToCell(nextCell))
+            // Si todavia no toca moverse, salimos
+            if (timeUntilNextStep > 0f)
             {
-                continue;
+                return;
             }
 
-            float candidateDistance = Vector3Int.Distance(nextCell, playerCell);
-            if (candidateDistance < bestDistance)
+            // Cuando el temporizador llega a cero, damos un paso hacia el jugador
+            MoveTowardPlayer();
+            timeUntilNextStep = stepRepeatSeconds;
+        }
+
+        // Elige el paso valido que mas acerque al enemigo al jugador
+        private void MoveTowardPlayer()
+        {
+            // Sin referencias validas no podemos calcular rutas
+            if (player == null || groundTilemap == null || wallsTilemap == null)
             {
-                bestDistance = candidateDistance;
-                bestMove = nextCell;
+                return;
             }
+
+            // Convertimos posiciones reales a celdas del mapa
+            Vector3Int playerCell = groundTilemap.WorldToCell(player.transform.position);
+            Vector3Int enemyCell = groundTilemap.WorldToCell(transform.position);
+
+            // Empezamos suponiendo que no nos movemos
+            Vector3Int bestMove = enemyCell;
+            float bestDistance = Vector3Int.Distance(enemyCell, playerCell);
+
+            // Probamos cada direccion cardinal para buscar la mejor opcion
+            foreach (Vector3Int direction in CardinalDirections)
+            {
+                Vector3Int nextCell = enemyCell + direction;
+
+                // Si la celda esta bloqueada, la descartamos
+                if (!CanMoveToCell(nextCell))
+                {
+                    continue;
+                }
+
+                // Guardamos el movimiento que deje menor distancia al jugador
+                float candidateDistance = Vector3Int.Distance(nextCell, playerCell);
+                if (candidateDistance < bestDistance)
+                {
+                    bestDistance = candidateDistance;
+                    bestMove = nextCell;
+                }
+            }
+
+            // Si ninguna opcion mejora la posicion, no movemos al enemigo
+            if (bestMove == enemyCell)
+            {
+                return;
+            }
+
+            // Colocamos el enemigo en el centro de la celda elegida
+            transform.position = groundTilemap.GetCellCenterWorld(bestMove);
         }
 
-        if (bestMove == enemyCell)
+        // Comprueba si una celda es valida para caminar
+        private bool CanMoveToCell(Vector3Int cell)
         {
-            return;
+            // La celda debe existir en el suelo y no puede estar bloqueada por paredes
+            if (!groundTilemap.HasTile(cell) || wallsTilemap.HasTile(cell))
+            {
+                return false;
+            }
+
+            // Tampoco puede haber una caja en esa celda
+            if (IsBoxAtCell(cell))
+            {
+                return false;
+            }
+
+            return true;
         }
 
-        transform.position = groundTilemap.GetCellCenterWorld(bestMove);
-    }
-
-    private bool CanMoveToCell(Vector3Int cell)
-    {
-        if (!groundTilemap.HasTile(cell) || wallsTilemap.HasTile(cell))
+        // Revisa si una caja ocupa la celda indicada
+        private bool IsBoxAtCell(Vector3Int cell)
         {
+            // Miramos el centro de la celda para comprobar colisiones en ese punto
+            Vector3 cellCenterWorld = groundTilemap.GetCellCenterWorld(cell);
+            Collider2D[] collidersAtPoint = Physics2D.OverlapPointAll(cellCenterWorld);
+
+            // Si encontramos un objeto con tag Box, bloqueamos la celda
+            foreach (Collider2D colliderAtPoint in collidersAtPoint)
+            {
+                if (colliderAtPoint != null && colliderAtPoint.CompareTag("Box"))
+                {
+                    return true;
+                }
+            }
+
             return false;
         }
 
-        if (IsBoxAtCell(cell))
+        // Si el enemigo toca al jugador, se destruye y aplica penalizacion
+        private void OnTriggerEnter2D(Collider2D collision)
         {
-            return false;
-        }
-
-        return true;
-    }
-
-    private bool IsBoxAtCell(Vector3Int cell)
-    {
-        Vector3 cellCenterWorld = groundTilemap.GetCellCenterWorld(cell);
-        Collider2D[] collidersAtPoint = Physics2D.OverlapPointAll(cellCenterWorld);
-
-        foreach (Collider2D colliderAtPoint in collidersAtPoint)
-        {
-            if (colliderAtPoint != null && colliderAtPoint.CompareTag("Box"))
+            if (collision.gameObject.CompareTag("Player"))
             {
-                return true;
+                Destroy(gameObject);
+                Debug.Log("Enemy collided with player!");
+                GameControl.Instance.RemoveScore(scorePenalty);
             }
-        }
-
-        return false;
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            Destroy(gameObject);
-            Debug.Log("Enemy collided with player!");
-            GameControl.Instance.RemoveScore(scorePenalty);
         }
     }
 }

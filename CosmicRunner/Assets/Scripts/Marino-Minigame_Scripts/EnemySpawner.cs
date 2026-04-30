@@ -3,106 +3,135 @@ using UnityEngine.Tilemaps;
 using System.Collections.Generic;
 using System.Collections;
 
-public class EnemySpawner : MonoBehaviour
+namespace MECS
 {
-    [SerializeField] private Tilemap groundTilemap;
-    [SerializeField] private Tilemap wallsTilemap;
-    [SerializeField] private GameObject enemyPrefab;
-    [SerializeField] private int minEnemiesPerWave = 1;
-    [SerializeField] private int maxEnemiesPerWave = 3;
-    [SerializeField] private float timeToSpawnMin = 1f;
-    [SerializeField] private float timeToSpawnMax = 3f;
-
-    void Start()
+    // Spawnea enemigos en tiles validos
+    public class EnemySpawner : MonoBehaviour
     {
-        StartCoroutine(SpawnLoop());
-    }
+        // Mapa del suelo donde pueden aparecer
+        [SerializeField] private Tilemap groundTilemap;
+        // Mapa con paredes o zonas prohibidas
+        [SerializeField] private Tilemap wallsTilemap;
+        // Prefab del enemigo a instanciar
+        [SerializeField] private GameObject enemyPrefab;
+        // Minimo de enemigos por oleada
+        [SerializeField] private int minEnemiesPerWave = 1;
+        // Maximo de enemigos por oleada
+        [SerializeField] private int maxEnemiesPerWave = 3;
+        // Tiempo minimo entre spawns
+        [SerializeField] private float timeToSpawnMin = 1f;
+        // Tiempo maximo entre spawns
+        [SerializeField] private float timeToSpawnMax = 3f;
 
-    private IEnumerator SpawnLoop()
-    {
-        while (true)
+        // Arranca la corutina que genera oleadas de enemigos
+        void Start()
         {
-            yield return new WaitForSeconds(Random.Range(timeToSpawnMin, timeToSpawnMax));
-            SpawnWave();
-        }
-    }
-
-    private void SpawnWave()
-    {
-        if (enemyPrefab == null || groundTilemap == null || wallsTilemap == null)
-        {
-            Debug.LogWarning("EnemySpawner is missing references.", this);
-            return;
+            StartCoroutine(SpawnLoop());
         }
 
-        int clampedMin = Mathf.Max(1, minEnemiesPerWave);
-        int clampedMax = Mathf.Max(clampedMin, maxEnemiesPerWave);
-        int enemiesToSpawn = Random.Range(clampedMin, clampedMax + 1);
-
-        List<Vector3Int> validTiles = GetValidSpawnTiles();
-        int spawnedCount = 0;
-
-        while (spawnedCount < enemiesToSpawn && validTiles.Count > 0)
+        // Bucle infinito que espera y luego crea una nueva oleada
+        private IEnumerator SpawnLoop()
         {
-            int randomIndex = Random.Range(0, validTiles.Count);
-            Vector3Int spawnCell = validTiles[randomIndex];
-            validTiles.RemoveAt(randomIndex);
-
-            Vector3 spawnWorldPos = groundTilemap.GetCellCenterWorld(spawnCell);
-
-            if (IsCellOccupied(spawnWorldPos))
+            while (true)
             {
-                continue;
-            }
-
-            GameObject spawnedEnemy = Instantiate(enemyPrefab, spawnWorldPos, Quaternion.identity);
-            EnemyBehaviour enemyBehaviour = spawnedEnemy.GetComponent<EnemyBehaviour>();
-            if (enemyBehaviour != null)
-            {
-                enemyBehaviour.Initialize(groundTilemap, wallsTilemap);
-            }
-
-            spawnedCount++;
-        }
-
-        if (spawnedCount < enemiesToSpawn)
-        {
-            Debug.LogWarning("Spawned " + spawnedCount + " out of " + enemiesToSpawn + " enemies because not enough free tiles were available.");
-        }
-    }
-
-    private List<Vector3Int> GetValidSpawnTiles()
-    {
-        List<Vector3Int> validTiles = new List<Vector3Int>();
-
-        foreach (Vector3Int cell in groundTilemap.cellBounds.allPositionsWithin)
-        {
-            if (groundTilemap.HasTile(cell) && !wallsTilemap.HasTile(cell))
-            {
-                validTiles.Add(cell);
+                // Esperamos un tiempo aleatorio antes de volver a spawnear
+                yield return new WaitForSeconds(Random.Range(timeToSpawnMin, timeToSpawnMax));
+                SpawnWave();
             }
         }
 
-        return validTiles;
-    }
-
-    private bool IsCellOccupied(Vector3 worldPosition)
-    {
-        Collider2D[] collidersAtPoint = Physics2D.OverlapPointAll(worldPosition);
-
-        foreach (Collider2D colliderAtPoint in collidersAtPoint)
+        // Instancia una oleada de enemigos respetando las celdas libres
+        private void SpawnWave()
         {
-            if (colliderAtPoint == null)
+            // Sin referencias no podemos crear enemigos de forma segura
+            if (enemyPrefab == null || groundTilemap == null || wallsTilemap == null)
             {
-                continue;
+                Debug.LogWarning("EnemySpawner is missing references.", this);
+                return;
             }
 
-            if (colliderAtPoint.CompareTag("Player") || colliderAtPoint.CompareTag("Enemy") || colliderAtPoint.CompareTag("Box"))
+            // Aseguramos un rango valido de cantidad por oleada
+            int clampedMin = Mathf.Max(1, minEnemiesPerWave);
+            int clampedMax = Mathf.Max(clampedMin, maxEnemiesPerWave);
+            int enemiesToSpawn = Random.Range(clampedMin, clampedMax + 1);
+
+            // Reunimos las celdas donde realmente se puede aparecer
+            List<Vector3Int> validTiles = GetValidSpawnTiles();
+            int spawnedCount = 0;
+
+            // Vamos consumiendo tiles validos hasta cubrir la cantidad objetivo
+            while (spawnedCount < enemiesToSpawn && validTiles.Count > 0)
             {
-                return true;
+                // Elegimos una celda libre al azar y la sacamos del pool
+                int randomIndex = Random.Range(0, validTiles.Count);
+                Vector3Int spawnCell = validTiles[randomIndex];
+                validTiles.RemoveAt(randomIndex);
+
+                // Convertimos la celda elegida a posicion de mundo
+                Vector3 spawnWorldPos = groundTilemap.GetCellCenterWorld(spawnCell);
+
+                // Si algo ocupa el punto, probamos otra celda
+                if (IsCellOccupied(spawnWorldPos))
+                {
+                    continue;
+                }
+
+                // Creamos el enemigo y le damos referencias del mapa
+                GameObject spawnedEnemy = Instantiate(enemyPrefab, spawnWorldPos, Quaternion.identity);
+                EnemyBehaviour enemyBehaviour = spawnedEnemy.GetComponent<EnemyBehaviour>();
+                if (enemyBehaviour != null)
+                {
+                    enemyBehaviour.Initialize(groundTilemap, wallsTilemap);
+                }
+
+                spawnedCount++;
+            }
+
+            // Avisamos si no se pudo cubrir toda la oleada por falta de espacio
+            if (spawnedCount < enemiesToSpawn)
+            {
+                Debug.LogWarning("Spawned " + spawnedCount + " out of " + enemiesToSpawn + " enemies because not enough free tiles were available.");
             }
         }
 
-        return false;
+        // Devuelve todas las celdas transitable donde puede aparecer un enemigo
+        private List<Vector3Int> GetValidSpawnTiles()
+        {
+            List<Vector3Int> validTiles = new List<Vector3Int>();
+
+            // Recorremos el mapa completo buscando tiles sin pared
+            foreach (Vector3Int cell in groundTilemap.cellBounds.allPositionsWithin)
+            {
+                if (groundTilemap.HasTile(cell) && !wallsTilemap.HasTile(cell))
+                {
+                    validTiles.Add(cell);
+                }
+            }
+
+            return validTiles;
+        }
+
+        // Comprueba si ya hay algo ocupando la posicion de spawn
+        private bool IsCellOccupied(Vector3 worldPosition)
+        {
+            // Miramos todos los colliders en el punto elegido
+            Collider2D[] collidersAtPoint = Physics2D.OverlapPointAll(worldPosition);
+
+            // Si encontramos jugador, enemigo o caja, cancelamos ese spawn
+            foreach (Collider2D colliderAtPoint in collidersAtPoint)
+            {
+                if (colliderAtPoint == null)
+                {
+                    continue;
+                }
+
+                if (colliderAtPoint.CompareTag("Player") || colliderAtPoint.CompareTag("Enemy") || colliderAtPoint.CompareTag("Box"))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
     }
 }

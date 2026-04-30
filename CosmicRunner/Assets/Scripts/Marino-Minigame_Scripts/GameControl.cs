@@ -1,130 +1,172 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameControl : MonoBehaviour
+namespace MECS
 {
-    public static GameControl Instance;
-
-    [Header("Game Settings")]
-    public int promptsToWin = 8;
-    public int currentPrompts = 0;
-    public int currentScore = 0;
-
-    [Header("UI Control")]
-    public float totalGameTime = 120f;
-    public float remainingTime;
-    public UIControl uiControl;
-
-    
-    private bool gameOver;
-    private PromptsControl promptsControl;
-
-    private void Awake()
+    // Control principal del juego y estado
+    public class GameControl : MonoBehaviour
     {
-        if (Instance != null && Instance != this)
+        // Instancia global para consultar estado del juego desde otros sistemas
+        public static GameControl Instance;
+
+        [Header("Game Settings")]
+        // Cantidad de prompts necesaria para ganar
+        public int promptsToWin = 8;
+        // Prompts completados durante la partida
+        public int currentPrompts = 0;
+        // Puntaje acumulado actual
+        public int currentScore = 0;
+
+        [Header("UI Control")]
+        // Tiempo total de la partida en segundos
+        public float totalGameTime = 120f;
+        // Tiempo restante en la partida actual
+        public float remainingTime;
+        // Referencia a la UI principal para refrescar textos
+        public UIControl uiControl;
+
+        [Header("SFX Control")]
+        // Controlador global de sonidos del juego
+        public SFXManager sfxManager;
+
+        // Marca cuando la partida ya termino
+        private bool gameOver;
+        // Referencia interna al controlador de prompts
+        private PromptsControl promptsControl;
+
+        // Prepara referencias y arranca la partida desde cero
+        private void Awake()
         {
-            Destroy(gameObject);
-            return;
+            // Evita tener mas de un controlador vivo al mismo tiempo
+            if (Instance != null && Instance != this)
+            {
+                Destroy(gameObject);
+                return;
+            }
+
+            // Guardamos la instancia activa para otros scripts
+            Instance = this;
+            if (sfxManager == null)
+            {
+                sfxManager = FindAnyObjectByType<SFXManager>();
+            }
+            SetReferences();
+            StartGame();
         }
 
-        Instance = this;
-        SetReferences();
-        StartGame();
-    }
-
-    private void Update()
-    {
-        if (gameOver)
+        // Cuenta el tiempo y termina la partida al llegar a cero
+        private void Update()
         {
-            return;
-        }
+            // Si el juego ya termino, no seguimos contando tiempo
+            if (gameOver)
+            {
+                return;
+            }
 
-        remainingTime -= Time.deltaTime;
+            // Restamos el delta de cada frame al temporizador
+            remainingTime -= Time.deltaTime;
 
-        if (uiControl != null)
-        {
-            uiControl.SetTimer(remainingTime);
-        }
-
-        if (remainingTime <= 0f)
-        {
-            remainingTime = 0f;
+            // La UI siempre debe mostrar el tiempo actual
             if (uiControl != null)
             {
                 uiControl.SetTimer(remainingTime);
             }
-            EndGame();
+
+            // Si ya no queda tiempo, forzamos fin de partida
+            if (remainingTime <= 0f)
+            {
+                remainingTime = 0f;
+                if (uiControl != null)
+                {
+                    uiControl.SetTimer(remainingTime);
+                }
+                EndGame();
+            }
         }
-    }
 
-    private void SetReferences()
-    {
-        if (promptsControl == null)
+        // Busca las referencias que usa el sistema de juego
+        private void SetReferences()
         {
-            promptsControl = PromptsControl.Instance;
+            // Tomamos el controlador de prompts si ya existe en escena
+            if (promptsControl == null)
+            {
+                promptsControl = PromptsControl.Instance;
+            }
+
+            // Si la UI no esta ligada, la buscamos automaticamente
+            if (uiControl == null)
+            {
+                uiControl = FindAnyObjectByType<UIControl>();
+            }
         }
 
-        if (uiControl == null)
+        // Reinicia valores y refresca la UI antes de jugar
+        public void StartGame()
         {
-            uiControl = FindAnyObjectByType<UIControl>();
-        }
-    }
-
-    public void StartGame()
-    {
-        currentScore = 0;
-        currentPrompts = 0;
-        remainingTime = totalGameTime;
-        gameOver = false;
-
-        if (uiControl != null)
-        {
-            uiControl.SetTimer(remainingTime);
-            uiControl.SetScore(currentScore);
-            uiControl.SetPrompts(currentPrompts, promptsToWin);
-        }
-    }
-
-    public void AddScore(int amount)
-    {
-        currentScore += amount;
-
-        if (uiControl != null)
-        {
-            uiControl.SetScore(currentScore);
-        }
-    }
-
-    public void RemoveScore(int amount)
-    {
-        if (currentScore - amount < 0)
-        {
+            // Vaciamos score y progreso para empezar limpio
             currentScore = 0;
+            currentPrompts = 0;
+            remainingTime = totalGameTime;
+            gameOver = false;
+
+            // Mandamos el estado inicial a la interfaz
+            if (uiControl != null)
+            {
+                uiControl.SetTimer(remainingTime);
+                uiControl.SetScore(currentScore);
+                uiControl.SetPrompts(currentPrompts, promptsToWin);
+            }
         }
-        else
+
+        // Suma puntos al marcador
+        public void AddScore(int amount)
         {
-            currentScore -= amount;
+            currentScore += amount;
+
+            // Refrescamos la UI para mostrar el nuevo total
+            if (uiControl != null)
+            {
+                uiControl.SetScore(currentScore);
+            }
         }
 
-        if (uiControl != null)
+        // Resta puntos sin permitir que el score baje de cero
+        public void RemoveScore(int amount)
         {
-            uiControl.SetScore(currentScore);
+            // Evitamos valores negativos en la interfaz y en la logica
+            if (currentScore - amount < 0)
+            {
+                currentScore = 0;
+            }
+            else
+            {
+                currentScore -= amount;
+            }
+
+            // Actualizamos el texto de score despues de cambiarlo
+            if (uiControl != null)
+            {
+                uiControl.SetScore(currentScore);
+            }
         }
-    }
 
-    public void AddCompletedPrompt()
-    {
-        currentPrompts += 1;
-
-        if (uiControl != null)
+        // Incrementa el contador de prompts resueltos
+        public void AddCompletedPrompt()
         {
-            uiControl.SetPrompts(currentPrompts, promptsToWin);
-        }
-    }
+            currentPrompts += 1;
 
-    private void EndGame()
-    {
-        gameOver = true;
-        SceneManager.LoadScene("EndScene");
+            // La UI debe reflejar el progreso hacia la victoria
+            if (uiControl != null)
+            {
+                uiControl.SetPrompts(currentPrompts, promptsToWin);
+            }
+        }
+
+        // Marca el juego como terminado y carga la escena final
+        private void EndGame()
+        {
+            gameOver = true;
+            SceneManager.LoadScene("EndScene");
+        }
     }
 }

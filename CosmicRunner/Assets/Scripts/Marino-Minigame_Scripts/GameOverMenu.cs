@@ -1,19 +1,22 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameOverMenu : MonoBehaviour
+namespace MECS
 {
-    // Metodo para el boton de reintentar en el menu de game over
-    public void ReplayButton()
+    public class GameOverMenu : MonoBehaviour
     {
-        // Reinicia el tiempo de juego a 1 para asegurarse de que el juego no este pausado al reiniciar
-        Time.timeScale = 1f;
-        SceneManager.LoadScene("GameScene");
-    }
+        // Boton para reiniciar la partida desde la pantalla final
+        public void ReplayButton()
+        {
+            // Nos aseguramos de que el juego vuelva a velocidad normal antes de cargar la escena
+            Time.timeScale = 1f;
+            SceneManager.LoadScene("GameScene");
+        }
 
-    // Metodo para el boton de menu principal en el menu de game over
-    public void MainMenuButton()
-    {
-        SceneManager.LoadScene("MainMenuScene");
+        // Boton para volver al menu principal
+        public void MainMenuButton()
+        {
+            SceneManager.LoadScene("MainMenuScene");
+        }
     }
 }
