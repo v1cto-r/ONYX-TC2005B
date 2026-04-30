@@ -1,5 +1,7 @@
 using UnityEngine;
 
+namespace JorgeGame
+{
 public class InstructionsManager : MonoBehaviour
 {
     // panel de instrucciones
@@ -35,4 +37,5 @@ public class InstructionsManager : MonoBehaviour
 
         Time.timeScale = 0f;
     }
+}
 }

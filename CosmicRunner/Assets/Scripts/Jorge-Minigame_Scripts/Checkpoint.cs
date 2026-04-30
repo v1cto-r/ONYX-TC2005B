@@ -1,5 +1,7 @@
 using UnityEngine;
 
+namespace JorgeGame
+{
 public class Checkpoint : MonoBehaviour
 {
     // referencia al sistema de preguntas
@@ -50,4 +52,5 @@ public class Checkpoint : MonoBehaviour
         if (sr != null)
             sr.color = wrongColor;
     }
+}
 }

@@ -2,6 +2,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 
+namespace JorgeGame
+{
 public class EndGameManager : MonoBehaviour
 {
     // define si es victoria o derrota
@@ -40,4 +42,5 @@ public class EndGameManager : MonoBehaviour
         Time.timeScale = 1f;
         SceneManager.LoadScene(2);
     }
+}
 }

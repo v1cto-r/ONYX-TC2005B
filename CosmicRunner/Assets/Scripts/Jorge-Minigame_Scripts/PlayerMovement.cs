@@ -2,6 +2,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
 
+namespace JorgeGame
+{
 public class PlayerMovement : MonoBehaviour
 {
     // acciones de movimiento y salto
@@ -170,4 +172,5 @@ public class PlayerMovement : MonoBehaviour
                 break;
         }
     }
+}
 }

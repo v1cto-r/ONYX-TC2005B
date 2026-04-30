@@ -1,5 +1,7 @@
 using UnityEngine;
 
+namespace JorgeGame
+{
 public class SpawnPoint : MonoBehaviour
 {
     // instancia global para acceder desde otros scripts
@@ -12,4 +14,5 @@ public class SpawnPoint : MonoBehaviour
     {
         instance = this;
     }
+}
 }

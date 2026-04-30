@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+namespace JorgeGame
+{
 public class PauseManager : MonoBehaviour
 {
     // panel del menu de pausa
@@ -48,4 +50,5 @@ public class PauseManager : MonoBehaviour
         Time.timeScale = 1f;
         SceneManager.LoadScene(2);
     }
+}
 }

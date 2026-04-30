@@ -1,5 +1,7 @@
 using UnityEngine;
 
+namespace JorgeGame
+{
 public class Enemy : MonoBehaviour
 {
     // velocidad de movimiento
@@ -140,4 +142,5 @@ public class Enemy : MonoBehaviour
         scale.x *= -1;
         transform.localScale = scale;
     }
+}
 }

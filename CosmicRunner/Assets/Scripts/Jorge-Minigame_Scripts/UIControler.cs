@@ -2,6 +2,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+namespace JorgeGame
+{
 public class UIControler : MonoBehaviour
 {
     // imagenes que representan las vidas (corazones)
@@ -51,4 +53,5 @@ public class UIControler : MonoBehaviour
         // muestra la cantidad de monedas en la interfaz
         coinsText.text = coins.ToString();
     }
+}
 }

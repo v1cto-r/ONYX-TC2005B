@@ -1,5 +1,7 @@
 using UnityEngine;
 
+namespace JorgeGame
+{
 public class MovingPlatform : MonoBehaviour
 {
     // puntos entre los que se mueve la plataforma
@@ -34,4 +36,5 @@ public class MovingPlatform : MonoBehaviour
                 : pointA.position;
         }
     }
+}
 }

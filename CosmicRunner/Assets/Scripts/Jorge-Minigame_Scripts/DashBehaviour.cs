@@ -2,6 +2,8 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+namespace JorgeGame
+{
 public class DashBehaviour : MonoBehaviour
 {
     // accion de dash del input system
@@ -90,4 +92,5 @@ public class DashBehaviour : MonoBehaviour
             canDash = true;
         }
     }
+}
 }

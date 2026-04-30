@@ -1,5 +1,7 @@
 using UnityEngine;
 
+namespace JorgeGame
+{
 public class UIQuestionManager : MonoBehaviour
 {
     // panel donde se muestra la pregunta
@@ -65,4 +67,5 @@ public void ShowQuestion(Vector3 checkpointPos, Checkpoint checkpoint, GameObjec
 
         Time.timeScale = 1f;
     }
+}
 }

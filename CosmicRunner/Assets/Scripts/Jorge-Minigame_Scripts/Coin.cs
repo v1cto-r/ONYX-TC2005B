@@ -1,5 +1,7 @@
 using UnityEngine;
 
+namespace JorgeGame
+{
 public class Coin : MonoBehaviour
 {
     // valor que suma la moneda
@@ -14,4 +16,5 @@ public class Coin : MonoBehaviour
             Destroy(gameObject);
         }
     }
+}
 }

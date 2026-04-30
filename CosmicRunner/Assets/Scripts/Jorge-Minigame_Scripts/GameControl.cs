@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+namespace JorgeGame
+{
 public class GameControl : MonoBehaviour
 {
     // instancia global para acceder desde otros scripts
@@ -65,4 +67,5 @@ public class GameControl : MonoBehaviour
         if (uiControler != null)
             uiControler.UpdateCoins(coins);
     }
+}
 }

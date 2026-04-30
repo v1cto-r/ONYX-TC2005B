@@ -1,5 +1,7 @@
 using UnityEngine;
 
+namespace JorgeGame
+{
 public class EnemySpawner : MonoBehaviour
 {
     // prefab del enemigo
@@ -37,4 +39,5 @@ public class EnemySpawner : MonoBehaviour
             }
         }
     }
+}
 }
