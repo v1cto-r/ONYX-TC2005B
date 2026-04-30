@@ -151,6 +151,7 @@ namespace MECS
             {
                 Destroy(gameObject);
                 Debug.Log("Enemy collided with player!");
+                GameControl.Instance.sfxManager.PlayHurtSound();
                 GameControl.Instance.RemoveScore(scorePenalty);
             }
         }

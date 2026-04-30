@@ -156,8 +156,8 @@ MonoBehaviour:
   boxCollectSound: {fileID: 0}
   goodSound: {fileID: 0}
   hurtSound: {fileID: 0}
-  loseSound: {fileID: 0}
-  winSound: {fileID: 0}
+  loseSound: {fileID: 8300000, guid: df6e10229f2a1444caafca0723f32be7, type: 3}
+  winSound: {fileID: 8300000, guid: 70f904f39de0d4e738ca6e9c6931ebe8, type: 3}
 --- !u!82 &322287390
 AudioSource:
   m_ObjectHideFlags: 0

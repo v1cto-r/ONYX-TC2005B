@@ -38,7 +38,7 @@ namespace MECS
         // Boton para volver al menu principal
         public void BackButton()
         {
-            SceneManager.LoadScene("MainMenuScene");
+            SceneManager.LoadScene("MainMenuScene_MECS");
         }
 
         // Activa un solo panel y oculta los demas

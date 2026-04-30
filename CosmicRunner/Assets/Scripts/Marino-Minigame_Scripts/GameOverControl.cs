@@ -13,36 +13,32 @@ namespace MECS
         [SerializeField] private TextMeshProUGUI scoreText;
 
         // Referencia al SFXManager para reproducir los sonidos de resultado
-        // private SFXManager sfxManager;
+        private SFXManager sfxManager;
 
         // Decide el resultado final y actualiza los textos al cargar la escena
         void Start()
         {
+            // Buscamos el SFXManager en la escena para reproducir los sonidos de resultado
+            sfxManager = FindAnyObjectByType<SFXManager>();
+
             // Verifica si el jugador ha ganado o perdido y actualiza el texto en consecuencia
 
-            // Si el jugador no perdio ni una sola vida
+            // Si el jugador gano
             if (GameControl.Instance.currentPrompts >= GameControl.Instance.promptsToWin)
             {
                 // Mensaje de victoria cuando se completo el objetivo
                 resultText.text = "VICTORIA";
-
-                if (GameControl.Instance != null && GameControl.Instance.sfxManager != null)
-                {
-                    GameControl.Instance.sfxManager.PlayWinSound();
-                }
+                sfxManager.PlayWinSound();
+                
 
             }
 
-            // Si el jugador perdio todas sus vidas
+            // Si el jugador perdio
             else
             {
                 // Mensaje de derrota cuando no se llego a la meta
                 resultText.text = "DERROTA";
-
-                if (GameControl.Instance != null && GameControl.Instance.sfxManager != null)
-                {
-                    GameControl.Instance.sfxManager.PlayLoseSound();
-                }
+                sfxManager.PlayLoseSound();
             }
 
             // Actualiza el texto del puntaje final

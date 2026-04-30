@@ -92,6 +92,8 @@ namespace MECS
             {
                 Debug.LogWarning("Spawned " + spawnedCount + " out of " + enemiesToSpawn + " enemies because not enough free tiles were available.");
             }
+
+            GameControl.Instance.sfxManager.PlayEnemySpawnSound();
         }
 
         // Devuelve todas las celdas transitable donde puede aparecer un enemigo

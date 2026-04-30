@@ -32,16 +32,19 @@ EditorBuildSettings:
     path: Assets/Scenes/Jorge-Minigame_Scenes/LoseScene.unity
     guid: 759dfd5e85d142e4698ab55f6b52e7b8
   - enabled: 1
-    path: Assets/Scenes/Marino-Minigame_Scenes/MainMenuScene.unity
+    path: Assets/Scenes/Marino-Minigame_Scenes/MainMenuScene_MECS.unity
     guid: 9b9d8e0cc8c804aafb44e67fba3b0e54
   - enabled: 1
-    path: Assets/Scenes/Marino-Minigame_Scenes/TutorialScene.unity
+    path: Assets/Scenes/Marino-Minigame_Scenes/TutorialScene_MECS.unity
     guid: 850ddb3d14f9e4d54a6230b2be56f5f7
   - enabled: 1
-    path: Assets/Scenes/Marino-Minigame_Scenes/GameScene.unity
+    path: Assets/Scenes/Marino-Minigame_Scenes/GameScene_MECS.unity
     guid: b94e142e4db074235b046c014730fb2c
   - enabled: 1
-    path: Assets/Scenes/Marino-Minigame_Scenes/EndScene.unity
+    path: Assets/Scenes/Marino-Minigame_Scenes/EndScene_MECS.unity
     guid: a6d91b4a22e4149879c4c1bdb4274062
+  - enabled: 1
+    path: Assets/Scenes/CosmicRunner-General_Scenes/TitleScreen_Scenes/GameSelectScene.unity
+    guid: aca8e0e15353d454782f2cb59219e0d3
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
