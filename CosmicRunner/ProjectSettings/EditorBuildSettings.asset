@@ -4,18 +4,6 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes:
-  - enabled: 1
-    path: Assets/Scenes/Marino-Minigame_Scenes/MainMenuScene.unity
-    guid: 9b9d8e0cc8c804aafb44e67fba3b0e54
-  - enabled: 1
-    path: Assets/Scenes/Marino-Minigame_Scenes/TutorialScene.unity
-    guid: 850ddb3d14f9e4d54a6230b2be56f5f7
-  - enabled: 1
-    path: Assets/Scenes/Marino-Minigame_Scenes/GameScene.unity
-    guid: b94e142e4db074235b046c014730fb2c
-  - enabled: 1
-    path: Assets/Scenes/Marino-Minigame_Scenes/EndScene.unity
-    guid: a6d91b4a22e4149879c4c1bdb4274062
+  m_Scenes: []
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
