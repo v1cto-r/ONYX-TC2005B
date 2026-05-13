@@ -1,11 +1,14 @@
 using UnityEngine;
 
 namespace Nicte.Minigame{
+// Maneja los disparos del enemigo segun su estado
 public class EnemyAttack : MonoBehaviour
 {
+    // Prefabs de balas normales y especiales
     public GameObject[] bullets;
     public GameObject specialBullet;
     public Transform firePoint;
+    // Tiempos de disparo por estado y municion especial
     private float normalCooldown = 1.5f;
     private float aggressiveCooldown = 1f;
     private float enragedCooldown= 0.6f;
@@ -14,11 +17,13 @@ public class EnemyAttack : MonoBehaviour
     float shootTimer=0.3f;
     float currentCooldown;
     bool canAttack = true;
+    // Arranca con la cadencia de disparo normal
     void Start()
     {
         currentCooldown = normalCooldown;
     }
 
+    // Dispara de forma continua mientras el ataque siga habilitado
     void Update()
     {
         if (!canAttack) return;
@@ -32,6 +37,7 @@ public class EnemyAttack : MonoBehaviour
         }
 
     }
+    // Elige una bala aleatoria del arreglo disponible
     GameObject GetBullet()
     {
         if (bullets == null || bullets.Length == 0) return null;
@@ -39,6 +45,7 @@ public class EnemyAttack : MonoBehaviour
         return bullets[index];
     }
 
+    // Instancia la bala correspondiente al estado actual
     void Shoot()
     {
         if(currentState == "Enraged" && specialBulletCount > 0)
@@ -53,6 +60,7 @@ public class EnemyAttack : MonoBehaviour
         }
     }
 
+    // Ajusta la cadencia y municion segun el nuevo estado
     public void StateChanged(string state)
     {
         currentState = state;

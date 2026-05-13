@@ -1,18 +1,22 @@
 using UnityEngine;
 
 namespace Nicte.Minigame{
+// Coordina el estado general y la reaccion del enemigo
 public class EnemyController : MonoBehaviour
 {
+    // Referencias a los sistemas de juego, ataque y salud
     GameController gameController;
     EnemyMovement enemyMovement;
     EnemyAttack attack;
     EnemyHealth health;
     
+    // Estados y umbrales de comportamiento
     public string currentState = "Normal";
     public int aggressiveThreshold = 6;
     public int enragedThreshold = 2;
     public int currentHealth = 12;
 
+    // Prepara las referencias y guarda la vida inicial
     void Awake()
     {
         gameController = FindObjectOfType<GameController>();
@@ -24,11 +28,13 @@ public class EnemyController : MonoBehaviour
         health= GetComponent<EnemyHealth>();
     }
 
+    // Coloca al enemigo en estado normal al iniciar
     void Start()
     {
         ChangeState("Normal");
     }
 
+    // Notifica a ataque y movimiento cuando cambia el estado
     public void ChangeState(string newState)
     {
         if (currentState == newState) return;
@@ -45,6 +51,7 @@ public class EnemyController : MonoBehaviour
         }
     }
 
+    // Decide el estado segun la salud restante
     public void EvaluateStateFromHealth(float healthRatio)
     {
         if (healthRatio <= enragedThreshold)

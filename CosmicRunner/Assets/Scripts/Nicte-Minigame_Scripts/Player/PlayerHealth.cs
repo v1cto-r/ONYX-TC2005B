@@ -2,10 +2,13 @@ using UnityEngine;
 using Nicte.Minigame;
 
 namespace Nicte.Minigame{
+// Gestiona la vida, escudo y muerte del jugador
 public class PlayerHealth : MonoBehaviour
 {
+    // Referencias a control y UI de vida
     PlayerController playerController;
     HealthBarUI healthBarUI;
+    // Efecto visual del escudo y datos de salud
     public GameObject shieldEffect;
     public int maxHealth = 12;
     public float shieldTimerMax = 5f;
@@ -13,6 +16,7 @@ public class PlayerHealth : MonoBehaviour
     public bool shieldActive = false;
     public int currentHealth;
 
+    // Inicializa la vida y guarda el valor persistente
     void Awake()
     {
         playerController = GetComponent<PlayerController>();
@@ -21,6 +25,7 @@ public class PlayerHealth : MonoBehaviour
         PlayerPrefs.SetInt("PlayerHealth", currentHealth);
     }
 
+    // Reduce el temporizador del escudo mientras esta activo
     void Update()
     {
         if (shieldActive)
@@ -35,6 +40,7 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
+    // Resta vida si el jugador no esta protegido
     public void TakeDamage(int damage)
     {
         if (!isAlive || damage <= 0|| shieldActive) return;
@@ -59,6 +65,7 @@ public class PlayerHealth : MonoBehaviour
         }   
     }
 
+    // Desactiva el jugador y cambia el estado del juego a derrota
     void Die()
     {
         Debug.Log("Llegue a la funcion DIE");
@@ -73,6 +80,7 @@ public class PlayerHealth : MonoBehaviour
             GameController.instancia.ChangeState("Defeat");
     }
 
+    // Activa el escudo temporal del jugador
     public void ActivateShield()
     {
         Debug.Log("Shield activated");
@@ -84,6 +92,7 @@ public class PlayerHealth : MonoBehaviour
         shieldTimerMax = 5f;
     }
 
+    // Recupera vida hasta el maximo permitido
     public void Heal()
     {
         currentHealth += 2;

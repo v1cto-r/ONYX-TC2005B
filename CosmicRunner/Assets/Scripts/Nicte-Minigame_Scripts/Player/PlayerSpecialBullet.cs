@@ -1,13 +1,17 @@
 using UnityEngine;
 
 namespace Nicte.Minigame{
+// Proyectil especial del jugador con daño variable
 public class PlayerSpecialBullet : MonoBehaviour
 {
 
+    // Referencia a la UI de combo para sumar impacto
     ComboUI comboUI;
+    // Vida util y velocidad de la bala especial
     public float lifetime = 4f;
     public float bulletSpeed = 10f;
 
+    // Prepara la bala especial y reproduce sonido de disparo
     void Start()
     {
         Destroy(gameObject, lifetime);
@@ -15,6 +19,7 @@ public class PlayerSpecialBullet : MonoBehaviour
         SFXManager.Instance.BulletSound();
     }
 
+    // Daño aleatorio al impactar a un enemigo
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Enemy"))
@@ -32,6 +37,7 @@ public class PlayerSpecialBullet : MonoBehaviour
         }
     }
 
+    // Desplaza la bala especial hacia la izquierda
     void Update()
     {
         transform.position+= Vector3.left*Time.deltaTime*bulletSpeed;

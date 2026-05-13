@@ -1,8 +1,10 @@
 using UnityEngine;
 
 namespace Nicte.Minigame{
+// Controla el movimiento vertical del enemigo segun su estado
 public class EnemyMovement : MonoBehaviour
 {
+    // Velocidades por estado y limites de pantalla
     private float normalSpeed =2f;
     private float aggressiveSpeed=4f;
     private float enragedSpeed=6f;
@@ -11,11 +13,13 @@ public class EnemyMovement : MonoBehaviour
     private float maxY =  2f;
     private float chaseRange    = 8f;
     private float chaseStrength = 0.6f;
+    // Referencias al rigidbody y al jugador
     Rigidbody2D rb;
     Transform playerTransform;
     string currentState = "Normal";
     float currentSpeed;
 
+    // Configura el cuerpo fisico del enemigo
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -23,6 +27,7 @@ public class EnemyMovement : MonoBehaviour
         rb.freezeRotation = true;
     }
 
+    // Busca al jugador y prepara la velocidad base
     void Start()
     {
         currentSpeed = normalSpeed;
@@ -32,6 +37,7 @@ public class EnemyMovement : MonoBehaviour
             playerTransform = player.transform;
     }
 
+    // Aplica el movimiento segun el estado actual
     void FixedUpdate()
     {
         Vector2 velocity = Vector2.zero;
@@ -73,11 +79,13 @@ public class EnemyMovement : MonoBehaviour
         transform.position = pos;
     }
 
+    // Movimiento base hacia arriba o abajo
     Vector2 MoveNormally()
     {
         return new Vector2(0f, direction * currentSpeed);
     }
 
+    // Movimiento agresivo que intenta acercarse al jugador
     Vector2 MoveAggressive()
     {
         Vector2 baseVelocity = MoveNormally();
@@ -101,6 +109,7 @@ public class EnemyMovement : MonoBehaviour
         return baseVelocity;
     }
 
+    // Movimiento enojado que persigue al jugador con mas intensidad
     Vector2 MoveEnraged()
     {
         if (playerTransform == null) return MoveAggressive();
@@ -116,6 +125,7 @@ public class EnemyMovement : MonoBehaviour
         return new Vector2(0f, dirY * currentSpeed);
     }
 
+    // Ajusta la velocidad del enemigo segun el estado recibido
     public void StateChanged(string state)
     {
         currentState = state;
