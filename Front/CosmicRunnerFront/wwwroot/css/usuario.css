@@ -82,6 +82,7 @@
 	font-weight: 400;
 	color: #313131;
 	background: transparent;
+	text-decoration: none;
 	justify-self: center;
 }
 
@@ -180,6 +181,13 @@
 	margin: 0;
 	font-size: 0.93rem;
 	line-height: 1.4;
+	color: #313131;
+}
+
+.usuario-placeholder {
+	margin-top: 26px;
+	padding: 24px 0;
+	border-top: 1px solid #505050;
 	color: #313131;
 }
 

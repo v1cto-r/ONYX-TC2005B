@@ -1,3 +1,5 @@
+@model CosmicRunnerFront.Models.UsuarioModels.UsuarioViewModel
+
 @{
     ViewData["Title"] = "Usuario";
 }
@@ -9,85 +11,64 @@
 <section class="usuario-panel" aria-label="Panel de perfil">
     <div class="usuario-top">
         <div class="usuario-avatar-shell">
-            <img class="usuario-avatar" src="~/assets/random/user.png" alt="Foto temporal del usuario" />
+            <img class="usuario-avatar" src="@Url.Content(Model.FotoPerfilUrl)" alt="Foto del usuario" />
         </div>
 
         <div class="usuario-headlines">
-            <h1 class="usuario-nombre">César Alexandro Rodríguez Falcon</h1>
-            <p class="usuario-rol">Ingeniero industrial</p>
-            <p class="usuario-area">Tecnología</p>
+            <h1 class="usuario-nombre">@Model.NombreCompleto</h1>
+            <p class="usuario-rol">@Model.Puesto</p>
+            <p class="usuario-area">@Model.Departamento</p>
         </div>
     </div>
 
     <div class="usuario-tabs" role="tablist" aria-label="Secciones del perfil">
-        <span class="tab-pill tab-pill-active">Información general</span>
-        <span class="tab-pill">Actividad reciente</span>
-        <span class="tab-pill">Proyectos</span>
-        <span class="tab-pill">Configuración</span>
+        @foreach (var seccion in Model.Secciones)
+        {
+            <a class="tab-pill @(Model.SeccionActiva == seccion.Accion ? "tab-pill-active" : "")" asp-controller="Usuario" asp-action="@seccion.Accion">@seccion.Etiqueta</a>
+        }
     </div>
 
-    <div class="usuario-content-grid">
-        <aside class="usuario-contact-card" aria-label="Datos de contacto">
-            <div class="contact-row">
-                <div class="contact-lines">
-                    <p class="contact-label">Teléfono</p>
-                    <p class="contact-value">+52 123 456 7890</p>
-                </div>
-                <span class="contact-icon" aria-hidden="true">
-                    <img src="~/assets/icons/phone.svg" alt="" />
-                </span>
-            </div>
+    @if (Model.SeccionActiva == "Index")
+    {
+        <div class="usuario-content-grid">
+            <aside class="usuario-contact-card" aria-label="Datos de contacto">
+                @foreach (var contacto in Model.Contactos)
+                {
+                    <div class="contact-row">
+                        <div class="contact-lines">
+                            <p class="contact-label">@contacto.Etiqueta</p>
+                            <p class="contact-value">@contacto.Valor</p>
+                        </div>
+                        <span class="contact-icon" aria-hidden="true">
+                            <img src="@Url.Content(contacto.IconoSvg)" alt="" />
+                        </span>
+                    </div>
+                }
+            </aside>
 
-            <div class="contact-row">
-                <div class="contact-lines">
-                    <p class="contact-label">Correo</p>
-                    <p class="contact-value">usuario.temporal@whirlpool.com</p>
+            <section class="usuario-right-zone" aria-label="Resumen profesional">
+                <div class="about-shell">
+                    <h2 class="about-title">Acerca de Mí</h2>
+                    <p class="about-text">@Model.Biografia</p>
                 </div>
-                <span class="contact-icon" aria-hidden="true">
-                    <img src="~/assets/icons/mail.svg" alt="" />
-                </span>
-            </div>
 
-            <div class="contact-row">
-                <div class="contact-lines">
-                    <p class="contact-label">Ubicación</p>
-                    <p class="contact-value">Monterrey, Nuevo León</p>
+                <div class="skills-shell">
+                    <h2 class="skills-title">Habilidades clave</h2>
+                    <div class="skills-grid">
+                        @foreach (var habilidad in Model.Habilidades)
+                        {
+                            <span class="skill-chip">@habilidad</span>
+                        }
+                    </div>
                 </div>
-                <span class="contact-icon" aria-hidden="true">
-                    <img src="~/assets/icons/map-pin.svg" alt="" />
-                </span>
-            </div>
-
-            <div class="contact-row">
-                <div class="contact-lines">
-                    <p class="contact-label">Fecha de ingreso</p>
-                    <p class="contact-value">Abril 16, 2011</p>
-                </div>
-                <span class="contact-icon" aria-hidden="true">
-                    <img src="~/assets/icons/calendar-days.svg" alt="" />
-                </span>
-            </div>
-        </aside>
-
-        <section class="usuario-right-zone" aria-label="Resumen profesional">
-            <div class="about-shell">
-                <h2 class="about-title">Acerca de Mí</h2>
-                <p class="about-text">Director de calidad e ingeniero industrial con 15 anos de trayectoria.</p>
-                <p class="about-text">A mis 50 anos, mi prioridad es equilibrar el exito profesional con la estabilidad de mi familia y mis tres hijos.</p>
-                <p class="about-text">Me enfoco en la optimizacion de la calidad y en aumentar mi productividad.</p>
-                <p class="about-text">Aunque la implementacion de nuevas tecnologias como la IA representa un desafio personal, estoy comprometido con mi crecimiento economico y la mejora constante de mi entorno laboral.</p>
-            </div>
-
-            <div class="skills-shell">
-                <h2 class="skills-title">Habilidades clave</h2>
-                <div class="skills-grid">
-                    <span class="skill-chip">Gestion de calidad</span>
-                    <span class="skill-chip">Liderazgo</span>
-                    <span class="skill-chip">Planificacion estrategica</span>
-                    <span class="skill-chip">Eficiencia</span>
-                    <span class="skill-chip">Control de riesgos</span>
-                </div>
-            </div>
-        </section>
-    </div>
+            </section>
+        </div>
+    }
+    else
+    {
+        <div class="usuario-placeholder">
+            <h2>@(Model.Secciones.FirstOrDefault(x => x.Accion == Model.SeccionActiva)?.Etiqueta)</h2>
+            <p>Sección en desarrollo.</p>
+        </div>
+    }
 </section>
