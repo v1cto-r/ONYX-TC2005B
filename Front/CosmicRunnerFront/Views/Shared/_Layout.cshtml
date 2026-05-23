@@ -52,6 +52,12 @@
                               <p>Capacitación</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark @(currentController == "Tienda" ? "active" : "")" asp-area="" asp-controller="Tienda" asp-action="Index">
+                              <img src="~/assets/icons/shop.svg" />
+                              <p>Tienda</p>
+                            </a>
+                        </li>
                         <li class="nav-item user-profile">
                             <img src="~/assets/random/user.png" />
                         </li>
