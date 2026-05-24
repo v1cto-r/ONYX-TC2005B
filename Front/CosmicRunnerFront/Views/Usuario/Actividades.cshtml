@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="~/css/usuario.css" asp-append-version="true" />
 }
 
+<!-- Activity layout based on Index structure -->
 <section class="usuario-panel" aria-label="Panel de perfil">
     <div class="usuario-top">
         <div class="usuario-avatar-shell">
@@ -28,8 +29,39 @@
         }
     </div>
 
-    <div class="usuario-placeholder">
-        <h2>@Model.SeccionActiva</h2>
-        <p>Sección en desarrollo.</p>
+    <div class="usuario-actividad-panel">
+        <div class="actividad-grid">
+            <aside class="actividad-summary" aria-label="Actividad general">
+                <h3 class="actividad-section-title">@Model.TituloActividadGeneral</h3>
+                <div class="actividad-metrics" aria-label="Métricas de actividad">
+                    @foreach (var metric in Model.ActividadGeneral)
+                    {
+                        <div class="actividad-metric-card">
+                            <span class="actividad-metric-value">@metric.Valor</span>
+                            <span class="actividad-metric-label">@metric.Etiqueta</span>
+                        </div>
+                    }
+                </div>
+            </aside>
+
+            <section class="actividad-timeline" aria-label="Últimos movimientos">
+                <h3 class="actividad-section-title">@Model.TituloUltimosMovimientos</h3>
+
+                <div class="actividad-timeline-list">
+                    @foreach (var actividad in Model.ActividadesRecientes)
+                    {
+                        <div class="actividad-item">
+                            <span class="actividad-item-icon" aria-hidden="true">
+                                <img src="@Url.Content(actividad.IconoSvg)" alt="" />
+                            </span>
+                            <div>
+                                <h4>@actividad.Titulo</h4>
+                                <p>@actividad.Subtitulo</p>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </section>
+        </div>
     </div>
 </section>

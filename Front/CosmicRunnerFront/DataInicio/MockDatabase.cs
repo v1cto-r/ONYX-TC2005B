@@ -23,7 +23,48 @@ namespace CosmicRunnerFront.DataInicio
             AreasImpacto.Add(new AreaImpacto { Id = 2, Nombre = "Sostenibilidad" });
 
             // 3. Usuarios (Basados en el mockup)
-            var cesar = new Usuario { Id = 1, Nombre = "César", Apellido = "Alexandro", DepartamentoId = 1, Racha = 24, PosicionGlobalPorcentaje = 50, PosicionDepartamentalPorcentaje = 10, FotoPerfilUrl = "/assets/random/user.png" };
+            var cesar = new Usuario
+            {
+                Id = 1,
+                Nombre = "César",
+                Apellido = "Alexandro",
+                DepartamentoId = 1,
+                Racha = 24,
+                PosicionGlobalPorcentaje = 50,
+                PosicionDepartamentalPorcentaje = 10,
+                FotoPerfilUrl = "/assets/random/user.png",
+                Puesto = "Ingeniero industrial",
+                Correo = "cesar.alexandro@whirlpool.com",
+                Telefono = "+52 123 456 7890",
+                Ubicacion = "Monterrey, Nuevo León",
+                Biografia = "Director de calidad e ingeniero industrial con 15 años de trayectoria.",
+                Habilidades = new List<string>
+                {
+                    "Gestión de calidad",
+                    "Liderazgo",
+                    "Planificación estratégica",
+                    "Eficiencia",
+                    "Control de riesgos"
+                },
+                ListaPrompts = new List<string>
+                {
+                    "Optimización de inventario",
+                    "Revisión de procesos de calidad",
+                    "Propuesta de mejora continua",
+                    "Análisis de cuellos de botella"
+                },
+                ListaComentarios = new List<Comentario>
+                {
+                    new Comentario(),
+                    new Comentario(),
+                    new Comentario()
+                },
+                ListaProyectos = new List<Idea>
+                {
+                    new Idea(),
+                    new Idea()
+                }
+            };
             var adriana = new Usuario { Id = 2, Nombre = "Adriana", Apellido = "Díaz", DepartamentoId = 1, FotoPerfilUrl = "/assets/random/5.png" };
             var jacobo = new Usuario { Id = 3, Nombre = "Jacobo", Apellido = "Pérez", DepartamentoId = 2, FotoPerfilUrl = "/assets/random/4.png" };
             var julia = new Usuario { Id = 4, Nombre = "Julia", Apellido = "Fernández", DepartamentoId = 3, FotoPerfilUrl = "/assets/random/1.png" };

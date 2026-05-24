@@ -48,12 +48,12 @@
 
             <section class="usuario-right-zone" aria-label="Resumen profesional">
                 <div class="about-shell">
-                    <h2 class="about-title">Acerca de Mí</h2>
+                    <h2 class="about-title">@Model.TituloAcercaDeMi</h2>
                     <p class="about-text">@Model.Biografia</p>
                 </div>
 
                 <div class="skills-shell">
-                    <h2 class="skills-title">Habilidades clave</h2>
+                    <h2 class="skills-title">@Model.TituloHabilidadesClave</h2>
                     <div class="skills-grid">
                         @foreach (var habilidad in Model.Habilidades)
                         {

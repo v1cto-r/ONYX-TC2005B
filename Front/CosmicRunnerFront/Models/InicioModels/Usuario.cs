@@ -9,6 +9,7 @@ namespace CosmicRunnerFront.Models.InicioModels
         public string Nombre { get; set; }
         public string Apellido { get; set; }
         public string Correo { get; set; }
+        public string Telefono { get; set; }
         public string Username { get; set; }
         public string Contrasena { get; set; }
         public string Biografia { get; set; }
@@ -32,5 +33,6 @@ namespace CosmicRunnerFront.Models.InicioModels
         public List<Idea> ListaProyectos { get; set; } = new List<Idea>();
         public List<Comentario> ListaComentarios { get; set; } = new List<Comentario>();
         public List<string> ListaPrompts { get; set; } = new List<string>();
+        public List<string> Habilidades { get; set; } = new List<string>();
     }
 }
