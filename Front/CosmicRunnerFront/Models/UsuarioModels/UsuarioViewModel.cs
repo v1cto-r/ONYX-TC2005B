@@ -1,4 +1,5 @@
 using System.Globalization;
+using CosmicRunnerFront.Models;
 using CosmicRunnerFront.Models.InicioModels;
 
 namespace CosmicRunnerFront.Models.UsuarioModels;
@@ -17,6 +18,7 @@ public class UsuarioViewModel
     public List<string> Habilidades { get; set; } = new();
     public List<ActividadMetrica> ActividadGeneral { get; set; } = new();
     public List<ActividadReciente> ActividadesRecientes { get; set; } = new();
+    public List<PromptModel> PromptsRecientes { get; set; } = new();
 
     public string NombreCompleto => $"{Usuario.Nombre} {Usuario.Apellido}".Trim();
     public string Puesto => Usuario.Puesto;
@@ -53,4 +55,5 @@ public class UsuarioViewModel
         public string Etiqueta { get; set; } = string.Empty;
         public string Accion { get; set; } = string.Empty;
     }
+
 }

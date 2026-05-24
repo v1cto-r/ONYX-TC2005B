@@ -28,7 +28,7 @@ public class UsuarioController : Controller
 
     public IActionResult Prompts()
     {
-        return View("Index", BuildUsuarioViewModel(nameof(Prompts)));
+        return View("Prompts", BuildUsuarioViewModel(nameof(Prompts)));
     }
 
     public IActionResult Configuracion()
@@ -84,7 +84,7 @@ public class UsuarioController : Controller
             Secciones = new List<UsuarioViewModel.Pestana>
             {
                 new() { Etiqueta = "Información General", Accion = nameof(Index) },
-                new() { Etiqueta = "Actividad reciente", Accion = nameof(Actividades) },
+                new() { Etiqueta = "Actividad Reciente", Accion = nameof(Actividades) },
                 new() { Etiqueta = "Prompts", Accion = nameof(Prompts) },
                 new() { Etiqueta = "Configuración", Accion = nameof(Configuracion) }
             },
@@ -96,6 +96,10 @@ public class UsuarioController : Controller
                 new() { Etiqueta = "Fecha de ingreso", Valor = usuario.FechaIngreso.ToString("dd 'de' MMMM 'de' yyyy", new CultureInfo("es-MX")), IconoSvg = "~/assets/icons/calendar-days.svg" }
             },
             Habilidades = usuario.Habilidades,
+            PromptsRecientes = MockDatabase.Prompts
+                .Where(prompt => prompt.promptUserId == usuario.Id)
+                .OrderByDescending(prompt => prompt.promptCreatedAt)
+                .ToList(),
             ActividadGeneral = new List<UsuarioViewModel.ActividadMetrica>
             {
                 new() { Etiqueta = "Proyectos", Valor = usuario.ListaProyectos.Count.ToString() },
