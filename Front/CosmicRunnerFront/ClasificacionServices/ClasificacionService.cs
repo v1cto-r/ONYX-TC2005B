@@ -27,6 +27,7 @@ namespace Front.Services
 
             return datos.Select((u, i) => new UsuarioRanking
             {
+                Id        = u.Id,
                 Nombre     = u.Nombre,        
                 Departamento = u.Departamento,
                 Prompts    = u.Prompts,
@@ -49,6 +50,7 @@ namespace Front.Services
 
             return datos.Select(u => new UsuarioRanking
             {
+                Id        = u.Id,
                 Nombre     = u.Nombre, 
                 Prompts    = u.Prompts,
                 Puntaje    = u.Puntaje,
@@ -58,6 +60,7 @@ namespace Front.Services
 
         private class ApiUsuario
         {
+            public int    Id          { get; set; }
             public string Nombre      { get; set; } = string.Empty;
             public int    Prompts     { get; set; }
             public int    Puntaje     { get; set; }
@@ -67,6 +70,7 @@ namespace Front.Services
 
         private class ApiUsuarioDepartamental
         {
+            public int    Id        { get; set; }
             public string Nombre    { get; set; } = string.Empty;
             public int    Prompts   { get; set; }
             public int    Puntaje   { get; set; }

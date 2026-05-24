@@ -31,7 +31,7 @@ namespace Front.Controllers
             var departamentoSeleccionado = string.IsNullOrWhiteSpace(departamento) ? string.Empty : departamento;
 
             var globalCompleto = await _clasificacion.ObtenerClasificacionGlobal();
-            var global         = globalCompleto.Take(3).ToList();
+            var global = globalCompleto.Take(3).ToList();
 
             List<UsuarioRanking> todosResultados;
 
@@ -48,7 +48,7 @@ namespace Front.Controllers
             }
 
             var totalResultados = todosResultados.Count;
-            var totalPaginas    = (int)Math.Ceiling((double)totalResultados / resultadosPorPagina);
+            var totalPaginas= (int)Math.Ceiling((double)totalResultados / resultadosPorPagina);
 
             if (page < 1) page = 1;
             if (page > totalPaginas && totalPaginas > 0) page = totalPaginas;
@@ -66,16 +66,16 @@ namespace Front.Controllers
 
             var vm = new ClasificacionViewModel
             {
-                Global                  = global,
-                Departamental           = departamental,
-                Departamentos           = departamentos,
+                Global= global,
+                Departamental= departamental,
+                Departamentos= departamentos,
                 DepartamentoSeleccionado = departamentoSeleccionado,
-                NombreBuscado           = nombreBuscado,
-                ErrorNombre             = errorNombre,
-                PaginaActual            = page,
-                TotalPaginas            = totalPaginas,
-                ResultadosPorPagina     = resultadosPorPagina,
-                TotalResultados         = totalResultados
+                NombreBuscado= nombreBuscado,
+                ErrorNombre= errorNombre,
+                PaginaActual = page,
+                TotalPaginas= totalPaginas,
+                ResultadosPorPagina= resultadosPorPagina,
+                TotalResultados= totalResultados
             };
 
             return View("~/Views/Clasificacion/Index.cshtml", vm);

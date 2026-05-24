@@ -122,7 +122,7 @@ body{
 
 
 .ranking-content {
-    height: 120px;
+    height: 100px;
 }
 
 .ranking-contentTop {
@@ -137,7 +137,6 @@ body{
 }
 
 .score-box {
-    background-color: #fde19a;
     padding: 10px 18px;
     border-radius: 10px;
     font-weight: 600;
@@ -147,6 +146,25 @@ body{
     height: 60px;
     align-items: center;
     justify-content: center;
+    color: #313131;
+}
+
+.score-1{
+    background-color: #fde19a;
+}
+
+.score-2{
+    background-color: #a7a7a7;
+}
+
+.score-3{
+    background-color: #d9d9d9;
+}
+
+.score-boxSimple {
+    background-color: #fde19a;
+    width: 150px;
+    height: 50px;
 }
 
 
@@ -179,32 +197,72 @@ body{
 }
 
 .department{
-    background-color: #ffffff !important; 
-    color: #505050 !important;
-    border: 2px solid #f0b310 !important;
-    width: 170px;
-
+    background-color: #ffffff; 
+    color: #505050 ;
+    border: 2px solid #f0b310;
 }
 
 .departmentSelection{
-    background-color: #f0b310 !important; 
-    border: 2px solid #f0b310 !important; 
-    color: #000000 !important;
-    width: 170px;
+    background-color: #f0b310; 
+    border: 2px solid #f0b310; 
+    color: #000000;
+    font-weight: 700;
 }
 
-.departmentSelection,.departmentSelection:focus {
-    font-weight: 700 !important;
-} 
+.department,.departmentSelection{
+    width: 170px;
+    border-radius: 10px;
+}
 
+.department:hover,
+.department:focus,
+.department:active,
+.departmentSelection:hover,
+.departmentSelection:focus,
+.departmentSelection:active {
+    border: 2px solid #f0b310 !important;
+}
 
-.btnSearch {
-    background-color: #f0b310 !important; 
-    border: 2px solid #ffffff !important; 
-    color: #000000 !important;
-    width: 100%;
+.btnName{
+    height: 40px;
 }
 
 .warning{
     background-color: #fde19a !important;
+}
+
+.form-control {
+    height: 100%; 
+    border: none; 
+    box-shadow: none;
+    border-radius: 10px; 
+}
+
+.form-label{
+    color: #313131;
+}
+
+.input-group{
+    height: 40px; 
+    border: 2px solid #505050; 
+    border-radius: 10px; 
+    padding: 0 10px;
+}
+
+.input-group img {
+    width: 20px; 
+    height: 20px;
+}
+
+.input-group-text{
+    background-color: #ffffff; 
+    border:none;
+}
+
+.PageImage, .PageImageDisabled{
+    height: 24px;
+}
+
+.PageImageDisabled{
+    opacity: 0.3;
 }

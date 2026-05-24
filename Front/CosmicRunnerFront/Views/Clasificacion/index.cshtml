@@ -8,14 +8,13 @@
     <link rel="stylesheet" href="~/css/Clasificacion.css" />
 }
 
-<body>
-<div class="container mt-4" style="background-color: #f7f7f7;">
+
+<div class=" mt-4">
 
     <h1 class="fw-bold">Clasificación Global</h1>
     <p class="text-muted">Consulta el desempeño de los colaboradores a nivel global y departamental</p>
-    <br />
 
-    <div class="card custom-card mb-5 p-4">
+    <div class="card custom-card mb-4 p-4">
 
         <div class="d-flex align-items-center mb-4">
             <div class="icon-circle me-2">
@@ -44,7 +43,7 @@
 
                         <div class="d-flex align-items-center">
 
-                            <img src="~/assets/random/user.png" class="rounded-circle user-img me-3" />
+                            <img src="~/assets/ImagenesClasificacion/Users/@(user.Id).png" class="rounded-circle user-img me-3" />
 
                             <div>
                                 <h5 class="mb-1 fw-semibold">@user.Nombre</h5>
@@ -58,8 +57,7 @@
                         </div>
 
                         <div class="d-flex align-items-center gap-3">
-
-                            <div class="score-box">
+                            <div class="score-box score-@user.Posicion">
                                 <img src="~/assets/ImagenesClasificacion/Flecha.png" class="mini-iconArrow" />
                                 @user.Puntaje
                             </div>
@@ -97,27 +95,27 @@
             <h4 class="mb-0">Clasificación Departamental: @Model.DepartamentoSeleccionado</h4>
         </div>
         <div class="d-flex flex-wrap gap-2 mb-3">
-            <a class="btn @(string.IsNullOrWhiteSpace(Model.DepartamentoSeleccionado) ? "btn-dark departmentSelection" : "btn-outline-dark department")" asp-route-nombre="@Model.NombreBuscado">Todos</a>
+            <a class="btn @(string.IsNullOrWhiteSpace(Model.DepartamentoSeleccionado) ? " departmentSelection" : "department")" asp-route-nombre="@Model.NombreBuscado">Todos</a>
             @foreach (var departamento in Model.Departamentos)
             {
                 var esSeleccionado = string.Equals(Model.DepartamentoSeleccionado, departamento, StringComparison.OrdinalIgnoreCase);
-                <a class="btn @(esSeleccionado ? "btn-dark departmentSelection" : "btn-outline-dark department")" asp-route-departamento="@departamento" asp-route-nombre="@Model.NombreBuscado">@departamento</a>
+                <a class="btn @(esSeleccionado ? "departmentSelection" : "department")" asp-route-departamento="@departamento" asp-route-nombre="@Model.NombreBuscado">@departamento</a>
             }
         </div>
 
         <form method="get" class="row g-3 mb-3 align-items-end">
             <div class="col-12 col-md-5">
-                <label for="nombre" class="form-label fw-semibold" style="color: #313131;">Filtrar por nombre</label>
-                <div class="input-group" style="height: 40px; border: 2px solid #505050; border-radius: 8px;">
-                    <span class="input-group-text" style="background-color: #ffffff; border-right: 1px solid #505050;">
-                        <img src="~/assets/ImagenesClasificacion/Buscar.png" style="width: 20px; height: 20px;" />
+                <label for="nombre" class="form-label fw-semibold">Filtrar por nombre</label>
+                <div class="input-group">
+                    <span class="input-group-text">
+                        <img src="~/assets/ImagenesClasificacion/Buscar.png" />
                     </span>
-                    <input id="nombre" name="nombre" value="@Model.NombreBuscado" class="form-control" style="height: 100%; border: none; box-shadow: none;" type="text" minlength="3" maxlength="50" placeholder="Ej. Jacobo Perez" />
+                    <input id="nombre" name="nombre" value="@Model.NombreBuscado" class="form-control" type="text" minlength="3" maxlength="50" placeholder="Ej. Jacobo Perez" />
                 </div>
             </div>
 
             <div class="col-12 col-md-2 d-grid">
-                <button type="submit" class="btn btn-dark" style="height: 40px;">Buscar</button>
+                <button type="submit" class="btn btn-dark btnName">Buscar</button>
             </div>
         </form>
 
@@ -134,7 +132,7 @@
                 {
                     <div class="ranking-item simple d-flex">
 
-                        <div class="position-box simple position-@user.Posicion">
+                        <div class="position-box simple">
                             @user.Posicion
                         </div>
 
@@ -142,7 +140,7 @@
 
                             <div class="d-flex align-items-center">
 
-                                <img src="~/assets/ImagenesClasificacion/UserImage.png" class="rounded-circle user-img me-3" />
+                                <img src="~/assets/ImagenesClasificacion/Users/@(user.Id).png" class="rounded-circle user-img me-3" />
 
                                 <div>
                                     <h5 class="mb-1 fw-semibold">@user.Nombre</h5>
@@ -157,7 +155,7 @@
 
                             <div class="d-flex align-items-center gap-3">
 
-                                <div class="score-box">
+                                <div class="score-box score-boxSimple">
                                     <img src="~/assets/ImagenesClasificacion/Flecha.png" class="mini-iconArrow" />
                                     @user.Puntaje
                                 </div>
@@ -176,12 +174,12 @@
                         @if (Model.PaginaActual > 1)
                         {
                             <a asp-route-departamento="@Model.DepartamentoSeleccionado" asp-route-nombre="@Model.NombreBuscado" asp-route-page="@(Model.PaginaActual - 1)">
-                                <img src="~/assets/ImagenesClasificacion/Pagina1.png" alt="Anterior" style="width: 24px; height: 24px;" />
+                                <img src="~/assets/ImagenesClasificacion/Pagina1.png" alt="Anterior" class="PageImage" />
                             </a>
                         }
                         else
                         {
-                            <img src="~/assets/ImagenesClasificacion/Pagina1.png" alt="Anterior" style="width: 24px; height: 24px; opacity: 0.3;" />
+                            <img src="~/assets/ImagenesClasificacion/Pagina1.png" alt="Anterior" class="PageImageDisabled" />
                         }
                     </div>
 
@@ -191,12 +189,12 @@
                         @if (Model.PaginaActual < Model.TotalPaginas)
                         {
                             <a asp-route-departamento="@Model.DepartamentoSeleccionado" asp-route-nombre="@Model.NombreBuscado" asp-route-page="@(Model.PaginaActual + 1)">
-                                <img src="~/assets/ImagenesClasificacion/Pagina2.png" alt="Siguiente" style="width: 24px; height: 24px;" />
+                                <img src="~/assets/ImagenesClasificacion/Pagina2.png" alt="Siguiente" class="PageImage" />
                             </a>
                         }
                         else
                         {
-                            <img src="~/assets/ImagenesClasificacion/Pagina2.png" alt="Siguiente" style="width: 24px; height: 24px; opacity: 0.3;" />
+                            <img src="~/assets/ImagenesClasificacion/Pagina2.png" alt="Siguiente" class="PageImageDisabled" />
                         }
                     </div>
                 </div>
@@ -207,4 +205,3 @@
 
 
 </div>
-</body>
