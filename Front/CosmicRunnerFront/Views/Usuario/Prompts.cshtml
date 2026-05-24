@@ -9,6 +9,14 @@
 }
 
 <section class="usuario-panel usuario-prompts-panel" aria-label="Panel de prompts">
+    @if (Model.EsPerfilPropio)
+    {
+        <a class="usuario-panel-action" asp-controller="Usuario" asp-action="Configuracion" aria-label="Configuración">
+            <img src="~/assets/icons/gear.svg" alt="" />
+            <span>Configuración</span>
+        </a>
+    }
+
     <div class="usuario-top">
         <div class="usuario-avatar-shell">
             <img class="usuario-avatar" src="@Url.Content(Model.FotoPerfilUrl)" alt="Foto del usuario" />
@@ -24,7 +32,10 @@
     <div class="usuario-tabs" role="tablist" aria-label="Secciones del perfil">
         @foreach (var seccion in Model.Secciones)
         {
-            <a class="tab-pill @(Model.SeccionActiva == seccion.Accion ? "tab-pill-active" : "")" asp-controller="Usuario" asp-action="@seccion.Accion">@seccion.Etiqueta</a>
+            if (seccion.Accion != "Configuracion")
+            {
+                <a class="tab-pill @(Model.SeccionActiva == seccion.Accion ? "tab-pill-active" : "")" asp-controller="Usuario" asp-action="@seccion.Accion">@seccion.Etiqueta</a>
+            }
         }
     </div>
 

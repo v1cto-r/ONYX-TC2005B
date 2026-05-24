@@ -10,6 +10,7 @@ namespace CosmicRunnerFront.Controllers;
 public class UsuarioController : Controller
 {
     private readonly ILogger<UsuarioController> _logger;
+    private const int CurrentUserId = 1;
 
     public UsuarioController(ILogger<UsuarioController> logger)
     {
@@ -100,6 +101,7 @@ public class UsuarioController : Controller
                 .Where(prompt => prompt.promptUserId == usuario.Id)
                 .OrderByDescending(prompt => prompt.promptCreatedAt)
                 .ToList(),
+            EsPerfilPropio = usuario.Id == CurrentUserId,
             ActividadGeneral = new List<UsuarioViewModel.ActividadMetrica>
             {
                 new() { Etiqueta = "Proyectos", Valor = usuario.ListaProyectos.Count.ToString() },

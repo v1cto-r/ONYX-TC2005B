@@ -3,11 +3,38 @@
 	--line: #313131;
 	--accent: #f0b310;
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	position: relative;
 	width: min(1180px, 100%);
 	margin: 24px auto 40px;
 	padding: 30px 36px 34px;
 	border-radius: 18px;
 	background: var(--panel-bg);
+}
+
+.usuario-panel-action {
+	position: absolute;
+	top: 30px;
+	right: 36px;
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	padding: 8px 12px;
+	border-radius: 999px;
+	background: #fff;
+	border: 1px solid rgba(49, 49, 49, 0.12);
+	box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03);
+	text-decoration: none;
+	color: #313131;
+	font-size: 0.88rem;
+	font-weight: 600;
+	line-height: 1;
+	z-index: 2;
+}
+
+.usuario-panel-action img {
+	width: 16px;
+	height: 16px;
+	display: block;
 }
 
 .usuario-top {
@@ -68,7 +95,7 @@
 	padding-bottom: 12px;
 	border-bottom: 2px solid var(--line);
 	display: grid;
-	grid-template-columns: repeat(4, minmax(120px, 1fr));
+	grid-template-columns: repeat(3, minmax(120px, 1fr));
 	gap: 12px;
 }
 
@@ -436,6 +463,13 @@
 		gap: 20px;
 	}
 
+	.usuario-panel-action {
+		top: 22px;
+	right: 22px;
+		padding: 7px 10px;
+		font-size: 0.84rem;
+	}
+
 	.usuario-avatar-shell {
 		width: 150px;
 		height: 150px;
@@ -447,8 +481,9 @@
 	}
 
 	.usuario-tabs {
-		grid-template-columns: repeat(2, minmax(120px, 1fr));
+		grid-template-columns: repeat(3, minmax(0, 1fr));
 		row-gap: 12px;
+		gap: 8px;
 	}
 
 	.tab-pill {
@@ -460,6 +495,12 @@
 	.usuario-panel {
 		margin-top: 12px;
 		padding: 18px 14px 22px;
+	}
+
+	.usuario-panel-action {
+		position: static;
+		margin-bottom: 14px;
+		align-self: flex-end;
 	}
 
 	.usuario-top {
@@ -482,11 +523,8 @@
 
 	.usuario-tabs {
 		margin-top: 20px;
-		grid-template-columns: 1fr;
-	}
-
-	.usuario-prompt-card-head {
-		align-items: flex-start;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 6px;
 	}
 
 	.tab-pill,

@@ -19,6 +19,7 @@ public class UsuarioViewModel
     public List<ActividadMetrica> ActividadGeneral { get; set; } = new();
     public List<ActividadReciente> ActividadesRecientes { get; set; } = new();
     public List<PromptModel> PromptsRecientes { get; set; } = new();
+    public bool EsPerfilPropio { get; set; }
 
     public string NombreCompleto => $"{Usuario.Nombre} {Usuario.Apellido}".Trim();
     public string Puesto => Usuario.Puesto;
