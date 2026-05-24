@@ -34,7 +34,7 @@ public class UsuarioController : Controller
 
     public IActionResult Configuracion()
     {
-        return View("Index", BuildUsuarioViewModel(nameof(Configuracion)));
+        return View("Configuracion", BuildUsuarioViewModel(nameof(Configuracion)));
     }
 
     private static UsuarioViewModel BuildUsuarioViewModel(string seccionActiva)

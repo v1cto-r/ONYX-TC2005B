@@ -451,6 +451,188 @@
 	white-space: nowrap;
 }
 
+.config-layout {
+	margin-top: 22px;
+	display: flex;
+	flex-direction: column;
+	gap: 18px;
+}
+
+.config-section {
+	padding-top: 12px;
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+}
+
+.config-section + .config-section {
+	border-top: 1px solid #505050;
+}
+
+.config-section-header {
+	display: flex;
+	justify-content: space-between;
+	gap: 18px;
+	align-items: flex-start;
+}
+
+.config-section-header h2 {
+	margin: 0;
+	font-size: 1rem;
+	font-weight: 700;
+	color: #313131;
+}
+
+.config-field-grid {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: 18px 26px;
+}
+
+.config-field-grid-single {
+	grid-template-columns: minmax(0, 260px);
+}
+
+.config-field {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+}
+
+.config-field span {
+	font-size: 0.88rem;
+	font-weight: 600;
+	color: #313131;
+}
+
+.config-field input,
+.config-field select,
+.config-field textarea {
+	width: 100%;
+	border: 1px solid rgba(49, 49, 49, 0.32);
+	border-radius: 4px;
+	padding: 9px 10px;
+	font-size: 0.92rem;
+	color: #313131;
+	background: #fff;
+	outline: none;
+}
+
+.config-field textarea {
+	resize: vertical;
+	min-height: 120px;
+	line-height: 1.45;
+}
+
+.config-field input[readonly] {
+	background: #fafafa;
+}
+
+.config-ability-editor {
+	display: grid;
+	grid-template-columns: minmax(260px, 300px) minmax(320px, 1fr);
+	gap: 18px;
+	align-items: end;
+}
+
+.config-field-inline,
+.config-about-field {
+	gap: 8px;
+}
+
+.config-about-field {
+	justify-self: end;
+	width: fit-content;
+	margin-right: 12px;
+}
+
+.config-inline-row {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.config-inline-row select,
+.config-inline-row input {
+	flex: 1;
+}
+
+.config-about-inline-text {
+	font-size: 0.92rem;
+	font-weight: 600;
+	color: #313131;
+	white-space: nowrap;
+}
+
+.config-about-field .config-inline-row {
+	width: fit-content;
+	justify-content: flex-end;
+}
+
+.config-icon-button {
+	width: 36px;
+	height: 36px;
+	border-radius: 10px;
+	border: 1px solid rgba(49, 49, 49, 0.32);
+	background: #fff;
+	color: #313131;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 1rem;
+	font-weight: 700;
+	flex-shrink: 0;
+}
+
+.config-icon-button img {
+	width: 16px;
+	height: 16px;
+	display: block;
+}
+
+.config-skills-grid {
+	margin-top: 0;
+}
+
+.config-actions {
+	padding-top: 10px;
+	border-top: 1px solid #505050;
+	display: flex;
+	justify-content: flex-end;
+	gap: 12px;
+}
+
+.config-secondary-button,
+.config-primary-button {
+	min-height: 38px;
+	padding: 0 14px;
+	border-radius: 8px;
+	font-size: 0.92rem;
+	font-weight: 600;
+	border: 1px solid #505050;
+	background: #fff;
+	color: #313131;
+}
+
+.config-primary-button {
+	border-color: #f0b310;
+	background: #fde19a;
+}
+
+.config-modal {
+	border-radius: 16px;
+	border: 1px solid rgba(49, 49, 49, 0.12);
+}
+
+.config-modal .modal-title {
+	font-weight: 700;
+	color: #313131;
+}
+
+.config-field-modal {
+	margin-bottom: 0;
+}
+
 @media (max-width: 992px) {
 	.usuario-panel {
 		width: 100%;
@@ -484,6 +666,11 @@
 		grid-template-columns: repeat(3, minmax(0, 1fr));
 		row-gap: 12px;
 		gap: 8px;
+	}
+
+	.config-field-grid,
+	.config-ability-editor {
+		grid-template-columns: 1fr;
 	}
 
 	.tab-pill {
@@ -525,6 +712,20 @@
 		margin-top: 20px;
 		grid-template-columns: repeat(3, minmax(0, 1fr));
 		gap: 6px;
+	}
+
+	.config-actions {
+		justify-content: stretch;
+		flex-direction: column-reverse;
+	}
+
+	.config-secondary-button,
+	.config-primary-button {
+		width: 100%;
+	}
+
+	.config-section-header {
+		flex-direction: column;
 	}
 
 	.tab-pill,

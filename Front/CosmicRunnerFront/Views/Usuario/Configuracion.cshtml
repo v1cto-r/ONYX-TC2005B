@@ -39,8 +39,124 @@
         }
     </div>
 
-    <div class="usuario-placeholder">
-        <h2>@Model.SeccionActivaEtiqueta</h2>
-        <p>@Model.TextoSeccionEnDesarrollo</p>
+    <div class="config-layout">
+        <section class="config-section">
+            <div class="config-section-header">
+                <div>
+                    <h2>Datos Personales</h2>
+                </div>
+            </div>
+
+            <div class="config-field-grid">
+                <label class="config-field">
+                    <span>Nombre(s)</span>
+                    <input type="text" value="@Model.Usuario.Nombre" readonly />
+                </label>
+                <label class="config-field">
+                    <span>Apellido(s)</span>
+                    <input type="text" value="@Model.Usuario.Apellido" readonly />
+                </label>
+                <label class="config-field">
+                    <span>Puesto de Trabajo</span>
+                    <input type="text" value="@Model.Puesto" readonly />
+                </label>
+                <label class="config-field">
+                    <span>Teléfono</span>
+                    <input type="text" value="@Model.Usuario.Telefono" readonly />
+                </label>
+                <label class="config-field">
+                    <span>Correo Electrónico</span>
+                    <input type="text" value="@Model.Correo" readonly />
+                </label>
+                <label class="config-field">
+                    <span>Área/Departamento</span>
+                    <input type="text" value="@Model.Departamento" readonly />
+                </label>
+            </div>
+        </section>
+
+        <section class="config-section config-section-wide">
+            <div class="config-section-header">
+                <div>
+                    <h2>Habilidades e Información</h2>
+                </div>
+            </div>
+
+            <div class="skills-grid config-skills-grid">
+                @for (var i = 0; i < Model.Habilidades.Count; i++)
+                {
+                    var habilidad = Model.Habilidades[i];
+                    <span class="skill-chip">@habilidad</span>
+                }
+            </div>
+
+            <div class="config-ability-editor">
+                <label class="config-field config-field-inline">
+                    <span>Selecciona una habilidad</span>
+                    <div class="config-inline-row">
+                        <select>
+                            <option>Eficiencia</option>
+                            <option>Liderazgo</option>
+                            <option>Calidad</option>
+                        </select>
+                        <button type="button" class="config-icon-button" aria-label="Agregar habilidad">+</button>
+                    </div>
+                </label>
+
+                <label class="config-field config-about-field">
+                    <div class="config-inline-row">
+                        <span class="config-about-inline-text">Acerca de Mí</span>
+                        <button type="button" class="config-icon-button" data-bs-toggle="modal" data-bs-target="#aboutMeModal" aria-label="Editar Acerca de Mí">
+                            <img src="~/assets/icons/pencil.svg" alt="" />
+                        </button>
+                    </div>
+                </label>
+            </div>
+
+        </section>
+
+        <section class="config-section">
+            <div class="config-section-header">
+                <div>
+                    <h2>Preferencia de Interfaz</h2>
+                </div>
+            </div>
+
+            <div class="config-field-grid config-field-grid-single">
+                <label class="config-field">
+                    <span>Tema</span>
+                    <select>
+                        <option selected>Claro</option>
+                        <option>Oscuro</option>
+                    </select>
+                </label>
+            </div>
+        </section>
+
+        <div class="config-actions">
+            <button type="button" class="config-secondary-button">Descartar Cambios</button>
+            <button type="button" class="config-primary-button">Guardar Cambios</button>
+        </div>
     </div>
 </section>
+
+<div class="modal fade" id="aboutMeModal" tabindex="-1" aria-labelledby="aboutMeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content config-modal">
+            <div class="modal-header border-0">
+                <h5 class="modal-title" id="aboutMeModalLabel">Editar Acerca de Mí</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body">
+                <label class="config-field config-field-modal">
+                    <span>Texto de presentación</span>
+                    <textarea rows="5">@Model.Biografia</textarea>
+                </label>
+            </div>
+            <div class="modal-footer border-0">
+                <button type="button" class="config-secondary-button" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="config-primary-button">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
