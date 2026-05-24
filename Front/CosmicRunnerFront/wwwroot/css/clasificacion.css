@@ -1,10 +1,16 @@
+*{
+    font-family: 'Helvetica Now', 'Helvetica Neue', Helvetica, Arial, sans-serif;   
+}
+
+body{
+    background-color: #f7f7f7;
+}
 
 .custom-card {
-    background-color: #f3f3f3;
+    background-color: #ffffff;
     border-radius: 14px;
     border: none;
 }
-
 
 .ranking-item {
     display: flex;
@@ -12,7 +18,7 @@
     border-radius: 14px;
     margin-bottom: 15px;
     overflow: hidden; 
-    border: 1px solid #e5e5e5;
+    border: 2px solid #a7a7a7;
 }
 
 .ranking-item.simple {
@@ -21,9 +27,8 @@
     border-radius: 0;
     margin-bottom: 10px;
     overflow: visible;
-    border-bottom: 1.5px solid #6c757d;
+    border-bottom: 1.5px solid #a7a7a7;
 }
-
 
 .position-box {
     width: 70px;
@@ -42,7 +47,7 @@
 
 
 .departamental-results-container {
-    border: 2px solid #6c757d;
+    border: 2px solid #a7a7a7;
     border-radius: 8px;
     padding: 20px;
     background-color: transparent;
@@ -59,7 +64,7 @@
 .pagination-button {
     width: 50px;
     height: 50px;
-    border: 2px solid #6c757d;
+    border: 2px solid #a7a7a7;
     border-radius: 8px;
     display: flex;
     align-items: center;
@@ -84,7 +89,7 @@
 }
 
 .pagination-button a:hover {
-    background-color: #f3f3f3;
+    background-color: #f7f7ff;
     border-radius: 6px;
 }
 
@@ -106,7 +111,7 @@
 }
 
 .position-2 {
-    background-color: #2f2f2f;
+    background-color: #313131;
     color: white;
 }
 
@@ -117,8 +122,11 @@
 
 
 .ranking-content {
-    padding: 15px 0px;
     height: 120px;
+}
+
+.ranking-contentTop {
+    height: 140px;
 }
 
 .user-img {
@@ -135,9 +143,12 @@
     font-weight: 600;
     display: flex;
     gap: 10px;
-    width: 120px;
+    width: 150px;
+    height: 60px;
+    align-items: center;
     justify-content: center;
 }
+
 
 .mini-icon {
     width: 16px;
@@ -149,13 +160,13 @@
 
 .trophy-icon {
     width: 80px;
-    opacity: 0.6;
+    margin: 0px 20px;
 }
 
 
 .icon-circle {
-    width: 45px;
-    height: 45px;
+    width: 60px;
+    height: 60px;
     background-color: #fde19a;
     border-radius: 50%;
     display: flex;
@@ -164,24 +175,36 @@
 }
 
 .icon-circle img {
-    width: 30px;
+    width: 40px;
 }
 
 .department{
-    background-color: #f0b310 !important; 
-    border: 2px solid #ffffff !important; 
-    color: #000000 !important;
-}
-
-.departmentSelection{
     background-color: #ffffff !important; 
     color: #505050 !important;
     border: 2px solid #f0b310 !important;
+    width: 170px;
+
 }
+
+.departmentSelection{
+    background-color: #f0b310 !important; 
+    border: 2px solid #f0b310 !important; 
+    color: #000000 !important;
+    width: 170px;
+}
+
+.departmentSelection,.departmentSelection:focus {
+    font-weight: 700 !important;
+} 
+
 
 .btnSearch {
     background-color: #f0b310 !important; 
     border: 2px solid #ffffff !important; 
     color: #000000 !important;
     width: 100%;
+}
+
+.warning{
+    background-color: #fde19a !important;
 }

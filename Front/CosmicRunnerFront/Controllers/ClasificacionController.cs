@@ -64,15 +64,6 @@ namespace Front.Controllers
                 .OrderBy(d => d)
                 .ToList();
 
-            var mensajeDepto = string.IsNullOrWhiteSpace(departamentoSeleccionado)
-                ? "todos los departamentos"
-                : departamentoSeleccionado;
-
-            var mensaje = errorNombre ??
-                (string.IsNullOrWhiteSpace(nombreBuscado)
-                    ? $"Datos cargados correctamente. Mostrando {mensajeDepto}."
-                    : $"Mostrando resultados para \"{nombreBuscado}\" en {mensajeDepto}.");
-
             var vm = new ClasificacionViewModel
             {
                 Global                  = global,
@@ -80,7 +71,6 @@ namespace Front.Controllers
                 Departamentos           = departamentos,
                 DepartamentoSeleccionado = departamentoSeleccionado,
                 NombreBuscado           = nombreBuscado,
-                Mensaje                 = mensaje,
                 ErrorNombre             = errorNombre,
                 PaginaActual            = page,
                 TotalPaginas            = totalPaginas,
