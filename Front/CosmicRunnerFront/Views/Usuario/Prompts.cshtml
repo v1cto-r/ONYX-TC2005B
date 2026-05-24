@@ -1,9 +1,35 @@
+@model CosmicRunnerFront.Models.UsuarioModels.UsuarioViewModel
+
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Prompts";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-        
-</div>
+@section Styles {
+    <link rel="stylesheet" href="~/css/usuario.css" asp-append-version="true" />
+}
+
+<section class="usuario-panel" aria-label="Panel de perfil">
+    <div class="usuario-top">
+        <div class="usuario-avatar-shell">
+            <img class="usuario-avatar" src="@Url.Content(Model.FotoPerfilUrl)" alt="Foto del usuario" />
+        </div>
+
+        <div class="usuario-headlines">
+            <h1 class="usuario-nombre">@Model.NombreCompleto</h1>
+            <p class="usuario-rol">@Model.Puesto</p>
+            <p class="usuario-area">@Model.Departamento</p>
+        </div>
+    </div>
+
+    <div class="usuario-tabs" role="tablist" aria-label="Secciones del perfil">
+        @foreach (var seccion in Model.Secciones)
+        {
+            <a class="tab-pill @(Model.SeccionActiva == seccion.Accion ? "tab-pill-active" : "")" asp-controller="Usuario" asp-action="@seccion.Accion">@seccion.Etiqueta</a>
+        }
+    </div>
+
+    <div class="usuario-placeholder">
+        <h2>@Model.SeccionActiva</h2>
+        <p>Sección en desarrollo.</p>
+    </div>
+</section>

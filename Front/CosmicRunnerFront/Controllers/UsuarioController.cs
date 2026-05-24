@@ -23,7 +23,7 @@ public class UsuarioController : Controller
 
     public IActionResult Actividades()
     {
-        return View("Index", BuildUsuarioViewModel(nameof(Actividades)));
+        return View("Actividades", BuildUsuarioViewModel(nameof(Actividades)));
     }
 
     public IActionResult Prompts()
