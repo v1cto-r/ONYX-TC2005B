@@ -92,18 +92,14 @@ public class UsuarioController : Controller
     {
         var usuario = usuarioViewModel.Usuario;
 
-        if (string.IsNullOrWhiteSpace(usuario.Nombre))
-        {
-            usuario.Nombre = string.Empty;
-        }
-
-        usuario.Puesto = usuario.Puesto ?? string.Empty;
-        usuario.Telefono = usuario.Telefono ?? string.Empty;
-        usuario.Ubicacion = usuario.Ubicacion ?? string.Empty;
-        usuario.Correo = usuario.Correo ?? string.Empty;
+        usuario.Nombre ??= string.Empty;
+        usuario.Puesto ??= string.Empty;
+        usuario.Telefono ??= string.Empty;
+        usuario.Ubicacion ??= string.Empty;
+        usuario.Correo ??= string.Empty;
         usuario.FotoPerfilUrl = string.IsNullOrWhiteSpace(usuario.FotoPerfilUrl) ? "/assets/random/user.png" : usuario.FotoPerfilUrl;
-        usuario.Biografia = usuario.Biografia ?? string.Empty;
-        usuario.Tema = usuario.Tema ?? "Claro";
+        usuario.Biografia ??= string.Empty;
+        usuario.Tema ??= "Claro";
         usuario.Habilidades ??= new List<string>();
         usuario.Departamento ??= new CosmicRunnerFront.Models.InicioModels.Departamento();
 

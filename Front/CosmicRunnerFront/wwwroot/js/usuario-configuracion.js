@@ -12,35 +12,10 @@
     const habilidadesInput = document.getElementById("Habilidades");
     const skillsGrid = form.querySelector(".config-skills-grid");
 
-    const requiredFields = [
-        ["#Nombre", "errorNombre"],
-        ["#Apellido", "errorApellido"],
-        ["#Puesto", "errorPuesto"],
-        ["#Telefono", "errorTelefono"],
-        ["#Correo", "errorCorreo"],
-        ["#Departamento", "errorDepartamento"],
-        ["#Tema", "errorTema"]
-    ];
-
-    function setError(id, message) {
-        const node = document.getElementById(id);
-        if (node) node.textContent = message || "";
-    }
-
-    function clearErrors() {
-        requiredFields.forEach(function (item) { setError(item[1], ""); });
-        setError("errorBiografia", "");
-        setError("errorHabilidades", "");
-    }
-
     function getSkills() {
         return Array.from(skillsGrid.querySelectorAll(".skill-chip"))
             .map(function (chip) { return (chip.textContent || "").trim(); })
             .filter(Boolean);
-    }
-
-    function syncSkillsHiddenInput() {
-        habilidadesInput.value = getSkills().join("|");
     }
 
     function renderSkills(skills) {
@@ -79,32 +54,6 @@
         biografiaInput.value = data.Biografia;
         aboutEditor.value = data.Biografia;
         renderSkills(data.Habilidades);
-        clearErrors();
-    }
-
-    function validate() {
-        let ok = true;
-        clearErrors();
-
-        requiredFields.forEach(function (item) {
-            const input = form.querySelector(item[0]);
-            if (!input || !input.value.trim()) {
-                setError(item[1], "Este campo es obligatorio.");
-                ok = false;
-            }
-        });
-
-        if (!biografiaInput.value.trim()) {
-            setError("errorBiografia", "Este campo es obligatorio.");
-            ok = false;
-        }
-
-        if (getSkills().length === 0) {
-            setError("errorHabilidades", "Este campo es obligatorio.");
-            ok = false;
-        }
-
-        return ok;
     }
 
     let lastSaved = snapshot();
@@ -120,14 +69,13 @@
             chip.setAttribute("data-pending", "true");
             chip.textContent = selected;
             skillsGrid.appendChild(chip);
-            syncSkillsHiddenInput();
+            habilidadesInput.value = getSkills().join("|");
         }
         habilidadSelect.value = "";
     });
 
     document.getElementById("saveAboutButton").addEventListener("click", function () {
         biografiaInput.value = aboutEditor.value.trim();
-        if (biografiaInput.value) setError("errorBiografia", "");
         aboutModal.hide();
     });
 
@@ -136,7 +84,7 @@
     });
 
     document.getElementById("saveChangesButton").addEventListener("click", function () {
-        if (validate()) saveModal.show();
+        saveModal.show();
     });
 
     document.getElementById("confirmSaveButton").addEventListener("click", function () {
@@ -151,22 +99,6 @@
     document.getElementById("confirmDiscardButton").addEventListener("click", function () {
         restore(lastSaved);
         discardModal.hide();
-    });
-
-    requiredFields.forEach(function (item) {
-        const input = form.querySelector(item[0]);
-        if (!input) return;
-        input.addEventListener("input", function () {
-            if (input.value.trim()) setError(item[1], "");
-        });
-    });
-
-    document.getElementById("Departamento").addEventListener("change", function () {
-        setError("errorDepartamento", "");
-    });
-
-    document.getElementById("Tema").addEventListener("change", function () {
-        setError("errorTema", "");
     });
 
 })();

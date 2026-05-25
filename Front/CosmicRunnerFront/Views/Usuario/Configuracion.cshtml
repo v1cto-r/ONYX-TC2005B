@@ -43,7 +43,7 @@
         }
     </div>
 
-    <form id="configForm" class="config-layout" asp-controller="Usuario" asp-action="GuardarConfiguracion" method="post" novalidate>
+    <form id="configForm" class="config-layout" asp-controller="Usuario" asp-action="GuardarConfiguracion" method="post">
         <input type="hidden" asp-for="Usuario.Id" />
         <input type="hidden" asp-for="Usuario.Ubicacion" />
         <input type="hidden" asp-for="Usuario.FotoPerfilUrl" />
@@ -60,33 +60,27 @@
             <div class="config-field-grid">
                 <label class="config-field">
                     <span>Nombre(s)</span>
-                    <input type="text" id="Nombre" asp-for="Usuario.Nombre" />
-                    <span id="errorNombre" class="config-inline-error" aria-live="polite"></span>
+                    <input type="text" id="Nombre" asp-for="Usuario.Nombre" required />
                 </label>
                 <label class="config-field">
                     <span>Apellido(s)</span>
-                    <input type="text" id="Apellido" asp-for="Usuario.Apellido" />
-                    <span id="errorApellido" class="config-inline-error" aria-live="polite"></span>
+                    <input type="text" id="Apellido" asp-for="Usuario.Apellido" required />
                 </label>
                 <label class="config-field">
                     <span>Puesto de Trabajo</span>
-                    <input type="text" id="Puesto" asp-for="Usuario.Puesto" />
-                    <span id="errorPuesto" class="config-inline-error" aria-live="polite"></span>
+                    <input type="text" id="Puesto" asp-for="Usuario.Puesto" required />
                 </label>
                 <label class="config-field">
                     <span>Teléfono</span>
-                    <input type="text" id="Telefono" asp-for="Usuario.Telefono" />
-                    <span id="errorTelefono" class="config-inline-error" aria-live="polite"></span>
+                    <input type="text" id="Telefono" asp-for="Usuario.Telefono" required />
                 </label>
                 <label class="config-field">
                     <span>Correo Electrónico</span>
-                    <input type="email" id="Correo" asp-for="Usuario.Correo" />
-                    <span id="errorCorreo" class="config-inline-error" aria-live="polite"></span>
+                    <input type="email" id="Correo" asp-for="Usuario.Correo" required />
                 </label>
                 <label class="config-field">
                     <span>Área/Departamento</span>
                     <input type="text" id="Departamento" value="@Model.Departamento" readonly />
-                    <span id="errorDepartamento" class="config-inline-error" aria-live="polite"></span>
                 </label>
             </div>
         </section>
@@ -105,8 +99,6 @@
                     <span class="skill-chip">@habilidad</span>
                 }
             </div>
-            <span id="errorHabilidades" class="config-inline-error" aria-live="polite"></span>
-
             <input type="hidden" id="Habilidades" name="HabilidadesTexto" value="@string.Join("|", Model.Habilidades)" />
 
             <div class="config-ability-editor">
@@ -135,8 +127,6 @@
                     </div>
                 </label>
             </div>
-            <span id="errorBiografia" class="config-inline-error" aria-live="polite"></span>
-
         </section>
 
         <section class="config-section">
@@ -149,11 +139,10 @@
             <div class="config-field-grid config-field-grid-single">
                 <label class="config-field">
                     <span>Tema</span>
-                    <select id="Tema" asp-for="Usuario.Tema">
+                    <select id="Tema" asp-for="Usuario.Tema" required>
                         <option value="Claro">Claro</option>
                         <option value="Oscuro">Oscuro</option>
                     </select>
-                    <span id="errorTema" class="config-inline-error" aria-live="polite"></span>
                 </label>
             </div>
         </section>

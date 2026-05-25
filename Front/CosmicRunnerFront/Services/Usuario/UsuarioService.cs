@@ -58,7 +58,7 @@ public class UsuarioService : IUsuarioService
 			DepartamentoId = GetInt(perfil, "DepartamentoId"),
 			FechaNacimiento = GetDateTime(perfil, "FechaNacimiento"),
 			FechaIngreso = GetDateTime(perfil, "FechaIngreso"),
-			Racha = GetInt(perfil, "Racha"),
+			Racha = GetInt(perfil, "Racha", "Streak"),
 			CreditosTiendita = GetInt(perfil, "CreditosTiendita"),
 			PosicionGlobalPorcentaje = GetInt(perfil, "PosicionGlobalPorcentaje"),
 			PosicionDepartamentalPorcentaje = GetInt(perfil, "PosicionDepartamentalPorcentaje"),
