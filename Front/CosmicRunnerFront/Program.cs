@@ -1,7 +1,19 @@
+using CosmicRunnerFront.Services.Usuario;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddHttpClient<IUsuarioService, UsuarioService>(client =>
+{
+    client.BaseAddress = new Uri("https://localhost:8443");
+})
+.ConfigurePrimaryHttpMessageHandler(() =>
+    new HttpClientHandler
+    {
+        ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+    });
 
 var app = builder.Build();
 

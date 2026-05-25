@@ -8,6 +8,10 @@
     <link rel="stylesheet" href="~/css/usuario.css" asp-append-version="true" />
 }
 
+@section Scripts {
+    <script src="~/js/usuario-configuracion.js" asp-append-version="true"></script>
+}
+
 <section class="usuario-panel" aria-label="Panel de perfil">
     @if (Model.EsPerfilPropio)
     {
@@ -39,7 +43,13 @@
         }
     </div>
 
-    <div class="config-layout">
+    <form id="configForm" class="config-layout" asp-controller="Usuario" asp-action="GuardarConfiguracion" method="post" novalidate>
+        <input type="hidden" asp-for="Usuario.Id" />
+        <input type="hidden" asp-for="Usuario.Ubicacion" />
+        <input type="hidden" asp-for="Usuario.FotoPerfilUrl" />
+        <input type="hidden" asp-for="Usuario.Biografia" />
+        <input type="hidden" asp-for="Usuario.DepartamentoId" />
+
         <section class="config-section">
             <div class="config-section-header">
                 <div>
@@ -50,27 +60,33 @@
             <div class="config-field-grid">
                 <label class="config-field">
                     <span>Nombre(s)</span>
-                    <input type="text" value="@Model.Usuario.Nombre" readonly />
+                    <input type="text" id="Nombre" asp-for="Usuario.Nombre" />
+                    <span id="errorNombre" class="config-inline-error" aria-live="polite"></span>
                 </label>
                 <label class="config-field">
                     <span>Apellido(s)</span>
-                    <input type="text" value="@Model.Usuario.Apellido" readonly />
+                    <input type="text" id="Apellido" asp-for="Usuario.Apellido" />
+                    <span id="errorApellido" class="config-inline-error" aria-live="polite"></span>
                 </label>
                 <label class="config-field">
                     <span>Puesto de Trabajo</span>
-                    <input type="text" value="@Model.Puesto" readonly />
+                    <input type="text" id="Puesto" asp-for="Usuario.Puesto" />
+                    <span id="errorPuesto" class="config-inline-error" aria-live="polite"></span>
                 </label>
                 <label class="config-field">
                     <span>Teléfono</span>
-                    <input type="text" value="@Model.Usuario.Telefono" readonly />
+                    <input type="text" id="Telefono" asp-for="Usuario.Telefono" />
+                    <span id="errorTelefono" class="config-inline-error" aria-live="polite"></span>
                 </label>
                 <label class="config-field">
                     <span>Correo Electrónico</span>
-                    <input type="text" value="@Model.Correo" readonly />
+                    <input type="email" id="Correo" asp-for="Usuario.Correo" />
+                    <span id="errorCorreo" class="config-inline-error" aria-live="polite"></span>
                 </label>
                 <label class="config-field">
                     <span>Área/Departamento</span>
-                    <input type="text" value="@Model.Departamento" readonly />
+                    <input type="text" id="Departamento" value="@Model.Departamento" readonly />
+                    <span id="errorDepartamento" class="config-inline-error" aria-live="polite"></span>
                 </label>
             </div>
         </section>
@@ -89,17 +105,24 @@
                     <span class="skill-chip">@habilidad</span>
                 }
             </div>
+            <span id="errorHabilidades" class="config-inline-error" aria-live="polite"></span>
+
+            <input type="hidden" id="Habilidades" name="HabilidadesTexto" value="@string.Join("|", Model.Habilidades)" />
 
             <div class="config-ability-editor">
                 <label class="config-field config-field-inline">
                     <span>Selecciona una habilidad</span>
                     <div class="config-inline-row">
-                        <select>
+                        <select id="habilidadSelect">
+                            <option value="">Seleccionar</option>
                             <option>Eficiencia</option>
                             <option>Liderazgo</option>
                             <option>Calidad</option>
+                            <option>Comunicación</option>
+                            <option>Planeación</option>
+                            <option>Trabajo en equipo</option>
                         </select>
-                        <button type="button" class="config-icon-button" aria-label="Agregar habilidad">+</button>
+                        <button type="button" id="addSkillButton" class="config-icon-button" aria-label="Agregar habilidad">+</button>
                     </div>
                 </label>
 
@@ -112,6 +135,7 @@
                     </div>
                 </label>
             </div>
+            <span id="errorBiografia" class="config-inline-error" aria-live="polite"></span>
 
         </section>
 
@@ -125,19 +149,20 @@
             <div class="config-field-grid config-field-grid-single">
                 <label class="config-field">
                     <span>Tema</span>
-                    <select>
-                        <option selected>Claro</option>
-                        <option>Oscuro</option>
+                    <select id="Tema" asp-for="Usuario.Tema">
+                        <option value="Claro">Claro</option>
+                        <option value="Oscuro">Oscuro</option>
                     </select>
+                    <span id="errorTema" class="config-inline-error" aria-live="polite"></span>
                 </label>
             </div>
         </section>
 
         <div class="config-actions">
-            <button type="button" class="config-secondary-button">Descartar Cambios</button>
-            <button type="button" class="config-primary-button">Guardar Cambios</button>
+            <button type="button" id="discardChangesButton" class="config-secondary-button">Descartar Cambios</button>
+            <button type="button" id="saveChangesButton" class="config-primary-button">Guardar Cambios</button>
         </div>
-    </div>
+    </form>
 </section>
 
 <div class="modal fade" id="aboutMeModal" tabindex="-1" aria-labelledby="aboutMeModalLabel" aria-hidden="true">
@@ -150,12 +175,48 @@
             <div class="modal-body">
                 <label class="config-field config-field-modal">
                     <span>Texto de presentación</span>
-                    <textarea rows="5">@Model.Biografia</textarea>
+                    <textarea id="aboutEditor" rows="5">@Model.Biografia</textarea>
                 </label>
             </div>
             <div class="modal-footer border-0">
                 <button type="button" class="config-secondary-button" data-bs-dismiss="modal">Cancelar</button>
-                <button type="button" class="config-primary-button">Guardar</button>
+                <button type="button" id="saveAboutButton" class="config-primary-button">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="confirmSaveModal" tabindex="-1" aria-labelledby="confirmSaveModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content config-modal">
+            <div class="modal-header border-0">
+                <h5 class="modal-title" id="confirmSaveModalLabel">Confirmar guardado</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body">
+                <p class="mb-0">¿Estás seguro que quieres guardar los cambios realizados?</p>
+            </div>
+            <div class="modal-footer border-0">
+                <button type="button" class="config-secondary-button" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" id="confirmSaveButton" class="config-primary-button">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="confirmDiscardModal" tabindex="-1" aria-labelledby="confirmDiscardModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content config-modal">
+            <div class="modal-header border-0">
+                <h5 class="modal-title" id="confirmDiscardModalLabel">Confirmar descarte</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body">
+                <p class="mb-0">¿Deseas descartar los cambios realizados?</p>
+            </div>
+            <div class="modal-footer border-0">
+                <button type="button" class="config-secondary-button" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" id="confirmDiscardButton" class="config-primary-button">Descarta</button>
             </div>
         </div>
     </div>

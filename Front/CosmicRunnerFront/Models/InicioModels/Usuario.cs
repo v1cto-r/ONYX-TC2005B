@@ -13,6 +13,7 @@ namespace CosmicRunnerFront.Models.InicioModels
         public string Username { get; set; }
         public string Contrasena { get; set; }
         public string Biografia { get; set; }
+        public string Tema { get; set; }
         public DateTime FechaNacimiento { get; set; }
         public DateTime FechaIngreso { get; set; }
         public string Puesto { get; set; }
