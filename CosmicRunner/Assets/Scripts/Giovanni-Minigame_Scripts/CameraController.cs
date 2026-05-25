@@ -6,11 +6,11 @@ public class CamaraController : MonoBehaviour
 {
     [Header("Objetivo y Suavizado")]
     public Transform objetivo;
-    public float velocidadCamara = 0.025f;
+    public float velocidadCamara = 0.04f;
     public Vector3 desplazamiento;
 
     [Header("Ventana de Movimiento (Deadzone)")]
-    public Vector2 ventana = new Vector2(3f, 3f);
+    public Vector2 ventana = new Vector2(7f, 2f);
     
     // Este será nuestro "objetivo virtual". La cámara lo seguirá a él.
     private Vector3 centroVentanaActual;
