@@ -386,9 +386,9 @@ namespace MECS
                 // El texto final depende del nivel de calidad obtenido
                 string msg = matchQuality switch
                 {
-                    PromptQuality.Good => $"Bien! +{pts}",
-                    PromptQuality.Ok => $"Ok. +{pts}",
-                    PromptQuality.Meh => $"Meh... +{pts}",
+                    PromptQuality.Good => $"Perfecto! +{pts}",
+                    PromptQuality.Ok => $"Bien. +{pts}",
+                    PromptQuality.Meh => $"Ok... +{pts}",
                     _ => null
                 };
 
@@ -728,6 +728,16 @@ namespace MECS
             if (GameControl.Instance != null && GameControl.Instance.uiControl != null)
             {
                 GameControl.Instance.uiControl.SetWordsStorage(currentWordCount, wordStorageCapacity);
+            }
+
+            // Auto-open prompts panel cuando el jugador llena el storage
+            if (GameControl.Instance != null && GameControl.Instance.uiControl != null)
+            {
+                var ui = GameControl.Instance.uiControl;
+                if (wordStorageCapacity > 0 && currentWordCount == wordStorageCapacity && !ui.IsPromptsPanelOpen())
+                {
+                    ui.TogglePromptsPanel();
+                }
             }
         }
     }
