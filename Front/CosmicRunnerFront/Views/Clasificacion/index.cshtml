@@ -43,7 +43,7 @@
 
                         <div class="d-flex align-items-center">
 
-                            <img src="~/assets/ImagenesClasificacion/Users/@(user.Id).png" class="rounded-circle user-img me-3" />
+                            <img src="@user.Picture" class="rounded-circle user-img me-3" />
 
                             <div>
                                 <h5 class="mb-1 fw-semibold">@user.Nombre</h5>
@@ -122,7 +122,7 @@
         @if (Model.Departamental.Count == 0)
         {
             <div class="alert alert-warning warning mb-0">
-                No se encontraron usuarios que coincidan con el filtro en el departamento seleccionado.
+                No se encontraron usuarios que coincidan con el filtro seleccionado.
             </div>
         }
         else
@@ -140,7 +140,7 @@
 
                             <div class="d-flex align-items-center">
 
-                                <img src="~/assets/ImagenesClasificacion/Users/@(user.Id).png" class="rounded-circle user-img me-3" />
+                                <img src="@user.Picture" class="rounded-circle user-img me-3" />
 
                                 <div>
                                     <h5 class="mb-1 fw-semibold">@user.Nombre</h5>

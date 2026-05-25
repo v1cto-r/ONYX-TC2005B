@@ -15,5 +15,6 @@ namespace Front.Models
         public int Puntaje { get; set; }
 
         public int Posicion { get; set; }
+        public string Picture { get; set; } = string.Empty;
     }
 }

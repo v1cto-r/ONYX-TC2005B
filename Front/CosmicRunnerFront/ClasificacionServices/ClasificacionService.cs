@@ -32,6 +32,7 @@ namespace Front.Services
                 Departamento = u.Departamento,
                 Prompts    = u.Prompts,
                 Puntaje    = u.Puntaje,
+                Picture    = u.Picture,
                 Posicion   = u.Posicion
             }).ToList();
         }
@@ -54,6 +55,7 @@ namespace Front.Services
                 Nombre     = u.Nombre, 
                 Prompts    = u.Prompts,
                 Puntaje    = u.Puntaje,
+                Picture    = u.Picture,
                 Posicion   = u.Posicion
             }).ToList();
         }
@@ -65,6 +67,8 @@ namespace Front.Services
             public int    Prompts     { get; set; }
             public int    Puntaje     { get; set; }
             public string Departamento { get; set; } = string.Empty;
+
+            public string Picture { get; set; } = string.Empty;
             public int    Posicion    { get; set; }
         }
 
@@ -75,6 +79,7 @@ namespace Front.Services
             public int    Prompts   { get; set; }
             public int    Puntaje   { get; set; }
             public int    Posicion  { get; set; }
+            public string Picture   { get; set; } = string.Empty;
         }
     }
 }
