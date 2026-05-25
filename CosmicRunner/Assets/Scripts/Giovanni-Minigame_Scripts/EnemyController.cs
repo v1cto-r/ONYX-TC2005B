@@ -6,39 +6,48 @@ public class EnemyShip : MonoBehaviour
 {
     [Header("Configuración")]
     public float velocidadEmbiste = 20f;
-    public float tiempoDeVida = 5f; // Tiempo antes de autodestruirse si no choca
-    public int daño = 2; // Vidas que quita al jugador
+    public float tiempoDeVida = 5f; 
+    public int daño = 2; 
+
+    [Header("Impacto (Knockback)")]
+    [Tooltip("Fuerza con la que el enemigo empuja al jugador al chocar")]
+    public float fuerzaEmpuje = 15f;
 
     private Rigidbody2D rb;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        
-        // El Rigidbody2D debe estar en modo Kinematic para que no lo afecten colisiones físicas 
-        // y se mueva como una bala, o Dynamic con masa alta y gravity 0.
         rb.gravityScale = 0f;
-        
-        // Destruir por seguridad después de X segundos
         Destroy(gameObject, tiempoDeVida);
     }
 
     void FixedUpdate()
     {
-        // Se mueve horizontalmente hacia la izquierda (asumiendo que aparece en el lado derecho)
-        // Cambia transform.right por -transform.right dependiendo de hacia dónde mire tu sprite
-        rb.linearVelocity = -transform.right * velocidadEmbiste; 
+        // Como rotamos el prefab en Z, su nariz ahora es "transform.up"
+        // Si el enemigo viaja de derecha a izquierda, asegúrate de que la rotación Z lo haga apuntar bien.
+        rb.linearVelocity = transform.up * velocidadEmbiste; 
     }
 
+    // Usamos OnTriggerEnter2D porque ahora la nave es un Trigger (Atraviesa)
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // Asumiendo que tu nave tiene el tag "Player"
         if (collision.CompareTag("Player"))
         {
-            // Aquí llamarás al GameManager para restar las 2 vidas
-            // GameManager.Instance.RestarVidas(daño);
+            // 1. Buscamos el Rigidbody del jugador para empujarlo
+            Rigidbody2D rbJugador = collision.GetComponent<Rigidbody2D>();
             
-            Debug.Log("Jugador golpeado. -2 Vidas.");
+            if (rbJugador != null)
+            {
+                // 2. Calculamos la dirección del empuje (Desde el enemigo hacia el jugador)
+                Vector2 direccionEmpuje = (collision.transform.position - transform.position).normalized;
+                
+                // 3. Aplicamos un impulso violento en esa dirección
+                rbJugador.AddForce(direccionEmpuje * fuerzaEmpuje, ForceMode2D.Impulse);
+            }
+
+            // Aquí llamarías al GameManager para restar vidas.
+            Debug.Log("Jugador golpeado. -2 Vidas. Aplicando Knockback.");
         }
     }
 }
