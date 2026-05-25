@@ -7,6 +7,8 @@ public class SpaceshipController2D : MonoBehaviour
     [Header("Motores Principales")]
     public float fuerzaEmpuje = 15f;
     public float velocidadRotacion = 250f; 
+    [Tooltip("Velocidad máxima que puede alcanzar la nave")]
+    public float velocidadMaxima = 1f; // <-- NUEVA VARIABLE
 
     [Header("Sistema de Control de Vuelo")]
     [Tooltip("Activa los propulsores RCS para frenar automáticamente cuando no hay input")]
@@ -76,6 +78,14 @@ public class SpaceshipController2D : MonoBehaviour
                 // Zona muerta: si la velocidad es mínima, "apagamos" el movimiento para evitar micro-temblores
                 rb.linearVelocity = Vector2.zero;
             }
+        }
+
+        // --- LÍMITE DE VELOCIDAD TERMINAL (NUEVO) ---
+        // Se coloca al final para garantizar que actúe sobre todas las fuerzas aplicadas en este frame
+        if (rb.linearVelocity.magnitude > velocidadMaxima)
+        {
+            // Mantenemos la dirección (rb.velocity.normalized) pero le asignamos la velocidad máxima permitida
+            rb.linearVelocity = rb.linearVelocity.normalized * velocidadMaxima;
         }
     }
 }
