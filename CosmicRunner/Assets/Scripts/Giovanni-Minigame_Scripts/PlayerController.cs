@@ -8,7 +8,7 @@ public class SpaceshipController2D : MonoBehaviour
     public float fuerzaEmpuje = 15f;
     public float velocidadRotacion = 250f; 
     [Tooltip("Velocidad máxima que puede alcanzar la nave")]
-    public float velocidadMaxima = 1f; // <-- NUEVA VARIABLE
+    public float velocidadMaxima = 5f; // <-- NUEVA VARIABLE
 
     [Header("Sistema de Control de Vuelo")]
     [Tooltip("Activa los propulsores RCS para frenar automáticamente cuando no hay input")]
