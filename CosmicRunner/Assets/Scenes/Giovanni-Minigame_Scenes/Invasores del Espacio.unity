@@ -4956,8 +4956,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4293444180
-  m_fontColor: {r: 0.32773942, g: 0.76009905, b: 0.90943396, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -5289,6 +5289,14 @@ MonoBehaviour:
   velocidadMaxima: 5
   amortiguadoresActivados: 1
   fuerzaFrenado: 10
+  prefabProyectil: {fileID: 4153581853768591233, guid: a1c8d54d1ca29574c820b6d4f4dec5f4, type: 3}
+  puntoDisparo: {fileID: 1064676922}
+  velocidadProyectil: 12
+  heredarVelocidadNave: 1
+  barraSobrecalentamiento: {fileID: 0}
+  sobrecalentamientoMaximo: 100
+  costoPorDisparo: 15
+  tasaEnfriamiento: 20
 --- !u!50 &1446868211
 Rigidbody2D:
   serializedVersion: 5
@@ -7578,8 +7586,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4282335223
-  m_fontColor: {r: 0.96981126, g: 0.2470273, b: 0.2470273, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -7951,63 +7959,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ddbec0150af82bc42bddf82fedf1d150, type: 3}
---- !u!1001 &4966742646526413123
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1062989980500397622, guid: 5c7e1d0842ba49246ab0d9c31ebcc291, type: 3}
-      propertyPath: m_Name
-      value: Balazo
-      objectReference: {fileID: 0}
-    - target: {fileID: 8400526995293704843, guid: 5c7e1d0842ba49246ab0d9c31ebcc291, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 5.2141004
-      objectReference: {fileID: 0}
-    - target: {fileID: 8400526995293704843, guid: 5c7e1d0842ba49246ab0d9c31ebcc291, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.5263999
-      objectReference: {fileID: 0}
-    - target: {fileID: 8400526995293704843, guid: 5c7e1d0842ba49246ab0d9c31ebcc291, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8400526995293704843, guid: 5c7e1d0842ba49246ab0d9c31ebcc291, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8400526995293704843, guid: 5c7e1d0842ba49246ab0d9c31ebcc291, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8400526995293704843, guid: 5c7e1d0842ba49246ab0d9c31ebcc291, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8400526995293704843, guid: 5c7e1d0842ba49246ab0d9c31ebcc291, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8400526995293704843, guid: 5c7e1d0842ba49246ab0d9c31ebcc291, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8400526995293704843, guid: 5c7e1d0842ba49246ab0d9c31ebcc291, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8400526995293704843, guid: 5c7e1d0842ba49246ab0d9c31ebcc291, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 5c7e1d0842ba49246ab0d9c31ebcc291, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -8015,7 +7966,6 @@ SceneRoots:
   - {fileID: 165564543}
   - {fileID: 1446868204}
   - {fileID: 310691326957425851}
-  - {fileID: 4966742646526413123}
   - {fileID: 379667939}
   - {fileID: 1110795581}
   - {fileID: 491230096}

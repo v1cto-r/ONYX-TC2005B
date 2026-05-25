@@ -8,6 +8,7 @@ TagManager:
   - Collector
   - Box
   - Enemy
+  - Bullet
   layers:
   - Default
   - TransparentFX

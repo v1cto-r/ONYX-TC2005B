@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI; // Requerido para interactuar con la barra de la UI
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class SpaceshipController2D : MonoBehaviour
@@ -8,22 +9,49 @@ public class SpaceshipController2D : MonoBehaviour
     public float fuerzaEmpuje = 15f;
     public float velocidadRotacion = 250f; 
     [Tooltip("Velocidad máxima que puede alcanzar la nave")]
-    public float velocidadMaxima = 5f; // <-- NUEVA VARIABLE
+    public float velocidadMaxima = 5f;
 
     [Header("Sistema de Control de Vuelo")]
-    [Tooltip("Activa los propulsores RCS para frenar automáticamente cuando no hay input")]
     public bool amortiguadoresActivados = true;
-    [Tooltip("Fuerza con la que la nave contrarresta la inercia (Propulsores retro)")]
     public float fuerzaFrenado = 10f;
 
+    [Header("Ofensiva (Paso 2.1)")]
+    public GameObject prefabProyectil;
+    public Transform puntoDisparo;
+    public float velocidadProyectil = 12f;
+    public bool heredarVelocidadNave = true;
+
+    [Header("Sobrecalentamiento (Paso 2.2)")]
+    [Tooltip("Arrastra aquí el Slider de sobrecalentamiento del Canvas")]
+    public Slider barraSobrecalentamiento;
+    public float sobrecalentamientoMaximo = 100f;
+    public float costoPorDisparo = 15f;
+    public float tasaEnfriamiento = 20f; // Cuánto sobrecalentamiento baja por segundo
+
     private Rigidbody2D rb;
+    private float sobrecalentamientoActual = 0f;
+    private bool armaBloqueada = false;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         rb.gravityScale = 0f;
-        rb.linearDamping = 0f; // El entorno sigue siendo un vacío perfecto
+        rb.linearDamping = 0f; 
         rb.angularDamping = 3f;
+
+        // Inicializar la barra de la UI si está asignada
+        if (barraSobrecalentamiento != null)
+        {
+            barraSobrecalentamiento.maxValue = sobrecalentamientoMaximo;
+            barraSobrecalentamiento.value = 0f;
+        }
+    }
+
+    void Update()
+    {
+        ManejarDisparo();
+        ManejarEnfriamiento();
+        ActualizarUI();
     }
 
     void FixedUpdate()
@@ -43,13 +71,11 @@ public class SpaceshipController2D : MonoBehaviour
         // ESTADO 1: Piloto manual (Acelerando)
         if (vectorDeseado != Vector2.zero)
         {
-            // Rotación
             float anguloDeseado = Mathf.Atan2(vectorDeseado.y, vectorDeseado.x) * Mathf.Rad2Deg - 90f;
             float anguloActual = rb.rotation;
             float nuevoAngulo = Mathf.MoveTowardsAngle(anguloActual, anguloDeseado, velocidadRotacion * Time.fixedDeltaTime);
             rb.MoveRotation(nuevoAngulo);
 
-            // Empuje
             float alineacion = Vector2.Dot(transform.up, vectorDeseado);
 
             if (alineacion > 0.5f)
@@ -60,32 +86,87 @@ public class SpaceshipController2D : MonoBehaviour
         // ESTADO 2: Piloto automático (Frenado)
         else if (amortiguadoresActivados)
         {
-            // Si la nave se está moviendo, actuamos para llevar la velocidad a cero
             if (rb.linearVelocity.magnitude > 0.1f)
             {
-                // Calculamos el vector opuesto a nuestro movimiento actual
                 Vector2 direccionFrenado = -rb.linearVelocity.normalized;
-                
-                // Aplicamos la fuerza. 
-                // Usamos Mathf.Min para evitar que una fuerza de frenado muy alta 
-                // nos empuje hacia atrás si ya estamos casi detenidos (evita oscilaciones).
                 float fuerzaAplicada = Mathf.Min(fuerzaFrenado, rb.linearVelocity.magnitude / Time.fixedDeltaTime);
-                
                 rb.AddForce(direccionFrenado * fuerzaAplicada, ForceMode2D.Force);
             }
             else
             {
-                // Zona muerta: si la velocidad es mínima, "apagamos" el movimiento para evitar micro-temblores
                 rb.linearVelocity = Vector2.zero;
             }
         }
 
-        // --- LÍMITE DE VELOCIDAD TERMINAL (NUEVO) ---
-        // Se coloca al final para garantizar que actúe sobre todas las fuerzas aplicadas en este frame
+        // LÍMITE DE VELOCIDAD TERMINAL
         if (rb.linearVelocity.magnitude > velocidadMaxima)
         {
-            // Mantenemos la dirección (rb.velocity.normalized) pero le asignamos la velocidad máxima permitida
             rb.linearVelocity = rb.linearVelocity.normalized * velocidadMaxima;
+        }
+    }
+
+    private void ManejarDisparo()
+    {
+        if (Keyboard.current == null) return;
+
+        if (Keyboard.current.spaceKey.wasPressedThisFrame || Keyboard.current.eKey.wasPressedThisFrame)
+        {
+            // Solo permite disparar si el arma no está bloqueada por sobrecalentamiento
+            if (!armaBloqueada)
+            {
+                EjecutarDisparo();
+            }
+        }
+    }
+
+    private void EjecutarDisparo()
+    {
+        if (prefabProyectil == null || puntoDisparo == null) return;
+
+        // 1. Instanciación (Paso 2.1)
+        GameObject nuevoProyectil = Instantiate(prefabProyectil, puntoDisparo.position, puntoDisparo.rotation);
+        Rigidbody2D rbProyectil = nuevoProyectil.GetComponent<Rigidbody2D>();
+
+        if (rbProyectil != null)
+        {
+            Vector2 velocidadInicial = transform.up * velocidadProyectil;
+            if (heredarVelocidadNave)
+            {
+                velocidadInicial += rb.linearVelocity;
+            }
+            rbProyectil.linearVelocity = velocidadInicial;
+        }
+
+        // 2. Control de Sobrecalentamiento (Paso 2.2)
+        sobrecalentamientoActual += costoPorDisparo;
+
+        if (sobrecalentamientoActual >= sobrecalentamientoMaximo)
+        {
+            sobrecalentamientoActual = sobrecalentamientoMaximo;
+            armaBloqueada = true; // Bloqueo activado
+        }
+    }
+
+    private void ManejarEnfriamiento()
+    {
+        if (sobrecalentamientoActual > 0f)
+        {
+            sobrecalentamientoActual -= tasaEnfriamiento * Time.deltaTime;
+
+            // Condición estricta: Solo se desbloquea si baja a cero en su totalidad
+            if (sobrecalentamientoActual <= 0f)
+            {
+                sobrecalentamientoActual = 0f;
+                armaBloqueada = false; // Bloqueo desactivado
+            }
+        }
+    }
+
+    private void ActualizarUI()
+    {
+        if (barraSobrecalentamiento != null)
+        {
+            barraSobrecalentamiento.value = sobrecalentamientoActual;
         }
     }
 }
