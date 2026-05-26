@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using System.Globalization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using CosmicRunnerFront.Models;
 using CosmicRunnerFront.Models.UsuarioModels;
@@ -9,9 +10,9 @@ namespace CosmicRunnerFront.Controllers;
 
 public class UsuarioController : Controller
 {
+    private const string CurrentUserSessionKey = "CurrentUserId";
     private readonly ILogger<UsuarioController> _logger;
     private readonly IUsuarioService _usuarioService;
-    private const int CurrentUserId = 1;
 
     public UsuarioController(ILogger<UsuarioController> logger, IUsuarioService usuarioService)
     {
@@ -21,30 +22,60 @@ public class UsuarioController : Controller
 
     public async Task<IActionResult> Index()
     {
-        return View(await BuildUsuarioViewModelAsync(nameof(Index)));
+        var currentUserId = GetCurrentUserId();
+        if (currentUserId is null)
+        {
+            return RedirectToAction("Index", "Home");
+        }
+
+        return View(await BuildUsuarioViewModelAsync(currentUserId.Value, nameof(Index)));
     }
 
     public async Task<IActionResult> Actividades()
     {
-        return View("Actividades", await BuildUsuarioViewModelAsync(nameof(Actividades)));
+        var currentUserId = GetCurrentUserId();
+        if (currentUserId is null)
+        {
+            return RedirectToAction("Index", "Home");
+        }
+
+        return View("Actividades", await BuildUsuarioViewModelAsync(currentUserId.Value, nameof(Actividades)));
     }
 
     public async Task<IActionResult> Prompts()
     {
-        return View("Prompts", await BuildUsuarioViewModelAsync(nameof(Prompts)));
+        var currentUserId = GetCurrentUserId();
+        if (currentUserId is null)
+        {
+            return RedirectToAction("Index", "Home");
+        }
+
+        return View("Prompts", await BuildUsuarioViewModelAsync(currentUserId.Value, nameof(Prompts)));
     }
 
     public async Task<IActionResult> Configuracion()
     {
-        return View("Configuracion", await BuildUsuarioViewModelAsync(nameof(Configuracion)));
+        var currentUserId = GetCurrentUserId();
+        if (currentUserId is null)
+        {
+            return RedirectToAction("Index", "Home");
+        }
+
+        return View("Configuracion", await BuildUsuarioViewModelAsync(currentUserId.Value, nameof(Configuracion)));
     }
 
     [HttpPost]
     public async Task<IActionResult> GuardarConfiguracion(UsuarioViewModel usuarioViewModel, string? habilidadesTexto)
     {
+        var currentUserId = GetCurrentUserId();
+        if (currentUserId is null)
+        {
+            return RedirectToAction("Index", "Home");
+        }
+
         if (usuarioViewModel.Usuario.Id == 0)
         {
-            usuarioViewModel.Usuario.Id = CurrentUserId;
+            usuarioViewModel.Usuario.Id = currentUserId.Value;
         }
 
         var success = await _usuarioService.ActualizarPerfilAsync(usuarioViewModel);
@@ -62,11 +93,11 @@ public class UsuarioController : Controller
         return RedirectToAction(nameof(Configuracion));
     }
 
-    private async Task<UsuarioViewModel> BuildUsuarioViewModelAsync(string seccionActiva)
+    private async Task<UsuarioViewModel> BuildUsuarioViewModelAsync(int currentUserId, string seccionActiva)
     {
-        var usuarioViewModel = await _usuarioService.ObtenerPerfilAsync(CurrentUserId) ?? new UsuarioViewModel
+        var usuarioViewModel = await _usuarioService.ObtenerPerfilAsync(currentUserId) ?? new UsuarioViewModel
         {
-            Usuario = new Models.InicioModels.Usuario { Id = CurrentUserId },
+            Usuario = new Models.InicioModels.Usuario { Id = currentUserId },
             Habilidades = new List<string>(),
             PromptsRecientes = new List<PromptModel>(),
             Contactos = new List<UsuarioViewModel.Contacto>(),
@@ -83,9 +114,14 @@ public class UsuarioController : Controller
             new() { Etiqueta = "Configuración", Accion = nameof(Configuracion) }
         };
 
-        usuarioViewModel.EsPerfilPropio = usuarioViewModel.Usuario.Id == CurrentUserId;
+        usuarioViewModel.EsPerfilPropio = usuarioViewModel.Usuario.Id == currentUserId;
 
         return usuarioViewModel;
+    }
+
+    private int? GetCurrentUserId()
+    {
+        return HttpContext.Session.GetInt32(CurrentUserSessionKey);
     }
 
     private static void EnsureUsuarioDefaults(UsuarioViewModel usuarioViewModel)
