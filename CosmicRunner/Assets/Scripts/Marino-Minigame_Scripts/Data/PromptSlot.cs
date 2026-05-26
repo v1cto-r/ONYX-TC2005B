@@ -197,7 +197,35 @@ namespace MECS
             int tokenIndex = sourceText.IndexOf(token, System.StringComparison.Ordinal);
             if (tokenIndex < 0)
             {
-                return sourceText;
+                int blankStart = -1;
+                int blankLength = 0;
+
+                for (int i = 0; i < sourceText.Length; i++)
+                {
+                    if (sourceText[i] == '_')
+                    {
+                        if (blankStart < 0)
+                        {
+                            blankStart = i;
+                        }
+
+                        blankLength++;
+                    }
+                    else if (blankStart >= 0)
+                    {
+                        break;
+                    }
+                }
+
+                if (blankStart < 0 || blankLength == 0)
+                {
+                    return sourceText;
+                }
+
+                // Si el API trae otro numero de guiones bajos, remplazamos ese bloque igual
+                return sourceText.Substring(0, blankStart)
+                    + replacement
+                    + sourceText.Substring(blankStart + blankLength);
             }
 
             // Reconstruimos el texto con la palabra colocada en ese punto
