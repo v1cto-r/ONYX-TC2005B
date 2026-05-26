@@ -14,7 +14,7 @@ builder.Services.AddSession(options =>
 
 builder.Services.AddHttpClient<IUsuarioService, UsuarioService>(client =>
 {
-    client.BaseAddress = new Uri("https://localhost:8443");
+    client.BaseAddress = new Uri("https://localhost:12003");
 })
 .ConfigurePrimaryHttpMessageHandler(() =>
     new HttpClientHandler
