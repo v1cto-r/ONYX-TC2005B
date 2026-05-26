@@ -1,3 +1,4 @@
+using CosmicRunnerFront.Services.Tienda;
 using CosmicRunnerFront.Services.Usuario;
 using Front.Services;
 
@@ -34,13 +35,23 @@ builder.Services.Configure<Microsoft.AspNetCore.Mvc.JsonOptions>(options =>
 options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
 });
 
+// Servicio para conectar solo la pantalla de Tienda con el API de Jorge
+builder.Services.AddHttpClient<TiendaApiService>()
+    .ConfigurePrimaryHttpMessageHandler(() =>
+    {
+        return new HttpClientHandler
+        {
+            // Solo se usa para pruebas locales con HTTPS
+            ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+        };
+    });
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
@@ -56,8 +67,5 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}")
     .WithStaticAssets();
-
-
-
 
 app.Run();
