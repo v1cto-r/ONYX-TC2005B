@@ -8,6 +8,7 @@ public enum GameState
 public class GameController : MonoBehaviour
 {
     public static GameController instancia;
+    public GameObject startScreen;
     string mainMenuScene="AtaqueEstelarGameStart";
     string gameScene="AtaqueEstelarGame";
     string DefeatScene="AtaqueEstelarDefeat";
@@ -36,6 +37,7 @@ public class GameController : MonoBehaviour
         Time.timeScale=1f;
     }
 
+    
     void Update()
     {
         if (currentState!="Playing")

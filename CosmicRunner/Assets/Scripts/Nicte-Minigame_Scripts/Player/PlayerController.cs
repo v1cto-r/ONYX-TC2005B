@@ -9,8 +9,9 @@ public class PlayerController : MonoBehaviour
    PlayerMovement playermovement;
    SpecialAttackUI specialAttackUI;
    SpriteRenderer spriteRenderer;
+   PlayerHealth playerHealth;
+   PlayerCombat playerCombat;
    string colorCooldown="#FFA3A3";
-   //public int currentHealth = 12;
    bool inputEnabled = true;
    bool isDead = false;
    float attackWindow = 1f;
@@ -26,6 +27,13 @@ public class PlayerController : MonoBehaviour
        specialAttackUI = FindObjectOfType<SpecialAttackUI>();
        spriteRenderer = GetComponent<SpriteRenderer>();
        gameController = FindObjectOfType<GameController>();
+       playerHealth = GetComponent<PlayerHealth>();
+       playerCombat = GetComponent<PlayerCombat>();
+   }
+
+   void Start()
+   {
+       ApplyTopRankBenefits();
    }
    
    void Update()
@@ -80,6 +88,27 @@ public class PlayerController : MonoBehaviour
             }
         }
    }
+
+   void ApplyTopRankBenefits()
+    {
+        int rankPosition = PlayerPrefs.GetInt("rank_position");
+
+        if (rankPosition <= 0 || rankPosition > 3)
+        {
+            Debug.Log("Player is not in the top 3 ranks");
+            return;
+        } 
+        if (playerHealth != null)
+        {
+            playerHealth.ActivateShield();     
+        }
+
+        if (playerCombat != null)
+        {
+            playerCombat.RechargeSpecial();
+        }
+        
+    }
 
    public void DisableInput()
     {

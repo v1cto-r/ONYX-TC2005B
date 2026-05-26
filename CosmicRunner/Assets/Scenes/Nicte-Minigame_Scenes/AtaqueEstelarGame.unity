@@ -1610,7 +1610,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 1
+  m_Constraints: 3
 --- !u!114 &244386438
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4181,6 +4181,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afcd6c1a6bfe5dd40b699eabc228e89b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameController
+  startScreen: {fileID: 0}
   time: 240
   timeRemaining: 0
   currentState: 

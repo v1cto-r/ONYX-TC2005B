@@ -39,11 +39,13 @@ public class EnemyHealth : MonoBehaviour
         if (healthBarUI != null)
         {
             healthBarUI.updateEnemyHealth(currentHealth);
+            Debug.Log("Enemy Health: " + currentHealth);
         }
 
         if (enemyController != null)
         {
-            enemyController.EvaluateStateFromHealth(PlayerPrefs.GetInt("EnemyHealth"));
+            // Pasar la salud actual directamente al controlador (evita depender de PlayerPrefs)
+            enemyController.EvaluateStateFromHealth(currentHealth);
         }
 
         if (currentHealth <= 0)
@@ -70,9 +72,9 @@ public class EnemyHealth : MonoBehaviour
     public void Heal()
     {
         int randomValue = Random.Range(0, 10);
-            if (randomValue < 5)
+            if (randomValue < 3)
             {
-                currentHealth += 3;
+                currentHealth += 2;
                 if (currentHealth > maxHealth)
                 {
                     currentHealth = maxHealth;
