@@ -15,7 +15,7 @@ namespace Front.Services
 
         public async Task<List<UsuarioRanking>> ObtenerClasificacionGlobal()
         {
-            var url = "https://192.168.1.25:5000//clasificacion/global";
+            var url = "https://127.0.0.1:12005//clasificacion/global";
             var response = await _httpClient.GetAsync(url);
 
             if (!response.IsSuccessStatusCode)
@@ -39,7 +39,7 @@ namespace Front.Services
 
         public async Task<List<UsuarioRanking>> ObtenerClasificacionDepartamental(string departamento)
         {
-            var url = $"https://192.168.1.25:5000//clasificacion/departamental/{departamento}";
+            var url = $"https://127.0.0.1:12005//clasificacion/departamental/{departamento}";
             var response = await _httpClient.GetAsync(url);
 
             if (!response.IsSuccessStatusCode)
