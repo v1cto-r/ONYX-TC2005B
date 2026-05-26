@@ -12,7 +12,7 @@ public class EnemyMovement : MonoBehaviour
     private float minY = -3f;
     private float maxY =  2f;
     private float chaseRange    = 8f;
-    private float chaseStrength = 0.6f;
+    private float chaseStrength = 0.5f;
     // Referencias al rigidbody y al jugador
     Rigidbody2D rb;
     Transform playerTransform;

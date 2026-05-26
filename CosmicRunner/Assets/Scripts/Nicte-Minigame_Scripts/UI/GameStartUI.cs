@@ -1,28 +1,123 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Networking;
+using TMPro;
+using System.Collections;
 
 namespace Nicte.Minigame{
+    
+    [System.Serializable]
+    public class RankResult
+    {
+        public string name;
+        public string lastname;
+        public int position;
+    }
+
+    [System.Serializable]
+    public class RankResultArray
+    {
+        public RankResult[] items;
+    }
+    
 public class GameStartUI : MonoBehaviour
 {
     public GameObject startScreen;
     public GameObject controlsScreen1;
     public GameObject controlsScreen2;
+    public GameObject benefitScreen;
+    public TextMeshProUGUI messageText;
+    public TextMeshProUGUI subtitleText;
+
+    RankResult rank;
+
+    bool benefit= false;
+
+    private string apiUrl = "https://127.0.0.1:5000/clasificacion/ataqueEstelar/";
+    //private string apiUrl = "https://192.168.1.25:5000/clasificacion/ataqueEstelar/";
 
     void Start()
     {
-        // Mostrar la pantalla de inicio y ocultar la UI general al iniciar
+        PlayerPrefs.DeleteKey("rank_position");
+        PlayerPrefs.DeleteKey("rank_name");
         if (startScreen != null)
             startScreen.SetActive(true);
         if (controlsScreen1 != null)
             controlsScreen1.SetActive(false);
+        if (controlsScreen2 != null)
+            controlsScreen2.SetActive(false);
+        if (benefitScreen != null)
+            benefitScreen.SetActive(false);
+        int userId = PlayerPrefs.GetInt("UserId");
+        StartCoroutine(CheckRank(userId));
+    }
+
+    IEnumerator CheckRank(int userId)
+    {
+        string url = apiUrl + userId;
+        UnityWebRequest web = UnityWebRequest.Get(url);
+        web.certificateHandler = new ForceAcceptAll();
+        yield return web.SendWebRequest();
+
+        if (web.result != UnityWebRequest.Result.Success)
+        {
+            SceneManager.LoadScene("AtaqueEstelarGame");
+            yield break;
+        }
+
+        string Array = "{\"items\":" + web.downloadHandler.text + "}";
+        RankResultArray wrapper = JsonUtility.FromJson<RankResultArray>(Array);
+        rank = wrapper.items[0];
+
+        Debug.Log($"Player rank: {rank.position}, Name: {rank.name} {rank.lastname}");
+            PlayerPrefs.SetString("rank_name", rank.name + " " + rank.lastname);
+            PlayerPrefs.SetInt("rank_position", rank.position);
+
+        if (rank != null && rank.position <= 3)
+        {
+            benefit = true;
+        }
+        else
+        {
+            benefit = false;
+        }
     }
 
     public void playGame()
     {
-        // Iniciar el juego y ocultar la pantalla de inicio
-        if (startScreen != null)
+        if(benefit)
+        {
+            ShowBenefitScreen(rank);
+        }else
+        {
             SceneManager.LoadScene("AtaqueEstelarGame");
+        }
     }
+
+    public void playGameBenefitScreen()
+    {
+        SceneManager.LoadScene("AtaqueEstelarGame");
+    }
+
+    
+    void ShowBenefitScreen(RankResult rank)
+    {
+        if (startScreen != null)
+        {
+            startScreen.SetActive(false);
+        }
+        if (benefitScreen != null)
+        {
+            benefitScreen.SetActive(true);
+        }   
+
+        if (messageText != null)
+                messageText.text = $"¡Felicidades, {rank.name}!";
+
+        if (subtitleText != null)
+                subtitleText.text = $"Te encuentras en la posición #{rank.position} global.\nPor ello, iniciarás este combate con:";
+    }
+
     public void controlScreen1()
     {
         if (startScreen != null)

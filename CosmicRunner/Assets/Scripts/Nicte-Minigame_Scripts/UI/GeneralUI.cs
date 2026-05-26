@@ -11,6 +11,7 @@ public class GeneralUI : MonoBehaviour
     public GameObject pauseScreen;
      bool gamePaused = false;
     public static int currentCredits = 0;
+
     void Update()
     {
         if (GameController.instancia.currentState != "Playing")
