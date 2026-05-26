@@ -2,73 +2,111 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using CosmicRunnerFront.Models;
 using CosmicRunnerFront.Models.TiendaModels;
-using CosmicRunnerFront.DataTienda;
+using CosmicRunnerFront.Services.Tienda;
 
 namespace CosmicRunnerFront.Controllers;
 
 public class TiendaController : Controller
 {
     private readonly ILogger<TiendaController> _logger;
+    private readonly TiendaApiService _tiendaApiService;
 
-    public TiendaController(ILogger<TiendaController> logger)
+    private const int UsuarioPruebaId = 1;
+
+    public TiendaController(ILogger<TiendaController> logger, TiendaApiService tiendaApiService)
     {
         _logger = logger;
+        _tiendaApiService = tiendaApiService;
     }
 
-    public IActionResult Index(string? SearchText, int? FilterCategoriaId)
+    public async Task<IActionResult> Index(string? SearchText, int? FilterCategoriaId)
     {
-        // Traemos los productos desde la base de datos fake
-        var productos = TiendaMockDatabase.ObtenerProductos().AsEnumerable();
-
-        // Si el usuario escribio algo buscamos en nombre descripcion o categoria
-        if (!string.IsNullOrWhiteSpace(SearchText))
+        try
         {
-            productos = productos.Where(producto =>
-                producto.Nombre.Contains(SearchText, StringComparison.OrdinalIgnoreCase) ||
-                producto.Descripcion.Contains(SearchText, StringComparison.OrdinalIgnoreCase) ||
-                producto.CategoriaNombre.Contains(SearchText, StringComparison.OrdinalIgnoreCase));
+            // Traemos los productos desde el API de Jorge
+            var viewModel = await _tiendaApiService.ObtenerTiendaAsync(UsuarioPruebaId);
+
+            var productos = viewModel.Productos.AsEnumerable();
+
+            // Si el usuario escribio algo buscamos en nombre descripcion o categoria
+            if (!string.IsNullOrWhiteSpace(SearchText))
+            {
+                productos = productos.Where(producto =>
+                    producto.Nombre.Contains(SearchText, StringComparison.OrdinalIgnoreCase) ||
+                    producto.Descripcion.Contains(SearchText, StringComparison.OrdinalIgnoreCase) ||
+                    producto.CategoriaNombre.Contains(SearchText, StringComparison.OrdinalIgnoreCase));
+            }
+
+            // Si el usuario selecciona una categoria dejamos solo esos productos
+            if (FilterCategoriaId.HasValue && FilterCategoriaId.Value > 0)
+            {
+                productos = productos.Where(producto => producto.CategoriaId == FilterCategoriaId.Value);
+            }
+
+            viewModel.Productos = productos.ToList();
+            viewModel.SearchText = SearchText;
+            viewModel.FilterCategoriaId = FilterCategoriaId;
+
+            return View(viewModel);
         }
-
-        // Si el usuario selecciona una categoria dejamos solo esos productos
-        if (FilterCategoriaId.HasValue && FilterCategoriaId.Value > 0)
+        catch (Exception ex)
         {
-            productos = productos.Where(producto => producto.CategoriaId == FilterCategoriaId.Value);
+            _logger.LogError(ex, "Error al cargar la tienda desde el API");
+
+            TempData["MensajeTienda"] = "No se pudo cargar la tienda. Revisa que el API esté encendido.";
+            TempData["TipoMensajeTienda"] = "error";
+
+            var viewModel = new TiendaViewModel
+            {
+                Productos = new List<ProductoTienda>(),
+                Categorias = new List<CategoriaTienda>(),
+                CreditosUsuario = 0,
+                SearchText = SearchText,
+                FilterCategoriaId = FilterCategoriaId
+            };
+
+            return View(viewModel);
         }
-
-        // Modelo que se manda a view
-        var viewModel = new TiendaViewModel
-        {
-            Productos = productos.ToList(),
-            Categorias = TiendaMockDatabase.Categorias,
-            CreditosUsuario = TiendaMockDatabase.CreditosUsuario,
-            SearchText = SearchText,
-            FilterCategoriaId = FilterCategoriaId
-        };
-
-        return View(viewModel);
     }
 
     [HttpPost]
-    public IActionResult Comprar(int productoId)
+    public async Task<IActionResult> Comprar(int productoId)
     {
-        // Intentamos comprar el producto]
-        var resultado = TiendaMockDatabase.ComprarProducto(productoId);
-
-        // Guardamos el resultado]
-        TempData["MensajeTienda"] = resultado.Mensaje;
-        TempData["TipoMensajeTienda"] = resultado.Exito ? "success" : "error";
-        TempData["CreditosRestantes"] = resultado.CreditosRestantes;
-
-        // Si la compra sale bien mandamos los datos del producto al pop up final
-        if (resultado.ProductoComprado != null)
+        try
         {
-            TempData["ProductoNombre"] = resultado.ProductoComprado.Nombre;
-            TempData["ProductoCategoria"] = resultado.ProductoComprado.CategoriaNombre;
-            TempData["ProductoImagen"] = resultado.ProductoComprado.ImagenUrl;
-            TempData["ProductoPrecio"] = resultado.ProductoComprado.Precio;
-        }
+            // Mandamos la compra al API
+            var resultado = await _tiendaApiService.ComprarProductoAsync(UsuarioPruebaId, productoId);
 
-        return RedirectToAction("Index");
+            TempData["MensajeTienda"] = resultado.Mensaje;
+            TempData["TipoMensajeTienda"] = resultado.Exito ? "success" : "error";
+            TempData["CreditosRestantes"] = resultado.CreditosRestantes;
+
+            // Si la compra sale bien buscamos el producto completo para mostrarlo en el pop up
+            if (resultado.Exito)
+            {
+                var tiendaActualizada = await _tiendaApiService.ObtenerTiendaAsync(UsuarioPruebaId);
+                var productoComprado = tiendaActualizada.Productos.FirstOrDefault(producto => producto.Id == productoId);
+
+                if (productoComprado != null)
+                {
+                    TempData["ProductoNombre"] = productoComprado.Nombre;
+                    TempData["ProductoCategoria"] = productoComprado.CategoriaNombre;
+                    TempData["ProductoImagen"] = productoComprado.ImagenUrl;
+                    TempData["ProductoPrecio"] = productoComprado.Precio;
+                }
+            }
+
+            return RedirectToAction("Index");
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error al comprar producto desde la tienda");
+
+            TempData["MensajeTienda"] = "No se pudo conectar con el API para completar la compra.";
+            TempData["TipoMensajeTienda"] = "error";
+
+            return RedirectToAction("Index");
+        }
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

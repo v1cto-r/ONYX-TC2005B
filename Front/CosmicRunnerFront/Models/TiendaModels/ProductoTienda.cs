@@ -9,6 +9,7 @@ public class ProductoTienda
     public string CategoriaNombre { get; set; } = "";
     public int Precio { get; set; }
     public string ImagenUrl { get; set; } = "";
+    public List<string> ImagenesUrl { get; set; } = new();
     public bool Disponible { get; set; } = true;
     public bool Comprado { get; set; }
 }

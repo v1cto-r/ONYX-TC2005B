@@ -1,7 +1,10 @@
-﻿@model CosmicRunnerFront.Models.TiendaModels.TiendaViewModel
+﻿@using System.Globalization
+@model CosmicRunnerFront.Models.TiendaModels.TiendaViewModel
 
 @{
     ViewData["Title"] = "Tienda";
+
+    var formatoNumero = CultureInfo.GetCultureInfo("en-US");
 
     var mensajeTienda = TempData["MensajeTienda"]?.ToString();
     var tipoMensajeTienda = TempData["TipoMensajeTienda"]?.ToString();
@@ -24,13 +27,13 @@
             <p class="tienda-eyebrow">Cosmic Runner</p>
             <h1>Tienda de recompensas</h1>
             <p class="tienda-description">
-                Canjea tus créditos por cosméticos del jugador, cosméticos de la nave e íconos para tu cuenta.
+                Canjea tus créditos por skins de jugador e íconos para personalizar tu cuenta.
             </p>
         </div>
 
         <div class="creditos-card">
             <span>Créditos disponibles</span>
-            <strong>@Model.CreditosUsuario.ToString("N0")</strong>
+            <strong>@Model.CreditosUsuario.ToString("N0", formatoNumero)</strong>
         </div>
     </section>
 
@@ -93,7 +96,7 @@
                     <div class="producto-footer">
                         <div class="producto-precio">
                             <span>Precio</span>
-                            <strong>@producto.Precio.ToString("N0") créditos</strong>
+                            <strong>@producto.Precio.ToString("N0", formatoNumero) créditos</strong>
                         </div>
 
                         @* Cambiamos el boton segun el estado del producto *@
@@ -122,6 +125,7 @@
                                 data-producto-categoria="@producto.CategoriaNombre"
                                 data-producto-precio="@producto.Precio"
                                 data-producto-imagen="@producto.ImagenUrl"
+                                data-producto-imagenes="@string.Join("|", producto.ImagenesUrl)"
                                 data-creditos="@Model.CreditosUsuario">
                                 Adquirir
                             </button>
@@ -152,7 +156,19 @@
             <div class="modal-body">
                 <div class="detalle-grid">
                     <div class="detalle-image-box">
-                        <img id="modalProductoImagen" src="" alt="Producto seleccionado" />
+                        <div id="modalProductoCarousel" class="carousel slide detalle-carousel">
+                            <div id="modalProductoCarouselInner" class="carousel-inner"></div>
+
+                            <button class="carousel-control-prev" type="button" data-bs-target="#modalProductoCarousel" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Anterior</span>
+                            </button>
+
+                            <button class="carousel-control-next" type="button" data-bs-target="#modalProductoCarousel" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Siguiente</span>
+                            </button>
+                        </div>
                     </div>
 
                     <div class="detalle-info">
@@ -264,7 +280,7 @@
                                 <span>@productoCategoria</span>
 
                                 <strong>
-                                    @Convert.ToInt32(creditosRestantes).ToString("N0") créditos restantes
+                                    @Convert.ToInt32(creditosRestantes).ToString("N0", formatoNumero) créditos restantes
                                 </strong>
                             </div>
                         </div>

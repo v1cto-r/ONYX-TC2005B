@@ -1,7 +1,8 @@
 document.addEventListener("DOMContentLoaded", function () {
     const detalleModalElement = document.getElementById("detalleProductoModal");
     const confirmarModalElement = document.getElementById("confirmarCompraModal");
-    const modalProductoImagen = document.getElementById("modalProductoImagen");
+    const modalProductoCarouselInner = document.getElementById("modalProductoCarouselInner");
+    const modalProductoCarousel = document.getElementById("modalProductoCarousel");
     const modalProductoCategoria = document.getElementById("modalProductoCategoria");
     const modalProductoNombre = document.getElementById("modalProductoNombre");
     const modalProductoDescripcion = document.getElementById("modalProductoDescripcion");
@@ -16,6 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const mensajeTiendaModalElement = document.getElementById("mensajeTiendaModal");
 
     let productoSeleccionado = null;
+    let carouselInstance = null;
 
     // Abrimos el pop up final
     if (mensajeTiendaModalElement) {
@@ -28,7 +30,58 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function formatearCreditos(cantidad) {
-        return new Intl.NumberFormat("es-MX").format(cantidad) + " créditos";
+        return new Intl.NumberFormat("en-US").format(cantidad) + " créditos";
+    }
+
+    function obtenerImagenesProducto(boton) {
+        const imagenesTexto = boton.getAttribute("data-producto-imagenes");
+        const imagenPrincipal = boton.getAttribute("data-producto-imagen");
+
+        const imagenes = (imagenesTexto || imagenPrincipal || "")
+            .split("|")
+            .map(imagen => imagen.trim())
+            .filter(imagen => imagen !== "");
+
+        if (imagenes.length === 0 && imagenPrincipal) {
+            imagenes.push(imagenPrincipal);
+        }
+
+        return imagenes;
+    }
+
+    function llenarCarrusel(imagenes, nombreProducto) {
+        modalProductoCarouselInner.innerHTML = "";
+
+        imagenes.forEach(function (imagen, index) {
+            const item = document.createElement("div");
+            item.className = index === 0 ? "carousel-item active" : "carousel-item";
+
+            const img = document.createElement("img");
+            img.src = imagen;
+            img.alt = nombreProducto;
+
+            item.appendChild(img);
+            modalProductoCarouselInner.appendChild(item);
+        });
+
+        const controlesCarousel = modalProductoCarousel.querySelectorAll(".carousel-control-prev, .carousel-control-next");
+        const mostrarControles = imagenes.length > 1;
+
+        controlesCarousel.forEach(function (control) {
+            control.classList.toggle("d-none", !mostrarControles);
+        });
+
+        if (carouselInstance) {
+            carouselInstance.dispose();
+        }
+
+        carouselInstance = new bootstrap.Carousel(modalProductoCarousel, {
+            interval: false,
+            ride: false,
+            touch: true
+        });
+
+        carouselInstance.to(0);
     }
 
     detalleModalElement.addEventListener("show.bs.modal", function (event) {
@@ -50,13 +103,15 @@ document.addEventListener("DOMContentLoaded", function () {
             categoria: boton.getAttribute("data-producto-categoria"),
             precio: precio,
             imagen: boton.getAttribute("data-producto-imagen"),
+            imagenes: obtenerImagenesProducto(boton),
             creditos: creditos,
             creditosRestantes: creditosRestantes
         };
 
+        // Llenamos las imagenes del producto en el carrusel
+        llenarCarrusel(productoSeleccionado.imagenes, productoSeleccionado.nombre);
+
         // Llenamos la informacion del producto
-        modalProductoImagen.src = productoSeleccionado.imagen;
-        modalProductoImagen.alt = productoSeleccionado.nombre;
         modalProductoCategoria.textContent = productoSeleccionado.categoria;
         modalProductoNombre.textContent = productoSeleccionado.nombre;
         modalProductoDescripcion.textContent = productoSeleccionado.descripcion;
@@ -83,6 +138,7 @@ document.addEventListener("DOMContentLoaded", function () {
         confirmProductoNombre.textContent = productoSeleccionado.nombre;
         confirmProductoPrecio.textContent = formatearCreditos(productoSeleccionado.precio);
         confirmProductoId.value = productoSeleccionado.id;
+
         const detalleModal = bootstrap.Modal.getInstance(detalleModalElement);
         detalleModal.hide();
 
