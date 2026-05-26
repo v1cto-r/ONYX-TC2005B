@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/prompts.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/CosmicRunnerFront.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/clasificacion.css" asp-append-version="true" />
     @await RenderSectionAsync("Styles", required: false)
 </head>
 <body class="d-flex flex-column min-vh-100">
@@ -59,7 +60,9 @@
                           </a>
                       </li>
                         <li class="nav-item user-profile">
+                          <a class="@(currentController == "Usuario" ? "active" : "")" asp-area="" asp-controller="Usuario" asp-action="Index">
                             <img src="~/assets/random/user.png" />
+                          </a>
                         </li>
                     </ul>
                 </div>

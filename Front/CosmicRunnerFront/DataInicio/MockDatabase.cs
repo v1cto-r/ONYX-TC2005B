@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using CosmicRunnerFront.Models;
 using CosmicRunnerFront.Models.InicioModels;
 
 namespace CosmicRunnerFront.DataInicio
@@ -8,6 +9,7 @@ namespace CosmicRunnerFront.DataInicio
     {
         public static List<Usuario> Usuarios = new List<Usuario>();
         public static List<Idea> Ideas = new List<Idea>();
+        public static List<PromptModel> Prompts = new List<PromptModel>();
         public static List<Departamento> Departamentos = new List<Departamento>();
         public static List<AreaImpacto> AreasImpacto = new List<AreaImpacto>();
 
@@ -23,7 +25,48 @@ namespace CosmicRunnerFront.DataInicio
             AreasImpacto.Add(new AreaImpacto { Id = 2, Nombre = "Sostenibilidad" });
 
             // 3. Usuarios (Basados en el mockup)
-            var cesar = new Usuario { Id = 1, Nombre = "César", Apellido = "Alexandro", DepartamentoId = 1, Racha = 24, PosicionGlobalPorcentaje = 50, PosicionDepartamentalPorcentaje = 10, FotoPerfilUrl = "/assets/random/user.png" };
+            var cesar = new Usuario
+            {
+                Id = 1,
+                Nombre = "César",
+                Apellido = "Alexandro",
+                DepartamentoId = 1,
+                Racha = 24,
+                PosicionGlobalPorcentaje = 50,
+                PosicionDepartamentalPorcentaje = 10,
+                FotoPerfilUrl = "/assets/random/user.png",
+                Puesto = "Ingeniero industrial",
+                Correo = "cesar.alexandro@whirlpool.com",
+                Telefono = "+52 123 456 7890",
+                Ubicacion = "Monterrey, Nuevo León",
+                Biografia = "Director de calidad e ingeniero industrial con 15 años de trayectoria.",
+                Habilidades = new List<string>
+                {
+                    "Gestión de calidad",
+                    "Liderazgo",
+                    "Planificación estratégica",
+                    "Eficiencia",
+                    "Control de riesgos"
+                },
+                ListaPrompts = new List<string>
+                {
+                    "Optimización de inventario",
+                    "Revisión de procesos de calidad",
+                    "Propuesta de mejora continua",
+                    "Análisis de cuellos de botella"
+                },
+                ListaComentarios = new List<Comentario>
+                {
+                    new Comentario(),
+                    new Comentario(),
+                    new Comentario()
+                },
+                ListaProyectos = new List<Idea>
+                {
+                    new Idea(),
+                    new Idea()
+                }
+            };
             var adriana = new Usuario { Id = 2, Nombre = "Adriana", Apellido = "Díaz", DepartamentoId = 1, FotoPerfilUrl = "/assets/random/5.png" };
             var jacobo = new Usuario { Id = 3, Nombre = "Jacobo", Apellido = "Pérez", DepartamentoId = 2, FotoPerfilUrl = "/assets/random/4.png" };
             var julia = new Usuario { Id = 4, Nombre = "Julia", Apellido = "Fernández", DepartamentoId = 3, FotoPerfilUrl = "/assets/random/1.png" };
@@ -31,6 +74,59 @@ namespace CosmicRunnerFront.DataInicio
 
             var elena = new Usuario { Id = 6, Nombre = "Elena", Apellido = "González", DepartamentoId = 3, FotoPerfilUrl = "/assets/random/2.png" };
             Usuarios.AddRange(new[] { cesar, adriana, jacobo, julia, mario, elena });
+
+            Prompts.AddRange(new[]
+            {
+                new PromptModel
+                {
+                    promptId = 1,
+                    promptUserId = cesar.Id,
+                    promptTitle = "Reporte financiero mensual",
+                    promptDescription = "Actúa como un analista financiero senior y resume los ingresos, gastos y variaciones clave en un reporte claro y ejecutivo.",
+                    promptCategoryId = 1,
+                    promptCategory = "Excel",
+                    promptDepartmentId = cesar.DepartamentoId,
+                    promptDepartment = cesar.Departamento?.Nombre ?? "Calidad",
+                    promptCreatedAt = DateTime.Now.AddDays(-1)
+                },
+                new PromptModel
+                {
+                    promptId = 2,
+                    promptUserId = cesar.Id,
+                    promptTitle = "Resumen para comité",
+                    promptDescription = "Redacta una versión breve y profesional de una propuesta de mejora enfocada en impacto, viabilidad y tiempo de implementación.",
+                    promptCategoryId = 2,
+                    promptCategory = "Innovación",
+                    promptDepartmentId = cesar.DepartamentoId,
+                    promptDepartment = cesar.Departamento?.Nombre ?? "Calidad",
+                    promptCreatedAt = DateTime.Now.AddDays(-2)
+                },
+                new PromptModel
+                {
+                    promptId = 3,
+                    promptUserId = cesar.Id,
+                    promptTitle = "Checklist de auditoría",
+                    promptDescription = "Genera una lista estructurada para revisar procesos, detectar riesgos y dejar acciones concretas de seguimiento.",
+                    promptCategoryId = 1,
+                    promptCategory = "Calidad",
+                    promptDepartmentId = cesar.DepartamentoId,
+                    promptDepartment = cesar.Departamento?.Nombre ?? "Calidad",
+                    promptCreatedAt = DateTime.Now.AddDays(-3)
+                },
+                new PromptModel
+                {
+                    promptId = 4,
+                    promptUserId = cesar.Id,
+                    promptTitle = "Correo de seguimiento",
+                    promptDescription = "Escribe un correo breve y cordial para dar seguimiento a una solicitud interna, manteniendo un tono claro y profesional.",
+                    promptCategoryId = 2,
+                    promptCategory = "Comunicación",
+                    promptDepartmentId = cesar.DepartamentoId,
+                    promptDepartment = cesar.Departamento?.Nombre ?? "Calidad",
+                    promptCreatedAt = DateTime.Now.AddDays(-4)
+                }
+            });
+
             // 4. Ideas
             var idea1 = new Idea
             {

@@ -54,13 +54,19 @@ html {
 
 .user-profile {
   border-radius: 50%;
-  overflow: hidden;
-  border: 3px solid var(--yellow-200);
 }
 
 .user-profile img {
   width: 48px;
   height: 48px;
+  display: block;
+  box-sizing: border-box;
+  border: 3px solid var(--yellow-200);
+  border-radius: 50%;
+}
+
+.user-profile a.active img {
+  border-color: #f2a51a;
 }
 
 footer {
