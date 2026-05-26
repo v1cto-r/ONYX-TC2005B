@@ -1,4 +1,5 @@
 using CosmicRunnerFront.Services.Usuario;
+using Front.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +21,18 @@ builder.Services.AddHttpClient<IUsuarioService, UsuarioService>(client =>
     {
         ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
     });
+
+builder.Services.AddHttpClient<IClasificacionService, ClasificacionService>().ConfigurePrimaryHttpMessageHandler(() =>
+new HttpClientHandler
+{
+ServerCertificateCustomValidationCallback =
+HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+});
+
+builder.Services.Configure<Microsoft.AspNetCore.Mvc.JsonOptions>(options =>
+{
+options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
+});
 
 var app = builder.Build();
 
