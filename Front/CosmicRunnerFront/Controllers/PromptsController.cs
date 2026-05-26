@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using CosmicRunnerFront.Models;
@@ -7,6 +8,7 @@ namespace CosmicRunnerFront.Controllers;
 
 public class PromptsController : Controller
 {
+    private const string CurrentUserSessionKey = "CurrentUserId";
     private readonly ILogger<PromptsController> _logger;
 
     // Los valores mock de manera estatica, para simular una base de datos en memoria. Es solo de demo, se saca de la base de datos despues.
@@ -28,7 +30,7 @@ public class PromptsController : Controller
 
     // Comentarios de mock
     private static List<PromptComment> _mockComments = new List<PromptComment> {
-        new PromptComment { commentId = 1, commentPromptId = 1, commentUserId = 1, commentContent = "¡Excelente prompt, muy útil!" },
+        new PromptComment { commentId = 1, commentPromptId = 1, commentUserId = 2, commentContent = "¡Excelente prompt, muy útil!" },
         new PromptComment { commentId = 2, commentPromptId = 1, commentUserId = 2, commentContent = "Lo usé y me ahorró mucho tiempo." }
     };
     private static List<int> _mockSavedPrompts = new List<int>(); // Prompts guardados (vacio inicialmente)
@@ -41,6 +43,12 @@ public class PromptsController : Controller
 
     public IActionResult Index(string? SearchText, int? FilterCategoryId, int? FilterDepartmentId)
     {
+        var currentUserId = GetCurrentUserId();
+        if (currentUserId is null)
+        {
+            return RedirectToAction("Index", "Home");
+        }
+
         // Crear las SelectLists para las opciones del select
         var categories = new SelectList(_dbCategories, "CategoryId", "CategoryName");
         var departments = new SelectList(_dbDepartments, "DepartmentId", "DepartmentName");
@@ -65,8 +73,7 @@ public class PromptsController : Controller
             p.Likes = _mockRatings.Count(r => r.ratingPromptId == p.promptId && r.ratingValue == 1);
             p.Dislikes = _mockRatings.Count(r => r.ratingPromptId == p.promptId && r.ratingValue == -1);
             
-            // Obtener el rating del usuario actual (mock user id = 1)
-            p.CurrentUserRating = _mockRatings.Find(r => r.ratingPromptId == p.promptId && r.ratingUserId == 1)?.ratingValue ?? 0;
+            p.CurrentUserRating = _mockRatings.Find(r => r.ratingPromptId == p.promptId && r.ratingUserId == currentUserId.Value)?.ratingValue ?? 0;
         }
 
         // Enviar a la vista
@@ -86,6 +93,11 @@ public class PromptsController : Controller
     [HttpPost]
     public IActionResult CreatePrompt(PromptsViewModel model)
     {
+        if (GetCurrentUserId() is null)
+        {
+            return RedirectToAction("Index", "Home");
+        }
+
         if (!ModelState.IsValid)
         {
             // Si el modelo no es válido, necesitamos recargar las listas y los prompts para mostrar la vista correctamente
@@ -125,6 +137,12 @@ public class PromptsController : Controller
     [HttpPost]
     public IActionResult AddComment(int promptId, string? commentText)
     {
+        var currentUserId = GetCurrentUserId();
+        if (currentUserId is null)
+        {
+            return RedirectToAction("Index", "Home");
+        }
+
         if (string.IsNullOrWhiteSpace(commentText))
         {
             ModelState.AddModelError("commentText_" + promptId, "El comentario no puede estar vacío.");
@@ -139,7 +157,7 @@ public class PromptsController : Controller
                 p.IsSaved = _mockSavedPrompts.Contains(p.promptId);
                 p.Likes = _mockRatings.Count(r => r.ratingPromptId == p.promptId && r.ratingValue == 1);
                 p.Dislikes = _mockRatings.Count(r => r.ratingPromptId == p.promptId && r.ratingValue == -1);
-                p.CurrentUserRating = _mockRatings.Find(r => r.ratingPromptId == p.promptId && r.ratingUserId == 1)?.ratingValue ?? 0;
+                p.CurrentUserRating = _mockRatings.Find(r => r.ratingPromptId == p.promptId && r.ratingUserId == currentUserId.Value)?.ratingValue ?? 0;
             }
 
             var vm = new PromptsViewModel
@@ -156,7 +174,7 @@ public class PromptsController : Controller
         {
             commentId = _mockComments.Count > 0 ? _mockComments.Max(c => c.commentId) + 1 : 1,
             commentPromptId = promptId,
-            commentUserId = 1, // mock del usuario actual
+            commentUserId = currentUserId.Value,
             commentContent = commentText
         };
         
@@ -168,6 +186,11 @@ public class PromptsController : Controller
     [HttpPost]
     public IActionResult SavePrompt(int promptId)
     {
+        if (GetCurrentUserId() is null)
+        {
+            return RedirectToAction("Index", "Home");
+        }
+
         if (_mockSavedPrompts.Contains(promptId))
             _mockSavedPrompts.Remove(promptId); // Quitar de guardados
         else
@@ -179,7 +202,13 @@ public class PromptsController : Controller
     [HttpPost]
     public IActionResult RatePrompt(int promptId, int ratingValue)
     {
-        var existingRating = _mockRatings.Find(r => r.ratingPromptId == promptId && r.ratingUserId == 1);
+        var currentUserId = GetCurrentUserId();
+        if (currentUserId is null)
+        {
+            return RedirectToAction("Index", "Home");
+        }
+
+        var existingRating = _mockRatings.Find(r => r.ratingPromptId == promptId && r.ratingUserId == currentUserId.Value);
 
         if (existingRating != null)
         {
@@ -197,7 +226,7 @@ public class PromptsController : Controller
         else
         {
             // Agregar nuevo rating
-            _mockRatings.Add(new PromptRating { ratingPromptId = promptId, ratingUserId = 1, ratingValue = ratingValue });
+            _mockRatings.Add(new PromptRating { ratingPromptId = promptId, ratingUserId = currentUserId.Value, ratingValue = ratingValue });
         }
 
         return RedirectToAction("Index");
@@ -207,5 +236,10 @@ public class PromptsController : Controller
     public IActionResult Error()
     {
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+    }
+
+    private int? GetCurrentUserId()
+    {
+        return HttpContext.Session.GetInt32(CurrentUserSessionKey);
     }
 }

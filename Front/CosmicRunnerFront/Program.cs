@@ -1,9 +1,27 @@
+using CosmicRunnerFront.Services.Usuario;
 using Front.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(options =>
+{
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
+
+builder.Services.AddHttpClient<IUsuarioService, UsuarioService>(client =>
+{
+    client.BaseAddress = new Uri("https://localhost:8443");
+})
+.ConfigurePrimaryHttpMessageHandler(() =>
+    new HttpClientHandler
+    {
+        ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+    });
+
 builder.Services.AddHttpClient<IClasificacionService, ClasificacionService>().ConfigurePrimaryHttpMessageHandler(() =>
 new HttpClientHandler
 {
@@ -28,6 +46,7 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseRouting();
+app.UseSession();
 
 app.UseAuthorization();
 

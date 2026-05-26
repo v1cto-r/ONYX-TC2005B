@@ -1,0 +1,64 @@
+@model CosmicRunnerFront.Models.UsuarioModels.UsuarioViewModel
+
+@{
+    ViewData["Title"] = "Prompts";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/usuario.css" asp-append-version="true" />
+}
+
+<section class="usuario-panel usuario-prompts-panel" aria-label="Panel de prompts">
+    @if (Model.EsPerfilPropio)
+    {
+        <a class="usuario-panel-action" asp-controller="Usuario" asp-action="Configuracion" aria-label="Configuración">
+            <img src="~/assets/icons/gear.svg" alt="" />
+            <span>Configuración</span>
+        </a>
+    }
+
+    <div class="usuario-top">
+        <div class="usuario-avatar-shell">
+            <img class="usuario-avatar" src="@Url.Content(Model.FotoPerfilUrl)" alt="Foto del usuario" />
+        </div>
+
+        <div class="usuario-headlines">
+            <h1 class="usuario-nombre">@Model.NombreCompleto</h1>
+            <p class="usuario-rol">@Model.Puesto</p>
+            <p class="usuario-area">@Model.Departamento</p>
+        </div>
+    </div>
+
+    <div class="usuario-tabs" role="tablist" aria-label="Secciones del perfil">
+        @foreach (var seccion in Model.Secciones)
+        {
+            if (seccion.Accion != "Configuracion")
+            {
+                <a class="tab-pill @(Model.SeccionActiva == seccion.Accion ? "tab-pill-active" : "")" asp-controller="Usuario" asp-action="@seccion.Accion">@seccion.Etiqueta</a>
+            }
+        }
+    </div>
+
+    @if (Model.PromptsRecientes.Count == 0)
+    {
+        <div class="usuario-placeholder">
+            <h2>No hay prompts disponibles</h2>
+            <p>Cuando el API devuelva prompts, aparecerán aquí automáticamente.</p>
+        </div>
+    }
+    else
+    {
+        <div class="usuario-prompts-list" aria-label="Lista de prompts">
+            @foreach (var prompt in Model.PromptsRecientes)
+            {
+                <article class="usuario-prompt-card">
+                    <div class="usuario-prompt-card-head">
+                        <h3>@prompt.promptTitle</h3>
+                        <span class="usuario-prompt-category">@prompt.promptCategory</span>
+                    </div>
+                    <p class="usuario-prompt-text">@prompt.promptDescription</p>
+                </article>
+            }
+        </div>
+    }
+</section>

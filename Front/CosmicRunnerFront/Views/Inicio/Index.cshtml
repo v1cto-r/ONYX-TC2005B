@@ -2,10 +2,9 @@
     ViewData["Title"] = "Impulsa el Cambio - Codex";
     Layout = "~/Views/Shared/_Layout.cshtml"; 
 }
-@using CosmicRunnerFront.DataInicio
+@using CosmicRunnerFront.Models.InicioModels
 @{
-    // Obtenemos los datos del usuario activo (César) desde nuestra memoria RAM
-    var usuarioActual = MockDatabase.Usuarios.FirstOrDefault(u => u.Id == 1);
+    var usuarioActual = ViewBag.UsuarioActual as Usuario;
 }
 @section Styles {
     <link rel="stylesheet" href="~/css/Inicio/inicio.css" />
