@@ -28,7 +28,7 @@ public class Login : MonoBehaviour
     {
         //PlayerPrefs.SetInt("UserId", 5);
         PlayerPrefs.SetInt("UserId", 1);
-        SceneManager.LoadScene("GameSelectScene");
+        SceneManager.LoadScene("MainMenuScene");
     }
 
 }
