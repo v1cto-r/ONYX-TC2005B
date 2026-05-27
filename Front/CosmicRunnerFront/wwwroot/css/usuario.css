@@ -8,7 +8,7 @@
 	margin: 24px auto 40px;
 	padding: 30px 36px 34px;
 	border-radius: 18px;
-	background: var(--panel-bg);
+	background: #fff;
 }
 
 .usuario-panel-action {
