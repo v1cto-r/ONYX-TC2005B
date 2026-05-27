@@ -23,27 +23,10 @@ public class TiendaController : Controller
     {
         try
         {
-            // Traemos los productos desde el API de Jorge
+            // Conexion API
             var viewModel = await _tiendaApiService.ObtenerTiendaAsync(UsuarioPruebaId);
 
-            var productos = viewModel.Productos.AsEnumerable();
-
-            // Si el usuario escribio algo buscamos en nombre descripcion o categoria
-            if (!string.IsNullOrWhiteSpace(SearchText))
-            {
-                productos = productos.Where(producto =>
-                    producto.Nombre.Contains(SearchText, StringComparison.OrdinalIgnoreCase) ||
-                    producto.Descripcion.Contains(SearchText, StringComparison.OrdinalIgnoreCase) ||
-                    producto.CategoriaNombre.Contains(SearchText, StringComparison.OrdinalIgnoreCase));
-            }
-
-            // Si el usuario selecciona una categoria dejamos solo esos productos
-            if (FilterCategoriaId.HasValue && FilterCategoriaId.Value > 0)
-            {
-                productos = productos.Where(producto => producto.CategoriaId == FilterCategoriaId.Value);
-            }
-
-            viewModel.Productos = productos.ToList();
+            viewModel.Productos = FiltrarProductos(viewModel.Productos, SearchText, FilterCategoriaId);
             viewModel.SearchText = SearchText;
             viewModel.FilterCategoriaId = FilterCategoriaId;
 
@@ -51,62 +34,108 @@ public class TiendaController : Controller
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error al cargar la tienda desde el API");
+            _logger.LogError(ex, "Error al cargar la tienda");
 
             TempData["MensajeTienda"] = "No se pudo cargar la tienda. Revisa que el API esté encendido.";
             TempData["TipoMensajeTienda"] = "error";
 
-            var viewModel = new TiendaViewModel
+            return View(new TiendaViewModel
             {
                 Productos = new List<ProductoTienda>(),
                 Categorias = new List<CategoriaTienda>(),
                 CreditosUsuario = 0,
                 SearchText = SearchText,
                 FilterCategoriaId = FilterCategoriaId
-            };
-
-            return View(viewModel);
+            });
         }
     }
 
     [HttpPost]
     public async Task<IActionResult> Comprar(int productoId)
     {
+        if (productoId <= 0)
+        {
+            TempData["MensajeTienda"] = "No se encontró el producto seleccionado.";
+            TempData["TipoMensajeTienda"] = "error";
+
+            return RedirectToAction(nameof(Index));
+        }
+
         try
         {
-            // Mandamos la compra al API
+            // Compra API
             var resultado = await _tiendaApiService.ComprarProductoAsync(UsuarioPruebaId, productoId);
 
-            TempData["MensajeTienda"] = resultado.Mensaje;
-            TempData["TipoMensajeTienda"] = resultado.Exito ? "success" : "error";
-            TempData["CreditosRestantes"] = resultado.CreditosRestantes;
+            GuardarResultadoCompra(resultado);
 
-            // Si la compra sale bien buscamos el producto completo para mostrarlo en el pop up
             if (resultado.Exito)
             {
-                var tiendaActualizada = await _tiendaApiService.ObtenerTiendaAsync(UsuarioPruebaId);
-                var productoComprado = tiendaActualizada.Productos.FirstOrDefault(producto => producto.Id == productoId);
-
-                if (productoComprado != null)
-                {
-                    TempData["ProductoNombre"] = productoComprado.Nombre;
-                    TempData["ProductoCategoria"] = productoComprado.CategoriaNombre;
-                    TempData["ProductoImagen"] = productoComprado.ImagenUrl;
-                    TempData["ProductoPrecio"] = productoComprado.Precio;
-                }
+                await GuardarProductoCompradoAsync(productoId);
             }
 
-            return RedirectToAction("Index");
+            return RedirectToAction(nameof(Index));
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error al comprar producto desde la tienda");
+            _logger.LogError(ex, "Error al comprar producto");
 
             TempData["MensajeTienda"] = "No se pudo conectar con el API para completar la compra.";
             TempData["TipoMensajeTienda"] = "error";
 
-            return RedirectToAction("Index");
+            return RedirectToAction(nameof(Index));
         }
+    }
+
+private static List<ProductoTienda> FiltrarProductos(
+    List<ProductoTienda> productos,
+    string? searchText,
+    int? filterCategoriaId)
+{
+    var productosFiltrados = productos.AsEnumerable();
+    var busqueda = searchText?.Trim();
+    var categoriaId = filterCategoriaId.GetValueOrDefault();
+
+    // Filtros
+    if (!string.IsNullOrWhiteSpace(busqueda))
+    {
+        productosFiltrados = productosFiltrados.Where(producto =>
+            producto.Nombre.Contains(busqueda, StringComparison.OrdinalIgnoreCase) ||
+            producto.Descripcion.Contains(busqueda, StringComparison.OrdinalIgnoreCase) ||
+            producto.CategoriaNombre.Contains(busqueda, StringComparison.OrdinalIgnoreCase));
+    }
+
+    if (categoriaId > 0)
+    {
+        productosFiltrados = productosFiltrados.Where(producto =>
+            producto.CategoriaId == categoriaId);
+    }
+
+    return productosFiltrados.ToList();
+}
+
+    private void GuardarResultadoCompra(CompraTiendaResponse resultado)
+    {
+        // Resultado compra
+        TempData["MensajeTienda"] = resultado.Mensaje;
+        TempData["TipoMensajeTienda"] = resultado.Exito ? "success" : "error";
+        TempData["CreditosRestantes"] = resultado.CreditosRestantes;
+    }
+
+    private async Task GuardarProductoCompradoAsync(int productoId)
+    {
+        // Producto para modal
+        var tiendaActualizada = await _tiendaApiService.ObtenerTiendaAsync(UsuarioPruebaId);
+        var productoComprado = tiendaActualizada.Productos.FirstOrDefault(producto => producto.Id == productoId);
+
+        if (productoComprado == null)
+        {
+            return;
+        }
+
+        TempData["ProductoNombre"] = productoComprado.Nombre;
+        TempData["ProductoCategoria"] = productoComprado.CategoriaNombre;
+        TempData["ProductoImagen"] = productoComprado.ImagenUrl;
+        TempData["ProductoPrecio"] = productoComprado.Precio;
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

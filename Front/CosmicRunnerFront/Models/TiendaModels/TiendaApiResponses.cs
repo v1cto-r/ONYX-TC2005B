@@ -69,19 +69,4 @@ public class ComprarTiendaApiResponse
 
     [JsonPropertyName("creditos_restantes")]
     public int CreditosRestantes { get; set; }
-
-    [JsonPropertyName("producto")]
-    public ProductoCompraApi? Producto { get; set; }
-}
-
-public class ProductoCompraApi
-{
-    [JsonPropertyName("asset_id")]
-    public int AssetId { get; set; }
-
-    [JsonPropertyName("name")]
-    public string Name { get; set; } = "";
-
-    [JsonPropertyName("cost")]
-    public int Cost { get; set; }
 }
