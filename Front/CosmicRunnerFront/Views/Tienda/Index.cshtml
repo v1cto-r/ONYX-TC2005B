@@ -11,8 +11,9 @@
     var productoNombre = TempData["ProductoNombre"]?.ToString();
     var productoCategoria = TempData["ProductoCategoria"]?.ToString();
     var productoImagen = TempData["ProductoImagen"]?.ToString();
-    var productoPrecio = TempData["ProductoPrecio"]?.ToString();
-    var creditosRestantes = TempData["CreditosRestantes"]?.ToString();
+
+    var creditosRestantesValor = 0;
+    int.TryParse(TempData["CreditosRestantes"]?.ToString(), out creditosRestantesValor);
 }
 
 @section Styles {
@@ -20,8 +21,6 @@
 }
 
 <div class="tienda-page">
-
-    @* Encabezado principal de la tienda *@
     <section class="tienda-header">
         <div>
             <p class="tienda-eyebrow">Cosmic Runner</p>
@@ -37,7 +36,7 @@
         </div>
     </section>
 
-    @* Formulario para buscar y filtrar productos *@
+    @* Filtros *@
     <section class="tienda-controls">
         <form asp-action="Index" method="get" class="tienda-filter-form">
             <div class="tienda-search">
@@ -76,12 +75,14 @@
         </form>
     </section>
 
-    @* Lista de productos disponibles *@
+    @* Productos *@
     <section class="tienda-products">
         @if (Model.Productos.Any())
         {
             foreach (var producto in Model.Productos)
             {
+                var detalleModalId = $"detalleProductoModal-{producto.Id}";
+
                 <article class="producto-card">
                     <div class="producto-img-wrapper">
                         <img src="@producto.ImagenUrl" alt="@producto.Nombre" />
@@ -99,7 +100,6 @@
                             <strong>@producto.Precio.ToString("N0", formatoNumero) créditos</strong>
                         </div>
 
-                        @* Cambiamos el boton segun el estado del producto *@
                         @if (producto.Comprado)
                         {
                             <button type="button" class="producto-button producto-button-disabled" disabled>
@@ -116,17 +116,9 @@
                         {
                             <button
                                 type="button"
-                                class="producto-button js-open-product"
+                                class="producto-button"
                                 data-bs-toggle="modal"
-                                data-bs-target="#detalleProductoModal"
-                                data-producto-id="@producto.Id"
-                                data-producto-nombre="@producto.Nombre"
-                                data-producto-descripcion="@producto.Descripcion"
-                                data-producto-categoria="@producto.CategoriaNombre"
-                                data-producto-precio="@producto.Precio"
-                                data-producto-imagen="@producto.ImagenUrl"
-                                data-producto-imagenes="@string.Join("|", producto.ImagenesUrl)"
-                                data-creditos="@Model.CreditosUsuario">
+                                data-bs-target="#@(detalleModalId)">
                                 Adquirir
                             </button>
                         }
@@ -144,115 +136,152 @@
     </section>
 </div>
 
-@* Detalles del producto antes de comprar *@
-<div class="modal fade" id="detalleProductoModal" tabindex="-1" aria-labelledby="detalleProductoTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content tienda-modal">
-            <div class="modal-header">
-                <h5 class="modal-title" id="detalleProductoTitle">Detalle del producto</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-            </div>
+@* Modales producto *@
+@foreach (var producto in Model.Productos.Where(producto => producto.Disponible && !producto.Comprado))
+{
+    var imagenesProducto = producto.ImagenesUrl.Any()
+        ? producto.ImagenesUrl
+        : new List<string> { producto.ImagenUrl };
 
-            <div class="modal-body">
-                <div class="detalle-grid">
-                    <div class="detalle-image-box">
-                        <div id="modalProductoCarousel" class="carousel slide detalle-carousel">
-                            <div id="modalProductoCarouselInner" class="carousel-inner"></div>
+    var detalleModalId = $"detalleProductoModal-{producto.Id}";
+    var confirmarModalId = $"confirmarCompraModal-{producto.Id}";
+    var carouselId = $"productoCarousel-{producto.Id}";
+    var tieneCreditos = Model.CreditosUsuario >= producto.Precio;
+    var creditosDespues = Model.CreditosUsuario - producto.Precio;
 
-                            <button class="carousel-control-prev" type="button" data-bs-target="#modalProductoCarousel" data-bs-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Anterior</span>
-                            </button>
+    <div class="modal fade" id="@detalleModalId" tabindex="-1" aria-labelledby="detalleProductoTitle-@producto.Id" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content tienda-modal">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="detalleProductoTitle-@producto.Id">Detalle del producto</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
 
-                            <button class="carousel-control-next" type="button" data-bs-target="#modalProductoCarousel" data-bs-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Siguiente</span>
-                            </button>
+                <div class="modal-body">
+                    <div class="detalle-grid">
+                        <div class="detalle-image-box">
+                            <div id="@carouselId" class="carousel slide detalle-carousel">
+                                <div class="carousel-inner">
+                                    @for (var i = 0; i < imagenesProducto.Count; i++)
+                                    {
+                                        var itemClass = i == 0 ? "carousel-item active" : "carousel-item";
+
+                                        <div class="@itemClass">
+                                            <img src="@imagenesProducto[i]" alt="@producto.Nombre" />
+                                        </div>
+                                    }
+                                </div>
+
+                                @if (imagenesProducto.Count > 1)
+                                {
+                                    <button class="carousel-control-prev" type="button" data-bs-target="#@(carouselId)" data-bs-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Anterior</span>
+                                    </button>
+
+                                    <button class="carousel-control-next" type="button" data-bs-target="#@(carouselId)" data-bs-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Siguiente</span>
+                                    </button>
+                                }
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="detalle-info">
-                        <span id="modalProductoCategoria" class="producto-categoria"></span>
-                        <h2 id="modalProductoNombre"></h2>
-                        <p id="modalProductoDescripcion"></p>
+                        <div class="detalle-info">
+                            <span class="producto-categoria">@producto.CategoriaNombre</span>
+                            <h2>@producto.Nombre</h2>
+                            <p>@producto.Descripcion</p>
 
-                        <div class="detalle-data">
-                            <div>
-                                <span>Precio</span>
-                                <strong id="modalProductoPrecio"></strong>
+                            <div class="detalle-data">
+                                <div>
+                                    <span>Precio</span>
+                                    <strong>@producto.Precio.ToString("N0", formatoNumero) créditos</strong>
+                                </div>
+
+                                <div>
+                                    <span>Créditos actuales</span>
+                                    <strong>@Model.CreditosUsuario.ToString("N0", formatoNumero) créditos</strong>
+                                </div>
+
+                                <div>
+                                    <span>Créditos restantes</span>
+                                    <strong>@creditosDespues.ToString("N0", formatoNumero) créditos</strong>
+                                </div>
                             </div>
 
-                            <div>
-                                <span>Créditos actuales</span>
-                                <strong id="modalCreditosActuales"></strong>
-                            </div>
-
-                            <div>
-                                <span>Créditos restantes</span>
-                                <strong id="modalCreditosRestantes"></strong>
-                            </div>
-                        </div>
-
-                        <div id="modalCompraMensaje" class="detalle-warning d-none">
-                            No tienes créditos suficientes para comprar este producto.
+                            @if (!tieneCreditos)
+                            {
+                                <div class="detalle-warning">
+                                    No tienes créditos suficientes para comprar este producto.
+                                </div>
+                            }
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="modal-footer">
-                <button type="button" class="tienda-modal-cancel" data-bs-dismiss="modal">
-                    Cancelar
-                </button>
-
-                <button
-                    type="button"
-                    id="btnAbrirConfirmacion"
-                    class="tienda-modal-action">
-                    Comprar ahora
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
-
-@* Confirmar la compra *@
-<div class="modal fade" id="confirmarCompraModal" tabindex="-1" aria-labelledby="confirmarCompraTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content tienda-modal">
-            <div class="modal-header">
-                <h5 class="modal-title" id="confirmarCompraTitle">Confirmar compra</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-            </div>
-
-            <div class="modal-body">
-                <p class="confirm-text">
-                    ¿Estás seguro de que deseas comprar este producto?
-                </p>
-
-                <div class="confirm-product-box">
-                    <strong id="confirmProductoNombre"></strong>
-                    <span id="confirmProductoPrecio"></span>
-                </div>
-            </div>
-
-            <div class="modal-footer">
-                <button type="button" class="tienda-modal-cancel" data-bs-dismiss="modal">
-                    Cancelar
-                </button>
-
-                <form asp-action="Comprar" method="post">
-                    <input type="hidden" id="confirmProductoId" name="productoId" />
-                    <button type="submit" class="tienda-modal-action">
-                        Confirmar compra
+                <div class="modal-footer">
+                    <button type="button" class="tienda-modal-cancel" data-bs-dismiss="modal">
+                        Cancelar
                     </button>
-                </form>
+
+                    @if (tieneCreditos)
+                    {
+                        <button
+                            type="button"
+                            class="tienda-modal-action"
+                            data-bs-toggle="modal"
+                            data-bs-target="#@(confirmarModalId)">
+                            Comprar ahora
+                        </button>
+                    }
+                    else
+                    {
+                        <button type="button" class="tienda-modal-action" disabled>
+                            Comprar ahora
+                        </button>
+                    }
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-@* Muestra si la compra salio bien o si hubo algun problema *@
+    <div class="modal fade" id="@confirmarModalId" tabindex="-1" aria-labelledby="confirmarCompraTitle-@producto.Id" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content tienda-modal">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmarCompraTitle-@producto.Id">Confirmar compra</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+
+                <div class="modal-body">
+                    <p class="confirm-text">
+                        ¿Estás seguro de que deseas comprar este producto?
+                    </p>
+
+                    <div class="confirm-product-box">
+                        <strong>@producto.Nombre</strong>
+                        <span>@producto.Precio.ToString("N0", formatoNumero) créditos</span>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="tienda-modal-cancel" data-bs-dismiss="modal">
+                        Cancelar
+                    </button>
+
+                    <form asp-action="Comprar" method="post">
+                        <input type="hidden" name="productoId" value="@producto.Id" />
+                        <button type="submit" class="tienda-modal-action">
+                            Confirmar compra
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@* Modal resultado *@
 @if (!string.IsNullOrEmpty(mensajeTienda))
 {
     <div class="modal fade" id="mensajeTiendaModal" tabindex="-1" aria-labelledby="mensajeTiendaTitle" aria-hidden="true">
@@ -280,7 +309,7 @@
                                 <span>@productoCategoria</span>
 
                                 <strong>
-                                    @Convert.ToInt32(creditosRestantes).ToString("N0", formatoNumero) créditos restantes
+                                    @creditosRestantesValor.ToString("N0", formatoNumero) créditos restantes
                                 </strong>
                             </div>
                         </div>
