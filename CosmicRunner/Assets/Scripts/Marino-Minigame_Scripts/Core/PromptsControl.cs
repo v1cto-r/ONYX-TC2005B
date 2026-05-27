@@ -47,7 +47,7 @@ namespace MECS
 
         [Header("API Settings")]
         // Base del API del minijuego
-        [SerializeField] private string apiBaseUrl = "https://localhost:8443/minigame";
+        [SerializeField] private string apiBaseUrl = "https://localhost:12003/minigame";
 
         [Header("Input Settings")]
         // Accion que confirma clicks o disparos sobre la UI
@@ -115,7 +115,7 @@ namespace MECS
                 return;
             }
 
-            wordSlots = FindObjectsByType<DraggableWord>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+            wordSlots = FindObjectsByType<DraggableWord>(FindObjectsInactive.Include);
             wordStorageCapacity = wordSlots != null ? wordSlots.Length : 0;
         }
 

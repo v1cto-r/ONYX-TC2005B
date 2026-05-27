@@ -20,7 +20,7 @@ namespace MECS
 
         [Header("API Settings")]
         // Base del API del minijuego
-        [SerializeField] private string apiBaseUrl = "https://localhost:8443/minigame";
+        [SerializeField] private string apiBaseUrl = "https://localhost:12003/minigame";
         // Id del usuario a reportar al API
         [SerializeField] private int userId = 1;
 

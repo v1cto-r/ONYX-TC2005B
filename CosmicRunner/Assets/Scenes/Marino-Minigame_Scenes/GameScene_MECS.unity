@@ -7924,7 +7924,7 @@ MonoBehaviour:
   qualityDisplaySeconds: 1.5
   clearSlotsOnStart: 1
   assignRandomPromptsOnStart: 1
-  apiBaseUrl: https://localhost:8443/minigame
+  apiBaseUrl: https://localhost:12003/minigame
   clickActionName: Drag
   pointerActionName: Point
   worldCamera: {fileID: 1816648660}
