@@ -1320,7 +1320,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Checkpoint
   uiManager: {fileID: 1981157537}
-  myQuestionPanel: {fileID: 0}
   normalColor: {r: 1, g: 1, b: 1, a: 1}
   correctColor: {r: 0.4, g: 1, b: 0.4, a: 1}
   wrongColor: {r: 1, g: 0.4, b: 0.4, a: 1}
@@ -1735,7 +1734,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &162285633
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1829,7 +1828,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Checkpoint
   uiManager: {fileID: 1981157537}
-  myQuestionPanel: {fileID: 0}
   normalColor: {r: 1, g: 1, b: 1, a: 1}
   correctColor: {r: 0.4, g: 1, b: 0.4, a: 1}
   wrongColor: {r: 1, g: 0.4, b: 0.4, a: 1}
@@ -7506,7 +7504,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Checkpoint
   uiManager: {fileID: 1981157537}
-  myQuestionPanel: {fileID: 162285632}
   normalColor: {r: 1, g: 1, b: 1, a: 1}
   correctColor: {r: 0.4, g: 1, b: 0.4, a: 1}
   wrongColor: {r: 1, g: 0.4, b: 0.4, a: 1}
@@ -15759,7 +15756,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42683b6ce2234f34990aa58972564a66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIQuestionManager
+  apiUrl: https://127.0.0.1:5057/api/jorge/pregunta-aleatoria
   questionPanel: {fileID: 162285632}
+  questionText: {fileID: 654988045}
+  answerButtons:
+  - {fileID: 1754222634}
+  - {fileID: 132715628}
+  - {fileID: 534265285}
+  answerTexts:
+  - {fileID: 1754222632}
+  - {fileID: 132715626}
+  - {fileID: 534265283}
+  statusText: {fileID: 0}
 --- !u!4 &1981157538
 Transform:
   m_ObjectHideFlags: 0

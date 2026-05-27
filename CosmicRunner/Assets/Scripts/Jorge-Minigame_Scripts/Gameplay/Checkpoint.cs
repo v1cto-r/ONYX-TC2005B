@@ -2,58 +2,55 @@ using UnityEngine;
 
 namespace JorgeGame
 {
-public class Checkpoint : MonoBehaviour
-{
-    // referencia al sistema de preguntas
-    public UIQuestionManager uiManager;
-
-    // evita que se active varias veces
-    private bool activated = false;
-
-    // renderer del sprite
-    private SpriteRenderer sr;
-
-    // panel de pregunta asociado a este checkpoint
-    public GameObject myQuestionPanel;
-
-    // colores
-    public Color normalColor = Color.white;
-    public Color correctColor = new Color(0.4f, 1f, 0.4f); // verde suave
-    public Color wrongColor = new Color(1f, 0.4f, 0.4f);   // rojo suave
-
-    void Start()
+    public class Checkpoint : MonoBehaviour
     {
-        // obtiene el renderer del sprite
-        sr = GetComponent<SpriteRenderer>();
+        public UIQuestionManager uiManager;
 
-        // asegura color normal al inicio
-        if (sr != null)
-            sr.color = normalColor;
-    }
+        private bool activated = false;
+        private SpriteRenderer sr;
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        // solo se activa si lo toca el jugador y no se ha usado antes
-        if (collision.CompareTag("Player") && !activated)
+        public Color normalColor = Color.white;
+        public Color correctColor = new Color(0.4f, 1f, 0.4f);
+        public Color wrongColor = new Color(1f, 0.4f, 0.4f);
+
+        void Start()
         {
-            activated = true;
+            sr = GetComponent<SpriteRenderer>();
 
-            // muestra la pregunta y guarda la posicion del checkpoint
-        uiManager.ShowQuestion(transform.position, this, myQuestionPanel);}
-    }
+            if (sr != null)
+                sr.color = normalColor;
 
-    // se pondra verde cuando responda bien
-    public void SetCorrect()
-    {
-        if (sr != null)
-            sr.color = correctColor;
-    }
+            if (uiManager == null)
+                uiManager = FindAnyObjectByType<UIQuestionManager>();
+        }
 
-    // se pondra rojo cuando responda mal
-    public void SetWrong()
-    {
-        if (sr != null)
-            sr.color = wrongColor;
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (collision.CompareTag("Player") && !activated)
+            {
+                activated = true;
+
+                if (uiManager != null)
+                {
+                    uiManager.ShowQuestion(transform.position, this);
+                }
+                else
+                {
+                    Debug.LogWarning("No se encontro UIQuestionManager en la escena.");
+                }
+            }
+        }
+
+        public void SetCorrect()
+        {
+            if (sr != null)
+                sr.color = correctColor;
+        }
+
+        public void SetWrong()
+        {
+            if (sr != null)
+                sr.color = wrongColor;
+        }
     }
-}
 }
