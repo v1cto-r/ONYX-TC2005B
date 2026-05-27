@@ -8,6 +8,12 @@
     <link rel="stylesheet" href="~/css/usuario.css" asp-append-version="true" />
 }
 
+@{
+    var fotoPerfil = string.IsNullOrWhiteSpace(Model.FotoPerfilUrl)
+        ? "~/assets/random/user.png"
+        : Model.FotoPerfilUrl;
+}
+
 <section class="usuario-panel usuario-prompts-panel" aria-label="Panel de prompts">
     @if (Model.EsPerfilPropio)
     {
@@ -19,7 +25,7 @@
 
     <div class="usuario-top">
         <div class="usuario-avatar-shell">
-            <img class="usuario-avatar" src="@Url.Content(Model.FotoPerfilUrl)" alt="Foto del usuario" />
+            <img class="usuario-avatar" src="@(fotoPerfil.StartsWith("http", StringComparison.OrdinalIgnoreCase) ? fotoPerfil : Url.Content(fotoPerfil))" alt="Foto del usuario" onerror="this.src='@Url.Content("~/assets/random/user.png")'" />
         </div>
 
         <div class="usuario-headlines">

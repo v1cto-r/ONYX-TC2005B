@@ -8,6 +8,12 @@
     <link rel="stylesheet" href="~/css/usuario.css" asp-append-version="true" />
 }
 
+@{
+    var fotoPerfil = string.IsNullOrWhiteSpace(Model.FotoPerfilUrl)
+        ? "~/assets/random/user.png"
+        : Model.FotoPerfilUrl;
+}
+
 <section class="usuario-panel" aria-label="Panel de perfil">
     @if (Model.EsPerfilPropio)
     {
@@ -19,7 +25,7 @@
 
     <div class="usuario-top">
         <div class="usuario-avatar-shell">
-            <img class="usuario-avatar" src="@Url.Content(Model.FotoPerfilUrl)" alt="Foto del usuario" />
+            <img class="usuario-avatar" src="@(fotoPerfil.StartsWith("http", StringComparison.OrdinalIgnoreCase) ? fotoPerfil : Url.Content(fotoPerfil))" alt="Foto del usuario" onerror="this.src='@Url.Content("~/assets/random/user.png")'" />
         </div>
 
         <div class="usuario-headlines">
@@ -59,12 +65,12 @@
 
             <section class="usuario-right-zone" aria-label="Resumen profesional">
                 <div class="about-shell">
-                    <h2 class="about-title">@Model.TituloAcercaDeMi</h2>
+                    <h2 class="about-title">Acerca de Mí</h2>
                     <p class="about-text">@Model.Biografia</p>
                 </div>
 
                 <div class="skills-shell">
-                    <h2 class="skills-title">@Model.TituloHabilidadesClave</h2>
+                    <h2 class="skills-title">Habilidades clave</h2>
                     <div class="skills-grid">
                         @foreach (var habilidad in Model.Habilidades)
                         {

@@ -8,11 +8,6 @@ public class UsuarioViewModel
 {
     public Usuario Usuario { get; set; } = new();
     public string SeccionActiva { get; set; } = string.Empty;
-    public string TextoSeccionEnDesarrollo { get; set; } = "Sección en desarrollo.";
-    public string TituloAcercaDeMi { get; set; } = "Acerca de Mí";
-    public string TituloHabilidadesClave { get; set; } = "Habilidades clave";
-    public string TituloActividadGeneral { get; set; } = "Actividad general";
-    public string TituloUltimosMovimientos { get; set; } = "Últimos movimientos";
     public List<Pestana> Secciones { get; set; } = new();
     public List<Contacto> Contactos { get; set; } = new();
     public List<string> Habilidades { get; set; } = new();
