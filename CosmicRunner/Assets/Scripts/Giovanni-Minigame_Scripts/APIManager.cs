@@ -7,8 +7,6 @@ using Newtonsoft.Json;
 public class APIAttackManager : MonoBehaviour
 {
     public static APIAttackManager Instance;
-    
-    [Header("Datos Cargados")]
     public List<Prompt> listaPrompts = new List<Prompt>();
 
     private void Awake()
@@ -38,7 +36,6 @@ public class APIAttackManager : MonoBehaviour
     {
         UnityWebRequest web = UnityWebRequest.Get("https://10.22.228.205:8443/prompts");
         
-        // Descomentar si el servidor tiene certificados autofirmados (solo desarrollo)
         web.certificateHandler = new ForceAceptAll(); 
 
         yield return web.SendWebRequest();
@@ -52,11 +49,11 @@ public class APIAttackManager : MonoBehaviour
             try
             {
                 listaPrompts = JsonConvert.DeserializeObject<List<Prompt>>(web.downloadHandler.text);
-                Debug.Log($"API cargada con éxito. Prompts obtenidos: {listaPrompts.Count}");
+                Debug.Log($"Prompts: {listaPrompts.Count}");
             }
             catch (System.Exception e)
             {
-                Debug.LogError("Error al deserializar JSON: " + e.Message);
+                Debug.LogError("Error: " + e.Message);
             }
         }
     }
