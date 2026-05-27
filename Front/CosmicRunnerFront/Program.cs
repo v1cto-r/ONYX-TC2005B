@@ -1,7 +1,23 @@
+using CosmicRunnerFront.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddHttpClient<IInicioApiService, InicioApiService>()
+    .ConfigurePrimaryHttpMessageHandler(() =>
+    new HttpClientHandler
+        {
+            ServerCertificateCustomValidationCallback =
+            HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+        }
+    );
+
+builder.Services.Configure<Microsoft.AspNetCore.Mvc.JsonOptions>(options =>
+    {
+        options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
+    }
+);
 
 var app = builder.Build();
 
