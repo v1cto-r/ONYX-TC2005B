@@ -15,13 +15,11 @@ namespace AB {
     public class ShipControlller : MonoBehaviour
     {
 
-        // Render related
         private GameObject ship;
         private SpriteRenderer spriteRenderer;
         public GameObject explosion;
         private float lookAtAngle;
 
-        // The movement of the ship variables, done in the circumference of a circle
         [Header("Positioning")]
 
         public float radius = 17f;
@@ -30,7 +28,6 @@ namespace AB {
         private float angle;
         private float newAngle;
         public float initialAngleRadians = 2.8f;
-        // Upper bound first, then lower bound, in radians
         public AngleBounds angleLimits = new AngleBounds { lowerBound = 2.5f, upperBound = 3.1416f };
         private Vector2 position;
         private Vector2 previousPosition;
@@ -57,20 +54,15 @@ namespace AB {
 
         void Awake()
         {
-            // El gameObject al cual se asignó el script (La nave)
             ship = this.gameObject;
 
-            // El origen de rotación, en este caso se le pasa el planeta y se usa su posición
             origin = originObject.transform.position;
 
-            // Del input system, la acción de movimiento, usada en todos los otros juegos
             moveAction = InputSystem.actions.FindAction("Move");
             shootAction = InputSystem.actions.FindAction("Shoot");
 
-            // Inicializar la rotación
             angle = newAngle = initialAngleRadians;
 
-            // Poner la nave en la posición inicial, usando el ángulo inicial
             position = CalculateShipPosition(angle);
             ship.transform.position = position;
         }
@@ -102,33 +94,25 @@ namespace AB {
 
         void FixedUpdate()
         {
-            // Solo utilizamos el movimiento vertical del input
             float input = moveAction.ReadValue<Vector2>().y;
 
             Debug.Log("Input: " + input);
 
-            // Si hay movimiento, acelerar hacia la velocidad
             if (input != 0f)
             {
-                // Input (0-1) * velocidad para sacar la velocidad target
                 SFXGameController.Instance.PlayShipMoveSound();
                 float targetVelocity = input * maxAngularVelocity;
-                // Calcular la nueva velocidad, acelerando hacia la velocidad target
                 angularVelocity = Mathf.MoveTowards(angularVelocity, targetVelocity, angularAcceleration * Time.fixedDeltaTime);
             }
             else
             {
                 SFXGameController.Instance.StopShipMoveSound();
-                // Si no hay input, desacelerar hacia 0, en base al drag
                 angularVelocity = Mathf.MoveTowards(angularVelocity, 0f, drag * Time.fixedDeltaTime);
             }
 
-            // El nuevo ángulo calculado en base a la velocidad
             float proposedAngle = newAngle - angularVelocity * Time.fixedDeltaTime;
-            // Limitar el ángulo a los límites, para que la nave no se salga de la pantalla
             float clampedAngle = Mathf.Clamp(proposedAngle, angleLimits.lowerBound, angleLimits.upperBound);
 
-            // Si la nave tocó el límite, detener la aceleración
             if (!Mathf.Approximately(clampedAngle, proposedAngle))
             {
                 if ((clampedAngle <= angleLimits.lowerBound && angularVelocity > 0f) ||
@@ -138,15 +122,12 @@ namespace AB {
                 }
             }
 
-            // Actualizar el ángulo, y la rotación de la nave para voltear a ver el planeta
             newAngle = clampedAngle;
             lookAtAngle = newAngle + Mathf.PI / 2f;
             ship.transform.rotation = Quaternion.Euler(0f, 0f, lookAtAngle * Mathf.Rad2Deg);
 
-            // Si el ángulo no cambió, no calcular la posición
             if (Mathf.Approximately(newAngle, angle)) return;
 
-            // Actualizar el ángulo y la posición de la nave
             angle = newAngle;
             previousPosition = position;
             position = CalculateShipPosition(angle);
@@ -154,20 +135,15 @@ namespace AB {
             shipVelocity2D = (position - previousPosition) / Time.fixedDeltaTime;
         }
 
-        // Formula para calcular la posición de la nave en base al ángulo, usando trigonometría
         Vector2 CalculateShipPosition(float angle)
         {
-            // Nueva posición
             Vector2 newPosition;
-            // Calcular componentes x e y, usando coseno y seno respectivamente
-            // Creciendo la distancia con el radio
-            // Y usando la posición del origen como offset
+
             newPosition.x = origin.x + Mathf.Cos(angle) * radius;
             newPosition.y = origin.y + Mathf.Sin(angle) * radius;
             return newPosition;
         }
 
-        // Maneja activar y desactivar el escudo
         public void EnableShield()
         {
             shieldActive = true;
@@ -186,7 +162,6 @@ namespace AB {
             return shieldActive;
         }
 
-        // Damage termina el juego
         public void TakeDamage()
         {
             if (shieldActive)
@@ -200,7 +175,6 @@ namespace AB {
             StartCoroutine(DieWithDelay());
         }
 
-        // Se espera a morir para mostrar la explosión
         private IEnumerator DieWithDelay()
         {
             yield return new WaitForSeconds(0.5f);

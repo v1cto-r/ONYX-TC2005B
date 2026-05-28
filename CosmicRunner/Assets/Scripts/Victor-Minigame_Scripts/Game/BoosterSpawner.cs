@@ -6,10 +6,8 @@ namespace AB
     [System.Serializable]
     public struct Boosters
     {
-        // El prefab del booster a spawnear
         public GameObject boosterPrefab;
 
-        // Que tan probable es que spawnee el booster
         [Range(1, 5)]
         public int availability;
     }
@@ -17,19 +15,15 @@ namespace AB
     public class BoosterSpawner : Spawner
     {
         [Header("Enemy Spawning")]
-        public Boosters[] boostersToSpawn; // Boosters
-        public float boosterSpeed = 5f; // Su velocidad (Aplica a todos)
-        private float boosterWeightSum; // Usado para calcular la probabilidad
+        public Boosters[] boostersToSpawn;
+        public float boosterSpeed = 5f;
+        private float boosterWeightSum;
         
 
         void Start()
         {
-            // Manda a llamar el init de la clase padre Spawner
             Init(spawnInterval, angleLimits, GameController.Instance.gameDuration);
 
-            // El acumulado de dificultad, para generar enemigos en base a su dificultad
-            // Se va a calcular de manera inversa para que de tal manera
-            // > dificultad = < probabilidad de spawn
             for (int i = 0; i < boostersToSpawn.Length; i++)
             {
                 boosterWeightSum += boostersToSpawn[i].availability;
@@ -38,18 +32,13 @@ namespace AB
             StartCoroutine(SpawnBoosters());
         }
 
-        // Calcula el booster a spawnear usando un random ponderado
-        // En base al valor de disponibilidad
         int WeightedRandomBooster()
         {
-            // Genera un número aleatorio con probabilidades ponderadas
-            // Genera un número entre 0 y la suma de las probabilidades acumuladas
             float randomValue = Random.Range(0f, boosterWeightSum);
             float cumulativeWeight = 0f;
 
             for (int i = 0; i < boostersToSpawn.Length; i++)
             {
-                // El peso calculado
                 float weight = boostersToSpawn[i].availability;
                 cumulativeWeight += weight;
 
@@ -60,8 +49,6 @@ namespace AB
             return 0;
         }
 
-        // Coroutine para spawnear los boosters por tiempo interpolado
-        // Definido en spawner
         IEnumerator SpawnBoosters ()
         {
             yield return new WaitForSeconds(this.CalculateSpawnInterval());

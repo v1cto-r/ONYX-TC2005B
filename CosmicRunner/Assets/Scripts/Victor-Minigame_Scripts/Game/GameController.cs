@@ -4,10 +4,8 @@ using UnityEngine.SceneManagement;
 
 namespace AB
 {
-    // Tipo de booster que se puede recoger
     public enum BoosterType { Credit, Shield, Bullet }
 
-    // Va a juntar todos los componentes principales
     public class GameController : MonoBehaviour
     {
         [Header("Game Components")]
@@ -64,7 +62,6 @@ namespace AB
             }
         }
 
-        // Timer del shield
         IEnumerator ShieldTime()
         {
             yield return new WaitForSeconds(1);
@@ -93,7 +90,6 @@ namespace AB
             uiController.ScarpShield();
         }
 
-        // Dependiendo del tipo de booster, se llama a la función correspondiente
         public void CollectBooster(BoosterType boosterType)
         {
             SFXGameController.Instance.PlayBoosterCollectSound();
@@ -163,14 +159,12 @@ namespace AB
             SceneManager.LoadScene("EndScene_AB");
         }
 
-        // Activa la reparacion, que pausa el juego y muestra el panel de reparación
         public void HandleRepair()
         {
             Time.timeScale = 0f;
             repairController.gameObject.SetActive(true);
         }
 
-        // Termina la reparación, que reanuda el juego y oculta el panel de reparación
         public void FinishRepair()
         {
             Time.timeScale = 1f;

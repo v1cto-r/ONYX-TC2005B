@@ -6,7 +6,6 @@ using UnityEngine.UI;
 namespace AB {
     public class ChipController : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler
     {
-        // Display y posicionamiento
         private RectTransform rectTransform;
         private CanvasGroup canvasGroup;
         private Canvas canvas;
@@ -15,10 +14,8 @@ namespace AB {
         private Transform startParent;
         private Vector2 startAnchoredPosition;
 
-        // Los datos del fragmento que representa el chip
         public int FragmentOrder { get; set; }
         public string FragmentText { get; set; } = string.Empty;
-        // Si el chip se colocó correctamente en un slot
         private bool isPlaced;
 
         private void Awake()
@@ -30,7 +27,6 @@ namespace AB {
             startAnchoredPosition = rectTransform.anchoredPosition;
         }
 
-        // Asigna el fragmento de texto y su orden al chip, y lo muestra
         public void SetFragment(string fragmentText, int fragmentOrder)
         {
             FragmentText = fragmentText ?? string.Empty;
@@ -40,7 +36,6 @@ namespace AB {
             feedbackImage.gameObject.SetActive(false);
         }
 
-        // Feedback de colocar el chip en el slot correcto
         public void MarkCorrect(Transform slotTransform)
         {
             isPlaced = true;
@@ -51,7 +46,6 @@ namespace AB {
             RepairController.Instance.ChipPlaced();
         }
 
-        // Feedback de colocar el chip en un lugar incorrecto
         public void MarkIncorrect()
         {
             isPlaced = false;
@@ -60,7 +54,6 @@ namespace AB {
             feedbackImage.gameObject.SetActive(true);
         }
 
-        // Regresa el chip a su posición inicial
         public void ReturnToStartPosition()
         {
             canvasGroup.alpha = 1f;
@@ -74,7 +67,6 @@ namespace AB {
         {
         }
 
-        // Feedback de arrastrar el chip
         public void OnBeginDrag(PointerEventData eventData)
         {
             isPlaced = false;
@@ -82,14 +74,12 @@ namespace AB {
             canvasGroup.blocksRaycasts = false;
         }
 
-        // Mueve el chip con el mouse
         public void OnDrag(PointerEventData eventData)
         {
             float scaleFactor = canvas != null && canvas.scaleFactor > 0f ? canvas.scaleFactor : 1f;
             rectTransform.anchoredPosition += eventData.delta / scaleFactor;
         }
 
-        // Si no se colocó en un slot, regresa a la posición inicial
         public void OnEndDrag(PointerEventData eventData)
         {
             canvasGroup.alpha = 1f;
