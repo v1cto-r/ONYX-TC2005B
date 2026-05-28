@@ -20,7 +20,7 @@ public class ProyectilBasico : MonoBehaviour
                 obstaculo.RecibirDanoProyectil(danoBala);
             }
             
-            Destroy(gameObject); // Destruir el láser
+            Destroy(gameObject); //proyectil
         }
     }
 }

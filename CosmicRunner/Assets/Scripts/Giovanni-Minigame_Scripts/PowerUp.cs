@@ -7,14 +7,10 @@ public enum TipoColeccionable
     Ataque, 
     Velocidad 
 }
-
-[RequireComponent(typeof(Collider2D))]
-
 public class Coleccionable : MonoBehaviour
 {
     public TipoColeccionable tipoItem;
-    [Tooltip("Cantidad de monedas que da, o duración en segundos si es un power-up")]
-    public float valorODuracion = 5f;
+    public float duracion = 5f; 
     public Sprite spriteParaUI;
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -28,23 +24,27 @@ public class Coleccionable : MonoBehaviour
                 switch (tipoItem)
                 {
                     case TipoColeccionable.Moneda:
-                        GameManager.Instance.SumarMonedas(1);
+                        GameManager.Instance.SumarMonedas(5);
+                        if (SFXManager.Instance != null) SFXManager.Instance.PlayCoinSound();
                         Debug.Log("Moneda recogida");
                         break;
                     case TipoColeccionable.Defensa:
-                        player.ActivarDefensa(valorODuracion);
+                        if (SFXManager.Instance != null) SFXManager.Instance.PlayPowerUpSound();
+                        player.ActivarDefensa(duracion);
                         break;
                     case TipoColeccionable.Ataque:
-                        player.ActivarAtaque(valorODuracion);
+                        if (SFXManager.Instance != null) SFXManager.Instance.PlayPowerUpSound();
+                        player.ActivarAtaque(duracion);
                         break;
                     case TipoColeccionable.Velocidad:
-                        player.ActivarVelocidad(valorODuracion);
+                        if (SFXManager.Instance != null) SFXManager.Instance.PlayPowerUpSound();
+                        player.ActivarVelocidad(duracion);
                         break;
                 }
                 
                 if (tipoItem != TipoColeccionable.Moneda && UIPowerUpContador.Instance != null)
                 {
-                    UIPowerUpContador.Instance.MostrarContador(spriteParaUI, tipoItem.ToString(), valorODuracion);
+                    UIPowerUpContador.Instance.MostrarContador(spriteParaUI, tipoItem.ToString(), duracion);
                 }
             }
             

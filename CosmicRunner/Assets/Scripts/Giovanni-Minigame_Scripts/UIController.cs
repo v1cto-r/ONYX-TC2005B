@@ -7,32 +7,31 @@ namespace Gio.Minigame
 {
     public class UIController : MonoBehaviour
     {
-        [Header("Textos de API")]
         public TextMeshProUGUI textoZonaSuperior;
         public TextMeshProUGUI textoZonaInferior;
-        
-        [Header("Enemigo y Puntos de Aparición")]
+        public TextMeshProUGUI textoAdvertenciaGeneral;
+        private bool advertenciaMostrada = true;
         public GameObject prefabEnemigo;
         public Transform puntoAparicionSuperior;
         public Transform puntoAparicionInferior;
         
-        [Header("Tiempos")]
         public float tiempoDecision = 10f;
         public float intervaloEntreAtaques = 5f; 
         private bool ataqueEnCurso = false;
 
-        [Header("Marcos de Advertencia (Estáticos)")]
-        [Tooltip("El objeto de UI con el contorno de la zona superior")]
         public GameObject marcoSuperior;
-        [Tooltip("El objeto de UI con el contorno de la zona inferior")]
         public GameObject marcoInferior;
         
         private void Start()
         {
             textoZonaSuperior.text = "";
             textoZonaInferior.text = "";
+            if (textoAdvertenciaGeneral != null)
+            {
+                textoAdvertenciaGeneral.text = "Cuidado, la zona con el peor prompt será atacada";
+                textoAdvertenciaGeneral.gameObject.SetActive(true);
+            }
 
-            // Asegurar que los marcos inicien ocultos
             if (marcoSuperior != null) marcoSuperior.SetActive(false);
             if (marcoInferior != null) marcoInferior.SetActive(false);
 
@@ -44,6 +43,7 @@ namespace Gio.Minigame
             while (true)
             {
                 yield return new WaitForSeconds(intervaloEntreAtaques);
+                if (textoAdvertenciaGeneral != null) textoAdvertenciaGeneral.gameObject.SetActive(false);
                 
                 if (APIAttackManager.Instance != null && APIAttackManager.Instance.listaPrompts.Count > 0 && !ataqueEnCurso)
                 {
@@ -54,6 +54,7 @@ namespace Gio.Minigame
 
         private IEnumerator EjecutarAtaque()
         {
+            if (SFXManager.Instance != null) SFXManager.Instance.PlayEnemySound();
             ataqueEnCurso = true;
 
             int indexAleatorio = Random.Range(0, APIAttackManager.Instance.listaPrompts.Count);
@@ -75,14 +76,11 @@ namespace Gio.Minigame
                 puntoAtaque = puntoAparicionSuperior; 
             }
 
-            // ACTIVACIÓN SIMULTÁNEA: Ambos marcos se encienden de forma fija junto con los textos
             if (marcoSuperior != null) marcoSuperior.SetActive(true);
             if (marcoInferior != null) marcoInferior.SetActive(true);
-
-            // Esperar el tiempo de decisión del jugador
+            
             yield return new WaitForSeconds(tiempoDecision);
 
-            // DESACTIVACIÓN SIMULTÁNEA: Se apagan ambos marcos y se limpian los textos
             if (marcoSuperior != null) marcoSuperior.SetActive(false);
             if (marcoInferior != null) marcoInferior.SetActive(false);
 

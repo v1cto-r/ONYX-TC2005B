@@ -30,8 +30,8 @@ Transform:
   m_GameObject: {fileID: 3720195203076762163}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.03, y: -1.42, z: 0}
-  m_LocalScale: {x: 0.034310393, y: 0.034310393, z: 0.034310393}
+  m_LocalPosition: {x: 6.838, y: -0.395, z: 0}
+  m_LocalScale: {x: 0.12837577, y: 0.14537658, z: 0.034310393}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 5
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -855298285791758126, guid: 934b1e97e3c050f48b91ecab3c36b3c7, type: 3}
+  m_Sprite: {fileID: 4120901811166270815, guid: 42c8dda631b15dc47a3a897804b14d68, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -129,8 +129,8 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0.6821537}
-  m_Radius: 11.111271
+  m_Offset: {x: 0, y: -0.21393193}
+  m_Radius: 3.1154401
 --- !u!114 &5914586565148609572
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -144,8 +144,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Coleccionable
   tipoItem: 2
-  valorODuracion: 5
-  spriteParaUI: {fileID: -855298285791758126, guid: 934b1e97e3c050f48b91ecab3c36b3c7, type: 3}
+  duracion: 6
+  spriteParaUI: {fileID: 4120901811166270815, guid: 42c8dda631b15dc47a3a897804b14d68, type: 3}
 --- !u!50 &1770002432974879459
 Rigidbody2D:
   serializedVersion: 5

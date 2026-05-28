@@ -131,7 +131,7 @@ public class PlayerController : MonoBehaviour
         Rigidbody2D rbProyectil = nuevoProyectil.GetComponent<Rigidbody2D>();
         ProyectilBasico scriptProyectil = nuevoProyectil.GetComponent<ProyectilBasico>();
         SpriteRenderer srProyectil = nuevoProyectil.GetComponent<SpriteRenderer>();
-
+        
         if (rbProyectil != null)
         {
             Vector2 velocidadInicial = transform.up * velocidadProyectil;
@@ -141,6 +141,7 @@ public class PlayerController : MonoBehaviour
 
         if (scriptProyectil != null)
         {
+            if (SFXManager.Instance != null) SFXManager.Instance.PlayShootSound();
             if (tieneSuperAtaque)
             {
                 scriptProyectil.danoBala = 3; 

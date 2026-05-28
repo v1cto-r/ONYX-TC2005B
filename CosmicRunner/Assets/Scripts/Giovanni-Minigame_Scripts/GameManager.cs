@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement; // Necesario para cambiar entre escenas
+using UnityEngine.InputSystem;
 namespace Gio.Minigame{
 public class GameManager : MonoBehaviour
 {
@@ -22,6 +23,10 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI textoCreditosUI; 
     private int creditosActuales = 0;
 
+
+    public GameObject panelPausa;
+    private bool juegoPausado = false;
+
     private void Awake()
     {
         Instance = this;
@@ -29,6 +34,12 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        // --- FIX CRÍTICO: Protección contra Nulos en Sonido ---
+        if (SFXManager.Instance != null && SFXManager.Instance.musicaFondo1 != null) 
+        {
+            SFXManager.Instance.PlayBackgroundMusic(SFXManager.Instance.musicaFondo1); 
+        }
+
         Time.timeScale = 1f; 
         
         vidasActuales = vidasMaximas;
@@ -43,7 +54,14 @@ public class GameManager : MonoBehaviour
     {
         if (juegoTerminado) return;
 
-        ManejarTemporizador();
+        if (Keyboard.current.escapeKey.wasPressedThisFrame || Keyboard.current.pKey.wasPressedThisFrame)
+        {
+            AlternarPausa();
+        }
+        if (!juegoPausado)
+        {
+            ManejarTemporizador();
+        }
     }
 
     private void ManejarTemporizador()
@@ -86,6 +104,8 @@ public class GameManager : MonoBehaviour
             return;
         }
 
+        if (SFXManager.Instance != null) SFXManager.Instance.PlayHitSound();
+
         vidasActuales -= cantidad;
         if (vidasActuales < 0) vidasActuales = 0;
 
@@ -118,12 +138,38 @@ public class GameManager : MonoBehaviour
     private void TerminarPartida(bool victoria)
     {
         juegoTerminado = true;
+        if (SFXManager.Instance != null) SFXManager.Instance.StopBackgroundMusic();
 
         PlayerPrefs.SetInt("resultado", victoria ? 1 : 0);
         PlayerPrefs.SetInt("credits", creditosActuales);
         PlayerPrefs.Save();
 
         SceneManager.LoadScene("IEEndScene"); 
+    }
+
+    public void AlternarPausa()
+    {
+        juegoPausado = !juegoPausado;
+
+        if (juegoPausado)
+        {
+            Time.timeScale = 0f;
+            if (panelPausa != null) panelPausa.SetActive(true);
+            if (jugadorRef != null) jugadorRef.enabled = false; 
+        }
+        else
+        {
+            Time.timeScale = 1f;
+            if (panelPausa != null) panelPausa.SetActive(false);
+            if (jugadorRef != null) jugadorRef.enabled = true;
+        }
+    }
+    public void ReanudarJuego()
+    {
+        if (juegoPausado)
+        {
+            AlternarPausa();
+        }
     }
 }
 }

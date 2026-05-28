@@ -144,7 +144,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Coleccionable
   tipoItem: 1
-  valorODuracion: 5
+  duracion: 6
   spriteParaUI: {fileID: -6470460504253458178, guid: 8c1b3cf43509a004aa354bdd8c167263, type: 3}
 --- !u!50 &1334877862963252977
 Rigidbody2D:
