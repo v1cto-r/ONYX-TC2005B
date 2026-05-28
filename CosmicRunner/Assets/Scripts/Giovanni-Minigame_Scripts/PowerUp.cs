@@ -28,7 +28,7 @@ public class Coleccionable : MonoBehaviour
                 switch (tipoItem)
                 {
                     case TipoColeccionable.Moneda:
-                        // GameManager.Instance.SumarMonedas(valorODuracion);
+                        GameManager.Instance.SumarMonedas(1);
                         Debug.Log("Moneda recogida");
                         break;
                     case TipoColeccionable.Defensa:
