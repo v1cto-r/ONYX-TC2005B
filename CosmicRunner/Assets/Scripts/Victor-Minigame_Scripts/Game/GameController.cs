@@ -38,6 +38,9 @@ namespace AB
             Time.timeScale = 1f;
             uiController.UpdateBullets(bullets);
             StartCoroutine(MatchTime());
+            PlayerPrefs.DeleteKey("collected_credits");
+            PlayerPrefs.DeleteKey("result");
+            PlayerPrefs.SetInt("userId", 1); // Usuario 1
         }
         
         public float GetElapsedTime()
