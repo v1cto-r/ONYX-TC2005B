@@ -86,7 +86,7 @@ SpriteRenderer:
   m_SortingOrder: 5
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: d08008d544d1bfc4cb5c67065aeb5453, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.44175953, g: 0, b: 0.509434, a: 0.81960785}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -144,7 +144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4a24ff7d5a82ba4b88c5d60c4d87b83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Obstaculo
-  puntosDeVida: 1
+  puntosDeVida: 2
 --- !u!50 &6982203008805023482
 Rigidbody2D:
   serializedVersion: 5
