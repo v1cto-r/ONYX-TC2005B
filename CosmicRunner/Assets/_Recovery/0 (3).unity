@@ -2854,7 +2854,6 @@ GameObject:
   - component: {fileID: 1074443169}
   - component: {fileID: 1074443170}
   - component: {fileID: 1074443171}
-  - component: {fileID: 1074443172}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -2871,7 +2870,7 @@ Transform:
   m_GameObject: {fileID: 1074443168}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -12.48, y: -0.09, z: 5}
+  m_LocalPosition: {x: -12.48, y: -0.09, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2908,31 +2907,6 @@ MonoBehaviour:
   puntoAparicionInferior: {fileID: 1838459621}
   tiempoDecision: 10
   intervaloEntreAtaques: 15
---- !u!114 &1074443172
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1074443168}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a0e6123410749347b72d069b66164d4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SpawnerEcosistema
-  prefabsObstaculos:
-  - {fileID: 6859161522272269626, guid: 67c025bce5d268f45a9ed88bbe423110, type: 3}
-  - {fileID: 6859161522272269626, guid: 359825f28b9610c4eaee06f4f66c8b86, type: 3}
-  - {fileID: 124689894803458372, guid: 9e1dc9a6c3e0f414c9d4827f11fd7aa1, type: 3}
-  prefabsPowerUps:
-  - {fileID: 3720195203076762163, guid: 2b2022641d3dfba4d823002fb835d7ad, type: 3}
-  - {fileID: 5596439661757579426, guid: a256baa898ce51c45a5085ceaa1ebd92, type: 3}
-  - {fileID: 2590506136177861101, guid: 5cb5c1fda2931ce438775efd3106e1f3, type: 3}
-  prefabMoneda: {fileID: 2590506136177861101, guid: b2a061a4920635a43a72657dbda4837b, type: 3}
-  tiempoEntreObstaculos: 2
-  tiempoEntreMonedas: 5
-  tiempoEntrePowerUps: 15
-  radioDeAparicion: 15
 --- !u!1 &1076690976
 GameObject:
   m_ObjectHideFlags: 0

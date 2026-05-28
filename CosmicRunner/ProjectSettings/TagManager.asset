@@ -9,6 +9,9 @@ TagManager:
   - Box
   - Enemy
   - Bullet
+  - Asteroid
+  - PowerUp
+  - Credit
   layers:
   - Default
   - TransparentFX
