@@ -17,6 +17,13 @@ namespace MECS
         // Puntaje acumulado actual
         public int currentScore = 0;
 
+        // Estado final de la ultima partida para la escena de resultados
+        public static int LastRunPrompts = 0;
+        // Puntaje final de la ultima partida para la escena de resultados
+        public static int LastRunScore = 0;
+        // Indica si la ultima partida termino en victoria
+        public static bool LastRunWasWin = false;
+
         [Header("UI Control")]
         // Tiempo total de la partida en segundos
         public float totalGameTime = 120f;
@@ -165,6 +172,10 @@ namespace MECS
         // Marca el juego como terminado y carga la escena final
         private void EndGame()
         {
+            LastRunPrompts = currentPrompts;
+            LastRunScore = currentScore;
+            LastRunWasWin = currentPrompts >= promptsToWin;
+
             gameOver = true;
             SceneManager.LoadScene("EndScene_MECS");
         }

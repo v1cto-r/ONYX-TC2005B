@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
@@ -44,6 +45,10 @@ namespace MECS
         // Si se asignan prompts aleatorios al iniciar
         [SerializeField] private bool assignRandomPromptsOnStart = true;
 
+        [Header("API Settings")]
+        // Base del API del minijuego
+        [SerializeField] private string apiBaseUrl = "https://localhost:12003/minigame";
+
         [Header("Input Settings")]
         // Accion que confirma clicks o disparos sobre la UI
         [SerializeField] private string clickActionName = "Drag";
@@ -56,6 +61,8 @@ namespace MECS
         private InputAction clickAction;
         // Entrada de posicion del puntero
         private InputAction pointerAction;
+        // Servicio simple para traer datos del minijuego
+        private MinigameApiService apiService;
         
 
         // Prepara singleton, referencias y estado inicial
@@ -72,16 +79,15 @@ namespace MECS
             Instance = this;
 
             // El limite de almacenamiento depende de cuantos slots existan
-            if (wordSlots != null)
-            {
-                wordStorageCapacity = wordSlots.Length;
-            }
+            ResolveWordSlots();
 
             // Si no asignamos camara, usamos la principal
             if (worldCamera == null)
             {
                 worldCamera = Camera.main;
             }
+
+            apiService = new MinigameApiService(apiBaseUrl);
 
             // Al iniciar, ocultamos cualquier texto de calidad que ya estuviera activo
             if (promptSlots != null && promptSlots.Length > 0)
@@ -98,7 +104,51 @@ namespace MECS
 
             // Resolvemos input y dejamos el estado de juego listo
             ResolveInputActions();
-            InitializeGameplayState();
+        }
+
+        // Si no se asignaron slots manualmente, los buscamos en la escena
+        private void ResolveWordSlots()
+        {
+            if (wordSlots != null && wordSlots.Length > 0)
+            {
+                wordStorageCapacity = wordSlots.Length;
+                return;
+            }
+
+            wordSlots = FindObjectsByType<DraggableWord>(FindObjectsInactive.Include);
+            wordStorageCapacity = wordSlots != null ? wordSlots.Length : 0;
+        }
+
+        // Cargamos datos de API antes de preparar el estado inicial
+        private IEnumerator Start()
+        {
+            if (apiService != null)
+            {
+                List<string> loadedWords = null;
+                List<PromptEntry> loadedPrompts = null;
+
+                yield return apiService.GetWords(words => loadedWords = words);
+                yield return apiService.GetPrompts(prompts => loadedPrompts = prompts);
+
+                if (loadedWords == null || loadedWords.Count == 0)
+                {
+                    Debug.LogError("API did not return any usable words. PromptsControl will not initialize.", this);
+                    yield break;
+                }
+
+                if (loadedPrompts == null || loadedPrompts.Count == 0)
+                {
+                    Debug.LogError("API did not return any usable prompts. PromptsControl will not initialize.", this);
+                    yield break;
+                }
+
+                boxWords = loadedWords != null ? loadedWords.ToArray() : new string[0];
+                promptPool = loadedPrompts != null ? loadedPrompts.ToArray() : new PromptEntry[0];
+                InitializeGameplayState();
+                yield break;
+            }
+
+            Debug.LogError("PromptsControl could not start because the API service is missing.", this);
         }
 
         // Enciende las acciones de entrada cuando el objeto esta activo
@@ -386,9 +436,9 @@ namespace MECS
                 // El texto final depende del nivel de calidad obtenido
                 string msg = matchQuality switch
                 {
-                    PromptQuality.Good => $"Bien! +{pts}",
-                    PromptQuality.Ok => $"Ok. +{pts}",
-                    PromptQuality.Meh => $"Meh... +{pts}",
+                    PromptQuality.Good => $"Perfecto! +{pts}",
+                    PromptQuality.Ok => $"Bien. +{pts}",
+                    PromptQuality.Meh => $"Ok... +{pts}",
                     _ => null
                 };
 
@@ -571,6 +621,7 @@ namespace MECS
             // Si no hay datos suficientes, no hacemos nada
             if (promptPool == null || promptPool.Length == 0 || promptSlots == null || promptSlots.Length == 0)
             {
+                Debug.LogWarning($"AssignRandomPromptsToSlots skipped. promptPool={(promptPool != null ? promptPool.Length : 0)}, promptSlots={(promptSlots != null ? promptSlots.Length : 0)}.", this);
                 return;
             }
 
@@ -728,6 +779,16 @@ namespace MECS
             if (GameControl.Instance != null && GameControl.Instance.uiControl != null)
             {
                 GameControl.Instance.uiControl.SetWordsStorage(currentWordCount, wordStorageCapacity);
+            }
+
+            // Auto-open prompts panel cuando el jugador llena el storage
+            if (GameControl.Instance != null && GameControl.Instance.uiControl != null)
+            {
+                var ui = GameControl.Instance.uiControl;
+                if (wordStorageCapacity > 0 && currentWordCount == wordStorageCapacity && !ui.IsPromptsPanelOpen())
+                {
+                    ui.TogglePromptsPanel();
+                }
             }
         }
     }
