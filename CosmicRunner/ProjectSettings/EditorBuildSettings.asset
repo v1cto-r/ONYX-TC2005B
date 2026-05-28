@@ -54,7 +54,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Marino-Minigame_Scenes/EndScene_MECS.unity
     guid: a6d91b4a22e4149879c4c1bdb4274062
   - enabled: 1
-<<<<<<< HEAD
     path: Assets/Scenes/Giovanni-Minigame_Scenes/Invasores del Espacio.unity
     guid: 983229f40fc19c349b66254e86e9528e
   - enabled: 1
@@ -66,7 +65,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Giovanni-Minigame_Scenes/InvasoresVictoria.unity
     guid: 5c865f2d689ad7a44a71425d312b75c6
-=======
+  - enabled: 1
     path: Assets/Scenes/Victor-Minigame_Scenes/MainMenuScene_AB.unity
     guid: faf0ae236303f4c0db9f1adcc70a4df1
   - enabled: 1
@@ -78,6 +77,5 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Victor-Minigame_Scenes/EndScene_AB.unity
     guid: 017ec72d8b7874ab29dd78dcb68ab092
->>>>>>> unity
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}

@@ -105,6 +105,8 @@ namespace AB {
             // Solo utilizamos el movimiento vertical del input
             float input = moveAction.ReadValue<Vector2>().y;
 
+            Debug.Log("Input: " + input);
+
             // Si hay movimiento, acelerar hacia la velocidad
             if (input != 0f)
             {
