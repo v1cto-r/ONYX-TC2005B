@@ -83,6 +83,8 @@ namespace AB {
                 {
                     GameController.Instance.SpendBullet();
 
+                    SFXGameController.Instance.PlayShootSound();
+
                     Instantiate(
                         bulletPrefab, 
                         position, 
@@ -107,12 +109,14 @@ namespace AB {
             if (input != 0f)
             {
                 // Input (0-1) * velocidad para sacar la velocidad target
+                SFXGameController.Instance.PlayShipMoveSound();
                 float targetVelocity = input * maxAngularVelocity;
                 // Calcular la nueva velocidad, acelerando hacia la velocidad target
                 angularVelocity = Mathf.MoveTowards(angularVelocity, targetVelocity, angularAcceleration * Time.fixedDeltaTime);
             }
             else
             {
+                SFXGameController.Instance.StopShipMoveSound();
                 // Si no hay input, desacelerar hacia 0, en base al drag
                 angularVelocity = Mathf.MoveTowards(angularVelocity, 0f, drag * Time.fixedDeltaTime);
             }
@@ -175,15 +179,20 @@ namespace AB {
             GameController.Instance.LooseShield();
         }
 
+        public bool getShieldActive()
+        {
+            return shieldActive;
+        }
+
         // Damage termina el juego
         public void TakeDamage()
         {
             if (shieldActive)
             {
-                shieldActive = false;
-                shieldObject.SetActive(false);
+                DisableShield();
                 return;
             }
+            SFXGameController.Instance.PlayShipDestroyedSound();
             explosion.SetActive(true);
 
             StartCoroutine(DieWithDelay());
@@ -201,8 +210,7 @@ namespace AB {
         {
             if (shieldActive)
             {
-                shieldActive = false;
-                shieldObject.SetActive(false);
+                DisableShield();
                 return;
             }
             

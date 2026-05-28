@@ -6,58 +6,61 @@ using UnityEngine.UI;
 namespace AB {
     public class ChipController : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler
     {
+        // Display y posicionamiento
         private RectTransform rectTransform;
         private CanvasGroup canvasGroup;
         private Canvas canvas;
         public TMP_Text chipLabel;
-        private Image borderImage;
+        public Image feedbackImage;
         private Transform startParent;
         private Vector2 startAnchoredPosition;
 
+        // Los datos del fragmento que representa el chip
         public int FragmentOrder { get; set; }
         public string FragmentText { get; set; } = string.Empty;
+        // Si el chip se colocó correctamente en un slot
         private bool isPlaced;
 
         private void Awake()
         {
             rectTransform = GetComponent<RectTransform>();
             canvasGroup = gameObject.AddComponent<CanvasGroup>();
-            SetupBorderLayer();
             canvas = FindAnyObjectByType<Canvas>();
             startParent = transform.parent;
             startAnchoredPosition = rectTransform.anchoredPosition;
         }
 
+        // Asigna el fragmento de texto y su orden al chip, y lo muestra
         public void SetFragment(string fragmentText, int fragmentOrder)
         {
             FragmentText = fragmentText ?? string.Empty;
             FragmentOrder = fragmentOrder;
             chipLabel.gameObject.SetActive(true);
             chipLabel.text = FragmentText;
-            SetBorderColor(null);
+            feedbackImage.gameObject.SetActive(false);
         }
 
+        // Feedback de colocar el chip en el slot correcto
         public void MarkCorrect(Transform slotTransform)
         {
             isPlaced = true;
-
-            if (slotTransform != null)
-            {
-                transform.SetParent(slotTransform, false);
-                rectTransform.anchoredPosition = Vector2.zero;
-            }
-
-            SetBorderColor(Color.green);
+            transform.SetParent(slotTransform, false);
+            rectTransform.anchoredPosition = Vector2.zero;
+            feedbackImage.color = new Color(0f, 1f, 0f, 0.1f);
+            feedbackImage.gameObject.SetActive(true);
             RepairController.Instance.ChipPlaced();
         }
 
+        // Feedback de colocar el chip en un lugar incorrecto
         public void MarkIncorrect()
         {
             isPlaced = false;
             ReturnToStartPosition();
-            SetBorderColor(Color.red);
+            feedbackImage.color = new Color(1f, 0f, 0f, 0.1f);
+            feedbackImage.gameObject.SetActive(true);
         }
 
+        // Regresa el chip a su posición inicial
         public void ReturnToStartPosition()
         {
             canvasGroup.alpha = 1f;
@@ -66,54 +69,12 @@ namespace AB {
             rectTransform.anchoredPosition = startAnchoredPosition;
         }
 
-        private void SetupBorderLayer()
-        {
-            Transform existing = transform.Find("Border");
-            if (existing != null)
-            {
-                borderImage = existing.GetComponent<Image>();
-                borderImage.gameObject.SetActive(false);
-                return;
-            }
-
-            GameObject borderObject = new GameObject("Border", typeof(RectTransform), typeof(Image));
-            borderObject.transform.SetParent(transform, false);
-            borderObject.transform.SetAsFirstSibling();
-
-            RectTransform borderRect = borderObject.GetComponent<RectTransform>();
-            borderRect.anchorMin = Vector2.zero;
-            borderRect.anchorMax = Vector2.one;
-            borderRect.offsetMin = new Vector2(-6f, -6f);
-            borderRect.offsetMax = new Vector2(6f, 6f);
-
-            borderImage = borderObject.GetComponent<Image>();
-            borderImage.raycastTarget = false;
-            borderImage.color = Color.clear;
-            borderImage.gameObject.SetActive(false);
-        }
-
-        private void SetBorderColor(Color? color)
-        {
-            if (borderImage == null)
-            {
-                return;
-            }
-
-            if (color.HasValue)
-            {
-                borderImage.color = color.Value;
-                borderImage.gameObject.SetActive(true);
-                return;
-            }
-
-            borderImage.gameObject.SetActive(false);
-        }
-
         // Do not remove it errors out //
         public void OnPointerDown(PointerEventData eventData)
         {
         }
 
+        // Feedback de arrastrar el chip
         public void OnBeginDrag(PointerEventData eventData)
         {
             isPlaced = false;
@@ -121,29 +82,18 @@ namespace AB {
             canvasGroup.blocksRaycasts = false;
         }
 
+        // Mueve el chip con el mouse
         public void OnDrag(PointerEventData eventData)
         {
-            if (rectTransform == null)
-            {
-                return;
-            }
-
-            float scaleFactor = 1f;
-            if (canvas != null && canvas.scaleFactor > 0f)
-            {
-                scaleFactor = canvas.scaleFactor;
-            }
-
+            float scaleFactor = canvas != null && canvas.scaleFactor > 0f ? canvas.scaleFactor : 1f;
             rectTransform.anchoredPosition += eventData.delta / scaleFactor;
         }
 
+        // Si no se colocó en un slot, regresa a la posición inicial
         public void OnEndDrag(PointerEventData eventData)
         {
-            if (canvasGroup != null)
-            {
-                canvasGroup.alpha = 1f;
-                canvasGroup.blocksRaycasts = true;
-            }
+            canvasGroup.alpha = 1f;
+            canvasGroup.blocksRaycasts = true;
 
             if (!isPlaced)
             {

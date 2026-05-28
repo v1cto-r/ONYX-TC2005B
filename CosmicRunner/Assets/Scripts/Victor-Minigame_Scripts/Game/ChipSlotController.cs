@@ -20,6 +20,7 @@ namespace AB
             // Si están en el orden correcto, marcar como correcto, si no, marcar como incorrecto
             if (draggedChip.FragmentOrder == slotOrder)
             {
+                SFXGameController.Instance.PlayChipPlaceSound();
                 draggedChip.MarkCorrect(transform);
             }
             else

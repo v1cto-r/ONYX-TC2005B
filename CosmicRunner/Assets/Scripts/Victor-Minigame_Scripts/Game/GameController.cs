@@ -18,6 +18,7 @@ namespace AB
         public ShipControlller shipController;
         public UIController uiController;
         public RepairController repairController;
+        public SFXGameController sfxGameController;
 
         public ChipController[] chips;
 
@@ -51,6 +52,7 @@ namespace AB
 
             if (elapsedTime >= gameDuration)
             {
+                credits += 100;
                 WinGame();
             } else
             {
@@ -83,6 +85,7 @@ namespace AB
         // Dependiendo del tipo de booster, se llama a la función correspondiente
         public void CollectBooster(BoosterType boosterType)
         {
+            SFXGameController.Instance.PlayBoosterCollectSound();
             switch (boosterType)
             {
                 case BoosterType.Credit:
@@ -105,8 +108,14 @@ namespace AB
 
         public void CollectShield()
         {
-            shipController.EnableShield();
-            StartCoroutine(ShieldTime());
+            if (shipController.getShieldActive())
+            {
+                elapsedShieldTime = 0;
+            } else
+            {
+                shipController.EnableShield();
+                StartCoroutine(ShieldTime());
+            }
         }
 
         public void CollectBullet()
