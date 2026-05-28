@@ -24,7 +24,7 @@ public class GameSelect : MonoBehaviour
 
     public void GioMinigameButton()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("InvasoresMenu");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("IEGameStart");
     }
 
     public void BackToMainMenu()
