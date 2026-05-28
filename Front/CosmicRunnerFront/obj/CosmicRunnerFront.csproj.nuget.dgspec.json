@@ -1,6 +1,22 @@
 {
   "format": 1,
   "restore": {
+<<<<<<< HEAD
+    "C:\\Users\\magio\\OneDrive\\Documentos\\GitHub\\ONYX-TC2005B\\Front\\CosmicRunnerFront\\CosmicRunnerFront.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\magio\\OneDrive\\Documentos\\GitHub\\ONYX-TC2005B\\Front\\CosmicRunnerFront\\CosmicRunnerFront.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\magio\\OneDrive\\Documentos\\GitHub\\ONYX-TC2005B\\Front\\CosmicRunnerFront\\CosmicRunnerFront.csproj",
+        "projectName": "CosmicRunnerFront",
+        "projectPath": "C:\\Users\\magio\\OneDrive\\Documentos\\GitHub\\ONYX-TC2005B\\Front\\CosmicRunnerFront\\CosmicRunnerFront.csproj",
+        "packagesPath": "C:\\Users\\magio\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\magio\\OneDrive\\Documentos\\GitHub\\ONYX-TC2005B\\Front\\CosmicRunnerFront\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\magio\\AppData\\Roaming\\NuGet\\NuGet.Config"
+=======
     "/Users/victor/Documents/TEC/4/Software/ONYX-TC2005B/Front/CosmicRunnerFront/CosmicRunnerFront.csproj": {}
   },
   "projects": {
@@ -15,6 +31,7 @@
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/victor/.nuget/NuGet/NuGet.Config"
+>>>>>>> unity
         ],
         "originalTargetFrameworks": [
           "net9.0"
@@ -54,6 +71,27 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+<<<<<<< HEAD
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[9.0.14, 9.0.14]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x64",
+              "version": "[9.0.14, 9.0.14]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[9.0.14, 9.0.14]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[9.0.14, 9.0.14]"
+            }
+          ],
+=======
+>>>>>>> unity
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -62,7 +100,11 @@
               "privateAssets": "all"
             }
           },
+<<<<<<< HEAD
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.201/PortableRuntimeIdentifierGraph.json"
+=======
           "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/10.0.203/PortableRuntimeIdentifierGraph.json"
+>>>>>>> unity
         }
       }
     }

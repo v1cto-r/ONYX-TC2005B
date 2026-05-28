@@ -1,8 +1,20 @@
 {
   "version": 2,
+<<<<<<< HEAD
+  "dgSpecHash": "q6B4urfYn8U=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\magio\\OneDrive\\Documentos\\GitHub\\ONYX-TC2005B\\Front\\CosmicRunnerFront\\CosmicRunnerFront.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\magio\\.nuget\\packages\\microsoft.netcore.app.ref\\9.0.14\\microsoft.netcore.app.ref.9.0.14.nupkg.sha512",
+    "C:\\Users\\magio\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\9.0.14\\microsoft.windowsdesktop.app.ref.9.0.14.nupkg.sha512",
+    "C:\\Users\\magio\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\9.0.14\\microsoft.aspnetcore.app.ref.9.0.14.nupkg.sha512",
+    "C:\\Users\\magio\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\9.0.14\\microsoft.netcore.app.host.win-x64.9.0.14.nupkg.sha512"
+  ],
+=======
   "dgSpecHash": "4wKF5kV0TU4=",
   "success": true,
   "projectFilePath": "/Users/victor/Documents/TEC/4/Software/ONYX-TC2005B/Front/CosmicRunnerFront/CosmicRunnerFront.csproj",
   "expectedPackageFiles": [],
+>>>>>>> unity
   "logs": []
 }

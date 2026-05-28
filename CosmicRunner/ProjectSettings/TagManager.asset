@@ -9,7 +9,13 @@ TagManager:
   - Box
   - Enemy
   - Bullet
+<<<<<<< HEAD
+  - Asteroid
+  - PowerUp
+  - Credit
+=======
   - Shield
+>>>>>>> unity
   layers:
   - Default
   - TransparentFX
