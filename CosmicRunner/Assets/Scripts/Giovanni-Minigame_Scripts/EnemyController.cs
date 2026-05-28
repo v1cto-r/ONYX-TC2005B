@@ -2,13 +2,10 @@ using UnityEngine;
 namespace Gio.Minigame{
 public class EnemyShip : MonoBehaviour
 {
-    [Header("Configuración")]
     public float velocidadEmbiste = 20f;
     public float tiempoDeVida = 5f; 
     public int dano = 2; 
-
     public float fuerzaEmpuje = 15f;
-
     private Rigidbody2D rb;
     private Transform camaraTransform;
     private float offsetY;

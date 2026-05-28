@@ -2,21 +2,25 @@ using UnityEngine;
 namespace Gio.Minigame{
 public class ProyectilBasico : MonoBehaviour
 {
-    public float tiempoDeVida = 1f;
+    public float tiempoDeVida = 3f;
+    public int danoBala = 1; 
 
     void Start()
     {
-        // El proyectil se destruirá automáticamente tras X segundos si no impacta con nada
         Destroy(gameObject, tiempoDeVida);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // Si el proyectil golpea un obstáculo (Fase 3), se destruirá.
-        if (collision.CompareTag("Obstaculo"))
+        if (collision.CompareTag("Asteroid"))
         {
-            // Aquí se restará vida al obstáculo en la siguiente fase
-            Destroy(gameObject);
+            Obstaculo obstaculo = collision.GetComponent<Obstaculo>();
+            if (obstaculo != null)
+            {
+                obstaculo.RecibirDanoProyectil(danoBala);
+            }
+            
+            Destroy(gameObject); //proyectil
         }
     }
 }

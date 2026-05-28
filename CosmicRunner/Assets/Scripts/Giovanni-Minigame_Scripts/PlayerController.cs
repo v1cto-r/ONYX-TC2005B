@@ -2,44 +2,39 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI; // Requerido para interactuar con la barra de la UI
 namespace Gio.Minigame{
-[RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
 {
-    [Header("Motores Principales")]
     public float fuerzaEmpuje = 15f;
     public float velocidadRotacion = 250f; 
-    [Tooltip("Velocidad máxima que puede alcanzar la nave")]
     public float velocidadMaxima = 5f;
-
-    [Header("Sistema de Control de Vuelo")]
     public bool amortiguadoresActivados = true;
     public float fuerzaFrenado = 10f;
 
-    [Header("Ofensiva (Paso 2.1)")]
+    // Disparos
     public GameObject prefabProyectil;
     public Transform puntoDisparo;
     public float velocidadProyectil = 12f;
     public bool heredarVelocidadNave = true;
 
-    [Header("Sobrecalentamiento (Paso 2.2)")]
-    [Tooltip("Arrastra aquí el Slider de sobrecalentamiento del Canvas")]
+    // Barra de sobrecalentacmiento
     public Slider barraSobrecalentamiento;
     public float sobrecalentamientoMaximo = 100f;
     public float costoPorDisparo = 15f;
-    public float tasaEnfriamiento = 20f; // Cuánto sobrecalentamiento baja por segundo
+    public float tasaEnfriamiento = 20f;
 
     private Rigidbody2D rb;
     private float sobrecalentamientoActual = 0f;
     private bool armaBloqueada = false;
 
-    [Header("Configuración Base (Backup)")]
+    // Estado base
     private float fuerzaEmpujeBase;
     private float velocidadRotacionBase;
     private float costoDisparoBase;
 
-    [Header("Estados de Power-up")]
+    // Power Ups
     public bool esInmune = false;
     public bool tieneSuperAtaque = false;
+    public Sprite spriteSuperProyectil;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -47,7 +42,6 @@ public class PlayerController : MonoBehaviour
         rb.linearDamping = 0f; 
         rb.angularDamping = 3f;
 
-        // --- NUEVO: Guardar valores base para restaurar luego ---
         fuerzaEmpujeBase = fuerzaEmpuje;
         velocidadRotacionBase = velocidadRotacion;
         costoDisparoBase = costoPorDisparo;
@@ -77,10 +71,9 @@ public class PlayerController : MonoBehaviour
             if (Keyboard.current.rightArrowKey.isPressed || Keyboard.current.dKey.isPressed) vectorDeseado.x += 1;
             if (Keyboard.current.leftArrowKey.isPressed || Keyboard.current.aKey.isPressed) vectorDeseado.x -= 1;
         }
-
         vectorDeseado = vectorDeseado.normalized;
-
-        // ESTADO 1: Piloto manual (Acelerando)
+        
+        // Aceleracion
         if (vectorDeseado != Vector2.zero)
         {
             float anguloDeseado = Mathf.Atan2(vectorDeseado.y, vectorDeseado.x) * Mathf.Rad2Deg - 90f;
@@ -95,7 +88,7 @@ public class PlayerController : MonoBehaviour
                 rb.AddForce(transform.up * fuerzaEmpuje * alineacion, ForceMode2D.Force);
             }
         }
-        // ESTADO 2: Piloto automático (Frenado)
+        // Frenado
         else if (amortiguadoresActivados)
         {
             if (rb.linearVelocity.magnitude > 0.1f)
@@ -110,7 +103,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        // LÍMITE DE VELOCIDAD TERMINAL
+        // vel terminal
         if (rb.linearVelocity.magnitude > velocidadMaxima)
         {
             rb.linearVelocity = rb.linearVelocity.normalized * velocidadMaxima;
@@ -123,7 +116,6 @@ public class PlayerController : MonoBehaviour
 
         if (Keyboard.current.spaceKey.wasPressedThisFrame || Keyboard.current.eKey.wasPressedThisFrame)
         {
-            // Solo permite disparar si el arma no está bloqueada por sobrecalentamiento
             if (!armaBloqueada)
             {
                 EjecutarDisparo();
@@ -135,27 +127,42 @@ public class PlayerController : MonoBehaviour
     {
         if (prefabProyectil == null || puntoDisparo == null) return;
 
-        // 1. Instanciación (Paso 2.1)
         GameObject nuevoProyectil = Instantiate(prefabProyectil, puntoDisparo.position, puntoDisparo.rotation);
         Rigidbody2D rbProyectil = nuevoProyectil.GetComponent<Rigidbody2D>();
-
+        ProyectilBasico scriptProyectil = nuevoProyectil.GetComponent<ProyectilBasico>();
+        SpriteRenderer srProyectil = nuevoProyectil.GetComponent<SpriteRenderer>();
+        
         if (rbProyectil != null)
         {
             Vector2 velocidadInicial = transform.up * velocidadProyectil;
-            if (heredarVelocidadNave)
-            {
-                velocidadInicial += rb.linearVelocity;
-            }
+            if (heredarVelocidadNave) velocidadInicial += rb.linearVelocity;
             rbProyectil.linearVelocity = velocidadInicial;
         }
 
-        // 2. Control de Sobrecalentamiento (Paso 2.2)
-        sobrecalentamientoActual += costoPorDisparo;
+        if (scriptProyectil != null)
+        {
+            if (SFXManager.Instance != null) SFXManager.Instance.PlayShootSound();
+            if (tieneSuperAtaque)
+            {
+                scriptProyectil.danoBala = 3; 
+                
+                if (spriteSuperProyectil != null && srProyectil != null)
+                {
+                    srProyectil.sprite = spriteSuperProyectil; 
+                }
+            }
+            else
+            {
+                scriptProyectil.danoBala = 1; 
+            }
+        }
 
+        // Control de Sobrecalentamiento
+        sobrecalentamientoActual += costoPorDisparo;
         if (sobrecalentamientoActual >= sobrecalentamientoMaximo)
         {
             sobrecalentamientoActual = sobrecalentamientoMaximo;
-            armaBloqueada = true; // Bloqueo activado
+            armaBloqueada = true;
         }
     }
 
@@ -165,11 +172,10 @@ public class PlayerController : MonoBehaviour
         {
             sobrecalentamientoActual -= tasaEnfriamiento * Time.deltaTime;
 
-            // Condición estricta: Solo se desbloquea si baja a cero en su totalidad
             if (sobrecalentamientoActual <= 0f)
             {
                 sobrecalentamientoActual = 0f;
-                armaBloqueada = false; // Bloqueo desactivado
+                armaBloqueada = false;
             }
         }
     }
@@ -181,37 +187,38 @@ public class PlayerController : MonoBehaviour
             barraSobrecalentamiento.value = sobrecalentamientoActual;
         }
     }
-    // --- MÉTODOS PÚBLICOS DE POWER-UPS ---
 
+
+    // Power Ups
     public void ActivarDefensa(float duracion)
     {
         esInmune = true;
-        // Opcional: Activar un efecto visual de escudo aquí
-        Debug.Log("Escudo activado");
-        CancelInvoke("DesactivarDefensa"); // Reinicia timer si recoges otro
+        // un efecto visual de escudo aquí
+        // Debug.Log("Escudo activado");
+        CancelInvoke("DesactivarDefensa");
         Invoke("DesactivarDefensa", duracion);
     }
-    private void DesactivarDefensa() { esInmune = false; Debug.Log("Escudo desactivado"); }
+    private void DesactivarDefensa() { esInmune = false; }// Debug.Log("Escudo desactivado"); }
 
     public void ActivarAtaque(float duracion)
     {
         tieneSuperAtaque = true;
-        costoPorDisparo = 0f; // Elimina sobrecalentamiento
-        Debug.Log("Súper Ataque activado");
+        costoPorDisparo = 0f; 
+        // Debug.Log("Súper Ataque activado");
         CancelInvoke("DesactivarAtaque");
         Invoke("DesactivarAtaque", duracion);
     }
-    private void DesactivarAtaque() { tieneSuperAtaque = false; costoPorDisparo = costoDisparoBase; Debug.Log("Súper Ataque desactivado"); }
+    private void DesactivarAtaque() { tieneSuperAtaque = false; costoPorDisparo = costoDisparoBase; }//Debug.Log("Súper Ataque desactivado"); }
 
     public void ActivarVelocidad(float duracion)
     {
-        fuerzaEmpuje = fuerzaEmpujeBase * 1.5f; // 50% más rápido
-        velocidadRotacion = velocidadRotacionBase * 1.5f;
-        Debug.Log("Súper Velocidad activada");
+        fuerzaEmpuje = fuerzaEmpujeBase * 2f; 
+        velocidadRotacion = velocidadRotacionBase * 5f;
+        // Debug.Log("Súper Velocidad activada");
         CancelInvoke("DesactivarVelocidad");
         Invoke("DesactivarVelocidad", duracion);
     }
-    private void DesactivarVelocidad() { fuerzaEmpuje = fuerzaEmpujeBase; velocidadRotacion = velocidadRotacionBase; Debug.Log("Súper Velocidad desactivada"); }
+    private void DesactivarVelocidad() { fuerzaEmpuje = fuerzaEmpujeBase; velocidadRotacion = velocidadRotacionBase; }//Debug.Log("Súper Velocidad desactivada"); }
 
 
 }
