@@ -34,7 +34,6 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        // --- FIX CRÍTICO: Protección contra Nulos en Sonido ---
         if (SFXManager.Instance != null && SFXManager.Instance.musicaFondo1 != null) 
         {
             SFXManager.Instance.PlayBackgroundMusic(SFXManager.Instance.musicaFondo1); 
