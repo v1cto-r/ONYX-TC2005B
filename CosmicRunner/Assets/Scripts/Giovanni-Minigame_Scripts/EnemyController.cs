@@ -1,4 +1,5 @@
 using UnityEngine;
+namespace Gio.Minigame{
 public class EnemyShip : MonoBehaviour
 {
     [Header("Configuración")]
@@ -50,4 +51,5 @@ public class EnemyShip : MonoBehaviour
             }
         }
     }
+}
 }

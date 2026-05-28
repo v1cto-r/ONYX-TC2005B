@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+namespace Gio.Minigame{
 public class CamaraController : MonoBehaviour
 {
     [Header("Objetivo y Suavizado")]
@@ -59,4 +59,5 @@ public class CamaraController : MonoBehaviour
             Gizmos.DrawWireCube(centroVentanaActual, new Vector3(ventana.x * 2, ventana.y * 2, 0));
         }
     }
+}
 }

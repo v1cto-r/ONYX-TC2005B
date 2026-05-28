@@ -1,5 +1,5 @@
 using UnityEngine;
-
+namespace Gio.Minigame{
 public class ProyectilBasico : MonoBehaviour
 {
     public float tiempoDeVida = 1f;
@@ -19,4 +19,5 @@ public class ProyectilBasico : MonoBehaviour
             Destroy(gameObject);
         }
     }
+}
 }

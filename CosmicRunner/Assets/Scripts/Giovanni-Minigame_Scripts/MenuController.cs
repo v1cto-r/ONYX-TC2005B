@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+namespace Gio.Minigame{
 public class MenuManager : MonoBehaviour
 {
     [Header("Configuración de Escenas")]
@@ -68,4 +68,5 @@ public class MenuManager : MonoBehaviour
         
         // Application.Quit(); // Descomentar si se desea cerrar el .exe por completo
     }
+}
 }

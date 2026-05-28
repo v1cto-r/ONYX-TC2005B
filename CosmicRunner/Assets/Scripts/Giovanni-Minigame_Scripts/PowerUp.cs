@@ -1,5 +1,5 @@
 using UnityEngine;
-
+namespace Gio.Minigame{
 public enum TipoColeccionable 
 { 
     Moneda, 
@@ -9,6 +9,7 @@ public enum TipoColeccionable
 }
 
 [RequireComponent(typeof(Collider2D))]
+
 public class Coleccionable : MonoBehaviour
 {
     public TipoColeccionable tipoItem;
@@ -50,4 +51,5 @@ public class Coleccionable : MonoBehaviour
             Destroy(gameObject);
         }
     }
+}
 }

@@ -1,4 +1,5 @@
 using UnityEngine;
+namespace Gio.Minigame{
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class DerivaEspacial : MonoBehaviour
@@ -35,4 +36,5 @@ public class DerivaEspacial : MonoBehaviour
         // 5. Destrucción programada: si el jugador no lo destruye ni lo recoge, el objeto se borra al alejarse
         Destroy(gameObject, tiempoDeVida);
     }
+}
 }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-
+namespace Gio.Minigame{
 public class AttackManager : MonoBehaviour
 {
     public TextMeshProUGUI textoZonaSuperior;
@@ -68,4 +68,5 @@ public class AttackManager : MonoBehaviour
         Instantiate(prefabEnemigo, puntoAtaque.position, puntoAtaque.rotation);
         ataqueEnCurso = false;
     }
+}
 }

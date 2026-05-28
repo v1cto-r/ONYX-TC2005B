@@ -1,7 +1,7 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement; // Necesario para cambiar entre escenas
-
+namespace Gio.Minigame{
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
@@ -139,4 +139,5 @@ public class GameManager : MonoBehaviour
             SceneManager.LoadScene(escenaDerrota);
         }
     }
+}
 }

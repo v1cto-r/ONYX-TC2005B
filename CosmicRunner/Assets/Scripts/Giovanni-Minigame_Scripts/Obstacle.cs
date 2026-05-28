@@ -1,5 +1,5 @@
 using UnityEngine;
-
+namespace Gio.Minigame{
 [RequireComponent(typeof(Collider2D))]
 public class Obstaculo : MonoBehaviour
 {
@@ -31,4 +31,5 @@ public class Obstaculo : MonoBehaviour
             Destroy(gameObject);
         }
     }
+}
 }

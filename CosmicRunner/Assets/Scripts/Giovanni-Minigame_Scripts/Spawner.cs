@@ -1,6 +1,6 @@
 using System.Collections;
 using UnityEngine;
-
+namespace Gio.Minigame{
 public class SpawnerEcosistema : MonoBehaviour
 {
     public GameObject[] prefabsObstaculos; // Arrastra aquí tus asteroides de 1, 2 y 3 vidas
@@ -60,4 +60,5 @@ public class SpawnerEcosistema : MonoBehaviour
             Gizmos.DrawWireSphere(Camera.main.transform.position, radioDeAparicion);
         }
     }
+}
 }

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-
+namespace Gio.Minigame{
 public class UIPowerUpContador : MonoBehaviour
 {
     public static UIPowerUpContador Instance;
@@ -82,4 +82,5 @@ public class UIPowerUpContador : MonoBehaviour
         cuentaRegresivaActiva = false;
         panelVisual.SetActive(false);
     }
+}
 }

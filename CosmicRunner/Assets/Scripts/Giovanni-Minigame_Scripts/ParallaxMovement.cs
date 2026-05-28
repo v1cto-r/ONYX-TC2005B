@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+namespace Gio.Minigame{
 public class ParallaxMovement : MonoBehaviour
 {
     Transform cam; //Main Camera
@@ -74,4 +74,5 @@ public class ParallaxMovement : MonoBehaviour
             mat[i].SetTextureOffset("_MainTex", distanceRecorrida * speed);
         }
     }
+}
 }

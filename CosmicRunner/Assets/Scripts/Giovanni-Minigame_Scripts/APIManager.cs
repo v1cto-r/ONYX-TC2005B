@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 using Newtonsoft.Json;
-
+namespace Gio.Minigame{
 public class APIAttackManager : MonoBehaviour
 {
     public static APIAttackManager Instance;
@@ -57,4 +57,5 @@ public class APIAttackManager : MonoBehaviour
             }
         }
     }
+}
 }

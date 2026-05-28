@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI; // Requerido para interactuar con la barra de la UI
-
+namespace Gio.Minigame{
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
 {
@@ -214,4 +214,5 @@ public class PlayerController : MonoBehaviour
     private void DesactivarVelocidad() { fuerzaEmpuje = fuerzaEmpujeBase; velocidadRotacion = velocidadRotacionBase; Debug.Log("Súper Velocidad desactivada"); }
 
 
+}
 }
