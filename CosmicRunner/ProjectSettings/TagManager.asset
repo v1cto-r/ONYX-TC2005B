@@ -9,21 +9,19 @@ TagManager:
   - Box
   - Enemy
   - Bullet
-<<<<<<< HEAD
   - Asteroid
   - PowerUp
   - Credit
-=======
   - Shield
->>>>>>> unity
+  - Obstaculo
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Water
   - Water
   - UI
-  - Ground
+  - 
   - 
   - 
   - 
