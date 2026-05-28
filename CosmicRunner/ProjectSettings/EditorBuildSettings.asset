@@ -6,8 +6,14 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/CosmicRunner-General_Scenes/TitleScreen_Scenes/LogInScene.unity
+    guid: f24d335fc282548728c8ec19a3232d84
+  - enabled: 1
     path: Assets/Scenes/CosmicRunner-General_Scenes/TitleScreen_Scenes/MainMenuScene.unity
     guid: 848a0a7d112a7433487d584ec227d08b
+  - enabled: 1
+    path: Assets/Scenes/CosmicRunner-General_Scenes/TitleScreen_Scenes/CustomizeScene.unity
+    guid: a782b4efdeb11491aaeaf12a4223ba53
   - enabled: 1
     path: Assets/Scenes/CosmicRunner-General_Scenes/TitleScreen_Scenes/GameSelectScene.unity
     guid: aca8e0e15353d454782f2cb59219e0d3
@@ -20,6 +26,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Nicte-Minigame_Scenes/AtaqueEstelarVictory.unity
     guid: 20aa6414465591644a925bc9fbaf473e
+  - enabled: 1
+    path: Assets/Scenes/Nicte-Minigame_Scenes/AtaqueEstelarDefeat.unity
+    guid: ff94031043c31404382a77ac0f803ae1
   - enabled: 1
     path: Assets/Scenes/Jorge-Minigame_Scenes/MainMenuScene_Jorge.unity
     guid: cfbd5d62c9667cf45b2b21f1bbf35146
@@ -45,6 +54,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Marino-Minigame_Scenes/EndScene_MECS.unity
     guid: a6d91b4a22e4149879c4c1bdb4274062
   - enabled: 1
+<<<<<<< HEAD
     path: Assets/Scenes/Giovanni-Minigame_Scenes/Invasores del Espacio.unity
     guid: 983229f40fc19c349b66254e86e9528e
   - enabled: 1
@@ -56,5 +66,18 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Giovanni-Minigame_Scenes/InvasoresVictoria.unity
     guid: 5c865f2d689ad7a44a71425d312b75c6
+=======
+    path: Assets/Scenes/Victor-Minigame_Scenes/MainMenuScene_AB.unity
+    guid: faf0ae236303f4c0db9f1adcc70a4df1
+  - enabled: 1
+    path: Assets/Scenes/Victor-Minigame_Scenes/TutorialScene_AB.unity
+    guid: 7d56167c83de946c4b61cd9390448499
+  - enabled: 1
+    path: Assets/Scenes/Victor-Minigame_Scenes/GameScene_AB.unity
+    guid: 703f1ccad5991482c94243671b718637
+  - enabled: 1
+    path: Assets/Scenes/Victor-Minigame_Scenes/EndScene_AB.unity
+    guid: 017ec72d8b7874ab29dd78dcb68ab092
+>>>>>>> unity
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}

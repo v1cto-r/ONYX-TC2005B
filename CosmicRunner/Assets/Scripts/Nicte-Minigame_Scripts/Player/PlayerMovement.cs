@@ -2,15 +2,19 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace Nicte.Minigame{
+// Controla el movimiento vertical del jugador
 public class PlayerMovement : MonoBehaviour
 {
+    // Rigidbody y limites de movimiento en pantalla
     public Rigidbody2D rig;
     float moveSpeed = 6f;
     public float minY = -3.70f;    
     public float maxY = 2.54f;  
+    // Entrada vertical actual y estado de habilitacion
     private float yInput;
     public bool inputEnabled = true;
 
+    // Lee las teclas de direccion cada frame
     void Update()
     {
         yInput = 0f;
@@ -30,6 +34,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    // Aplica el movimiento fisico en FixedUpdate
     void FixedUpdate()
     {
         float currentY = rig.position.y;
@@ -51,6 +56,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    // Habilita o bloquea el control del jugador
     public void SetInputEnabled(bool enabled)
     {
         inputEnabled = enabled;
