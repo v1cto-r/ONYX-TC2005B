@@ -4,8 +4,10 @@ using UnityEngine.SceneManagement;
 
 namespace AB
 {
+    // Tipo de booster que se puede recoger
     public enum BoosterType { Credit, Shield, Bullet }
 
+    // Va a juntar todos los componentes principales
     public class GameController : MonoBehaviour
     {
         [Header("Game Components")]
@@ -15,10 +17,15 @@ namespace AB
         public BoosterSpawner boosterSpawner;
         public ShipControlller shipController;
         public UIController uiController;
+        public RepairController repairController;
+
+        public ChipController[] chips;
 
         [Header("Game Values")]
         public float gameDuration = 60f;
+        public float shieldDuration = 10f;
         private float elapsedTime = 0f;
+        private float elapsedShieldTime = 0f;
         private int credits = 0;
         public int bullets = 5;
         
@@ -26,7 +33,7 @@ namespace AB
         void Awake()
         {
             Instance = this;
-            Time.timeScale = 1;
+            Time.timeScale = 1f;
             uiController.UpdateBullets(bullets);
             StartCoroutine(MatchTime());
         }
@@ -51,6 +58,29 @@ namespace AB
             }
         }
 
+        // Timer del shield
+        IEnumerator ShieldTime()
+        {
+            yield return new WaitForSeconds(1);
+            elapsedShieldTime += 1;
+            uiController.UpdateShieldTime(elapsedShieldTime, shieldDuration);
+
+            if (elapsedShieldTime >= shieldDuration)
+            {
+                elapsedShieldTime = 0;
+                shipController.DisableShield();
+            } else
+            {
+                StartCoroutine(ShieldTime());
+            }
+        }
+
+        public void LooseShield()
+        {
+            elapsedShieldTime = 0;
+        }
+
+        // Dependiendo del tipo de booster, se llama a la función correspondiente
         public void CollectBooster(BoosterType boosterType)
         {
             switch (boosterType)
@@ -76,6 +106,7 @@ namespace AB
         public void CollectShield()
         {
             shipController.EnableShield();
+            StartCoroutine(ShieldTime());
         }
 
         public void CollectBullet()
@@ -110,6 +141,22 @@ namespace AB
             PlayerPrefs.SetInt("collected_credits", credits);
             PlayerPrefs.SetInt("result", -1);
             SceneManager.LoadScene("EndScene_AB");
+        }
+
+        // Activa la reparacion, que pausa el juego y muestra el panel de reparación
+        public void HandleRepair()
+        {
+            Time.timeScale = 0f;
+            repairController.gameObject.SetActive(true);
+        }
+
+        // Termina la reparación, que reanuda el juego y oculta el panel de reparación
+        public void FinishRepair()
+        {
+            Time.timeScale = 1f;
+            repairController.gameObject.SetActive(false);
+            shipController.EnableShield();
+            StartCoroutine(ShieldTime());
         }
     }
 }

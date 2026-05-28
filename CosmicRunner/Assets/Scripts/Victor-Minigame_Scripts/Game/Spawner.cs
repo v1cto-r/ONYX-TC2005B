@@ -9,10 +9,14 @@ namespace AB
         public float[] interval;
     }
 
+    // Implementación base de los spawners
     public class Spawner : MonoBehaviour
     {
+        // El intervalo de spawn, con una variación aleatoria
         public SpawnInterval spawnInterval = new SpawnInterval { variance = 0.1f, interval = new float[] { 1.0f, 0.3f } };
+        // De donde se va a spawnear
         private Vector2 spawnPosition;
+        // Y en que angulos puede spawnear, en radianes
         public AngleBounds angleLimits = new AngleBounds { lowerBound = 2.6f, upperBound = 3.1f };
         private float gameDuration;
 
@@ -41,6 +45,8 @@ namespace AB
             return spawnPosition;
         }
 
+        // Interpola el intervalo de spawn
+        // Para que aparezcan más enemigos a medida que avanza el juego
         protected float InterpolateSpawnInterval(float x)
         {
             // Usando la formula de interpolación lineal
@@ -54,6 +60,8 @@ namespace AB
             return interpolatedValue;
         }
 
+        // Calcula el intervalo de spawn, usando la interpolación
+        // Y agregando una variación aleatoria
         protected float CalculateSpawnInterval()
         {
             // Calcula el intervalo de spawn, usando la interpolación

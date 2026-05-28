@@ -161,12 +161,21 @@ namespace AB {
             return newPosition;
         }
 
+        // Maneja activar y desactivar el escudo
         public void EnableShield()
         {
             shieldActive = true;
             shieldObject.SetActive(true);
         }
 
+        public void DisableShield()
+        {
+            shieldActive = false;
+            shieldObject.SetActive(false);
+            GameController.Instance.LooseShield();
+        }
+
+        // Damage termina el juego
         public void TakeDamage()
         {
             if (shieldActive)
@@ -180,12 +189,14 @@ namespace AB {
             StartCoroutine(DieWithDelay());
         }
 
+        // Se espera a morir para mostrar la explosión
         private IEnumerator DieWithDelay()
         {
             yield return new WaitForSeconds(0.5f);
             GameController.Instance.EndGame();
         }
 
+        // Soft damage muestra reparar
         public void TakeSoftDamage()
         {
             if (shieldActive)
@@ -194,8 +205,8 @@ namespace AB {
                 shieldObject.SetActive(false);
                 return;
             }
-            // Aquí se puede implementar la lógica de daño suave a la nave, como reducir la velocidad o mostrar una animación
             
+            GameController.Instance.HandleRepair();
         }
     }
 }

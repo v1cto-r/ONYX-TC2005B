@@ -6,11 +6,15 @@ namespace AB {
     [System.Serializable]
     public struct EnemyDebris
     {
+        // Prefab del enemigo
         public GameObject debrisPrefab;
+        // Dificultad del enemigo, entre 1 y 3, va a afectar la probabilidad de spawn
         [Range(1, 3)]
         public int dificulty;
+        // Cuantas balas para destruirlo
         [Range(1,2)]
         public int hardness;
+        // Velocidad del enemigo
         public float speed;
     }
 
@@ -18,9 +22,11 @@ public class EnemySpawner : Spawner
     {
         [Header("Enemy Spawning")]
         public EnemyDebris[] enemiesToSpawn;
-        // The intervals to spawn the enemies, starting and ending, will be interpolated
-        // depending on the time, to increase difficulty
-        public float homingSpread = 0.1f;
+        // Para cuando el objeto tenga homing
+        // Es decir que spawnee con un ángulo directo a la nave
+        // Que tanto se puede desviar de ese ángulo
+        // Para que parezca natural y no tan directo
+        public float homingSpread = 0.1f; // En radianes
         private float debrisWeightSum;
 
         
@@ -28,6 +34,7 @@ public class EnemySpawner : Spawner
 
         void Start()
         {
+            // Manda a llamar el init de la clase padre Spawner
             Init(spawnInterval, angleLimits, GameController.Instance.gameDuration);
 
             // El acumulado de dificultad, para generar enemigos en base a su dificultad
@@ -69,12 +76,14 @@ public class EnemySpawner : Spawner
 
             float spawnAngle;
 
+            // Si su hardness es 1, va a tener homing
             if (enemyToSpawn.hardness == 1)
             {
                 float shipAngle = GameController.Instance.shipController.GetShipAngle();
                 spawnAngle = shipAngle + Random.Range(-homingSpread, homingSpread);
             } else
             {
+                // Spawnea en un ángulo aleatorio dentro de los límites definidos
                 spawnAngle = Random.Range(this.GetAngleLimits().lowerBound, this.GetAngleLimits().upperBound);
             }
 

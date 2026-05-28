@@ -3,8 +3,10 @@ using UnityEngine;
 namespace AB {
     public class BulletController : MonoBehaviour
     {
+        // Velocidad a la que se mueve la bala
         public float BulletSpeed = 3f;
 
+        // Mover la bala hacia adelante
         void FixedUpdate()
         {
             transform.position += transform.up * BulletSpeed * Time.deltaTime;
