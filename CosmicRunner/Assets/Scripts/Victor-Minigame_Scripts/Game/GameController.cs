@@ -27,6 +27,7 @@ namespace AB
         public float shieldDuration = 10f;
         private float elapsedTime = 0f;
         private float elapsedShieldTime = 0f;
+        private Coroutine shieldCoroutine;
         private int credits = 0;
         public int bullets = 5;
         
@@ -70,16 +71,23 @@ namespace AB
             if (elapsedShieldTime >= shieldDuration)
             {
                 elapsedShieldTime = 0;
+                shieldCoroutine = null;
                 shipController.DisableShield();
             } else
             {
-                StartCoroutine(ShieldTime());
+                shieldCoroutine = StartCoroutine(ShieldTime());
             }
         }
 
         public void LooseShield()
         {
+            if (shieldCoroutine != null)
+            {
+                StopCoroutine(shieldCoroutine);
+                shieldCoroutine = null;
+            }
             elapsedShieldTime = 0;
+            uiController.ScarpShield();
         }
 
         // Dependiendo del tipo de booster, se llama a la función correspondiente
@@ -114,7 +122,7 @@ namespace AB
             } else
             {
                 shipController.EnableShield();
-                StartCoroutine(ShieldTime());
+                shieldCoroutine = StartCoroutine(ShieldTime());
             }
         }
 
@@ -142,7 +150,7 @@ namespace AB
         {
             PlayerPrefs.SetInt("collected_credits", credits);
             PlayerPrefs.SetInt("result", 1);
-            SceneManager.LoadScene("WinScene_AB");
+            SceneManager.LoadScene("EndScene_AB");
         }
 
         public void EndGame()
@@ -165,7 +173,7 @@ namespace AB
             Time.timeScale = 1f;
             repairController.gameObject.SetActive(false);
             shipController.EnableShield();
-            StartCoroutine(ShieldTime());
+            shieldCoroutine = StartCoroutine(ShieldTime());
         }
     }
 }

@@ -17,6 +17,11 @@ public class GameSelect : MonoBehaviour
         UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenuScene_MECS");
     }
 
+    public void VictorMinigameButton()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenuScene_AB");
+    }
+
     public void BackToMainMenu()
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenuScene");

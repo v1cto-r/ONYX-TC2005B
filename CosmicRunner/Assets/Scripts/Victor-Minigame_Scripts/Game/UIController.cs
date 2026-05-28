@@ -23,7 +23,7 @@ namespace AB
         public void UpdateTimeText(float elapsedTime, float gameDuration)
         {
             float remainingTime = Mathf.Max(0, gameDuration - elapsedTime);
-            timeText.text = remainingTime.ToString("F1") + "s";
+            timeText.text = remainingTime.ToString() + "s";
         }
 
         // Modifica el texto del tiempo restante del shield
@@ -32,13 +32,18 @@ namespace AB
             float remainingShieldTime = Mathf.Max(0, totalShieldDuration - elapsedShieldTime);
             if (remainingShieldTime > 0)
             {
-                shieldText.text = remainingShieldTime.ToString("F1");
+                shieldText.text = remainingShieldTime.ToString() + "s";
                 shieldIcon.gameObject.SetActive(true);
             }
             else
             {
                 shieldIcon.gameObject.SetActive(false);
             }
+        }
+
+        public void ScarpShield()
+        {
+            shieldIcon.gameObject.SetActive(false);
         }
 
         // Modifica el número de balas mostradas

@@ -2735,7 +2735,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -16.7, y: 0.000010192}
+  m_AnchoredPosition: {x: 0.0000076294, y: -0.000044224}
   m_SizeDelta: {x: 183.6713, y: 56.276}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &688667142
@@ -3812,7 +3812,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -24.2, y: 0.000010192}
+  m_AnchoredPosition: {x: -6.7, y: -0.2065}
   m_SizeDelta: {x: 183.6713, y: 56.276}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1174973072
@@ -3851,7 +3851,7 @@ MonoBehaviour:
   repairController: {fileID: 1466482706}
   sfxGameController: {fileID: 522441896}
   chips: []
-  gameDuration: 60
+  gameDuration: 15
   shieldDuration: 10
   bullets: 6
 --- !u!4 &1174973074
