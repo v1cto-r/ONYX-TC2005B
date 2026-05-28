@@ -24,8 +24,10 @@ public class Obstaculo : MonoBehaviour
         // Si choca con el jugador, le hace daño y se destruye (opcional, dependiendo de tu diseño)
         else if (collision.CompareTag("Player"))
         {
-            Debug.Log("Jugador chocó contra un obstáculo.");
-            // Lógica de restar vida al jugador iría aquí
+            if (GameManager.Instance != null)
+            {
+                GameManager.Instance.RecibirDano(1);
+            }
             Destroy(gameObject);
         }
     }

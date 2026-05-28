@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.UI; // Requerido para interactuar con la barra de la UI
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class SpaceshipController2D : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     [Header("Motores Principales")]
     public float fuerzaEmpuje = 15f;
@@ -32,6 +32,14 @@ public class SpaceshipController2D : MonoBehaviour
     private float sobrecalentamientoActual = 0f;
     private bool armaBloqueada = false;
 
+    [Header("Configuración Base (Backup)")]
+    private float fuerzaEmpujeBase;
+    private float velocidadRotacionBase;
+    private float costoDisparoBase;
+
+    [Header("Estados de Power-up")]
+    public bool esInmune = false;
+    public bool tieneSuperAtaque = false;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -39,7 +47,11 @@ public class SpaceshipController2D : MonoBehaviour
         rb.linearDamping = 0f; 
         rb.angularDamping = 3f;
 
-        // Inicializar la barra de la UI si está asignada
+        // --- NUEVO: Guardar valores base para restaurar luego ---
+        fuerzaEmpujeBase = fuerzaEmpuje;
+        velocidadRotacionBase = velocidadRotacion;
+        costoDisparoBase = costoPorDisparo;
+
         if (barraSobrecalentamiento != null)
         {
             barraSobrecalentamiento.maxValue = sobrecalentamientoMaximo;
@@ -169,4 +181,37 @@ public class SpaceshipController2D : MonoBehaviour
             barraSobrecalentamiento.value = sobrecalentamientoActual;
         }
     }
+    // --- MÉTODOS PÚBLICOS DE POWER-UPS ---
+
+    public void ActivarDefensa(float duracion)
+    {
+        esInmune = true;
+        // Opcional: Activar un efecto visual de escudo aquí
+        Debug.Log("Escudo activado");
+        CancelInvoke("DesactivarDefensa"); // Reinicia timer si recoges otro
+        Invoke("DesactivarDefensa", duracion);
+    }
+    private void DesactivarDefensa() { esInmune = false; Debug.Log("Escudo desactivado"); }
+
+    public void ActivarAtaque(float duracion)
+    {
+        tieneSuperAtaque = true;
+        costoPorDisparo = 0f; // Elimina sobrecalentamiento
+        Debug.Log("Súper Ataque activado");
+        CancelInvoke("DesactivarAtaque");
+        Invoke("DesactivarAtaque", duracion);
+    }
+    private void DesactivarAtaque() { tieneSuperAtaque = false; costoPorDisparo = costoDisparoBase; Debug.Log("Súper Ataque desactivado"); }
+
+    public void ActivarVelocidad(float duracion)
+    {
+        fuerzaEmpuje = fuerzaEmpujeBase * 1.5f; // 50% más rápido
+        velocidadRotacion = velocidadRotacionBase * 1.5f;
+        Debug.Log("Súper Velocidad activada");
+        CancelInvoke("DesactivarVelocidad");
+        Invoke("DesactivarVelocidad", duracion);
+    }
+    private void DesactivarVelocidad() { fuerzaEmpuje = fuerzaEmpujeBase; velocidadRotacion = velocidadRotacionBase; Debug.Log("Súper Velocidad desactivada"); }
+
+
 }

@@ -4,7 +4,7 @@ public class EnemyShip : MonoBehaviour
     [Header("Configuración")]
     public float velocidadEmbiste = 20f;
     public float tiempoDeVida = 5f; 
-    public int daño = 2; 
+    public int dano = 2; 
 
     public float fuerzaEmpuje = 15f;
 
@@ -44,7 +44,10 @@ public class EnemyShip : MonoBehaviour
                 rbJugador.AddForce(direccionEmpuje * fuerzaEmpuje, ForceMode2D.Impulse);
             }
 
-            Debug.Log("Jugador golpeado. -2 Vidas. Aplicando Knockback.");
+            if (GameManager.Instance != null)
+            {
+                GameManager.Instance.RecibirDano(dano);
+            }
         }
     }
 }
