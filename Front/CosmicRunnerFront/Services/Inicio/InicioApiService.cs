@@ -3,7 +3,6 @@ using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
 using CosmicRunnerFront.Models.InicioModels;
-using CosmicRunnerFront.Models.ViewModels;
 
 namespace CosmicRunnerFront.Services
 {
@@ -16,16 +15,16 @@ namespace CosmicRunnerFront.Services
             _httpClient = httpClient;
         }
 
-        public async Task<Usuario> GetUsuarioByIdAsync(int userId)
+        public async Task<UsuarioUsr> GetUsuarioByIdAsync(int userId)
         {
             var url = $"https://127.0.0.1:12001/api/user/{userId}";
             var response = await _httpClient.GetAsync(url);
             
             if (!response.IsSuccessStatusCode)
-                return new Usuario();
+                return new UsuarioUsr();
                 
-            var usuario = await response.Content.ReadFromJsonAsync<Usuario>();
-            return usuario ?? new Usuario();
+            var usuario = await response.Content.ReadFromJsonAsync<UsuarioUsr>();
+            return usuario ?? new UsuarioUsr();
         }
 
         public async Task<List<Idea>> GetIdeasAsync()
