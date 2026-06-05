@@ -1,0 +1,84 @@
+@model CosmicRunnerFront.Models.UsuarioModels.UsuarioViewModel
+
+@{
+    ViewData["Title"] = "Actividad Reciente";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/usuario.css" asp-append-version="true" />
+}
+
+@{
+    var fotoPerfil = string.IsNullOrWhiteSpace(Model.FotoPerfilUrl)
+        ? "~/assets/random/user.png"
+        : Model.FotoPerfilUrl;
+}
+
+<!-- Activity layout based on Index structure -->
+<section class="usuario-panel" aria-label="Panel de perfil">
+    @if (Model.EsPerfilPropio)
+    {
+        <a class="usuario-panel-action" asp-controller="Usuario" asp-action="Configuracion" aria-label="Configuración">
+            <img src="~/assets/icons/gear.svg" alt="" />
+            <span>Configuración</span>
+        </a>
+    }
+
+    <div class="usuario-top">
+        <div class="usuario-avatar-shell">
+            <img class="usuario-avatar" src="@(fotoPerfil.StartsWith("http", StringComparison.OrdinalIgnoreCase) ? fotoPerfil : Url.Content(fotoPerfil))" alt="Foto del usuario" onerror="this.src='@Url.Content("~/assets/random/user.png")'" />
+        </div>
+
+        <div class="usuario-headlines">
+            <h1 class="usuario-nombre">@Model.NombreCompleto</h1>
+            <p class="usuario-rol">@Model.Puesto</p>
+            <p class="usuario-area">@Model.Departamento</p>
+        </div>
+    </div>
+
+    <div class="usuario-tabs" role="tablist" aria-label="Secciones del perfil">
+        @foreach (var seccion in Model.Secciones)
+        {
+            if (seccion.Accion != "Configuracion")
+            {
+                <a class="tab-pill @(Model.SeccionActiva == seccion.Accion ? "tab-pill-active" : "")" asp-controller="Usuario" asp-action="@seccion.Accion">@seccion.Etiqueta</a>
+            }
+        }
+    </div>
+
+    <div class="usuario-actividad-panel">
+        <div class="actividad-grid">
+            <aside class="actividad-summary" aria-label="Actividad general">
+                <h3 class="actividad-section-title">Actividad general</h3>
+                <div class="actividad-metrics" aria-label="Métricas de actividad">
+                    @foreach (var metric in Model.ActividadGeneral)
+                    {
+                        <div class="actividad-metric-card">
+                            <span class="actividad-metric-value">@metric.Valor</span>
+                            <span class="actividad-metric-label">@metric.Etiqueta</span>
+                        </div>
+                    }
+                </div>
+            </aside>
+
+            <section class="actividad-timeline" aria-label="Últimos movimientos">
+                <h3 class="actividad-section-title">Últimos movimientos</h3>
+
+                <div class="actividad-timeline-list">
+                    @foreach (var actividad in Model.ActividadesRecientes)
+                    {
+                        <div class="actividad-item">
+                            <span class="actividad-item-icon" aria-hidden="true">
+                                <img src="@Url.Content(actividad.IconoSvg)" alt="" />
+                            </span>
+                            <div>
+                                <h4>@actividad.Titulo</h4>
+                                <p>@actividad.Subtitulo</p>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </section>
+        </div>
+    </div>
+</section>

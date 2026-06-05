@@ -1,0 +1,268 @@
+*{
+    font-family: 'Helvetica Now', 'Helvetica Neue', Helvetica, Arial, sans-serif;   
+}
+
+body{
+    background-color: #f7f7f7;
+}
+
+.custom-card {
+    background-color: #ffffff;
+    border-radius: 14px;
+    border: none;
+}
+
+.ranking-item {
+    display: flex;
+    background-color: white;
+    border-radius: 14px;
+    margin-bottom: 15px;
+    overflow: hidden; 
+    border: 2px solid #a7a7a7;
+}
+
+.ranking-item.simple {
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
+    margin-bottom: 10px;
+    overflow: visible;
+    border-bottom: 1.5px solid #a7a7a7;
+}
+
+.position-box {
+    width: 70px;
+    min-height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.position-box.simple {
+    background-color: transparent !important;
+    color: black !important;
+}
+
+
+.departamental-results-container {
+    border: 2px solid #a7a7a7;
+    border-radius: 8px;
+    padding: 20px;
+    background-color: transparent;
+    margin-bottom: 20px;
+}
+
+.pagination-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.pagination-button {
+    width: 50px;
+    height: 50px;
+    border: 2px solid #a7a7a7;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.pagination-button.disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.pagination-button a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    color: #6c757d;
+    text-decoration: none;
+}
+
+.pagination-button a:hover {
+    background-color: #f7f7ff;
+    border-radius: 6px;
+}
+
+.pagination-button svg {
+    color: #6c757d;
+}
+
+.pagination-info {
+    font-weight: 600;
+    color: #6c757d;
+    min-width: 60px;
+    text-align: center;
+}
+
+
+.position-1 {
+    background-color: #f4b400;
+    color: black;
+}
+
+.position-2 {
+    background-color: #313131;
+    color: white;
+}
+
+.position-3 {
+    background-color: #d9d9d9;
+    color: black;
+}
+
+
+.ranking-content {
+    height: 100px;
+}
+
+.ranking-contentTop {
+    height: 140px;
+}
+
+.user-img {
+    width: 110px;
+    height: 110px;
+    object-fit: cover;
+    padding: 20px;
+}
+
+.score-box {
+    padding: 10px 18px;
+    border-radius: 10px;
+    font-weight: 600;
+    display: flex;
+    gap: 10px;
+    width: 150px;
+    height: 60px;
+    align-items: center;
+    justify-content: center;
+    color: #313131;
+}
+
+.score-1{
+    background-color: #fde19a;
+}
+
+.score-2{
+    background-color: #a7a7a7;
+}
+
+.score-3{
+    background-color: #d9d9d9;
+}
+
+.score-boxSimple {
+    background-color: #fde19a;
+    width: 150px;
+    height: 50px;
+}
+
+
+.mini-icon {
+    width: 16px;
+}
+
+.mini-iconArrow {
+    width: 25px;
+}
+
+.trophy-icon {
+    width: 80px;
+    margin: 0px 20px;
+}
+
+
+.icon-circle {
+    width: 60px;
+    height: 60px;
+    background-color: #fde19a;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon-circle img {
+    width: 40px;
+}
+
+.department{
+    background-color: #ffffff; 
+    color: #505050 ;
+    border: 2px solid #f0b310;
+}
+
+.departmentSelection{
+    background-color: #f0b310; 
+    border: 2px solid #f0b310; 
+    color: #000000;
+    font-weight: 700;
+}
+
+.department,.departmentSelection{
+    width: 170px;
+    border-radius: 10px;
+}
+
+.department:hover,
+.department:focus,
+.department:active,
+.departmentSelection:hover,
+.departmentSelection:focus,
+.departmentSelection:active {
+    border: 2px solid #f0b310 !important;
+}
+
+.btnName{
+    height: 40px;
+}
+
+.warning{
+    background-color: #fde19a !important;
+}
+
+.form-control {
+    height: 100%; 
+    border: none; 
+    box-shadow: none;
+    border-radius: 10px; 
+}
+
+.form-label{
+    color: #313131;
+}
+
+.input-group{
+    height: 40px; 
+    border: 2px solid #505050; 
+    border-radius: 10px; 
+    padding: 0 10px;
+}
+
+.input-group img {
+    width: 20px; 
+    height: 20px;
+}
+
+.input-group-text{
+    background-color: #ffffff; 
+    border:none;
+}
+
+.PageImage, .PageImageDisabled{
+    height: 24px;
+}
+
+.PageImageDisabled{
+    opacity: 0.3;
+}
