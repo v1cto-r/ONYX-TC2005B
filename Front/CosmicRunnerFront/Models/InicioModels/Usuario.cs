@@ -1,4 +1,5 @@
-namespace CosmicRunnerFront.Models.InicioModels{
+namespace CosmicRunnerFront.Models.InicioModels
+{
     public class Usuario
     {
         public int user_id { get; set; }

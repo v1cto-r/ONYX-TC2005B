@@ -1,13 +1,9 @@
-using System;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using CosmicRunnerFront.Models;
 using CosmicRunnerFront.Models.InicioModels;
-using CosmicRunnerFront.Models.ViewModels;
 using CosmicRunnerFront.Services;
+using CosmicRunnerFront.Models;
 
 namespace CosmicRunnerFront.Controllers;
 
@@ -68,13 +64,9 @@ public class InicioController : Controller
     }
 
 
-    public IActionResult Privacy() => View();
-
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error() => View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-
-    private int? GetCurrentUserId()
+     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+    public IActionResult Error()
     {
-        return HttpContext.Session.GetInt32(CurrentUserSessionKey);
+        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
 }

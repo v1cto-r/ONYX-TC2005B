@@ -1,6 +1,4 @@
-using CosmicRunnerFront.Models.InicioModels;
-
-namespace CosmicRunnerFront.Models.ViewModels
+namespace CosmicRunnerFront.Models.InicioModels
 {
     public class InicioViewModel
     {
