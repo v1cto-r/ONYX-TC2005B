@@ -75,8 +75,8 @@ public class UsuarioService : IUsuarioService
 		{
 			usuario.Departamento = new Departamento
 			{
-				Id = usuario.DepartamentoId,
-				Nombre = departamentoNombre
+				department_id = usuario.DepartamentoId,
+				name = departamentoNombre
 			};
 		}
 

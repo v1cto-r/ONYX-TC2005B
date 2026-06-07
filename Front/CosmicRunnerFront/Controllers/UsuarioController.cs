@@ -139,9 +139,9 @@ public class UsuarioController : Controller
         usuario.Habilidades ??= new List<string>();
         usuario.Departamento ??= new CosmicRunnerFront.Models.InicioModels.Departamento();
 
-        if (string.IsNullOrWhiteSpace(usuario.Departamento.Nombre) && usuario.DepartamentoId > 0)
+        if (string.IsNullOrWhiteSpace(usuario.Departamento.name) && usuario.DepartamentoId > 0)
         {
-            usuario.Departamento.Nombre = $"Departamento {usuario.DepartamentoId}";
+            usuario.Departamento.name = $"Departamento {usuario.DepartamentoId}";
         }
 
         usuarioViewModel.Contactos = new List<UsuarioViewModel.Contacto>
