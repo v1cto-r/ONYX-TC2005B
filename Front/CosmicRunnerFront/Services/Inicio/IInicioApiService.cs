@@ -10,5 +10,7 @@ namespace CosmicRunnerFront.Services
         Task<List<AreaImpacto>> GetAreasImpactoAsync();
         Task<bool> CrearIdeaAsync(FormularioIdeaViewModel nuevaIdea);
         Task<bool> ReaccionarIdeaAsync(int ideaId, int userId, string tipo);
+        Task<bool> GuardarComentarioAsync(int ideaId, int userId, string mensaje);
+        Task<bool> UnirseProyectoAsync(int ideaId, int userId);
     }
 }

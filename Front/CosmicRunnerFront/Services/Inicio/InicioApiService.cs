@@ -29,7 +29,7 @@ namespace CosmicRunnerFront.Services
 
         public async Task<List<Idea>> GetIdeasAsync()
         {
-            var url = "https://127.0.0.1:12001/api/ideas";
+            var url = "https://127.0.0.1:12001/api/ideas?user_id=1";
             var response = await _httpClient.GetAsync(url);
             
             if (!response.IsSuccessStatusCode)
@@ -81,6 +81,26 @@ namespace CosmicRunnerFront.Services
             var url = $"https://127.0.0.1:12001/api/idea/{ideaId}/reaccion";
             var payload = new { user_id = userId, tipo = tipo };           
             var response = await _httpClient.PutAsJsonAsync(url, payload);
+            return response.IsSuccessStatusCode;
+        }
+
+        public async Task<bool> GuardarComentarioAsync(int ideaId, int userId, string mensaje)
+        {
+            // URL actualizada para coincidir con Python
+            var url = $"https://127.0.0.1:12001/api/idea/{ideaId}/comentario";
+            var payload = new { autor_id = userId, mensaje = mensaje }; 
+            
+            var response = await _httpClient.PostAsJsonAsync(url, payload);
+            return response.IsSuccessStatusCode;
+        }
+
+        public async Task<bool> UnirseProyectoAsync(int ideaId, int userId)
+        {
+            // URL actualizada para coincidir con Python
+            var url = $"https://127.0.0.1:12001/api/idea/{ideaId}/colaborador";
+            var payload = new { user_id = userId };
+            
+            var response = await _httpClient.PostAsJsonAsync(url, payload);
             return response.IsSuccessStatusCode;
         }
     }

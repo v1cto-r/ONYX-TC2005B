@@ -89,4 +89,25 @@ public class InicioController : Controller
         await _inicioApiService.ReaccionarIdeaAsync(ideaId, 1, "dislike");
         return RedirectToAction("Index");
     }
+
+    [HttpPost]
+    public async Task<IActionResult> GuardarComentario(int ideaId, string Mensaje)
+    {
+        if (!string.IsNullOrWhiteSpace(Mensaje))
+        {
+            // Enviamos el comentario con el usuario 1 hardcodeado
+            await _inicioApiService.GuardarComentarioAsync(ideaId, 1, Mensaje);
+        }
+        
+        return RedirectToAction("Index");
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> UnirseProyecto(int ideaId)
+    {
+        // Registramos la solicitud con el usuario 1 hardcodeado
+        await _inicioApiService.UnirseProyectoAsync(ideaId, 1);
+        
+        return RedirectToAction("Index");
+    }
 }
