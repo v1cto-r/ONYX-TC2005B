@@ -75,5 +75,13 @@ namespace CosmicRunnerFront.Services
             
             return false;
         }
+
+        public async Task<bool> ReaccionarIdeaAsync(int ideaId, int userId, string tipo)
+        {
+            var url = $"https://127.0.0.1:12001/api/idea/{ideaId}/reaccion";
+            var payload = new { user_id = userId, tipo = tipo };           
+            var response = await _httpClient.PutAsJsonAsync(url, payload);
+            return response.IsSuccessStatusCode;
+        }
     }
 }

@@ -75,4 +75,18 @@ public class InicioController : Controller
     {
         return RedirectToAction("Index");
     }
+
+    [HttpPost]
+    public async Task<IActionResult> DarLike(int ideaId)
+    {
+        await _inicioApiService.ReaccionarIdeaAsync(ideaId, 1, "like");
+        return RedirectToAction("Index");
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> DarDislike(int ideaId)
+    {
+        await _inicioApiService.ReaccionarIdeaAsync(ideaId, 1, "dislike");
+        return RedirectToAction("Index");
+    }
 }

@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 namespace CosmicRunnerFront.Models.InicioModels
 {
     public class Idea
@@ -13,5 +14,8 @@ namespace CosmicRunnerFront.Models.InicioModels
         public List<Participante> colaboradores { get; set; }
         public List<Comentario> comentarios { get; set; }
         public List<string> puntos_clave { get; set; }
+
+        [JsonPropertyName("reaccion_usuario")]
+        public string ReaccionUsuario { get; set; } = string.Empty; 
     }
 }

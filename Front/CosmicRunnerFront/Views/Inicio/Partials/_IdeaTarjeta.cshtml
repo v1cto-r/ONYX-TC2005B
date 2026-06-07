@@ -112,7 +112,10 @@
             <form method="post" action="/Inicio/GuardarComentario" class="flex-grow-1 m-0 d-flex gap-2">
                 <input type="hidden" name="ideaId" value="@Model.idea_id" />
                 <input type="text" class="form-control rounded-pill bg-white border border-secondary px-4 py-2 text-dark" name="Mensaje" placeholder="Escribe tu recomendación..." required>
-                <button type="submit" class="d-none">Enviar</button>
+                
+                <button type="submit" class="btn btn-dark rounded-circle d-flex align-items-center justify-content-center p-2" style="width: 42px; height: 42px;" title="Enviar comentario">
+                    <img src="~/assets/icons/send.svg" alt="Enviar" style="width: 18px; height: 18px; filter: brightness(0) invert(1);" />
+                </button>
             </form>
         </div>
 
@@ -147,23 +150,32 @@
     </details>
 
     <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mt-4 gap-3">
+        
         <div class="d-flex align-items-center gap-1 contadores-interaccion">
             <form method="post" action="/Inicio/DarLike" class="m-0">
                 <input type="hidden" name="ideaId" value="@Model.idea_id" />
-                <button type="submit" class="btn-interacciones">
+                <button type="submit" class="btn-interacciones @(Model.ReaccionUsuario == "like" ? "bg-light border-primary" : "")">
                     <div class="row">
-                        <div class="col-6"><img src="~/assets/icons/thumbs-up.svg" class="btn-icon" /></div>
-                        <div class="col-6"><span class="fw-bold text-dark fs-5">@(Model.metricas?.likes ?? 0)</span></div>
+                        <div class="col-6">
+                            <img src="~/assets/icons/@(Model.ReaccionUsuario == "like" ? "thumbs-up-fill.svg" : "thumbs-up.svg")" class="btn-icon" />
+                        </div>
+                        <div class="col-6">
+                            <span class="fw-bold @(Model.ReaccionUsuario == "like" ? "text-primary" : "text-dark") fs-5">@(Model.metricas?.likes ?? 0)</span>
+                        </div>
                     </div>
                 </button>
             </form>
 
             <form method="post" action="/Inicio/DarDislike" class="m-0">
                 <input type="hidden" name="ideaId" value="@Model.idea_id" />
-                <button type="submit" class="btn-interacciones">
+                <button type="submit" class="btn-interacciones @(Model.ReaccionUsuario == "dislike" ? "bg-light border-danger" : "")">
                     <div class="row">
-                        <div class="col-6"><img src="~/assets/icons/thumbs-down.svg" class="btn-icon" /></div>
-                        <div class="col-6"><span class="fw-bold text-dark fs-5">@(Model.metricas?.dislikes ?? 0)</span></div>
+                        <div class="col-6">
+                            <img src="~/assets/icons/@(Model.ReaccionUsuario == "dislike" ? "thumbs-down-fill.svg" : "thumbs-down.svg")" class="btn-icon" />
+                        </div>
+                        <div class="col-6">
+                            <span class="fw-bold @(Model.ReaccionUsuario == "dislike" ? "text-danger" : "text-dark") fs-5">@(Model.metricas?.dislikes ?? 0)</span>
+                        </div>
                     </div>
                 </button>
             </form>
@@ -178,7 +190,30 @@
         
         <form method="post" action="/Inicio/UnirseProyecto" class="m-0 align-self-start align-self-md-center">
             <input type="hidden" name="ideaId" value="@Model.idea_id" />
-            <button type="submit" class="btn btn-unirme rounded-pill fw-bold fs-5 py-2 px-4">Unirme al Proyecto</button>
+            <button type="button" class="btn btn-unirme rounded-pill fw-bold fs-5 py-2 px-4" data-bs-toggle="modal" data-bs-target="#modalUnirse-@Model.idea_id">Unirme al Proyecto</button>
         </form>
     </div>
+</div>
+
+<div class="modal fade" id="modalUnirse-@Model.idea_id" tabindex="-1" aria-labelledby="modalLabel-@Model.idea_id" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content rounded-4 border-0 shadow">
+            <div class="modal-header border-bottom-0 pb-0">
+                <h5 class="modal-title fw-bold text-dark" id="modalLabel-@Model.idea_id">Unirse al Proyecto</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center py-4">
+                <p class="fs-5 mb-0 text-dark">¿Estás seguro que deseas postularte para unirte al equipo de <strong>@Model.titulo</strong>?</p>
+                <p class="text-muted small mt-2">El líder de la iniciativa revisará tu perfil.</p>
+            </div>
+            <div class="modal-footer border-top-0 d-flex justify-content-center gap-2 pb-4">
+                <button type="button" class="btn btn-light border rounded-pill px-4 fw-bold text-muted" data-bs-dismiss="modal">Cancelar</button>
+                <form method="post" action="/Inicio/UnirseProyecto" class="m-0">
+                    <input type="hidden" name="ideaId" value="@Model.idea_id" />
+                    <button type="submit" class="btn btn-unirme rounded-pill px-5 fw-bold">Sí, unirme</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 </div>
