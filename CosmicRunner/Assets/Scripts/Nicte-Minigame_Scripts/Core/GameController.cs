@@ -108,19 +108,6 @@ public class GameController : MonoBehaviour
         SceneManager.LoadScene(gameScene);
     }
 
-    public void TogglePause()
-    {
-        if (currentState != "Playing")
-            return;
-
-        if (Time.timeScale == 0f)
-        {
-            Time.timeScale = 1f;
-        }
-        else
-        {
-            Time.timeScale = 0f;
-        }
-    }
+    
 }
 }

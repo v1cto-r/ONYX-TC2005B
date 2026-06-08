@@ -44,7 +44,7 @@ public class GeneralUI : MonoBehaviour
             return;
         }
 
-        GameController.instancia.TogglePause();
+        Time.timeScale = 0f;
 
         gamePaused = !gamePaused;
 
@@ -58,7 +58,7 @@ public class GeneralUI : MonoBehaviour
     {
         if (GameController.instancia != null)
         {
-            GameController.instancia.TogglePause();
+            Time.timeScale = 1f;
         }
 
         if (pauseScreen != null)

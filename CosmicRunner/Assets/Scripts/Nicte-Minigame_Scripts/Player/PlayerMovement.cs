@@ -14,6 +14,17 @@ public class PlayerMovement : MonoBehaviour
     private float yInput;
     public bool inputEnabled = true;
 
+    // Input actions para movimiento, se asignan desde PlayerControl
+    private InputAction moveAction;
+    
+
+
+    private void Awake()
+    {
+        rig = GetComponent<Rigidbody2D>();
+        moveAction = InputSystem.actions.FindAction("Move");
+    }
+
     // Lee las teclas de direccion cada frame
     void Update()
     {
@@ -24,13 +35,22 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
-        if (Keyboard.current.upArrowKey.isPressed)
+        if (moveAction != null)
         {
-            yInput = 1f;
+            Vector2 inputVector = moveAction.ReadValue<Vector2>();
+            yInput = inputVector.y;
         }
-        else if (Keyboard.current.downArrowKey.isPressed)
+        else
         {
-            yInput = -1f;
+            // Fallback a teclado si no se asigno InputAction
+            if (Keyboard.current.upArrowKey.isPressed)
+            {
+                yInput = 1f;
+            }
+            else if (Keyboard.current.downArrowKey.isPressed)
+            {
+                yInput = -1f;
+            }
         }
     }
 
