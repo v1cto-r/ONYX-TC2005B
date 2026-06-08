@@ -5,19 +5,19 @@ namespace Gio.Minigame{
     public static SFXManager Instance;
     public AudioSource sfxSource;
     public AudioSource musicSource;
-    public AudioClip disparoClip;     // Asigna aquí: disparo_r
-    public AudioClip choqueClip;      // Asigna aquí: choque_mn
-    public AudioClip enemigoClip;     // Asigna aquí: enemigo
-    public AudioClip coinClip;        // Asigna aquí: coin
-    public AudioClip powerUpClip;     // Asigna aquí: powerUp
-    public AudioClip ganarClip;       // Asigna aquí: win
-    public AudioClip perderClip;      // Asigna aquí: perder
-    public AudioClip gritoWeeeClip;   // Asigna aquí: azareel_james-weee-337908
+    public AudioClip disparoClip;    
+    public AudioClip choqueClip;      
+    public AudioClip enemigoClip;    
+    public AudioClip coinClip;        
+    public AudioClip powerUpClip;     
+    public AudioClip ganarClip;       
+    public AudioClip perderClip;      
+    public AudioClip gritoWeeeClip;   
 
     [Header("Música de Fondo")]
-    public AudioClip musicaFondo1;    // Asigna aquí: musicafondo1
-    public AudioClip musicaFondo2;    // Asigna aquí: musicafondo2
-    public AudioClip musicaBoss;      // Asigna aquí: m_b
+    public AudioClip musicaFondo1;   
+    public AudioClip musicaFondo2;    
+    public AudioClip musicaBoss;      // m_b
 
     private void Awake()
     {
