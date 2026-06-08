@@ -16,7 +16,7 @@ builder.Services.AddSession(options =>
 
 builder.Services.AddHttpClient<IUsuarioService, UsuarioService>(client =>
 {
-    client.BaseAddress = new Uri("https://localhost:12003");
+    client.BaseAddress = new Uri("https://marino.onyx.14082006.xyz");
 })
 .ConfigurePrimaryHttpMessageHandler(() =>
     new HttpClientHandler
