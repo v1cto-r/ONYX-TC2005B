@@ -106,20 +106,32 @@ namespace MECS
             ResolveInputActions();
         }
 
-        // Si no se asignaron slots manualmente, los buscamos en la escena
-        private void ResolveWordSlots()
-        {
-            if (wordSlots != null && wordSlots.Length > 0)
-            {
-                wordStorageCapacity = wordSlots.Length;
-                return;
-            }
+    private void OnEnable()
+    {
+        ResolveInputActions();
+        clickAction?.Enable();
+        pointerAction?.Enable();
+    }
 
-            wordSlots = FindObjectsByType<DraggableWord>(FindObjectsInactive.Include);
-            wordStorageCapacity = wordSlots != null ? wordSlots.Length : 0;
+    private void OnDisable()
+    {
+        clickAction?.Disable();
+        pointerAction?.Disable();
+    }
+
+    private void ResolveWordSlots()
+    {
+        if (wordSlots != null && wordSlots.Length > 0)
+        {
+            wordStorageCapacity = wordSlots.Length;
+            return;
         }
 
-        // Cargamos datos de API antes de preparar el estado inicial
+        wordSlots = FindObjectsByType<DraggableWord>(FindObjectsInactive.Include);
+        wordStorageCapacity = wordSlots != null ? wordSlots.Length : 0;
+    }
+
+    // Cargamos datos de API antes de preparar el estado inicial
         private IEnumerator Start()
         {
             if (apiService != null)
@@ -149,38 +161,6 @@ namespace MECS
             }
 
             Debug.LogError("PromptsControl could not start because the API service is missing.", this);
-        }
-
-        // Enciende las acciones de entrada cuando el objeto esta activo
-        private void OnEnable()
-        {
-            ResolveInputActions();
-
-            // Activamos la accion de click si existe
-            if (clickAction != null)
-            {
-                clickAction.Enable();
-            }
-
-            // Activamos la accion del puntero si existe
-            if (pointerAction != null)
-            {
-                pointerAction.Enable();
-            }
-        }
-
-        // Desactiva las acciones para no dejar input vivo
-        private void OnDisable()
-        {
-            if (clickAction != null)
-            {
-                clickAction.Disable();
-            }
-
-            if (pointerAction != null)
-            {
-                pointerAction.Disable();
-            }
         }
 
         // Revisa timers de feedback y clicks sobre prompts

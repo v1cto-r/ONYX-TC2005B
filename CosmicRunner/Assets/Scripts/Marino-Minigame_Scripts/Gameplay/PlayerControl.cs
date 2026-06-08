@@ -67,32 +67,33 @@ namespace MECS
         {
             if (moveAction == null)
             {
-                return;
+                moveAction = InputSystem.actions.FindAction("Move");
             }
 
-            // Activamos movimiento y, si existe, tambien pull
-            moveAction.Enable();
-
-            if (pullAction != null)
+            if (pullAction == null)
             {
-                pullAction.Enable();
+                pullAction = InputSystem.actions.FindAction("Pull");
             }
-        }
 
-        // Apaga las acciones para no seguir leyendo input fuera de escena
-        private void OnDisable()
-        {
             if (moveAction == null)
             {
+                Debug.LogError("Move action was not found in Input System Actions.", this);
                 return;
             }
 
-            moveAction.Disable();
-
-            if (pullAction != null)
+            if (pullAction == null)
             {
-                pullAction.Disable();
+                Debug.LogWarning("Pull action was not found in Input System Actions.", this);
             }
+
+            moveAction.Enable();
+            pullAction?.Enable();
+        }
+
+        private void OnDisable()
+        {
+            moveAction?.Disable();
+            pullAction?.Disable();
         }
 
         // Reinicia estado interno e input actions tras pausar/reanudar para evitar input bloqueado
@@ -103,13 +104,11 @@ namespace MECS
 
             if (moveAction != null)
             {
-                moveAction.Disable();
                 moveAction.Enable();
             }
 
             if (pullAction != null)
             {
-                pullAction.Disable();
                 pullAction.Enable();
             }
         }

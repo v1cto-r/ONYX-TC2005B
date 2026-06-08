@@ -26,6 +26,7 @@ namespace MECS
             Debug.Log("Game Quitted");
 
             // Volver a la pantalla de seleccion de nivel
+            Time.timeScale = 1f;
             SceneManager.LoadScene("GameSelectScene");
         }
     }

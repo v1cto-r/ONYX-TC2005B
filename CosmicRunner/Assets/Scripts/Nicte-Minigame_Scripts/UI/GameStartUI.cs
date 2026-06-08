@@ -90,6 +90,7 @@ public class GameStartUI : MonoBehaviour
             ShowBenefitScreen(rank);
         }else
         {
+            Time.timeScale = 1f;
             SceneManager.LoadScene("AtaqueEstelarGame");
         }
     }
@@ -148,6 +149,7 @@ public class GameStartUI : MonoBehaviour
 
     public void exitGame()
     {
+        Time.timeScale = 1f;
         SceneManager.LoadScene("GameSelectScene");
     }
 }

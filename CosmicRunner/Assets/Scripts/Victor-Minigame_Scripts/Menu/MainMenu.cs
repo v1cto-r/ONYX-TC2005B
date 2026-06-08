@@ -21,6 +21,7 @@ namespace AB
         // Boton para salir del juego
         public void QuitButton()
         {
+            Time.timeScale = 1f;
             SceneManager.LoadScene("GameSelectScene");
         }
     }
