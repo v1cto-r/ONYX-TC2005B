@@ -1,12 +1,14 @@
 from flask import Flask, jsonify
 from routes.game_routes import game_bp
 from routes.prompts_routes import prompts_bp
+from routes.login_routes import login_bp
 
 app = Flask(__name__)
 app.json.sort_keys = False
 
 app.register_blueprint(game_bp, url_prefix="/api")
 app.register_blueprint(prompts_bp, url_prefix="/api")
+app.register_blueprint(login_bp, url_prefix="/api")
 
 @app.route('/', methods=['GET'])
 def hello_world():
