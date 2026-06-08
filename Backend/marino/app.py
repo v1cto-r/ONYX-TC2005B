@@ -15,5 +15,4 @@ app.register_blueprint(usuario_bp)
 app.register_blueprint(minigame_bp)
 
 if __name__ == "__main__":
-    # HTTPS (Uso de SSL)
     app.run(host="0.0.0.0", port=12003, ssl_context="adhoc", debug=True)

@@ -1,14 +1,4 @@
 services:
-  api_victor:
-    restart: always
-    env_file:
-      - .env
-    build:
-      context: ./victor
-      dockerfile: Dockerfile
-    ports:
-      - "12002:12002"
-
   api_gio:
     restart: always
     env_file:
@@ -18,6 +8,28 @@ services:
       dockerfile: Dockerfile
     ports:
       - "12001:12001"
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "-k", "https://localhost:12001/" ]
+      interval: 60s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
+
+  api_victor:
+    restart: always
+    env_file:
+      - .env
+    build:
+      context: ./victor
+      dockerfile: Dockerfile
+    ports:
+      - "12002:12002"
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "-k", "https://localhost:12002/" ]
+      interval: 60s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
 
   api_marino:
     restart: always
@@ -28,3 +40,42 @@ services:
       dockerfile: Dockerfile
     ports:
       - "12003:12003"
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "-k", "https://localhost:12003/" ]
+      interval: 60s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
+
+  api_jorge:
+    restart: always
+    env_file:
+      - .env
+    build:
+      context: ./jorge
+      dockerfile: Dockerfile
+    ports:
+      - "12004:12004"
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "-k", "https://localhost:12004/" ]
+      interval: 60s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
+
+  api_nicte:
+    restart: always
+    env_file:
+      - .env
+    build:
+      context: ./nicte
+      dockerfile: Dockerfile
+    ports:
+      - "12005:12005"
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "-k", "https://localhost:12005/" ]
+      interval: 60s
+      timeout: 10s
+      retries: 3
+      start_period: 20s
+
