@@ -70,29 +70,16 @@ namespace MECS
                 return;
             }
 
-            // Activamos movimiento y, si existe, tambien pull
-            moveAction.Enable();
-
             if (pullAction != null)
             {
                 pullAction.Enable();
             }
-        }
 
-        // Apaga las acciones para no seguir leyendo input fuera de escena
-        private void OnDisable()
-        {
-            if (moveAction == null)
-            {
-                return;
-            }
+            // Activamos movimiento y, si existe, tambien pull
+            moveAction.Enable();
+            pullAction.Enable();
 
-            moveAction.Disable();
-
-            if (pullAction != null)
-            {
-                pullAction.Disable();
-            }
+            
         }
 
         // Reinicia estado interno e input actions tras pausar/reanudar para evitar input bloqueado
@@ -103,13 +90,11 @@ namespace MECS
 
             if (moveAction != null)
             {
-                moveAction.Disable();
                 moveAction.Enable();
             }
 
             if (pullAction != null)
             {
-                pullAction.Disable();
                 pullAction.Enable();
             }
         }

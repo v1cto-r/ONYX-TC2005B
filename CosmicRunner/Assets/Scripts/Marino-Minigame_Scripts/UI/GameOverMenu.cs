@@ -16,6 +16,7 @@ namespace MECS
         // Boton para volver al menu principal
         public void MainMenuButton()
         {
+            Time.timeScale = 1f;
             SceneManager.LoadScene("MainMenuScene_MECS");
         }
     }
