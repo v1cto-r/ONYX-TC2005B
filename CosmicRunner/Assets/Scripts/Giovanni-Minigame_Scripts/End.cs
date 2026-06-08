@@ -13,10 +13,12 @@ public class End : MonoBehaviour
         if (PlayerPrefs.GetInt("resultado") == 1)
         {
             resultado.text = "VICTORIA";
+            if (SFXManager.Instance != null) SFXManager.Instance.PlayWinSound();
         }
         else
         {
             resultado.text = "DERROTA";
+            if (SFXManager.Instance != null) SFXManager.Instance.PlayLoseSound();
         }
         creditsText.text = "+" + PlayerPrefs.GetInt("credits");
     }

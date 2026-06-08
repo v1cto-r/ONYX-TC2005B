@@ -21,7 +21,7 @@ public class DerivaEspacial : MonoBehaviour
 
         float velocidadReal = Random.Range(velocidadMinima, velocidadMaxima);
         rb.linearVelocity = direccionFinal * velocidadReal;
-         Destroy(gameObject, tiempoDeVida);
+        Destroy(gameObject, tiempoDeVida);
     }
 }
 }
