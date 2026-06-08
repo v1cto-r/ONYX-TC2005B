@@ -19,11 +19,6 @@ body{
     background-color: var(--bg-light-grey);
 }
 
-html, body {
-    overflow-x: hidden !important;
-    width: 100%;
-}
-
  .custom-container {
     width: 64rem;
     max-width: 100%; 
@@ -40,6 +35,9 @@ html, body {
     height: 100%; 
     display: flex;
     flex-direction: column;
+    border-bottom: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
 }
 
 .contenedor-perfil-foto {
@@ -79,13 +77,13 @@ html, body {
 }
 
 .numero-denso {
-    font-weight: 700;                 /* Negro puro */
-    font-size: 3.5rem;         /* Ajusta según necesidad */
+    font-weight: 700;                 
+    font-size: 3.5rem;        
 }
 
 .numero-denso-posicion{
-    font-weight: 600;                 /* Negro puro */
-    font-size: 2rem;         /* Ajusta según necesidad */
+    font-weight: 600;                 
+    font-size: 2rem;         
 }
 
 .boton-pildora {
@@ -129,6 +127,8 @@ html, body {
 .contenedor-impulsa {
     background-color: var(--card-bg);
     padding: 2rem 3rem;
+    border: 1px solid #ccc;
+    border-radius: 1rem;
     text-align: center;
 }
 
@@ -186,7 +186,6 @@ html, body {
     transform: translateY(-2px);
 }
 
-/* TARJETAS DE IDEAS (TOP SEMANAL)    */
 .tarjeta-idea {
     background-color: var(--card-bg);
     border: 1px solid var(--border-color);
@@ -243,8 +242,8 @@ html, body {
     height: 30px;
     border-radius: 50%;
     margin-bottom: 0.5rem;
-    background-color: #e9ecef; /* Default Grey */
-    border: 2px solid #fff; /* Pequeño borde blanco para separarlo de la línea */
+    background-color: #e9ecef; 
+    border: 2px solid #fff; 
 }
 
 .node-yellow { background-color: var(--whirlpool-yellow); }
@@ -257,9 +256,8 @@ html, body {
     line-height: 1.1;
 }
 
-/* ACORDEÓN SIN JS (DETAILS & SUMMARY) */
 .tarjeta-details > summary {
-    list-style: none; /* Oculta la flecha por defecto de HTML */
+    list-style: none; 
     cursor: pointer;
 }
 
@@ -301,13 +299,10 @@ html, body {
     transform: translateY(-2px);
 }
 
-/* Gira la flecha cuando el <details> está abierto */
 .tarjeta-details[open] summary .btn-ver-mas span {
     display: inline-block;
     transform: rotate(180deg);
 }
-
-/*  BOTONES Y FOOTER TARJETA */
 
 /* Utilidades para los bordes en pantallas medianas hacia arriba */
 @media (min-width: 768px) {
@@ -321,7 +316,7 @@ html, body {
     display: inline-flex;
     align-items: center;
     border: 1px solid var(--border-color);
-    border-radius: 50px !important; /* Forzar pastilla */
+    border-radius: 50px !important; 
     padding: 6px 20px 6px 6px;
     background-color: var(--card-bg);
 }
@@ -329,9 +324,9 @@ html, body {
 .colaborador-pill img {
     width: 40px !important;
     height: 40px !important;
-    border-radius: 50% !important; /* Círculo perfecto */
-    object-fit: cover !important; /* Recorta la imagen sobrante */
-    aspect-ratio: 1/1; /* Evita que la imagen se deforme */
+    border-radius: 50% !important; 
+    object-fit: cover !important; 
+    aspect-ratio: 1/1; 
     margin-right: 12px;
 }
 
@@ -340,6 +335,12 @@ html, body {
     color: var(--text-main);
     border: none;
     transition: all 0.2s;
+}
+
+.btn-unido {
+    background-color: var(--whirlpool-yellow-hover); 
+    color: var(--text-main);
+    border: none;
 }
 
 .bt-unirme span{
@@ -351,19 +352,18 @@ html, body {
     transform: translateY(-2px);
 }
 
-/* Pastillas Interactivas Blindadas */
 .btn-interaccion-pill {
-    display: inline-flex !important; /* Forzar comportamiento de caja flex */
+    display: inline-flex !important; 
     align-items: center !important;
     justify-content: center !important;
     background-color: transparent !important;
     border: 1px solid var(--border-color) !important;
-    border-radius: 50px !important; /* Forzar la forma de pastilla */
-    padding: 6px 20px !important; /* Ajuste del "largo" de la pastilla */
+    border-radius: 50px !important; 
+    padding: 6px 20px !important; 
     cursor: pointer;
     transition: all 0.2s;
     text-decoration: none;
-    box-shadow: none; /* Quitar sombras por defecto del <button> */
+    box-shadow: none; 
 }
 
 .btn-interaccion-pill:hover {

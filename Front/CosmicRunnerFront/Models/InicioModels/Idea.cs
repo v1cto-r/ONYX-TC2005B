@@ -1,4 +1,5 @@
 using System.Text.Json.Serialization;
+
 namespace CosmicRunnerFront.Models.InicioModels
 {
     public class Idea
@@ -9,7 +10,7 @@ namespace CosmicRunnerFront.Models.InicioModels
         public int dias_transcurridos { get; set; }
         public int estado { get; set; } 
         public MetricasIdea metricas { get; set; }
-        public Participante autor { get; set; }
+        public Participante autor { get; set; } 
         public EtiquetasIdea etiquetas { get; set; } 
         public List<Participante> colaboradores { get; set; }
         public List<Comentario> comentarios { get; set; }

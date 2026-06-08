@@ -1,8 +1,19 @@
 @model CosmicRunnerFront.Models.InicioModels.Idea
 
-<div class="tarjeta-idea mb-4">
+@{
+    int currentUserId = 1;     
+    bool esAutor = Model.autor.autor_id == currentUserId;
+    bool esColaborador = Model.colaboradores != null && Model.colaboradores.Any(c => c.user_id == currentUserId);
+}
+
+<div class="tarjeta-idea bg-white shadow-sm border rounded-4 p-4 mb-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h3 class="mb-0 fw-bold text-dark">@Model.idea_id. @Model.titulo</h3>
+        <h3 class="mb-0 fw-bold text-dark">
+            @{ var ranking = ViewData["Ranking"] ?? 0; }
+            
+            @* Mostramos el ranking *@
+            @ranking. @Model.titulo
+        </h3>
         <span class="text-muted fs-6">• @Model.dias_transcurridos días</span>
     </div>
 
@@ -132,15 +143,22 @@
                                 <span class="text-muted small fw-bold">• @comentario.dias_transcurridos días</span>
                             </div>
                             <p class="text-dark fs-5 mb-3 lh-sm">@comentario.mensaje</p>
-                            <div class="d-flex align-items-center gap-2">
-                                <div class="d-flex align-items-center border rounded-pill bg-white px-3 py-1 shadow-sm">
-                                    <img src="~/assets/icons/thumbs-up.svg" alt="Like" style="width: 20px; height: 20px;" />
-                                    <span class="border-start ms-2 ps-2 fw-bold text-dark">@comentario.likes</span>
-                                </div>
-                                <div class="d-flex align-items-center border rounded-pill bg-white px-3 py-1 shadow-sm">
-                                    <img src="~/assets/icons/thumbs-down.svg" alt="Dislike" style="width: 20px; height: 20px;" />
-                                    <span class="border-start ms-2 ps-2 fw-bold text-dark">@comentario.dislikes</span>
-                                </div>
+                            <div class="d-flex align-items-center gap-2 mt-2">
+                                <form method="post" action="/Inicio/DarLikeComentario" class="m-0">
+                                    <input type="hidden" name="commentId" value="@comentario.comment_id" />
+                                    <button type="submit" class="btn btn-link p-0 text-decoration-none d-flex align-items-center border rounded-pill bg-white px-3 py-1 shadow-sm @(comentario.reaccion_usuario == "like" ? "bg-light border-dark" : "")">
+                                        <img src="~/assets/icons/@(comentario.reaccion_usuario == "like" ? "thumbs-up-fill.svg" : "thumbs-up.svg")" alt="Like" style="width: 20px; height: 20px;" />
+                                        <span class="border-start ms-2 ps-2 fw-bold text-dark">@comentario.likes</span>
+                                    </button>
+                                </form>
+
+                                <form method="post" action="/Inicio/DarDislikeComentario" class="m-0">
+                                    <input type="hidden" name="commentId" value="@comentario.comment_id" />
+                                    <button type="submit" class="btn btn-link p-0 text-decoration-none d-flex align-items-center border rounded-pill bg-white px-3 py-1 shadow-sm @(comentario.reaccion_usuario == "dislike" ? "bg-light border-dark" : "")">
+                                        <img src="~/assets/icons/@(comentario.reaccion_usuario == "dislike" ? "thumbs-down-fill.svg" : "thumbs-down.svg")" alt="Dislike" style="width: 20px; height: 20px;" />
+                                        <span class="border-start ms-2 ps-2 fw-bold text-dark">@comentario.dislikes</span>
+                                    </button>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -188,10 +206,20 @@
             </div>
         </div>
         
-        <form method="post" action="/Inicio/UnirseProyecto" class="m-0 align-self-start align-self-md-center">
-            <input type="hidden" name="ideaId" value="@Model.idea_id" />
-            <button type="button" class="btn btn-unirme rounded-pill fw-bold fs-5 py-2 px-4" data-bs-toggle="modal" data-bs-target="#modalUnirse-@Model.idea_id">Unirme al Proyecto</button>
-        </form>
+        <div class="align-self-start align-self-md-center m-0">
+            @if (esAutor)
+            {
+                <button type="button" class="btn-unido text-dark rounded-pill fw-bold fs-6 py-2 px-4" disabled>Tu Iniciativa</button>
+            }
+            else if (esColaborador)
+            {
+                <button type="button" class="btn-unido text-dark rounded-pill fw-bold fs-6 py-2 px-4" disabled>Ya eres colaborador</button>
+            }
+            else
+            {
+                <button type="button" class="btn btn-unirme rounded-pill fw-bold fs-6 py-2 px-4" data-bs-toggle="modal" data-bs-target="#modalUnirse-@Model.idea_id">Unirme al Proyecto</button>
+            }
+        </div>
     </div>
 </div>
 
@@ -215,5 +243,4 @@
             </div>
         </div>
     </div>
-</div>
 </div>

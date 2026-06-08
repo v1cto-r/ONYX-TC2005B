@@ -8,5 +8,6 @@ namespace CosmicRunnerFront.Models.InicioModels{
         public string autor_nombre { get; set; }
         public string autor_foto { get; set; } 
         public int dias_transcurridos { get; set; } 
+        public string reaccion_usuario { get; set; } = string.Empty;
     }
 }

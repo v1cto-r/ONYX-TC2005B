@@ -103,5 +103,14 @@ namespace CosmicRunnerFront.Services
             var response = await _httpClient.PostAsJsonAsync(url, payload);
             return response.IsSuccessStatusCode;
         }
+
+        public async Task<bool> ReaccionarComentarioAsync(int commentId, int userId, string tipo)
+        {
+            var url = $"https://127.0.0.1:12001/api/comentario/{commentId}/reaccion";
+            var payload = new { user_id = userId, tipo = tipo };
+            
+            var response = await _httpClient.PutAsJsonAsync(url, payload);
+            return response.IsSuccessStatusCode;
+        }
     }
 }

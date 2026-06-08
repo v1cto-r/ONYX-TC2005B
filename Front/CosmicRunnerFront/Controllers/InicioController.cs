@@ -110,4 +110,18 @@ public class InicioController : Controller
         
         return RedirectToAction("Index");
     }
+
+    [HttpPost]
+    public async Task<IActionResult> DarLikeComentario(int commentId)
+    {
+        await _inicioApiService.ReaccionarComentarioAsync(commentId, 1, "like");
+        return RedirectToAction("Index");
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> DarDislikeComentario(int commentId)
+    {
+        await _inicioApiService.ReaccionarComentarioAsync(commentId, 1, "dislike");
+        return RedirectToAction("Index");
+    }
 }
