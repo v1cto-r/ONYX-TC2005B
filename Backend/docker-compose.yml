@@ -1,0 +1,30 @@
+services:
+  api_victor:
+    restart: always
+    env_file:
+      - .env
+    build:
+      context: ./victor
+      dockerfile: Dockerfile
+    ports:
+      - "12002:12002"
+
+  api_gio:
+    restart: always
+    env_file:
+      - .env
+    build:
+      context: ./gio
+      dockerfile: Dockerfile
+    ports:
+      - "12001:12001"
+
+  api_marino:
+    restart: always
+    env_file:
+      - .env
+    build:
+      context: ./marino
+      dockerfile: Dockerfile
+    ports:
+      - "12003:12003"

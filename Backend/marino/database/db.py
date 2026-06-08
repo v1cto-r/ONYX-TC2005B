@@ -1,11 +1,12 @@
+import os
 import mysql.connector
 
-# Configuracion de MySQL
 def get_db_connection():
     conexion = mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="rootroot",
-        database="cosmic_runner"
+        host=os.getenv("HOST"),
+        user=os.getenv("USER"),
+        password=os.getenv("PASSWORD"),
+        database=os.getenv("DATABASE"),
+        port=int(os.getenv("PORT"))
     )
     return conexion
