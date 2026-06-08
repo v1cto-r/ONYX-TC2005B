@@ -24,32 +24,6 @@ public class UsuarioViewModel
     public string Biografia => Usuario.Biografia;
     public string FechaIngresoTexto => Usuario.FechaIngreso.ToString("dd 'de' MMMM 'de' yyyy", new CultureInfo("es-MX"));
     public string Departamento => Usuario.Departamento?.name ?? string.Empty;
+    public List<HabilidadModel> HabilidadesDisponibles { get; set; } = new();
     public string SeccionActivaEtiqueta => Secciones.FirstOrDefault(x => x.Accion == SeccionActiva)?.Etiqueta ?? SeccionActiva;
-
-    public class ActividadMetrica
-    {
-        public string Etiqueta { get; set; } = string.Empty;
-        public string Valor { get; set; } = string.Empty;
-    }
-
-    public class ActividadReciente
-    {
-        public string IconoSvg { get; set; } = string.Empty;
-        public string Titulo { get; set; } = string.Empty;
-        public string Subtitulo { get; set; } = string.Empty;
-    }
-
-    public class Contacto
-    {
-        public string Etiqueta { get; set; } = string.Empty;
-        public string Valor { get; set; } = string.Empty;
-        public string IconoSvg { get; set; } = string.Empty;
-    }
-
-    public class Pestana
-    {
-        public string Etiqueta { get; set; } = string.Empty;
-        public string Accion { get; set; } = string.Empty;
-    }
-
 }

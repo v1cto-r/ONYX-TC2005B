@@ -14,6 +14,13 @@
         : Model.FotoPerfilUrl;
 }
 
+@if (TempData["ApiError"] != null)
+{
+    <script>
+        alert('@TempData["ApiError"]');
+    </script>
+}
+
 <section class="usuario-panel usuario-prompts-panel" aria-label="Panel de prompts">
     @if (Model.EsPerfilPropio)
     {

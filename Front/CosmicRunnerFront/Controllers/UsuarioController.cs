@@ -73,21 +73,49 @@ public class UsuarioController : Controller
             return RedirectToAction("Index", "Home");
         }
 
+        // NOTA: Ya no hay validaciones manuales aquí. 
+        // ASP.NET valida automáticamente los campos usando los [Required] de tu modelo Usuario.cs
+
+        // Si faltan campos (el ModelState es inválido), recargar la vista mostrando los mensajes de error
+        if (!ModelState.IsValid)
+        {
+            var modelConErrores = await BuildUsuarioViewModelAsync(currentUserId.Value, nameof(Configuracion));
+            modelConErrores.Usuario = usuarioViewModel.Usuario; // Conserva lo que escribió el usuario
+            modelConErrores.Habilidades = ParseHabilidades(habilidadesTexto); // Conserva las habilidades cargadas
+            return View("Configuracion", modelConErrores);
+        }
+
         if (usuarioViewModel.Usuario.Id == 0)
         {
             usuarioViewModel.Usuario.Id = currentUserId.Value;
         }
 
-        var success = await _usuarioService.ActualizarPerfilAsync(usuarioViewModel);
-        if (!success)
+        // CONTROL DE CAÍDA DE API AL GUARDAR
+        try
         {
-            return StatusCode(502, new { mensaje = "No se pudo actualizar el perfil" });
-        }
+            var success = await _usuarioService.ActualizarPerfilAsync(usuarioViewModel);
+            if (!success)
+            {
+                TempData["ApiError"] = "Error de API"; // Envía el error a la vista
+                var modelConErrores = await BuildUsuarioViewModelAsync(currentUserId.Value, nameof(Configuracion));
+                modelConErrores.Usuario = usuarioViewModel.Usuario;
+                return View("Configuracion", modelConErrores);
+            }
 
-        var habilidades = ParseHabilidades(habilidadesTexto);
-        foreach (var habilidad in habilidades)
+            var habilidades = ParseHabilidades(habilidadesTexto);
+            foreach (var habilidad in habilidades)
+            {
+                await _usuarioService.AgregarHabilidadAsync(usuarioViewModel.Usuario.Id, habilidad);
+            }
+        }
+        catch (Exception ex)
         {
-            await _usuarioService.AgregarHabilidadAsync(usuarioViewModel.Usuario.Id, habilidad);
+            _logger.LogError(ex, "API no disponible o error al guardar");
+            TempData["ApiError"] = "Error de API"; // Envía el error a la vista
+            
+            var modelConErrores = await BuildUsuarioViewModelAsync(currentUserId.Value, nameof(Configuracion));
+            modelConErrores.Usuario = usuarioViewModel.Usuario;
+            return View("Configuracion", modelConErrores);
         }
 
         return RedirectToAction(nameof(Configuracion));
@@ -95,18 +123,46 @@ public class UsuarioController : Controller
 
     private async Task<UsuarioViewModel> BuildUsuarioViewModelAsync(int currentUserId, string seccionActiva)
     {
-        var usuarioViewModel = await _usuarioService.ObtenerPerfilAsync(currentUserId) ?? new UsuarioViewModel
+        UsuarioViewModel? usuarioViewModel = null;
+
+        // 1. OBTENER PERFIL
+        try
         {
-            Usuario = new Models.InicioModels.Usuario { Id = currentUserId },
-            Habilidades = new List<string>(),
-            PromptsRecientes = new List<PromptModel>(),
-            Contactos = new List<UsuarioViewModel.Contacto>(),
-            ActividadGeneral = new List<UsuarioViewModel.ActividadMetrica>()
-        };
+            usuarioViewModel = await _usuarioService.ObtenerPerfilAsync(currentUserId);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "API no disponible al obtener perfil");
+        }
+
+        // Si hubo error, cargar defaults
+        if (usuarioViewModel == null)
+        {
+            TempData["ApiError"] = "Error de API"; 
+            usuarioViewModel = new UsuarioViewModel
+            {
+                Usuario = new Models.InicioModels.Usuario { Id = currentUserId },
+                Habilidades = new List<string>(),
+                PromptsRecientes = new List<PromptModel>(),
+                Contactos = new List<Contacto>(),
+                ActividadGeneral = new List<ActividadMetrica>()
+            };
+        }
+
+        // 2. OBTENER HABILIDADES DISPONIBLES (NUEVO)
+        try
+        {
+            usuarioViewModel.HabilidadesDisponibles = await _usuarioService.ObtenerHabilidadesDisponiblesAsync();
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error al cargar la lista de habilidades disponibles");
+            usuarioViewModel.HabilidadesDisponibles = new List<HabilidadModel>(); // Lista vacía de respaldo
+        }
 
         EnsureUsuarioDefaults(usuarioViewModel);
         usuarioViewModel.SeccionActiva = seccionActiva;
-        usuarioViewModel.Secciones = new List<UsuarioViewModel.Pestana>
+        usuarioViewModel.Secciones = new List<Pestana>
         {
             new() { Etiqueta = "Información General", Accion = nameof(Index) },
             new() { Etiqueta = "Actividad Reciente", Accion = nameof(Actividades) },
@@ -144,7 +200,7 @@ public class UsuarioController : Controller
             usuario.Departamento.name = $"Departamento {usuario.DepartamentoId}";
         }
 
-        usuarioViewModel.Contactos = new List<UsuarioViewModel.Contacto>
+        usuarioViewModel.Contactos = new List<Contacto>
         {
             new() { Etiqueta = "Teléfono", Valor = usuario.Telefono, IconoSvg = "~/assets/icons/phone.svg" },
             new() { Etiqueta = "Correo", Valor = usuario.Correo, IconoSvg = "~/assets/icons/mail.svg" },
@@ -154,18 +210,18 @@ public class UsuarioController : Controller
 
         if (usuarioViewModel.ActividadGeneral.Count == 0)
         {
-            usuarioViewModel.ActividadGeneral = new List<UsuarioViewModel.ActividadMetrica>
+            usuarioViewModel.ActividadGeneral = new List<ActividadMetrica>
             {
-                new() { Etiqueta = "Proyectos", Valor = usuario.ListaProyectos.Count.ToString() },
-                new() { Etiqueta = "Prompts", Valor = usuario.ListaPrompts.Count.ToString() },
-                new() { Etiqueta = "Comentarios", Valor = usuario.ListaComentarios.Count.ToString() }
+                new() { Etiqueta = "Proyectos", Valor = usuario.ListaProyectos?.Count.ToString() ?? "0" },
+                new() { Etiqueta = "Prompts", Valor = usuario.ListaPrompts?.Count.ToString() ?? "0" },
+                new() { Etiqueta = "Comentarios", Valor = usuario.ListaComentarios?.Count.ToString() ?? "0" }
             };
         }
 
         if (usuarioViewModel.ActividadesRecientes.Count == 0 && usuarioViewModel.PromptsRecientes.Count > 0)
         {
             usuarioViewModel.ActividadesRecientes = usuarioViewModel.PromptsRecientes
-                .Select(prompt => new UsuarioViewModel.ActividadReciente
+                .Select(prompt => new ActividadReciente
                 {
                     IconoSvg = "~/assets/icons/book.svg",
                     Titulo = "Compartió un Prompt",
