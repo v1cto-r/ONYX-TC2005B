@@ -9,6 +9,7 @@
 }
 
 @section Scripts {
+    <partial name="_ValidationScriptsPartial" />
     <script src="~/js/usuario-configuracion.js" asp-append-version="true"></script>
 }
 
@@ -16,6 +17,13 @@
     var fotoPerfil = string.IsNullOrWhiteSpace(Model.FotoPerfilUrl)
         ? "~/assets/random/user.png"
         : Model.FotoPerfilUrl;
+}
+
+@if (TempData["ApiError"] != null)
+{
+    <script>
+        alert('@TempData["ApiError"]');
+    </script>
 }
 
 <section class="usuario-panel" aria-label="Panel de perfil">
@@ -49,7 +57,7 @@
         }
     </div>
 
-    <form id="configForm" class="config-layout" asp-controller="Usuario" asp-action="GuardarConfiguracion" method="post">
+    <form id="configForm" class="config-layout" asp-controller="Usuario" asp-action="GuardarConfiguracion" method="post" novalidate>
         <input type="hidden" asp-for="Usuario.Id" />
         <input type="hidden" asp-for="Usuario.Ubicacion" />
         <input type="hidden" asp-for="Usuario.FotoPerfilUrl" />
@@ -66,23 +74,28 @@
             <div class="config-field-grid">
                 <label class="config-field">
                     <span>Nombre(s)</span>
-                    <input type="text" id="Nombre" asp-for="Usuario.Nombre" required />
+                    <input type="text" id="Nombre" asp-for="Usuario.Nombre" />
+                    <span asp-validation-for="Usuario.Nombre" class="error-text" style="color:red; font-size:12px; margin-top:5px; display:block;"></span>
                 </label>
                 <label class="config-field">
                     <span>Apellido(s)</span>
-                    <input type="text" id="Apellido" asp-for="Usuario.Apellido" required />
+                    <input type="text" id="Apellido" asp-for="Usuario.Apellido" />
+                    <span asp-validation-for="Usuario.Apellido" class="error-text" style="color:red; font-size:12px; margin-top:5px; display:block;"></span>
                 </label>
                 <label class="config-field">
                     <span>Puesto de Trabajo</span>
-                    <input type="text" id="Puesto" asp-for="Usuario.Puesto" required />
+                    <input type="text" id="Puesto" asp-for="Usuario.Puesto" />
+                    <span asp-validation-for="Usuario.Puesto" class="error-text" style="color:red; font-size:12px; margin-top:5px; display:block;"></span>
                 </label>
                 <label class="config-field">
                     <span>Teléfono</span>
-                    <input type="text" id="Telefono" asp-for="Usuario.Telefono" required />
+                    <input type="text" id="Telefono" asp-for="Usuario.Telefono" />
+                    <span asp-validation-for="Usuario.Telefono" class="error-text" style="color:red; font-size:12px; margin-top:5px; display:block;"></span>
                 </label>
                 <label class="config-field">
                     <span>Correo Electrónico</span>
-                    <input type="email" id="Correo" asp-for="Usuario.Correo" required />
+                    <input type="email" id="Correo" asp-for="Usuario.Correo" />
+                    <span asp-validation-for="Usuario.Correo" class="error-text" style="color:red; font-size:12px; margin-top:5px; display:block;"></span>
                 </label>
                 <label class="config-field">
                     <span>Área/Departamento</span>
@@ -113,12 +126,10 @@
                     <div class="config-inline-row">
                         <select id="habilidadSelect">
                             <option value="">Seleccionar</option>
-                            <option>Eficiencia</option>
-                            <option>Liderazgo</option>
-                            <option>Calidad</option>
-                            <option>Comunicación</option>
-                            <option>Planeación</option>
-                            <option>Trabajo en equipo</option>
+                            @foreach (var hab in Model.HabilidadesDisponibles)
+                            {
+                                <option value="@hab.Nombre">@hab.Nombre</option>
+                            }
                         </select>
                         <button type="button" id="addSkillButton" class="config-icon-button" aria-label="Agregar habilidad">+</button>
                     </div>
@@ -145,10 +156,11 @@
             <div class="config-field-grid config-field-grid-single">
                 <label class="config-field">
                     <span>Tema</span>
-                    <select id="Tema" asp-for="Usuario.Tema" required>
+                    <select id="Tema" asp-for="Usuario.Tema">
                         <option value="Claro">Claro</option>
                         <option value="Oscuro">Oscuro</option>
                     </select>
+                    <span asp-validation-for="Usuario.Tema" class="error-text" style="color:red; font-size:12px; margin-top:5px; display:block;"></span>
                 </label>
             </div>
         </section>
@@ -211,7 +223,7 @@
             </div>
             <div class="modal-footer border-0">
                 <button type="button" class="config-secondary-button" data-bs-dismiss="modal">Cancelar</button>
-                <button type="button" id="confirmDiscardButton" class="config-primary-button">Descarta</button>
+                <button type="button" id="confirmDiscardButton" class="config-primary-button">Descartar</button>
             </div>
         </div>
     </div>
