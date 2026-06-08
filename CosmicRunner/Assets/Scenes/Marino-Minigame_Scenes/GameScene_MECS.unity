@@ -7924,7 +7924,7 @@ MonoBehaviour:
   qualityDisplaySeconds: 1.5
   clearSlotsOnStart: 1
   assignRandomPromptsOnStart: 1
-  apiBaseUrl: https://localhost:12003/minigame
+  apiBaseUrl: https://marino.onyx.14082006.xyz/minigame
   clickActionName: Drag
   pointerActionName: Point
   worldCamera: {fileID: 1816648660}

@@ -1398,6 +1398,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameOverControl
   resultText: {fileID: 1289422290}
   scoreText: {fileID: 1691635022}
+  apiBaseUrl: https://marino.onyx.14082006.xyz/minigame
+  userId: 1
 --- !u!4 &1576710343
 Transform:
   m_ObjectHideFlags: 0
