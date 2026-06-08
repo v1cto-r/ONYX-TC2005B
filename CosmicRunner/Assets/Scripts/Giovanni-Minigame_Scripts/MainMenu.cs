@@ -29,6 +29,7 @@ namespace Gio.Minigame
         // Boton para salir del juego
         public void QuitButton()
         {
+            Time.timeScale = 1f;
             if (SFXManager.Instance != null) SFXManager.Instance.StopBackgroundMusic();
             SceneManager.LoadScene("GameSelectScene");
         }
