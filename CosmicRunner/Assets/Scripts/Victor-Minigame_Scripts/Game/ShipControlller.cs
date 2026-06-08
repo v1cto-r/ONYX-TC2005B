@@ -46,7 +46,7 @@ namespace AB {
         public GameObject bulletPrefab;
         public float bulletOffset = 0.5f;
         public float shootCooldown = 0.5f;
-        private InputAction shootAction;
+        [HideInInspector] public InputAction shootAction;
 
         [Header("Shield")]
         public GameObject shieldObject;

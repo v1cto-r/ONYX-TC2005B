@@ -70,11 +70,15 @@ namespace AB
 
         public void PauseGame() {
             Time.timeScale = 0f;
+            ShipControlller shipController = FindObjectOfType<ShipControlller>();
+            shipController.shootAction.Disable();
             pauseMenu.SetActive(true);
         }
 
         public void ResumeGame() {
             Time.timeScale = 1f;
+            ShipControlller shipController = FindObjectOfType<ShipControlller>();
+            shipController.shootAction.Enable();
             pauseMenu.SetActive(false);
         }
     }
