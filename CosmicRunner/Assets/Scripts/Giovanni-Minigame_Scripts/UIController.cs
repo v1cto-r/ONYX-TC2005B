@@ -54,7 +54,6 @@ namespace Gio.Minigame
 
         private IEnumerator EjecutarAtaque()
         {
-            if (SFXManager.Instance != null) SFXManager.Instance.PlayEnemySound();
             ataqueEnCurso = true;
 
             int indexAleatorio = Random.Range(0, APIAttackManager.Instance.listaPrompts.Count);
@@ -88,6 +87,7 @@ namespace Gio.Minigame
             textoZonaInferior.text = "";
 
             Instantiate(prefabEnemigo, puntoAtaque.position, puntoAtaque.rotation);
+            if (SFXManager.Instance != null) SFXManager.Instance.PlayEnemySound();
             ataqueEnCurso = false;
         }
     }
