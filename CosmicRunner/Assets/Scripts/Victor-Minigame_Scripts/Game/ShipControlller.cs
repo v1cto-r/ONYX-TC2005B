@@ -61,15 +61,45 @@ namespace AB {
             moveAction = InputSystem.actions.FindAction("Move");
             shootAction = InputSystem.actions.FindAction("Shoot");
 
-            angle = newAngle = initialAngleRadians;
+        if (moveAction == null)
+        {
+            Debug.LogError("Move action was not found in Input System Actions.", this);
+        }
+
+        if (shootAction == null)
+        {
+            Debug.LogError("Shoot action was not found in Input System Actions.", this);
+        }
 
             position = CalculateShipPosition(angle);
             ship.transform.position = position;
         }
 
+        private void OnEnable()
+        {
+            if (moveAction == null)
+            {
+                moveAction = InputSystem.actions.FindAction("Move");
+            }
+
+            if (shootAction == null)
+            {
+                shootAction = InputSystem.actions.FindAction("Shoot");
+            }
+
+            moveAction?.Enable();
+            shootAction?.Enable();
+        }
+
+        private void OnDisable()
+        {
+            moveAction?.Disable();
+            shootAction?.Disable();
+        }
+
         void Update()
         {
-            if (shootAction.WasPressedThisFrame())
+            if (shootAction != null && shootAction.WasPressedThisFrame())
             {
                 if (GameController.Instance.GetBullets() > 0)
                 {
@@ -94,7 +124,11 @@ namespace AB {
 
         void FixedUpdate()
         {
-            float input = moveAction.ReadValue<Vector2>().y;
+            float input = 0f;
+        if (moveAction != null)
+        {
+            input = moveAction.ReadValue<Vector2>().y;
+        }
 
             Debug.Log("Input: " + input);
 

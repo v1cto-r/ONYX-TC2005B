@@ -44,21 +44,20 @@ public class ShipMenuMovement : MonoBehaviour
 
     private void OnEnable()
     {
-        if (moveAction != null)
+        if (moveAction == null)
         {
-            moveAction.Enable();
+            moveAction = InputSystem.actions.FindAction(moveActionName);
         }
+
+        moveAction?.Enable();
     }
 
     private void OnDisable()
     {
-        if (moveAction != null)
-        {
-            moveAction.Disable();
-        }
-
+        moveAction?.Disable();
         moveInput = Vector2.zero;
     }
+
 
     private void Update()
     {

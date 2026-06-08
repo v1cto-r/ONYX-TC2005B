@@ -38,6 +38,38 @@ public class PlayerMovement : MonoBehaviour
         // obtiene las acciones del input system
         moveAction = InputSystem.actions.FindAction("Move");
         jumpAction = InputSystem.actions.FindAction("Jump");
+
+        if (moveAction == null)
+        {
+            Debug.LogError("Move action was not found in Input System Actions.", this);
+        }
+
+        if (jumpAction == null)
+        {
+            Debug.LogError("Jump action was not found in Input System Actions.", this);
+        }
+    }
+
+    private void OnEnable()
+    {
+        if (moveAction == null)
+        {
+            moveAction = InputSystem.actions.FindAction("Move");
+        }
+
+        if (jumpAction == null)
+        {
+            jumpAction = InputSystem.actions.FindAction("Jump");
+        }
+
+        moveAction?.Enable();
+        jumpAction?.Enable();
+    }
+
+    private void OnDisable()
+    {
+        moveAction?.Disable();
+        jumpAction?.Disable();
     }
 
     void Update()
@@ -46,6 +78,11 @@ public class PlayerMovement : MonoBehaviour
         if (Time.timeScale == 0f)
         {
             jumpQueue = false;
+            return;
+        }
+
+        if (moveAction == null)
+        {
             return;
         }
 
@@ -63,7 +100,7 @@ public class PlayerMovement : MonoBehaviour
         }
         
         // si presiona salto y esta en el suelo, guarda la orden
-        if (jumpAction.triggered && isGrounded)
+        if (jumpAction != null && jumpAction.triggered && isGrounded)
         {
             jumpQueue = true;
         }
