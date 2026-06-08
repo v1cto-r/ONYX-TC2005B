@@ -1,7 +1,11 @@
 from flask import Blueprint, request, jsonify
-from services.prompts_services import add_prompt, get_prompts_and_comments, rate_prompt, add_comment, toggle_save
+from services.prompts_services import add_prompt, get_prompts_and_comments, rate_prompt, add_comment, toggle_save, get_prompt_options
 
 prompts_bp = Blueprint("prompts", __name__)
+
+@prompts_bp.route("/prompts/options", methods=["GET"])
+def prompt_options():
+    return jsonify(get_prompt_options())
 
 @prompts_bp.route("/prompts/full", methods=["GET"])
 def get_prompts():

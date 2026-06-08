@@ -2,6 +2,16 @@ from database.database import get_db_connection
 
 connection = get_db_connection()
 
+
+def get_prompt_options():
+    cursor = connection.cursor(dictionary=True)
+    cursor.execute("SELECT department_id, name FROM departments ORDER BY name")
+    departments = cursor.fetchall()
+    cursor.execute("SELECT category_id, name FROM prompts_categories ORDER BY name")
+    categories = cursor.fetchall()
+    cursor.close()
+    return {"departments": departments, "categories": categories}
+
 def get_prompts_and_comments(user_id: int , search_text: str | None, category_id: int | None, department_id: int | None):
     cursor = connection.cursor(dictionary=True)
 
