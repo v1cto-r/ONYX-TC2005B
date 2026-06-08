@@ -13,7 +13,7 @@ namespace Gio.Minigame
 
         public void HelpButton()
         {
-            Debug.Log("Falta agregar tutorial");
+            SceneManager.LoadScene("IETutorial");
         }
 
         // Boton para salir del juego
