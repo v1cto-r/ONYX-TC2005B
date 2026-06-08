@@ -71,14 +71,14 @@ public class UsuarioService : IUsuarioService
             departamentoNombre = GetString(perfil, "department_name");
         }
 
-        if (!string.IsNullOrWhiteSpace(departamentoNombre) || usuario.DepartamentoId > 0)
-        {
-            usuario.Departamento = new Departamento
-            {
-                Id = usuario.DepartamentoId,
-                Nombre = departamentoNombre
-            };
-        }
+		if (!string.IsNullOrWhiteSpace(departamentoNombre) || usuario.DepartamentoId > 0)
+		{
+			usuario.Departamento = new Departamento
+			{
+				department_id = usuario.DepartamentoId,
+				name = departamentoNombre
+			};
+		}
 
         var promptModels = new List<PromptModel>();
         if (promptsRecientes.ValueKind == JsonValueKind.Array)

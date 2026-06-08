@@ -1,207 +1,146 @@
-using System;
 using System.Diagnostics;
-using System.Linq;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using CosmicRunnerFront.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using CosmicRunnerFront.Models.InicioModels;
-using CosmicRunnerFront.DataInicio;
-using Microsoft.VisualBasic.FileIO; 
+using CosmicRunnerFront.Services;
+using CosmicRunnerFront.Models;
 
 namespace CosmicRunnerFront.Controllers;
 
 public class InicioController : Controller
 {
-    private const string CurrentUserSessionKey = "CurrentUserId";
+    private readonly IInicioApiService _inicioApiService;
 
-    public IActionResult Index()
+    public InicioController(IInicioApiService inicioApiService)
     {
-        var currentUserId = GetCurrentUserId();
-        if (currentUserId is null)
-        {
-            return RedirectToAction("Index", "Home");
-        }
+        _inicioApiService = inicioApiService;
+    }
 
-        // Obtenemos las ideas ordenadas por ID para mantener el orden del mockup
-        var ideasGuardadas = MockDatabase.Ideas.OrderBy(i => i.Id).ToList();
-        var usuarioActual = MockDatabase.Usuarios.FirstOrDefault(u => u.Id == currentUserId.Value);
+    [HttpGet]
+    public async Task<IActionResult> Index()
+    {
+        int? currentUserId = HttpContext.Session.GetInt32("CurrentUserId");
+        if (currentUserId == null) return RedirectToAction("Index", "Home");
 
-        if (usuarioActual is null)
-        {
-            return RedirectToAction("Index", "Home");
-        }
+        var viewModel = new InicioViewModel();
         
-        ViewBag.ListaIdeas = ideasGuardadas;
-        ViewBag.UsuarioActual = usuarioActual;
-        ViewData["NuevaIdea"] = new Idea();
-        
-        return View();
+        // Pasamos el ID dinámico con .Value ya que garantizamos que no es nulo
+        viewModel.UsuarioActual = await _inicioApiService.GetUsuarioByIdAsync(currentUserId.Value);
+        viewModel.ListaIdeas = await _inicioApiService.GetIdeasAsync(currentUserId.Value);
+
+        var departamentos = await _inicioApiService.GetDepartamentosAsync();
+        var areas = await _inicioApiService.GetAreasImpactoAsync();
+
+        viewModel.NuevaIdea.CatalogoDepartamentos = new SelectList(departamentos, "department_id", "name");
+        viewModel.NuevaIdea.CatalogoAreasImpacto = new SelectList(areas, "area_impacto_id", "name");
+
+        return View(viewModel);
     }
 
     [HttpPost]
-    public IActionResult CrearIdea(Idea nuevaIdea)
+    public async Task<IActionResult> CrearIdea(FormularioIdeaViewModel NuevaIdea)
     {
-        var currentUserId = GetCurrentUserId();
-        if (currentUserId is null)
+        int? currentUserId = HttpContext.Session.GetInt32("CurrentUserId");
+        if (currentUserId == null) return RedirectToAction("Index", "Home");
+
+        if (ModelState.IsValid)
         {
-            return RedirectToAction("Index", "Home");
-        }
-
-        nuevaIdea.Id = MockDatabase.Ideas.Any() ? MockDatabase.Ideas.Max(i => i.Id) + 1 : 1; 
-        nuevaIdea.FechaPublicacion = DateTime.Now;
-        nuevaIdea.Estado = EstadoIniciativa.EnRevisionInicial;
-        
-        nuevaIdea.AutorId = currentUserId.Value; 
-        nuevaIdea.Autor = MockDatabase.Usuarios.FirstOrDefault(u => u.Id == currentUserId.Value);
-        nuevaIdea.Departamento = MockDatabase.Departamentos.FirstOrDefault(d => d.Id == nuevaIdea.DepartamentoId);
-        nuevaIdea.AreaImpacto = MockDatabase.AreasImpacto.FirstOrDefault(a => a.Id == nuevaIdea.AreaImpactoId);
-
-        nuevaIdea.ListaColaboradores = new List<Usuario>();
-        nuevaIdea.ListaComentarios = new List<Comentario>();
-
-        MockDatabase.Ideas.Add(nuevaIdea);
-        return RedirectToAction("Index");
-    }
-   
-    [HttpPost]
-    public IActionResult UnirseProyecto(int ideaId)
-    {
-        var currentUserId = GetCurrentUserId();
-        if (currentUserId is null)
-        {
-            return RedirectToAction("Index", "Home");
-        }
-
-        // idea en nuestra "Base de Datos"
-        var idea = MockDatabase.Ideas.FirstOrDefault(i => i.Id == ideaId);
-        
-        if (idea != null)
-        {
-            var usuarioActual = MockDatabase.Usuarios.FirstOrDefault(u => u.Id == currentUserId.Value);
+            NuevaIdea.autor_id = currentUserId.Value;
             
-            // 3. Verificamos que el usuario no sea ya un colaborador para no duplicarlo
-            if (usuarioActual != null && !idea.ListaColaboradores.Any(c => c.Id == usuarioActual.Id) && usuarioActual.Id != idea.AutorId)
-            {
-                idea.ListaColaboradores.Add(usuarioActual);
-            }
+            var exito = await _inicioApiService.CrearIdeaAsync(NuevaIdea);
+            if (exito) return RedirectToAction("Index");
+        }
+
+        // Si el modelo es inválido, recargamos la vista con los datos del usuario real
+        var viewModel = new InicioViewModel
+        {
+            NuevaIdea = NuevaIdea, 
+            UsuarioActual = await _inicioApiService.GetUsuarioByIdAsync(currentUserId.Value),
+            ListaIdeas = await _inicioApiService.GetIdeasAsync(currentUserId.Value)
+        };
+
+        var departamentos = await _inicioApiService.GetDepartamentosAsync();
+        var areas = await _inicioApiService.GetAreasImpactoAsync();
+
+        viewModel.NuevaIdea.CatalogoDepartamentos = new SelectList(departamentos, "department_id", "name");
+        viewModel.NuevaIdea.CatalogoAreasImpacto = new SelectList(areas, "area_impacto_id", "name");
+
+        return View("Index", viewModel);
+    }
+
+    [HttpGet]
+    public IActionResult LimpiarFormulario()
+    {
+        return RedirectToAction("Index");
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> DarLike(int ideaId)
+    {
+        int? currentUserId = HttpContext.Session.GetInt32("CurrentUserId");
+        if (currentUserId == null) return RedirectToAction("Index", "Home");
+
+        await _inicioApiService.ReaccionarIdeaAsync(ideaId, currentUserId.Value, "like");
+        return RedirectToAction("Index");
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> DarDislike(int ideaId)
+    {
+        int? currentUserId = HttpContext.Session.GetInt32("CurrentUserId");
+        if (currentUserId == null) return RedirectToAction("Index", "Home");
+
+        await _inicioApiService.ReaccionarIdeaAsync(ideaId, currentUserId.Value, "dislike");
+        return RedirectToAction("Index");
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> GuardarComentario(int ideaId, string Mensaje)
+    {
+        int? currentUserId = HttpContext.Session.GetInt32("CurrentUserId");
+        if (currentUserId == null) return RedirectToAction("Index", "Home");
+
+        if (!string.IsNullOrWhiteSpace(Mensaje))
+        {
+            await _inicioApiService.GuardarComentarioAsync(ideaId, currentUserId.Value, Mensaje);
         }
         
-        // Devolvemos al usuario al feed para que vea su pastilla de colaborador
         return RedirectToAction("Index");
     }
 
-    // Likes
     [HttpPost]
-    public IActionResult DarLike(int ideaId)
+    public async Task<IActionResult> UnirseProyecto(int ideaId)
     {
-        if (GetCurrentUserId() is null)
-        {
-            return RedirectToAction("Index", "Home");
-        }
+        int? currentUserId = HttpContext.Session.GetInt32("CurrentUserId");
+        if (currentUserId == null) return RedirectToAction("Index", "Home");
 
-        var idea = MockDatabase.Ideas.FirstOrDefault(i => i.Id == ideaId);
-        if (idea != null)
-        {
-            idea.Likes++;
-        }
+        await _inicioApiService.UnirseProyectoAsync(ideaId, currentUserId.Value);
         return RedirectToAction("Index");
     }
 
-    // Dislikes
     [HttpPost]
-    public IActionResult DarDislike(int ideaId)
+    public async Task<IActionResult> DarLikeComentario(int commentId)
     {
-        if (GetCurrentUserId() is null)
-        {
-            return RedirectToAction("Index", "Home");
-        }
+        int? currentUserId = HttpContext.Session.GetInt32("CurrentUserId");
+        if (currentUserId == null) return RedirectToAction("Index", "Home");
 
-        var idea = MockDatabase.Ideas.FirstOrDefault(i => i.Id == ideaId);
-        if (idea != null)
-        {
-            idea.Dislikes++;
-        }
+        await _inicioApiService.ReaccionarComentarioAsync(commentId, currentUserId.Value, "like");
         return RedirectToAction("Index");
     }
 
-    // Guardar Comentarios
     [HttpPost]
-    public IActionResult GuardarComentario(int ideaId, string Mensaje)
+    public async Task<IActionResult> DarDislikeComentario(int commentId)
     {
-        var currentUserId = GetCurrentUserId();
-        if (currentUserId is null)
-        {
-            return RedirectToAction("Index", "Home");
-        }
+        int? currentUserId = HttpContext.Session.GetInt32("CurrentUserId");
+        if (currentUserId == null) return RedirectToAction("Index", "Home");
 
-        if (!string.IsNullOrWhiteSpace(Mensaje))
-        {
-            var idea = MockDatabase.Ideas.FirstOrDefault(i => i.Id == ideaId);
-            if (idea != null)
-            {
-                var nuevoComentario = new Comentario
-                {
-                    Id = idea.ListaComentarios.Any() ? idea.ListaComentarios.Max(c => c.Id) + 1 : 1,
-                    IdeaId = ideaId,
-                    Mensaje = Mensaje,
-                    FechaCreacion = DateTime.Now,
-                    AutorId = currentUserId.Value,
-                    Autor = MockDatabase.Usuarios.FirstOrDefault(u => u.Id == currentUserId.Value),
-                    Likes = 0,
-                    Dislikes = 0
-                };
-                
-                idea.ListaComentarios.Add(nuevoComentario);
-            }
-        }
+        await _inicioApiService.ReaccionarComentarioAsync(commentId, currentUserId.Value, "dislike");
         return RedirectToAction("Index");
     }
-
-    // Guardar Respuestas anidadas
-    [HttpPost]
-    public IActionResult GuardarRespuesta(int comentarioPadreId, string Mensaje)
-    {
-        var currentUserId = GetCurrentUserId();
-        if (currentUserId is null)
-        {
-            return RedirectToAction("Index", "Home");
-        }
-
-        if (!string.IsNullOrWhiteSpace(Mensaje))
-        {
-            // Buscamos el comentario padre dentro de las ideas
-            foreach (var idea in MockDatabase.Ideas)
-            {
-                var padre = idea.ListaComentarios.FirstOrDefault(c => c.Id == comentarioPadreId);
-                if (padre != null)
-                {
-                    var nuevaRespuesta = new Respuesta
-                    {
-                        Id = padre.ListaRespuestas.Any() ? padre.ListaRespuestas.Max(r => r.Id) + 1 : 1,
-                        ComentarioPadreId = comentarioPadreId,
-                        Mensaje = Mensaje,
-                        FechaCreacion = DateTime.Now,
-                        AutorId = currentUserId.Value,
-                        Autor = MockDatabase.Usuarios.FirstOrDefault(u => u.Id == currentUserId.Value),
-                        Likes = 0,
-                        Dislikes = 0
-                    };
-                    
-                    padre.ListaRespuestas.Add(nuevaRespuesta);
-                    break; // Salimos del ciclo porque ya encontramos el comentario
-                }
-            }
-        }
-        return RedirectToAction("Index");
-    }
-
-    public IActionResult Privacy() => View();
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error() => View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-
-    private int? GetCurrentUserId()
+    public IActionResult Error()
     {
-        return HttpContext.Session.GetInt32(CurrentUserSessionKey);
+        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
 }

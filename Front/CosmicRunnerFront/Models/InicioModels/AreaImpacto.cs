@@ -1,8 +1,7 @@
-namespace CosmicRunnerFront.Models.InicioModels
-{
+namespace CosmicRunnerFront.Models.InicioModels{
     public class AreaImpacto
     {
-        public int Id { get; set; }
-        public string Nombre { get; set; }
+        public int area_impacto_id { get; set; }
+        public string name { get; set; }
     }
 }

@@ -23,7 +23,7 @@ public class UsuarioViewModel
     public string FotoPerfilUrl => Usuario.FotoPerfilUrl;
     public string Biografia => Usuario.Biografia;
     public string FechaIngresoTexto => Usuario.FechaIngreso.ToString("dd 'de' MMMM 'de' yyyy", new CultureInfo("es-MX"));
-    public string Departamento => Usuario.Departamento?.Nombre ?? string.Empty;
+    public string Departamento => Usuario.Departamento?.name ?? string.Empty;
     public List<HabilidadModel> HabilidadesDisponibles { get; set; } = new();
     public string SeccionActivaEtiqueta => Secciones.FirstOrDefault(x => x.Accion == SeccionActiva)?.Etiqueta ?? SeccionActiva;
 }

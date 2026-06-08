@@ -1,24 +1,13 @@
-using System;
-using System.Collections.Generic;
-
-namespace CosmicRunnerFront.Models.InicioModels
-{
+namespace CosmicRunnerFront.Models.InicioModels{
     public class Comentario
     {
-        public int Id { get; set; }
-        public int AutorId { get; set; }
-        public Usuario Autor { get; set; }
-        
-        public int IdeaId { get; set; }
-        public Idea IdeaAsociada { get; set; }
-
-        public DateTime FechaCreacion { get; set; }
-        public string Mensaje { get; set; }
-        
-        public int Likes { get; set; }
-        public int Dislikes { get; set; }
-
-        // Relación con las respuestas
-        public List<Respuesta> ListaRespuestas { get; set; } = new List<Respuesta>();
+        public int comment_id { get; set; }
+        public string mensaje { get; set; }
+        public int likes { get; set; }
+        public int dislikes { get; set; }
+        public string autor_nombre { get; set; }
+        public string autor_foto { get; set; } 
+        public int dias_transcurridos { get; set; } 
+        public string reaccion_usuario { get; set; } = string.Empty;
     }
 }

@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations; // <-- Asegúrate de agregar esta línea
+using System.ComponentModel.DataAnnotations; 
 
 namespace CosmicRunnerFront.Models.InicioModels
 {
