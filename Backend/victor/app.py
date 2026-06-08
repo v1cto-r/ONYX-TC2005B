@@ -1,0 +1,16 @@
+from flask import Flask, jsonify
+from routes.game_routes import game_bp
+from routes.prompts_routes import prompts_bp
+
+app = Flask(__name__)
+app.json.sort_keys = False
+
+app.register_blueprint(game_bp, url_prefix="/api")
+app.register_blueprint(prompts_bp, url_prefix="/api")
+
+@app.route('/', methods=['GET'])
+def hello_world():
+    return jsonify({'hello': 'world'})
+
+if __name__ == '__main__':
+    app.run(debug=True, host='0.0.0.0', ssl_context="adhoc", port=12002)
