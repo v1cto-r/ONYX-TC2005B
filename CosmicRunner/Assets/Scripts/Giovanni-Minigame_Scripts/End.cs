@@ -18,7 +18,7 @@ public class End : MonoBehaviour
 {
     public TMP_Text resultado;
     public TMP_Text creditsText;
-    public string apiUrl = "https://127.0.0.1:12003/minigame/creditos";
+    public string apiUrl = "https://marino.onyx.14082006.xyz/minigame/creditos";
 
     void Start()
     {

@@ -26,7 +26,7 @@ public class APIAttackManager : MonoBehaviour
 
     private IEnumerator GetPromptsRoutine()
     {
-        UnityWebRequest web = UnityWebRequest.Get("https://localhost:12001/api/prompts");
+        UnityWebRequest web = UnityWebRequest.Get("https://gio.onyx.14082006.xyz/api/prompts");
         
         web.certificateHandler = new ForceAceptAll(); 
 
