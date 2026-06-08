@@ -112,7 +112,7 @@
             <form asp-action="SavePrompt" method="post">
               <input type="hidden" name="promptId" value="@p.promptId" />
               <button class="save-button iconed-button secondary-button" type="submit">
-                @(p.IsSaved ? "Guardado" : "Guardar") <img src="~/assets/icons/@(p.IsSaved ? "bookmark-fill.svg" : "bookmark.svg")" />
+                @(p.IsSaved == 1 ? "Guardado" : "Guardar") <img src="~/assets/icons/@(p.IsSaved == 1 ? "bookmark-fill.svg" : "bookmark.svg")" />
               </button>
             </form>
           </div>

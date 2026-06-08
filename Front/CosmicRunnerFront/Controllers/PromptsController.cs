@@ -1,87 +1,42 @@
 using System.Diagnostics;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using CosmicRunnerFront.Models;
+using CosmicRunnerFront.Services.Prompts;
 
 namespace CosmicRunnerFront.Controllers;
 
 public class PromptsController : Controller
 {
     private const string CurrentUserSessionKey = "CurrentUserId";
+    private readonly IPromptService _promptService;
     private readonly ILogger<PromptsController> _logger;
 
-    // Los valores mock de manera estatica, para simular una base de datos en memoria. Es solo de demo, se saca de la base de datos despues.
-    private static List<CategoryModel> _dbCategories = new List<CategoryModel> { 
-        new CategoryModel { CategoryId = 1, CategoryName = "Excel" }, 
-        new CategoryModel { CategoryId = 2, CategoryName = "Resumen" } 
-    };
-
-    private static List<DepartmentModel> _dbDepartments = new List<DepartmentModel> { 
-        new DepartmentModel { DepartmentId = 1, DepartmentName = "Innovación" }, 
-        new DepartmentModel { DepartmentId = 2, DepartmentName = "Finanzas" } 
-    };
-
-    private static List<PromptModel> _mockPrompts = new List<PromptModel>
-    {
-        new PromptModel { promptId = 1, promptTitle = "Mi prompt de excel", promptDescription = "Actúa como un analista financiero especializado en la industria de electrodomésticos (Whirlpool). Necesito editar un archivo de Excel con datos financieros de la empresa. Guíame paso a paso para realizar las siguientes tareas, asumiendo que tengo un nivel intermedio en Excel. No inventes datos reales de Whirlpool, sino estructura y fórmulas genéricas que pueda aplicar a mi archivo", promptCategoryId = 1, promptCategory = "Excel", promptDepartmentId = 1, promptDepartment = "Innovación", promptCreatedAt = DateTime.Now},
-        new PromptModel { promptId = 2, promptTitle = "Para generar un reporte mensual", promptDescription = "Actúa como un consultor senior en innovación corporativa. Trabajo en el departamento de innovación de una empresa de electrodomésticos (similar a Whirlpool). Necesito redactar un resumen administrativo (executive summary) de máximo una página para presentar a la dirección general. El resumen debe basarse en los siguientes elementos (puedes inventar datos realistas del sector, pero mantenlos coherentes): ...", promptCategoryId = 2, promptCategory = "Resumen", promptDepartmentId = 2, promptDepartment = "Finanzas", promptCreatedAt = DateTime.Now.AddDays(-1) }
-    };
-
-    // Comentarios de mock
-    private static List<PromptComment> _mockComments = new List<PromptComment> {
-        new PromptComment { commentId = 1, commentPromptId = 1, commentUserId = 2, commentContent = "¡Excelente prompt, muy útil!" },
-        new PromptComment { commentId = 2, commentPromptId = 1, commentUserId = 2, commentContent = "Lo usé y me ahorró mucho tiempo." }
-    };
-    private static List<int> _mockSavedPrompts = new List<int>(); // Prompts guardados (vacio inicialmente)
-    private static List<PromptRating> _mockRatings = new List<PromptRating>(); // Ratings de prompts (vacio inicialmente)
-
-    public PromptsController(ILogger<PromptsController> logger)
+    public PromptsController(ILogger<PromptsController> logger, IPromptService promptService)
     {
         _logger = logger;
+        _promptService = promptService;
     }
 
-    public IActionResult Index(string? SearchText, int? FilterCategoryId, int? FilterDepartmentId)
+    public async Task<IActionResult> Index(string? SearchText, int? FilterCategoryId, int? FilterDepartmentId)
     {
         var currentUserId = GetCurrentUserId();
         if (currentUserId is null)
-        {
             return RedirectToAction("Index", "Home");
-        }
 
-        // Crear las SelectLists para las opciones del select
-        var categories = new SelectList(_dbCategories, "CategoryId", "CategoryName");
-        var departments = new SelectList(_dbDepartments, "DepartmentId", "DepartmentName");
+        var prompts = await _promptService.ObtenerPromptAsync(
+            currentUserId.Value,
+            SearchText,
+            FilterCategoryId,
+            FilterDepartmentId
+        ) ?? new List<PromptModel>();
 
-        var promptsToList = _mockPrompts.AsEnumerable();
-
-        // Filtro falso solo para demostración
-        if (!string.IsNullOrEmpty(SearchText))
-        {
-            promptsToList = promptsToList.Where(p => 
-                (p.promptTitle != null && p.promptTitle.Contains(SearchText, StringComparison.OrdinalIgnoreCase)) || 
-                (p.promptDescription != null && p.promptDescription.Contains(SearchText, StringComparison.OrdinalIgnoreCase)));
-        }
-
-        var finalPrompts = promptsToList.ToList();
-        
-        // Agregar los datos de comentarios, guardados y ratings a cada prompt antes de enviarlos a la vista
-        foreach(var p in finalPrompts)
-        {
-            p.Comments = _mockComments.Where(c => c.commentPromptId == p.promptId).ToList();
-            p.IsSaved = _mockSavedPrompts.Contains(p.promptId);
-            p.Likes = _mockRatings.Count(r => r.ratingPromptId == p.promptId && r.ratingValue == 1);
-            p.Dislikes = _mockRatings.Count(r => r.ratingPromptId == p.promptId && r.ratingValue == -1);
-            
-            p.CurrentUserRating = _mockRatings.Find(r => r.ratingPromptId == p.promptId && r.ratingUserId == currentUserId.Value)?.ratingValue ?? 0;
-        }
-
-        // Enviar a la vista
+        var (categories, departments) = await GetSelectListsAsync();
         var vm = new PromptsViewModel
         {
             Categories = categories,
             Departments = departments,
-            Prompts = finalPrompts,
+            Prompts = prompts,
             SearchText = SearchText,
             FilterCategoryId = FilterCategoryId,
             FilterDepartmentId = FilterDepartmentId
@@ -91,144 +46,65 @@ public class PromptsController : Controller
     }
 
     [HttpPost]
-    public IActionResult CreatePrompt(PromptsViewModel model)
+    public async Task<IActionResult> CreatePrompt(PromptsViewModel model)
     {
-        if (GetCurrentUserId() is null)
-        {
+        var currentUserId = GetCurrentUserId();
+        if (currentUserId is null)
             return RedirectToAction("Index", "Home");
-        }
 
         if (!ModelState.IsValid)
         {
-            // Si el modelo no es válido, necesitamos recargar las listas y los prompts para mostrar la vista correctamente
-            model.Categories = new SelectList(_dbCategories, "CategoryId", "CategoryName");
-            model.Departments = new SelectList(_dbDepartments, "DepartmentId", "DepartmentName");
-            model.Prompts = _mockPrompts.ToList();
-            
-            return View("Index", model); 
+            var (cats, depts) = await GetSelectListsAsync();
+            model.Categories = cats;
+            model.Departments = depts;
+            model.Prompts = await _promptService.ObtenerPromptAsync(currentUserId.Value, null, null, null) ?? new List<PromptModel>();
+            return View("Index", model);
         }
 
-        // Sacar el nombre de la categoría/departamento en base al id
-        var selectedCategory = _dbCategories.Find(c => c.CategoryId == model.NewPromptCategoryId);
-        var selectedDepartment = _dbDepartments.Find(d => d.DepartmentId == model.NewPromptDepartmentId);
+        var status = await _promptService.CrearPromptAsync(
+            currentUserId.Value,
+            model.NewPromptTitle,
+            model.NewPromptDescription,
+            model.NewPromptCategoryId ?? 0,
+            model.NewPromptDepartmentId ?? 0
+        );
 
-        // Añadirlo a la "base de datos" (en este caso, la lista estática)
-        var newPrompt = new PromptModel
-        {
-            promptId = _mockPrompts.Count > 0 ? _mockPrompts.Max(p => p.promptId) + 1 : 1,
-            promptTitle = model.NewPromptTitle,
-            promptDescription = model.NewPromptDescription,
-            promptCategoryId = model.NewPromptCategoryId ?? 0,
-            promptCategory = selectedCategory?.CategoryName,
-            promptDepartmentId = model.NewPromptDepartmentId ?? 0,
-            promptDepartment = selectedDepartment?.DepartmentName,
-            promptCreatedAt = DateTime.Now
-        };
-
-        // Agregar al principio de la lista para que aparezca primero
-        _mockPrompts.Insert(0, newPrompt);
-
-        TempData["SuccessMessage"] = "¡Prompt creado exitosamente!";
-
-        // Regresar a la vista
+        TempData["SuccessMessage"] = status;
         return RedirectToAction("Index");
     }
 
     [HttpPost]
-    public IActionResult AddComment(int promptId, string? commentText)
+    public async Task<IActionResult> AddComment(int promptId, string? commentText)
     {
         var currentUserId = GetCurrentUserId();
         if (currentUserId is null)
-        {
             return RedirectToAction("Index", "Home");
-        }
 
-        if (string.IsNullOrWhiteSpace(commentText))
-        {
-            ModelState.AddModelError("commentText_" + promptId, "El comentario no puede estar vacío.");
-            
-            // Volver a cargar la vista con el error, para eso necesitamos recargar las listas y los prompts
-            var categories = new SelectList(_dbCategories, "CategoryId", "CategoryName");
-            var departments = new SelectList(_dbDepartments, "DepartmentId", "DepartmentName");
-            var finalPrompts = _mockPrompts.ToList();
-            foreach(var p in finalPrompts)
-            {
-                p.Comments = _mockComments.Where(c => c.commentPromptId == p.promptId).ToList();
-                p.IsSaved = _mockSavedPrompts.Contains(p.promptId);
-                p.Likes = _mockRatings.Count(r => r.ratingPromptId == p.promptId && r.ratingValue == 1);
-                p.Dislikes = _mockRatings.Count(r => r.ratingPromptId == p.promptId && r.ratingValue == -1);
-                p.CurrentUserRating = _mockRatings.Find(r => r.ratingPromptId == p.promptId && r.ratingUserId == currentUserId.Value)?.ratingValue ?? 0;
-            }
-
-            var vm = new PromptsViewModel
-            {
-                Categories = categories,
-                Departments = departments,
-                Prompts = finalPrompts
-            };
-
-            return View("Index", vm);
-        }
-
-        var newComment = new PromptComment
-        {
-            commentId = _mockComments.Count > 0 ? _mockComments.Max(c => c.commentId) + 1 : 1,
-            commentPromptId = promptId,
-            commentUserId = currentUserId.Value,
-            commentContent = commentText
-        };
-        
-        _mockComments.Add(newComment);
-        
-        return RedirectToAction("Index");
-    }
-
-    [HttpPost]
-    public IActionResult SavePrompt(int promptId)
-    {
-        if (GetCurrentUserId() is null)
-        {
-            return RedirectToAction("Index", "Home");
-        }
-
-        if (_mockSavedPrompts.Contains(promptId))
-            _mockSavedPrompts.Remove(promptId); // Quitar de guardados
-        else
-            _mockSavedPrompts.Add(promptId);    // Agregar a guardados
+        if (!string.IsNullOrWhiteSpace(commentText))
+            await _promptService.CommentarPromptAsync(promptId, currentUserId.Value, commentText);
 
         return RedirectToAction("Index");
     }
 
     [HttpPost]
-    public IActionResult RatePrompt(int promptId, int ratingValue)
+    public async Task<IActionResult> SavePrompt(int promptId)
     {
         var currentUserId = GetCurrentUserId();
         if (currentUserId is null)
-        {
             return RedirectToAction("Index", "Home");
-        }
 
-        var existingRating = _mockRatings.Find(r => r.ratingPromptId == promptId && r.ratingUserId == currentUserId.Value);
+        await _promptService.GuardarPromptAsync(promptId, currentUserId.Value);
+        return RedirectToAction("Index");
+    }
 
-        if (existingRating != null)
-        {
-            if (existingRating.ratingValue == ratingValue)
-            {
-                // Si el usuario hace click en el mismo rating, se quita el rating (toggle)
-                _mockRatings.Remove(existingRating);
-            }
-            else
-            {
-                // Actualizar el rating existente
-                existingRating.ratingValue = ratingValue;
-            }
-        }
-        else
-        {
-            // Agregar nuevo rating
-            _mockRatings.Add(new PromptRating { ratingPromptId = promptId, ratingUserId = currentUserId.Value, ratingValue = ratingValue });
-        }
+    [HttpPost]
+    public async Task<IActionResult> RatePrompt(int promptId, int ratingValue)
+    {
+        var currentUserId = GetCurrentUserId();
+        if (currentUserId is null)
+            return RedirectToAction("Index", "Home");
 
+        await _promptService.CalificarPromptAsync(promptId, currentUserId.Value, ratingValue);
         return RedirectToAction("Index");
     }
 
@@ -241,5 +117,14 @@ public class PromptsController : Controller
     private int? GetCurrentUserId()
     {
         return HttpContext.Session.GetInt32(CurrentUserSessionKey);
+    }
+
+    private async Task<(SelectList Categories, SelectList Departments)> GetSelectListsAsync()
+    {
+        var (categories, departments) = await _promptService.ObtenerOpcionesAsync();
+        return (
+            new SelectList(categories, "CategoryId", "CategoryName"),
+            new SelectList(departments, "DepartmentId", "DepartmentName")
+        );
     }
 }

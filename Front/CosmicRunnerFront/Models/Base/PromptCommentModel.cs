@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+
 namespace CosmicRunnerFront.Models;
 
 public class PromptComment

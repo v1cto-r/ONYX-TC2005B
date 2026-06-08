@@ -1,6 +1,7 @@
 using CosmicRunnerFront.Services;
 using CosmicRunnerFront.Services.Tienda;
 using CosmicRunnerFront.Services.Usuario;
+using CosmicRunnerFront.Services.Prompts;
 using Front.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -49,17 +50,17 @@ builder.Services.AddHttpClient<TiendaApiService>()
 builder.Services.AddHttpClient<IInicioApiService, InicioApiService>()
     .ConfigurePrimaryHttpMessageHandler(() =>
     new HttpClientHandler
-        {
-            ServerCertificateCustomValidationCallback =
-            HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
-        }
-    );
-
-builder.Services.Configure<Microsoft.AspNetCore.Mvc.JsonOptions>(options =>
     {
-        options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
-    }
-);
+        ServerCertificateCustomValidationCallback =
+        HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+    });
+
+builder.Services.AddHttpClient<IPromptService, PromptService>()
+    .ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler
+    {
+        ServerCertificateCustomValidationCallback =
+        HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+    });
 
 var app = builder.Build();
 
