@@ -80,10 +80,11 @@
                     @if (Model.ListaIdeas != null && Model.ListaIdeas.Any())
                     {
                         int ranking = 1; 
+                        int idSesionActual = Model.UsuarioActual?.user_id ?? 1;
 
                         foreach (var idea in Model.ListaIdeas)
                         {
-                            <partial name="Partials/_IdeaTarjeta" model="idea" view-data='@new ViewDataDictionary(ViewData) { { "Ranking", ranking } }' />
+                            <partial name="Partials/_IdeaTarjeta" model="idea" view-data='@new ViewDataDictionary(ViewData) { { "Ranking", ranking }, { "CurrentUserId", idSesionActual } }' />
                             ranking++;
                         }
                     }

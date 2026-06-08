@@ -19,9 +19,14 @@ public class InicioController : Controller
     [HttpGet]
     public async Task<IActionResult> Index()
     {
+        int? currentUserId = HttpContext.Session.GetInt32("CurrentUserId");
+        if (currentUserId == null) return RedirectToAction("Index", "Home");
+
         var viewModel = new InicioViewModel();
-        viewModel.UsuarioActual = await _inicioApiService.GetUsuarioByIdAsync(1);
-        viewModel.ListaIdeas = await _inicioApiService.GetIdeasAsync();
+        
+        // Pasamos el ID dinámico con .Value ya que garantizamos que no es nulo
+        viewModel.UsuarioActual = await _inicioApiService.GetUsuarioByIdAsync(currentUserId.Value);
+        viewModel.ListaIdeas = await _inicioApiService.GetIdeasAsync(currentUserId.Value);
 
         var departamentos = await _inicioApiService.GetDepartamentosAsync();
         var areas = await _inicioApiService.GetAreasImpactoAsync();
@@ -35,23 +40,23 @@ public class InicioController : Controller
     [HttpPost]
     public async Task<IActionResult> CrearIdea(FormularioIdeaViewModel NuevaIdea)
     {
+        int? currentUserId = HttpContext.Session.GetInt32("CurrentUserId");
+        if (currentUserId == null) return RedirectToAction("Index", "Home");
+
         if (ModelState.IsValid)
         {
-            NuevaIdea.autor_id = 1;
-
-            var exito = await _inicioApiService.CrearIdeaAsync(NuevaIdea);
+            NuevaIdea.autor_id = currentUserId.Value;
             
-            if (exito)
-            {
-                return RedirectToAction("Index");
-            }
+            var exito = await _inicioApiService.CrearIdeaAsync(NuevaIdea);
+            if (exito) return RedirectToAction("Index");
         }
 
+        // Si el modelo es inválido, recargamos la vista con los datos del usuario real
         var viewModel = new InicioViewModel
         {
             NuevaIdea = NuevaIdea, 
-            UsuarioActual = await _inicioApiService.GetUsuarioByIdAsync(1),
-            ListaIdeas = await _inicioApiService.GetIdeasAsync()
+            UsuarioActual = await _inicioApiService.GetUsuarioByIdAsync(currentUserId.Value),
+            ListaIdeas = await _inicioApiService.GetIdeasAsync(currentUserId.Value)
         };
 
         var departamentos = await _inicioApiService.GetDepartamentosAsync();
@@ -63,13 +68,6 @@ public class InicioController : Controller
         return View("Index", viewModel);
     }
 
-
-     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
-    {
-        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-    }
-
     [HttpGet]
     public IActionResult LimpiarFormulario()
     {
@@ -79,24 +77,32 @@ public class InicioController : Controller
     [HttpPost]
     public async Task<IActionResult> DarLike(int ideaId)
     {
-        await _inicioApiService.ReaccionarIdeaAsync(ideaId, 1, "like");
+        int? currentUserId = HttpContext.Session.GetInt32("CurrentUserId");
+        if (currentUserId == null) return RedirectToAction("Index", "Home");
+
+        await _inicioApiService.ReaccionarIdeaAsync(ideaId, currentUserId.Value, "like");
         return RedirectToAction("Index");
     }
 
     [HttpPost]
     public async Task<IActionResult> DarDislike(int ideaId)
     {
-        await _inicioApiService.ReaccionarIdeaAsync(ideaId, 1, "dislike");
+        int? currentUserId = HttpContext.Session.GetInt32("CurrentUserId");
+        if (currentUserId == null) return RedirectToAction("Index", "Home");
+
+        await _inicioApiService.ReaccionarIdeaAsync(ideaId, currentUserId.Value, "dislike");
         return RedirectToAction("Index");
     }
 
     [HttpPost]
     public async Task<IActionResult> GuardarComentario(int ideaId, string Mensaje)
     {
+        int? currentUserId = HttpContext.Session.GetInt32("CurrentUserId");
+        if (currentUserId == null) return RedirectToAction("Index", "Home");
+
         if (!string.IsNullOrWhiteSpace(Mensaje))
         {
-            // Enviamos el comentario con el usuario 1 hardcodeado
-            await _inicioApiService.GuardarComentarioAsync(ideaId, 1, Mensaje);
+            await _inicioApiService.GuardarComentarioAsync(ideaId, currentUserId.Value, Mensaje);
         }
         
         return RedirectToAction("Index");
@@ -105,23 +111,36 @@ public class InicioController : Controller
     [HttpPost]
     public async Task<IActionResult> UnirseProyecto(int ideaId)
     {
-        // Registramos la solicitud con el usuario 1 hardcodeado
-        await _inicioApiService.UnirseProyectoAsync(ideaId, 1);
-        
+        int? currentUserId = HttpContext.Session.GetInt32("CurrentUserId");
+        if (currentUserId == null) return RedirectToAction("Index", "Home");
+
+        await _inicioApiService.UnirseProyectoAsync(ideaId, currentUserId.Value);
         return RedirectToAction("Index");
     }
 
     [HttpPost]
     public async Task<IActionResult> DarLikeComentario(int commentId)
     {
-        await _inicioApiService.ReaccionarComentarioAsync(commentId, 1, "like");
+        int? currentUserId = HttpContext.Session.GetInt32("CurrentUserId");
+        if (currentUserId == null) return RedirectToAction("Index", "Home");
+
+        await _inicioApiService.ReaccionarComentarioAsync(commentId, currentUserId.Value, "like");
         return RedirectToAction("Index");
     }
 
     [HttpPost]
     public async Task<IActionResult> DarDislikeComentario(int commentId)
     {
-        await _inicioApiService.ReaccionarComentarioAsync(commentId, 1, "dislike");
+        int? currentUserId = HttpContext.Session.GetInt32("CurrentUserId");
+        if (currentUserId == null) return RedirectToAction("Index", "Home");
+
+        await _inicioApiService.ReaccionarComentarioAsync(commentId, currentUserId.Value, "dislike");
         return RedirectToAction("Index");
+    }
+
+    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+    public IActionResult Error()
+    {
+        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
 }

@@ -27,9 +27,9 @@ namespace CosmicRunnerFront.Services
             return usuario ?? new UsuarioUsr();
         }
 
-        public async Task<List<Idea>> GetIdeasAsync()
+        public async Task<List<Idea>> GetIdeasAsync(int userId)
         {
-            var url = "https://127.0.0.1:12001/api/ideas?user_id=1";
+            var url = $"https://127.0.0.1:12001/api/ideas?user_id={userId}";
             var response = await _httpClient.GetAsync(url);
             
             if (!response.IsSuccessStatusCode)

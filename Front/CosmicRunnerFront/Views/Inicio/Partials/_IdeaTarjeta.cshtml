@@ -1,7 +1,7 @@
 @model CosmicRunnerFront.Models.InicioModels.Idea
 
 @{
-    int currentUserId = 1;     
+    int currentUserId = (int)(ViewData["CurrentUserId"] ?? 1);     
     bool esAutor = Model.autor.autor_id == currentUserId;
     bool esColaborador = Model.colaboradores != null && Model.colaboradores.Any(c => c.user_id == currentUserId);
 }
