@@ -2048,6 +2048,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01b6941cfde902b4387baa380a8c62c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DeadZone
+  damageCooldown: 0.5
+  allowSafeTop: 1
+  safeTopMargin: 0.15
 --- !u!61 &192044200
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3131,8 +3134,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraFollow
   target: {fileID: 458373504}
-  smoothTime: 0.2
-  offset: {x: 2, y: 1, z: -10}
+  smoothTime: 0.3
+  offset: {x: 1.5, y: 1, z: -10}
+  followY: 1
   minX: -2
   maxX: 1000
 --- !u!1 &306681246
@@ -3751,6 +3755,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01b6941cfde902b4387baa380a8c62c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DeadZone
+  damageCooldown: 0.5
+  allowSafeTop: 1
+  safeTopMargin: 0.15
 --- !u!61 &358751898
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4595,6 +4602,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01b6941cfde902b4387baa380a8c62c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DeadZone
+  damageCooldown: 0.5
+  allowSafeTop: 1
+  safeTopMargin: 0.15
 --- !u!61 &503594129
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -6236,6 +6246,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01b6941cfde902b4387baa380a8c62c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DeadZone
+  damageCooldown: 0.5
+  allowSafeTop: 1
+  safeTopMargin: 0.15
 --- !u!61 &715348203
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -8506,6 +8519,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01b6941cfde902b4387baa380a8c62c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DeadZone
+  damageCooldown: 0.5
+  allowSafeTop: 1
+  safeTopMargin: 0.15
 --- !u!61 &972292133
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -9112,6 +9128,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01b6941cfde902b4387baa380a8c62c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DeadZone
+  damageCooldown: 0.5
+  allowSafeTop: 1
+  safeTopMargin: 0.15
 --- !u!61 &1000755035
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -9835,6 +9854,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01b6941cfde902b4387baa380a8c62c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DeadZone
+  damageCooldown: 0.5
+  allowSafeTop: 1
+  safeTopMargin: 0.15
 --- !u!61 &1063890668
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -12095,6 +12117,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01b6941cfde902b4387baa380a8c62c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DeadZone
+  damageCooldown: 0.5
+  allowSafeTop: 1
+  safeTopMargin: 0.15
 --- !u!61 &1497555818
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -12994,6 +13019,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01b6941cfde902b4387baa380a8c62c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DeadZone
+  damageCooldown: 0.5
+  allowSafeTop: 1
+  safeTopMargin: 0.15
 --- !u!61 &1573968376
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -13619,6 +13647,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01b6941cfde902b4387baa380a8c62c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DeadZone
+  damageCooldown: 0.5
+  allowSafeTop: 1
+  safeTopMargin: 0.15
 --- !u!61 &1660656915
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -14414,6 +14445,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01b6941cfde902b4387baa380a8c62c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DeadZone
+  damageCooldown: 0.5
+  allowSafeTop: 0
+  safeTopMargin: 0.15
 --- !u!61 &1776016887
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -14580,6 +14614,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01b6941cfde902b4387baa380a8c62c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DeadZone
+  damageCooldown: 0.5
+  allowSafeTop: 1
+  safeTopMargin: 0.15
 --- !u!61 &1784930868
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -15756,7 +15793,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42683b6ce2234f34990aa58972564a66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIQuestionManager
-  apiUrl: https://127.0.0.1:5057/api/jorge/pregunta-aleatoria
+  apiUrl: https://jorge.onyx.14082006.xyz/api/jorge/pregunta-aleatoria
   questionPanel: {fileID: 162285632}
   questionText: {fileID: 654988045}
   answerButtons:
@@ -16825,6 +16862,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01b6941cfde902b4387baa380a8c62c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DeadZone
+  damageCooldown: 0.5
+  allowSafeTop: 1
+  safeTopMargin: 0.15
 --- !u!61 &2130005404
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -17173,6 +17213,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 6728046215600972848, guid: 4cb0b7ea1156d734a83d637aafaaf22b, type: 3}
+      propertyPath: jumpForce
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 6728046215600972848, guid: 4cb0b7ea1156d734a83d637aafaaf22b, type: 3}
+      propertyPath: moveSpeed
+      value: 3.5
+      objectReference: {fileID: 0}
     - target: {fileID: 8182491960043342463, guid: 4cb0b7ea1156d734a83d637aafaaf22b, type: 3}
       propertyPath: m_LocalScale.x
       value: -0.5850808
@@ -17223,6 +17271,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8182491960043342463, guid: 4cb0b7ea1156d734a83d637aafaaf22b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8185206019360879783, guid: 4cb0b7ea1156d734a83d637aafaaf22b, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.b
+      value: 0.96862745
+      objectReference: {fileID: 0}
+    - target: {fileID: 8185206019360879783, guid: 4cb0b7ea1156d734a83d637aafaaf22b, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.g
+      value: 0.8385377
+      objectReference: {fileID: 0}
+    - target: {fileID: 8185206019360879783, guid: 4cb0b7ea1156d734a83d637aafaaf22b, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8185206019360879783, guid: 4cb0b7ea1156d734a83d637aafaaf22b, type: 3}
+      propertyPath: m_Parameters.colorGradient.m_Mode
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
