@@ -77,5 +77,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Giovanni-Minigame_Scenes/IETutorial.unity
     guid: 29e27c1af404f3e4486ff9d41b731d93
+  - enabled: 1
+    path: Assets/Scenes/CosmicRunner-General_Scenes/TitleScreen_Scenes/CustomizeScene.unity
+    guid: a782b4efdeb11491aaeaf12a4223ba53
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
