@@ -559,12 +559,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.CanvasScaler
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 960, y: 520}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -4788,6 +4788,15 @@ MonoBehaviour:
   bulletPrefab: {fileID: 3469528909076898584, guid: be2af8bfc64f743c4a4806a6b9d66b70, type: 3}
   bulletOffset: 0.5
   shootCooldown: 0.5
+  shootAction:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: dfa7a67b-ba53-4f78-8e7a-8b577887ba6f
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
   shieldObject: {fileID: 654114559}
 --- !u!1 &1595487199
 GameObject:
