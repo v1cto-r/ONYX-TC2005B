@@ -18,5 +18,9 @@ def hello_world():
 def ping():
     return jsonify({'ping': 'pong'})
 
+@app.route('/pong', methods=['GET'])
+def pong():
+    return jsonify({'pong': 'ping'})
+
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', ssl_context="adhoc", port=12002)
