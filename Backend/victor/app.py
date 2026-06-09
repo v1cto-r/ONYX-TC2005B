@@ -14,5 +14,9 @@ app.register_blueprint(login_bp, url_prefix="/api")
 def hello_world():
     return jsonify({'hello': 'world'})
 
+@app.route('/ping', methods=['GET'])
+def ping():
+    return jsonify({'ping': 'pong'})
+
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', ssl_context="adhoc", port=12002)
