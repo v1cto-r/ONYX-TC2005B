@@ -32,10 +32,10 @@ public class EndGameController : MonoBehaviour
         int userId = PlayerPrefs.GetInt("userId");
         int credits = PlayerPrefs.GetInt("collected_credits");
 
-        string body = $"{{\"userId\":\"{userId}\",\"credits\":{credits}}}";
+        string body = $"{{\"user_id\":\"{userId}\",\"credits\":{credits}}}";
         byte[] bodyRaw = Encoding.UTF8.GetBytes(body);
 
-        UnityWebRequest request = new UnityWebRequest(creditsURL, "POST");
+        UnityWebRequest request = new UnityWebRequest(creditsURL, "PATCH");
         request.uploadHandler = new UploadHandlerRaw(bodyRaw);
         request.downloadHandler = new DownloadHandlerBuffer();
         request.SetRequestHeader("Content-Type", "application/json");
