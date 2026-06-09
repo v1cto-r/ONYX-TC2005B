@@ -14,9 +14,5 @@ def inicio():
     }
 
 if __name__ == "__main__":
-    app.run(
-        debug=True,
-        host="127.0.0.1",
-        port=12004,
-        ssl_context="adhoc"
-    )
+    app.run(debug=True, host='0.0.0.0', ssl_context="adhoc", port=12002)
+
