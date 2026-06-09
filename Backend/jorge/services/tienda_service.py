@@ -1,6 +1,37 @@
 from database.conexion import obtener_conexion
 
 
+def crear_skin_base_azul(equipped=False):
+    return {
+        "asset_id": 0,
+        "name": "Traje Base",
+        "cost": 0,
+        "category": "player_skins",
+        "description": "Traje azul base del jugador",
+        "image_url": "",
+        "image_url_2": "",
+        "image_url_3": "",
+        "available": True,
+        "equipped": bool(equipped),
+        "image_urls": []
+    }
+
+
+def agregar_imagenes(asset):
+    imagenes = []
+
+    if asset.get("image_url"):
+        imagenes.append(asset["image_url"])
+
+    if asset.get("image_url_2"):
+        imagenes.append(asset["image_url_2"])
+
+    if asset.get("image_url_3"):
+        imagenes.append(asset["image_url_3"])
+
+    asset["image_urls"] = imagenes
+
+
 def obtener_productos_tienda(usuario_id):
     conexion = obtener_conexion()
     cursor = conexion.cursor(dictionary=True)
@@ -50,19 +81,7 @@ def obtener_productos_tienda(usuario_id):
     for producto in productos:
         producto["available"] = bool(producto["available"])
         producto["purchased"] = bool(producto["purchased"])
-
-        imagenes = []
-
-        if producto.get("image_url"):
-            imagenes.append(producto["image_url"])
-
-        if producto.get("image_url_2"):
-            imagenes.append(producto["image_url_2"])
-
-        if producto.get("image_url_3"):
-            imagenes.append(producto["image_url_3"])
-
-        producto["image_urls"] = imagenes
+        agregar_imagenes(producto)
 
     cursor.close()
     conexion.close()
@@ -241,24 +260,15 @@ def obtener_customizacion_usuario(usuario_id):
     for asset in assets:
         asset["available"] = bool(asset["available"])
         asset["equipped"] = bool(asset["equipped"])
-
-        imagenes = []
-
-        if asset.get("image_url"):
-            imagenes.append(asset["image_url"])
-
-        if asset.get("image_url_2"):
-            imagenes.append(asset["image_url_2"])
-
-        if asset.get("image_url_3"):
-            imagenes.append(asset["image_url_3"])
-
-        asset["image_urls"] = imagenes
+        agregar_imagenes(asset)
 
         if asset["category"] == "player_skins":
             skins.append(asset)
         elif asset["category"] == "icons":
             icons.append(asset)
+
+    hay_skin_equipada = any(skin["equipped"] for skin in skins)
+    skins.insert(0, crear_skin_base_azul(not hay_skin_equipada))
 
     cursor.close()
     conexion.close()
@@ -290,6 +300,25 @@ def equipar_asset_usuario(usuario_id, asset_id):
                 "exito": False,
                 "mensaje": "No se encontro el usuario"
             }, 404
+
+        if asset_id == 0:
+            quitar_skins_equipadas = """
+                UPDATE users_assets ua
+                INNER JOIN assets a ON ua.asset_id = a.asset_id
+                INNER JOIN assets_type at ON a.asset_type_id = at.asset_type_id
+                SET ua.equipped = FALSE
+                WHERE ua.user_id = %s
+                  AND at.name = 'player_skins'
+            """
+
+            cursor.execute(quitar_skins_equipadas, (usuario_id,))
+            conexion.commit()
+
+            return {
+                "exito": True,
+                "mensaje": "Traje base equipado correctamente",
+                "asset": crear_skin_base_azul(True)
+            }, 200
 
         consulta_asset = """
             SELECT
@@ -365,19 +394,7 @@ def equipar_asset_usuario(usuario_id, asset_id):
 
         asset["available"] = bool(asset["available"])
         asset["equipped"] = True
-
-        imagenes = []
-
-        if asset.get("image_url"):
-            imagenes.append(asset["image_url"])
-
-        if asset.get("image_url_2"):
-            imagenes.append(asset["image_url_2"])
-
-        if asset.get("image_url_3"):
-            imagenes.append(asset["image_url_3"])
-
-        asset["image_urls"] = imagenes
+        agregar_imagenes(asset)
 
         return {
             "exito": True,
