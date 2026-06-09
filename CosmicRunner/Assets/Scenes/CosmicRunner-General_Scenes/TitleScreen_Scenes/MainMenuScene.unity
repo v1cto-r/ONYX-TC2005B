@@ -654,6 +654,7 @@ GameObject:
   - component: {fileID: 191530612}
   - component: {fileID: 191530614}
   - component: {fileID: 191530613}
+  - component: {fileID: 191530615}
   m_Layer: 5
   m_Name: Player_Icon
   m_TagString: Untagged
@@ -718,6 +719,35 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 191530611}
   m_CullTransparentMesh: 1
+--- !u!114 &191530615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 191530611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05582fecd3eb560498c4308abe29a275, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MenuProfileIconLoader
+  loadFromApi: 1
+  apiBaseUrl: https://jorge.onyx.14082006.xyz
+  defaultUserId: 1
+  targetImage: {fileID: 191530613}
+  iconSprites:
+  - assetId: 5
+    sprite: {fileID: 21300000, guid: ae38ac5a9e2bab44c9f68cc8d28228ca, type: 3}
+  - assetId: 6
+    sprite: {fileID: -3950111043053983299, guid: 7ddcf5b300769b749961fc4f9eee5496, type: 3}
+  - assetId: 7
+    sprite: {fileID: -6181431388360836115, guid: c9a4b02a050d76c428405f4a106d60e6, type: 3}
+  - assetId: 8
+    sprite: {fileID: -8336007284100039187, guid: 4bb15722e6c483144ba5e00f706db3d0, type: 3}
+  - assetId: 9
+    sprite: {fileID: -9222146670870164336, guid: a408a5db89fcd394a814b3151e5fa167, type: 3}
+  - assetId: 10
+    sprite: {fileID: -3757784134045471056, guid: 0108bdc7d010b3347a4ad8e0bb9750cc, type: 3}
 --- !u!1 &233201139
 GameObject:
   m_ObjectHideFlags: 0
@@ -2488,6 +2518,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30566be13f89742f9aa49de90e2ab95f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMenuAnimations
+  loadFromApi: 1
+  apiBaseUrl: https://jorge.onyx.14082006.xyz
+  defaultUserId: 1
+  defaultBlueController: {fileID: 9100000, guid: cbecee8aa0c73ce43a93c06616d9edd4, type: 2}
+  yellowController: {fileID: 9100000, guid: 3f02f269366cc204d91c1325470f032d, type: 2}
+  redController: {fileID: 9100000, guid: 72816d27a2bd3894492483749add761e, type: 2}
+  pinkController: {fileID: 9100000, guid: 1cca6ed4abb081544bb1e278df3269fb, type: 2}
+  greenController: {fileID: 9100000, guid: efb7a71e59f68d646abb076f65a4d735, type: 2}
 --- !u!1 &2062256845
 GameObject:
   m_ObjectHideFlags: 0

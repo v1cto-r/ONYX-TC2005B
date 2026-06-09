@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 8743629646017443183}
   - component: {fileID: 8185206019360879783}
   - component: {fileID: 2922964738740418113}
+  - component: {fileID: 6407038602096770193}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -361,3 +362,23 @@ MonoBehaviour:
   m_DefaultActionMap: 
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &6407038602096770193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4291958161517535868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da21c6820f43dc447bb96ca946529a36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::JorgeGame.PlayerSkinLoader
+  loadFromApi: 1
+  apiBaseUrl: https://jorge.onyx.14082006.xyz
+  defaultUserId: 1
+  defaultBlueController: {fileID: 9100000, guid: cbecee8aa0c73ce43a93c06616d9edd4, type: 2}
+  yellowController: {fileID: 9100000, guid: 3f02f269366cc204d91c1325470f032d, type: 2}
+  redController: {fileID: 9100000, guid: 72816d27a2bd3894492483749add761e, type: 2}
+  pinkController: {fileID: 9100000, guid: 1cca6ed4abb081544bb1e278df3269fb, type: 2}
+  greenController: {fileID: 9100000, guid: efb7a71e59f68d646abb076f65a4d735, type: 2}
