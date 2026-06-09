@@ -420,3 +420,13 @@ body{
 .reply-desplegable[open] > div {
     animation: fadeInDown 0.2s ease-out;
 }
+
+.resumen-errores ul {
+    list-style-type: none !important; 
+    margin: 0 !important;             
+    padding: 0 !important;            
+}
+
+.resumen-errores li {
+    display: inline-block;            
+}

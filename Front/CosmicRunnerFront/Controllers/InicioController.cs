@@ -48,10 +48,20 @@ public class InicioController : Controller
             NuevaIdea.autor_id = currentUserId.Value;
             
             var exito = await _inicioApiService.CrearIdeaAsync(NuevaIdea);
-            if (exito) return RedirectToAction("Index");
+            if (exito) 
+            {
+                TempData["MensajeExito"] = "¡Tu iniciativa ha sido publicada con éxito y ya está en el Top!";
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                ModelState.AddModelError(string.Empty, "Ocurrió un error al guardar la idea en el servidor. Intenta de nuevo.");
+            }
         }
-
-        // Si el modelo es inválido, recargamos la vista con los datos del usuario real
+        else
+        {
+            ModelState.AddModelError(string.Empty, "No pudimos publicar tu idea. Por favor, revisa los campos en rojo.");
+        }
         var viewModel = new InicioViewModel
         {
             NuevaIdea = NuevaIdea, 
