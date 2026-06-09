@@ -1,8 +1,10 @@
 from flask import Flask, jsonify
+from flask_cors import CORS
 from routes.ususario_routes import usuario_bp
 from routes.minigame_routes import minigame_bp
 
 app = Flask(__name__)
+CORS(app)
 app.json.sort_keys = False
 
 # End-Point base

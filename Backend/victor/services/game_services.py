@@ -19,7 +19,7 @@ def next_prompt_id() -> int:
 
 def get_game_prompt():
     cursor = connection.cursor(dictionary=True)
-    cursor.execute("SELECT * FROM Ab_Prompt_Parts WHERE prompt = %s", [next_prompt_id()])
+    cursor.execute("SELECT * FROM ab_brompt_parts WHERE prompt = %s", [next_prompt_id()])
     result = cursor.fetchall()
     random.shuffle(result)
     cursor.close()

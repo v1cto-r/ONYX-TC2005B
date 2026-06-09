@@ -32,7 +32,7 @@ def get_prompts_and_comments(user_id: int , search_text: str | None, category_id
                 prompt_id AS commentPromptId,
                 user_id AS commentUserId,
                 comment AS commentContent
-            FROM Comments
+            FROM comments
             WHERE prompt_id IN ({format_strings});
         """
 
@@ -58,7 +58,7 @@ def get_prompts_and_comments(user_id: int , search_text: str | None, category_id
 def add_prompt(user_id: int, prompt_title: str, prompt_text: str, category_id: int, department_id: int):
     try:
         cursor = connection.cursor(dictionary=True)
-        sql = "INSERT INTO Prompts (user_id, title, prompt, category_id, department_id) VALUES (%s, %s, %s, %s, %s)"
+        sql = "INSERT INTO prompts (user_id, title, prompt, category_id, department_id) VALUES (%s, %s, %s, %s, %s)"
         values = (user_id, prompt_title, prompt_text, category_id, department_id)
 
         cursor.execute(sql, values)

@@ -1,9 +1,11 @@
 from flask import Flask, jsonify
+from flask_cors import CORS
 from routes.game_routes import game_bp
 from routes.prompts_routes import prompts_bp
 from routes.login_routes import login_bp
 
 app = Flask(__name__)
+CORS(app)
 app.json.sort_keys = False
 
 app.register_blueprint(game_bp, url_prefix="/api")

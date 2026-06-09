@@ -1,8 +1,9 @@
 from flask import Flask, jsonify
+from flask_cors import CORS
 from routes.onyx_routes import clasificacion_bp
 
 app = Flask(__name__)
-
+CORS(app)
 app.json.sort_keys = False
 
 @app.route("/")

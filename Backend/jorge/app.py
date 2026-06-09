@@ -1,8 +1,11 @@
 from flask import Flask
+from flask_cors import CORS
 from routes.tienda_routes import tienda_bp
 from routes.jorge_routes import jorge_bp
 
 app = Flask(__name__)
+CORS(app)
+app.json.sort_keys = False
 
 app.register_blueprint(tienda_bp)
 app.register_blueprint(jorge_bp)

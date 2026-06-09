@@ -1,9 +1,10 @@
 from flask import Flask, jsonify
-
+from flask_cors import CORS
 from routes.inicio_routes import inicio_bp
 from routes.minijuego_routes import minijuego_bp
 
 app = Flask(__name__)
+CORS(app)
 app.json.sort_keys = False
 
 @app.route("/")
