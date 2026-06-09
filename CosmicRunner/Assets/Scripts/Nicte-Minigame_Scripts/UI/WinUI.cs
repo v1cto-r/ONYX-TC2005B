@@ -9,7 +9,7 @@ namespace Nicte.Minigame{
 public class WinUI : MonoBehaviour
 {
     public TextMeshProUGUI finalWinScoreText;
-    private string apiUrl = "https://127.0.0.1:5000/clasificacion/ataqueEstelar/agregar";
+    private string apiUrl = "https://nicte.onyx.14082006.xyz/clasificacion/ataqueEstelar/agregar";
 
     [System.Serializable]
     class CreditsRequest
@@ -62,7 +62,7 @@ public class WinUI : MonoBehaviour
     
     public void backToMenu()
     {
-            SceneManager.LoadScene("AtaqueEstelarGameStart");
+            SceneManager.LoadScene("GameSelectScene");
     }
 }
 }

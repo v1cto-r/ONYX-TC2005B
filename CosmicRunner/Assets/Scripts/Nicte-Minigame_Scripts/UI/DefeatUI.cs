@@ -20,7 +20,7 @@ public class DefeatUI : MonoBehaviour
     
     public void backToMenu()
     {
-            SceneManager.LoadScene("AtaqueEstelarGameStart");
+            SceneManager.LoadScene("GameSelectScene");
     }
 }
 }

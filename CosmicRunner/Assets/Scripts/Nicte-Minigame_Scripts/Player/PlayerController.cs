@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
    void Update()
    {
        if (!isDead && gameController != null)
-            inputEnabled = (gameController.currentState == "Playing");
+            inputEnabled = gameController.currentState == "Playing";
 
         if (playermovement != null)
         {

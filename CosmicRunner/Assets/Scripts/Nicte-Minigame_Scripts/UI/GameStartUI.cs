@@ -11,7 +11,7 @@ namespace Nicte.Minigame{
     {
         public string name;
         public string lastname;
-        public int position;
+        public int posicion;
     }
 
     [System.Serializable]
@@ -33,8 +33,8 @@ public class GameStartUI : MonoBehaviour
 
     bool benefit= false;
 
-    private string apiUrl = "https://127.0.0.1:5000/clasificacion/ataqueEstelar/";
-    //private string apiUrl = "https://192.168.1.25:5000/clasificacion/ataqueEstelar/";
+    //private string apiUrl = "https://127.0.0.1:12005/clasificacion/ataqueEstelar/";
+    private string apiUrl = "https://nicte.onyx.14082006.xyz/clasificacion/ataqueEstelar/";
 
     void Start()
     {
@@ -48,8 +48,6 @@ public class GameStartUI : MonoBehaviour
             controlsScreen2.SetActive(false);
         if (benefitScreen != null)
             benefitScreen.SetActive(false);
-        int userId = PlayerPrefs.GetInt("UserId");
-        StartCoroutine(CheckRank(userId));
     }
 
     IEnumerator CheckRank(int userId)
@@ -69,11 +67,11 @@ public class GameStartUI : MonoBehaviour
         RankResultArray wrapper = JsonUtility.FromJson<RankResultArray>(Array);
         rank = wrapper.items[0];
 
-        Debug.Log($"Player rank: {rank.position}, Name: {rank.name} {rank.lastname}");
-            PlayerPrefs.SetString("rank_name", rank.name + " " + rank.lastname);
-            PlayerPrefs.SetInt("rank_position", rank.position);
+        Debug.Log($"Player rank: {rank.posicion}, Name: {rank.name} {rank.lastname}");
+        PlayerPrefs.SetString("rank_name", rank.name + " " + rank.lastname);
+        PlayerPrefs.SetInt("rank_position", rank.posicion);
 
-        if (rank != null && rank.position <= 3)
+        if (rank != null && rank.posicion <= 3)
         {
             benefit = true;
         }
@@ -81,10 +79,7 @@ public class GameStartUI : MonoBehaviour
         {
             benefit = false;
         }
-    }
 
-    public void playGame()
-    {
         if(benefit)
         {
             ShowBenefitScreen(rank);
@@ -93,6 +88,14 @@ public class GameStartUI : MonoBehaviour
             Time.timeScale = 1f;
             SceneManager.LoadScene("AtaqueEstelarGame");
         }
+    }
+
+    public void playGame()
+    {
+        int userId = PlayerPrefs.GetInt("UserId");
+        Debug.Log($"UserId: {userId}");
+        StartCoroutine(CheckRank(userId));
+        
     }
 
     public void playGameBenefitScreen()
@@ -116,7 +119,7 @@ public class GameStartUI : MonoBehaviour
                 messageText.text = $"¡Felicidades, {rank.name}!";
 
         if (subtitleText != null)
-                subtitleText.text = $"Te encuentras en la posición #{rank.position} global.\nPor ello, iniciarás este combate con:";
+                subtitleText.text = $"Te encuentras en la posición #{rank.posicion} global.\nPor ello, iniciarás este combate con:";
     }
 
     public void controlScreen1()
