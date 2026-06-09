@@ -8,10 +8,10 @@ namespace CosmicRunnerFront.Controllers;
 
 public class TiendaController : Controller
 {
+    private const string CurrentUserSessionKey = "CurrentUserId";
+
     private readonly ILogger<TiendaController> _logger;
     private readonly TiendaApiService _tiendaApiService;
-
-    private const int UsuarioPruebaId = 1;
 
     public TiendaController(ILogger<TiendaController> logger, TiendaApiService tiendaApiService)
     {
@@ -21,14 +21,20 @@ public class TiendaController : Controller
 
     public async Task<IActionResult> Index(string? SearchText, int? FilterCategoriaId)
     {
+        var currentUserId = GetCurrentUserId();
+        if (currentUserId is null)
+        {
+            return RedirectToAction("Index", "Home");
+        }
+
         try
         {
-            // Conexion API
-            var viewModel = await _tiendaApiService.ObtenerTiendaAsync(UsuarioPruebaId);
+            var viewModel = await _tiendaApiService.ObtenerTiendaAsync(currentUserId.Value);
 
             viewModel.Productos = FiltrarProductos(viewModel.Productos, SearchText, FilterCategoriaId);
             viewModel.SearchText = SearchText;
             viewModel.FilterCategoriaId = FilterCategoriaId;
+            viewModel.TiendaDisponible = true;
 
             return View(viewModel);
         }
@@ -36,7 +42,8 @@ public class TiendaController : Controller
         {
             _logger.LogError(ex, "Error al cargar la tienda");
 
-            TempData["MensajeTienda"] = "No se pudo cargar la tienda. Revisa que el API esté encendido.";
+            TempData["MensajeTiendaTitulo"] = "Tienda no disponible";
+            TempData["MensajeTienda"] = "Por el momento no se pudieron cargar los productos. Intenta de nuevo mas tarde.";
             TempData["TipoMensajeTienda"] = "error";
 
             return View(new TiendaViewModel
@@ -45,7 +52,8 @@ public class TiendaController : Controller
                 Categorias = new List<CategoriaTienda>(),
                 CreditosUsuario = 0,
                 SearchText = SearchText,
-                FilterCategoriaId = FilterCategoriaId
+                FilterCategoriaId = FilterCategoriaId,
+                TiendaDisponible = false
             });
         }
     }
@@ -53,9 +61,16 @@ public class TiendaController : Controller
     [HttpPost]
     public async Task<IActionResult> Comprar(int productoId)
     {
+        var currentUserId = GetCurrentUserId();
+        if (currentUserId is null)
+        {
+            return RedirectToAction("Index", "Home");
+        }
+
         if (productoId <= 0)
         {
-            TempData["MensajeTienda"] = "No se encontró el producto seleccionado.";
+            TempData["MensajeTiendaTitulo"] = "Producto no encontrado";
+            TempData["MensajeTienda"] = "No se encontro el producto seleccionado.";
             TempData["TipoMensajeTienda"] = "error";
 
             return RedirectToAction(nameof(Index));
@@ -63,14 +78,13 @@ public class TiendaController : Controller
 
         try
         {
-            // Compra API
-            var resultado = await _tiendaApiService.ComprarProductoAsync(UsuarioPruebaId, productoId);
+            var resultado = await _tiendaApiService.ComprarProductoAsync(currentUserId.Value, productoId);
 
             GuardarResultadoCompra(resultado);
 
             if (resultado.Exito)
             {
-                await GuardarProductoCompradoAsync(productoId);
+                await GuardarProductoCompradoAsync(currentUserId.Value, productoId);
             }
 
             return RedirectToAction(nameof(Index));
@@ -79,52 +93,61 @@ public class TiendaController : Controller
         {
             _logger.LogError(ex, "Error al comprar producto");
 
-            TempData["MensajeTienda"] = "No se pudo conectar con el API para completar la compra.";
+            TempData["MensajeTiendaTitulo"] = "Compra no disponible";
+            TempData["MensajeTienda"] = "No se pudo procesar la compra en este momento. Intenta de nuevo mas tarde.";
             TempData["TipoMensajeTienda"] = "error";
 
             return RedirectToAction(nameof(Index));
         }
     }
 
-private static List<ProductoTienda> FiltrarProductos(
-    List<ProductoTienda> productos,
-    string? searchText,
-    int? filterCategoriaId)
-{
-    var productosFiltrados = productos.AsEnumerable();
-    var busqueda = searchText?.Trim();
-    var categoriaId = filterCategoriaId.GetValueOrDefault();
-
-    // Filtros
-    if (!string.IsNullOrWhiteSpace(busqueda))
+    private int? GetCurrentUserId()
     {
-        productosFiltrados = productosFiltrados.Where(producto =>
-            producto.Nombre.Contains(busqueda, StringComparison.OrdinalIgnoreCase) ||
-            producto.Descripcion.Contains(busqueda, StringComparison.OrdinalIgnoreCase) ||
-            producto.CategoriaNombre.Contains(busqueda, StringComparison.OrdinalIgnoreCase));
+        return HttpContext.Session.GetInt32(CurrentUserSessionKey);
     }
 
-    if (categoriaId > 0)
+    private static List<ProductoTienda> FiltrarProductos(
+        List<ProductoTienda> productos,
+        string? searchText,
+        int? filterCategoriaId)
     {
-        productosFiltrados = productosFiltrados.Where(producto =>
-            producto.CategoriaId == categoriaId);
-    }
+        var productosFiltrados = productos.AsEnumerable();
+        var busqueda = searchText?.Trim();
+        var categoriaId = filterCategoriaId.GetValueOrDefault();
 
-    return productosFiltrados.ToList();
-}
+        // Filtros de busqueda y categoria.
+        if (!string.IsNullOrWhiteSpace(busqueda))
+        {
+            productosFiltrados = productosFiltrados.Where(producto =>
+                producto.Nombre.Contains(busqueda, StringComparison.OrdinalIgnoreCase) ||
+                producto.Descripcion.Contains(busqueda, StringComparison.OrdinalIgnoreCase) ||
+                producto.CategoriaNombre.Contains(busqueda, StringComparison.OrdinalIgnoreCase));
+        }
+
+        if (categoriaId > 0)
+        {
+            productosFiltrados = productosFiltrados.Where(producto =>
+                producto.CategoriaId == categoriaId);
+        }
+
+        return productosFiltrados.ToList();
+    }
 
     private void GuardarResultadoCompra(CompraTiendaResponse resultado)
     {
-        // Resultado compra
+        TempData["MensajeTiendaTitulo"] = resultado.Exito
+            ? "Compra realizada con exito"
+            : "No se pudo completar la compra";
+
         TempData["MensajeTienda"] = resultado.Mensaje;
         TempData["TipoMensajeTienda"] = resultado.Exito ? "success" : "error";
         TempData["CreditosRestantes"] = resultado.CreditosRestantes;
     }
 
-    private async Task GuardarProductoCompradoAsync(int productoId)
+    private async Task GuardarProductoCompradoAsync(int usuarioId, int productoId)
     {
-        // Producto para modal
-        var tiendaActualizada = await _tiendaApiService.ObtenerTiendaAsync(UsuarioPruebaId);
+        // Se vuelve a consultar la tienda para mostrar el producto comprado en el modal.
+        var tiendaActualizada = await _tiendaApiService.ObtenerTiendaAsync(usuarioId);
         var productoComprado = tiendaActualizada.Productos.FirstOrDefault(producto => producto.Id == productoId);
 
         if (productoComprado == null)

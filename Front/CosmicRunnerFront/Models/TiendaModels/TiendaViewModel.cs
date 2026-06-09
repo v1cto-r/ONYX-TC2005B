@@ -11,4 +11,6 @@ public class TiendaViewModel
     public string? SearchText { get; set; }
 
     public int? FilterCategoriaId { get; set; }
+
+    public bool TiendaDisponible { get; set; } = true;
 }

@@ -6,6 +6,7 @@
 
     var formatoNumero = CultureInfo.GetCultureInfo("en-US");
 
+    var mensajeTiendaTitulo = TempData["MensajeTiendaTitulo"]?.ToString();
     var mensajeTienda = TempData["MensajeTienda"]?.ToString();
     var tipoMensajeTienda = TempData["TipoMensajeTienda"]?.ToString();
     var productoNombre = TempData["ProductoNombre"]?.ToString();
@@ -32,7 +33,14 @@
 
         <div class="creditos-card">
             <span>Créditos disponibles</span>
-            <strong>@Model.CreditosUsuario.ToString("N0", formatoNumero)</strong>
+            @if (Model.TiendaDisponible)
+            {
+                <strong>@Model.CreditosUsuario.ToString("N0", formatoNumero)</strong>
+            }
+            else
+            {
+                <strong>No disponible</strong>
+            }
         </div>
     </section>
 
@@ -129,8 +137,16 @@
         else
         {
             <div class="tienda-empty">
-                <h3>No se encontraron productos</h3>
-                <p>Intenta cambiar la búsqueda o seleccionar otra categoría.</p>
+                @if (Model.TiendaDisponible)
+                {
+                    <h3>No se encontraron productos</h3>
+                    <p>Intenta cambiar la búsqueda o seleccionar otra categoría.</p>
+                }
+                else
+                {
+                    <h3>La tienda no está disponible</h3>
+                    <p>No se pudieron cargar los productos en este momento.</p>
+                }
             </div>
         }
     </section>
@@ -298,7 +314,7 @@
                             ✓
                         </div>
 
-                        <h2 id="mensajeTiendaTitle">Compra realizada con éxito</h2>
+                        <h2 id="mensajeTiendaTitle">@(mensajeTiendaTitulo ?? "Compra realizada con éxito")</h2>
                         <p>El artículo fue agregado a tu cuenta. Podrás verlo disponible dentro del juego.</p>
 
                         <div class="resultado-producto">
@@ -320,14 +336,14 @@
                             !
                         </div>
 
-                        <h2 id="mensajeTiendaTitle">No se pudo completar la compra</h2>
+                        <h2 id="mensajeTiendaTitle">@(mensajeTiendaTitulo ?? "No se pudo completar la compra")</h2>
                         <p>@mensajeTienda</p>
                     }
                 </div>
 
                 <div class="modal-footer resultado-modal-footer">
                     <button type="button" class="tienda-modal-action resultado-button-full" data-bs-dismiss="modal">
-                        Continuar comprando
+                        Continuar
                     </button>
                 </div>
             </div>
