@@ -8,7 +8,7 @@ namespace JorgeGame
     public class JorgeCreditsApi : MonoBehaviour
     {
         [Header("Api")]
-        public string apiUrl = "https://127.0.0.1:5057/api/jorge/minigame/creditos";
+        public string apiUrl = "https://jorge.onyx.14082006.xyz/api/jorge/minigame/creditos";
 
         [Header("Usuario")]
         public int userId = 1;

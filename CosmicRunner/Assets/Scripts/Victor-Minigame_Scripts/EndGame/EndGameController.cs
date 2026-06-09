@@ -9,7 +9,7 @@ public class EndGameController : MonoBehaviour
 {
     public TMP_Text resultText;
     public TMP_Text creditsText;
-    private string creditsURL = "https://127.0.0.1:12002/api/game/credits";
+    private string creditsURL = "https://victor.onyx.14082006.xyz/api/game/credits";
 
 
     void Start()

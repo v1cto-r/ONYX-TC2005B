@@ -58,7 +58,7 @@ public class SFXManager : MonoBehaviour
         {
             musicSource.clip = backgroundMusic;
             musicSource.loop = true;
-            musicSource.volume = 0.35f;
+            musicSource.volume = 1f;
             musicSource.Play();
         }
     }

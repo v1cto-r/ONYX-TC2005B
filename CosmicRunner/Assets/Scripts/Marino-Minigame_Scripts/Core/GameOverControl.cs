@@ -22,7 +22,7 @@ namespace MECS
         // Base del API del minijuego
         [SerializeField] private string apiBaseUrl = "https://localhost:12003/minigame";
         // Id del usuario a reportar al API
-        [SerializeField] private int userId = 1;
+        private int userId;
 
         // Decide el resultado final y actualiza los textos al cargar la escena
         void Start()
@@ -30,6 +30,9 @@ namespace MECS
             // Buscamos el SFXManager en la escena para reproducir los sonidos de resultado
             sfxManager = FindAnyObjectByType<SFXManager>();
             apiService = new MinigameApiService(apiBaseUrl);
+
+            // Obtener ID del usuario desde PlayerPrefs, con un valor predeterminado de 1 si no se encuentra
+            userId = PlayerPrefs.GetInt("UserId", 1);
 
             // Verifica si el jugador ha ganado o perdido y actualiza el texto en consecuencia
 

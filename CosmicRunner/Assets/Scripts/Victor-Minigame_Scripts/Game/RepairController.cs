@@ -19,7 +19,7 @@ namespace AB
     {
         public static RepairController Instance { get; set; }
 
-        private string promptsUrl = "https://127.0.0.1:12002/api/game/prompt";
+        private string promptsUrl = "https://victor.onyx.14082006.xyz/api/game/prompt";
         private List<PromptPart> prompts = new List<PromptPart>();
         private bool finished;
         public List<ChipController> chips;
