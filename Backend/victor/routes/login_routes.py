@@ -11,4 +11,4 @@ def login():
   
   result = login_user(email, password)
   
-  return jsonify(result)
+  return jsonify(result[0])
