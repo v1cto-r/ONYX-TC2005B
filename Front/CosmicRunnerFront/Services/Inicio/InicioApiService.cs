@@ -17,7 +17,7 @@ namespace CosmicRunnerFront.Services
 
         public async Task<UsuarioUsr> GetUsuarioByIdAsync(int userId)
         {
-            var url = $"https://127.0.0.1:12001/api/user/{userId}";
+            var url = $"https://gio.onyx.14082006.xyz/api/user/{userId}";
             var response = await _httpClient.GetAsync(url);
             
             if (!response.IsSuccessStatusCode)
@@ -29,7 +29,7 @@ namespace CosmicRunnerFront.Services
 
         public async Task<List<Idea>> GetIdeasAsync(int userId)
         {
-            var url = $"https://127.0.0.1:12001/api/ideas?user_id={userId}";
+            var url = $"https://gio.onyx.14082006.xyz/api/ideas?user_id={userId}";
             var response = await _httpClient.GetAsync(url);
             
             if (!response.IsSuccessStatusCode)
@@ -41,7 +41,7 @@ namespace CosmicRunnerFront.Services
 
         public async Task<List<Departamento>> GetDepartamentosAsync()
         {
-            var url = "https://127.0.0.1:12001/api/departamentos";
+            var url = "https://gio.onyx.14082006.xyz/api/departamentos";
             var response = await _httpClient.GetAsync(url);
             
             if (!response.IsSuccessStatusCode)
@@ -53,7 +53,7 @@ namespace CosmicRunnerFront.Services
 
         public async Task<List<AreaImpacto>> GetAreasImpactoAsync()
         {
-            var url = "https://127.0.0.1:12001/api/areasimpacto";
+            var url = "https://gio.onyx.14082006.xyz/api/areasimpacto";
             var response = await _httpClient.GetAsync(url);
             
             if (!response.IsSuccessStatusCode)
@@ -65,7 +65,7 @@ namespace CosmicRunnerFront.Services
 
         public async Task<bool> CrearIdeaAsync(FormularioIdeaViewModel nuevaIdea)
         {
-            var url = "https://localhost:12001/api/idea";
+            var url = "https://gio.onyx.14082006.xyz/api/idea";
             var response = await _httpClient.PostAsJsonAsync(url, nuevaIdea);
             
             if (response.IsSuccessStatusCode)
@@ -78,7 +78,7 @@ namespace CosmicRunnerFront.Services
 
         public async Task<bool> ReaccionarIdeaAsync(int ideaId, int userId, string tipo)
         {
-            var url = $"https://127.0.0.1:12001/api/idea/{ideaId}/reaccion";
+            var url = $"https://gio.onyx.14082006.xyz/api/idea/{ideaId}/reaccion";
             var payload = new { user_id = userId, tipo = tipo };           
             var response = await _httpClient.PutAsJsonAsync(url, payload);
             return response.IsSuccessStatusCode;
@@ -87,7 +87,7 @@ namespace CosmicRunnerFront.Services
         public async Task<bool> GuardarComentarioAsync(int ideaId, int userId, string mensaje)
         {
             // URL actualizada para coincidir con Python
-            var url = $"https://127.0.0.1:12001/api/idea/{ideaId}/comentario";
+            var url = $"https://gio.onyx.14082006.xyz/api/idea/{ideaId}/comentario";
             var payload = new { autor_id = userId, mensaje = mensaje }; 
             
             var response = await _httpClient.PostAsJsonAsync(url, payload);
@@ -97,7 +97,7 @@ namespace CosmicRunnerFront.Services
         public async Task<bool> UnirseProyectoAsync(int ideaId, int userId)
         {
             // URL actualizada para coincidir con Python
-            var url = $"https://127.0.0.1:12001/api/idea/{ideaId}/colaborador";
+            var url = $"https://gio.onyx.14082006.xyz/api/idea/{ideaId}/colaborador";
             var payload = new { user_id = userId };
             
             var response = await _httpClient.PostAsJsonAsync(url, payload);
@@ -106,7 +106,7 @@ namespace CosmicRunnerFront.Services
 
         public async Task<bool> ReaccionarComentarioAsync(int commentId, int userId, string tipo)
         {
-            var url = $"https://127.0.0.1:12001/api/comentario/{commentId}/reaccion";
+            var url = $"https://gio.onyx.14082006.xyz/api/comentario/{commentId}/reaccion";
             var payload = new { user_id = userId, tipo = tipo };
             
             var response = await _httpClient.PutAsJsonAsync(url, payload);
