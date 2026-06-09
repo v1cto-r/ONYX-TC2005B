@@ -17,6 +17,9 @@ namespace Front.Controllers
 
         public async Task<IActionResult> Index(string? departamento, string? nombre, int page = 1)
         {
+            int? currentUserId = HttpContext.Session.GetInt32("CurrentUserId");
+            if (currentUserId == null) return RedirectToAction("Index", "Home");
+
             const int resultadosPorPagina = 5;
 
             var nombreBuscado = nombre?.Trim() ?? string.Empty;
