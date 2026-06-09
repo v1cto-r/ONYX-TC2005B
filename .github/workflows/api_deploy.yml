@@ -12,7 +12,7 @@ jobs:
       - name: Call deploy webhook
         run: |
           PAYLOAD='{"event":"deploy"}'
-          curl -f -X POST https://your-server.com:9000/deploy \
+          curl -f -X POST https://deploy.onyx.14082006.xyz/deploy \
             -H "Content-Type: application/json" \
             -H "x-webhook-secret: ${{ secrets.WEBHOOK_SECRET }}" \
             -d "$PAYLOAD"
