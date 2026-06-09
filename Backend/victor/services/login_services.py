@@ -8,4 +8,8 @@ def login_user(email, password):
     cursor.execute("SELECT user_id FROM users WHERE email = %s AND password_hash = %s LIMIT 1", [email, password])
     result = cursor.fetchall()
     cursor.close()
-    return result
+    
+    if len(result) == 0:
+        return None
+    
+    return result[0]

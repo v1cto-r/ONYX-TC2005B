@@ -11,4 +11,7 @@ def login():
   
   result = login_user(email, password)
   
-  return jsonify(result[0])
+  if result is None:
+    return jsonify({"message": "Login failed"}), 400
+  
+  return jsonify(result)
