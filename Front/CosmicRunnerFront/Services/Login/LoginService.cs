@@ -11,7 +11,7 @@ namespace CosmicRunnerFront.Services.Login;
 
 public class PromptApiResponse
 {
-    public int Id { get; set; } = -1;
+    public int user_id { get; set; } = -1;
 }
 
 
@@ -37,6 +37,6 @@ public class LoginService : ILoginService
         var response = await _httpClient.PostAsync($"{BaseUrl}/login", content);
         if (!response.IsSuccessStatusCode) return -1;
         var result = await response.Content.ReadFromJsonAsync<PromptApiResponse>(_jsonOptions);
-        return result?.Id ?? -1;
+        return result?.user_id ?? -1;
     }
 }

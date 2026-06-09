@@ -32,7 +32,7 @@ public class PromptService : IPromptService
 {
     private readonly HttpClient _httpClient;
     private static readonly JsonSerializerOptions _jsonOptions = new() { PropertyNameCaseInsensitive = true };
-    private const string BaseUrl = "https://localhost:12002";
+    private const string BaseUrl = "https://victor.onyx.14082006.xyz/api";
 
     public PromptService(HttpClient httpClient)
     {
@@ -41,7 +41,7 @@ public class PromptService : IPromptService
 
     public async Task<(List<CategoryModel> Categories, List<DepartmentModel> Departments)> ObtenerOpcionesAsync()
     {
-        var response = await _httpClient.GetAsync($"{BaseUrl}/api/prompts/options");
+        var response = await _httpClient.GetAsync($"{BaseUrl}/prompts/options");
         if (!response.IsSuccessStatusCode)
             return (new List<CategoryModel>(), new List<DepartmentModel>());
 
@@ -61,7 +61,7 @@ public class PromptService : IPromptService
 
     public async Task<List<PromptModel>?> ObtenerPromptAsync(int userId, string? searchText, int? categoryId, int? departmentId)
     {
-        var url = $"{BaseUrl}/api/prompts/full?user_id={userId}";
+        var url = $"{BaseUrl}/prompts/full?user_id={userId}";
 
         if (!string.IsNullOrWhiteSpace(searchText))
             url += $"&search={Uri.EscapeDataString(searchText)}";
@@ -89,7 +89,7 @@ public class PromptService : IPromptService
             department_id = departmentId
         });
         var content = new StringContent(body, System.Text.Encoding.UTF8, "application/json");
-        var response = await _httpClient.PostAsync($"{BaseUrl}/api/prompts", content);
+        var response = await _httpClient.PostAsync($"{BaseUrl}/prompts", content);
         if (!response.IsSuccessStatusCode)
             return "Error al crear el prompt";
         var result = await response.Content.ReadFromJsonAsync<PromptApiResponse>(_jsonOptions);
@@ -100,7 +100,7 @@ public class PromptService : IPromptService
     {
         var body = JsonSerializer.Serialize(new { user_id = userId, comment });
         var content = new StringContent(body, System.Text.Encoding.UTF8, "application/json");
-        var response = await _httpClient.PostAsync($"{BaseUrl}/api/prompts/{promptId}/comment", content);
+        var response = await _httpClient.PostAsync($"{BaseUrl}/prompts/{promptId}/comment", content);
         if (!response.IsSuccessStatusCode)
             return "Error al agregar el comentario";
         var result = await response.Content.ReadFromJsonAsync<PromptApiResponse>(_jsonOptions);
@@ -111,7 +111,7 @@ public class PromptService : IPromptService
     {
         var body = JsonSerializer.Serialize(new { user_id = userId });
         var content = new StringContent(body, System.Text.Encoding.UTF8, "application/json");
-        var response = await _httpClient.PostAsync($"{BaseUrl}/api/prompts/{promptId}/save", content);
+        var response = await _httpClient.PostAsync($"{BaseUrl}/prompts/{promptId}/save", content);
         if (!response.IsSuccessStatusCode)
             return "Error al guardar el prompt";
         var result = await response.Content.ReadFromJsonAsync<PromptApiResponse>(_jsonOptions);
@@ -122,7 +122,7 @@ public class PromptService : IPromptService
     {
         var body = JsonSerializer.Serialize(new { user_id = userId, rating });
         var content = new StringContent(body, System.Text.Encoding.UTF8, "application/json");
-        var response = await _httpClient.PostAsync($"{BaseUrl}/api/prompts/{promptId}/rate", content);
+        var response = await _httpClient.PostAsync($"{BaseUrl}/prompts/{promptId}/rate", content);
         if (!response.IsSuccessStatusCode)
             return "Error al calificar el prompt";
         var result = await response.Content.ReadFromJsonAsync<PromptApiResponse>(_jsonOptions);

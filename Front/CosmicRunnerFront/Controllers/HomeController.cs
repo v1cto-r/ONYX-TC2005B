@@ -20,6 +20,10 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
+        var currentUserId = GetCurrentUserId();
+        if (currentUserId is not null)
+            return RedirectToAction("Index", "Inicio");
+        
         return View();
     }
 
@@ -32,8 +36,15 @@ public class HomeController : Controller
         {
             return RedirectToAction("Index", "Home");
         }
+        Console.WriteLine("User id after login is: "+userId);
+        
         HttpContext.Session.SetInt32(CurrentUserSessionKey, userId);
         return RedirectToAction("Index", "Inicio");
+    }
+    
+    private int? GetCurrentUserId()
+    {
+        return HttpContext.Session.GetInt32(CurrentUserSessionKey);
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
