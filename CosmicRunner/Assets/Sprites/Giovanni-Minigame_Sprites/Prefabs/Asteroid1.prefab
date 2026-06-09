@@ -144,7 +144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4a24ff7d5a82ba4b88c5d60c4d87b83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Obstaculo
-  puntosDeVida: 2
+  puntosDeVida: 1
 --- !u!50 &6982203008805023482
 Rigidbody2D:
   serializedVersion: 5

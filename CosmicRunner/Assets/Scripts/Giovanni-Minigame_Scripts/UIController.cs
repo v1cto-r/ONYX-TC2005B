@@ -21,6 +21,9 @@ namespace Gio.Minigame
 
         public GameObject marcoSuperior;
         public GameObject marcoInferior;
+
+        public GameObject panelSuperior;
+        public GameObject panelInferior;
         
         private void Start()
         {
@@ -34,6 +37,8 @@ namespace Gio.Minigame
 
             if (marcoSuperior != null) marcoSuperior.SetActive(false);
             if (marcoInferior != null) marcoInferior.SetActive(false);
+            if (panelSuperior != null) panelSuperior.SetActive(false);
+            if (panelInferior != null) panelInferior.SetActive(false);
 
             StartCoroutine(CicloDeAtaques());
         }
@@ -77,11 +82,16 @@ namespace Gio.Minigame
 
             if (marcoSuperior != null) marcoSuperior.SetActive(true);
             if (marcoInferior != null) marcoInferior.SetActive(true);
+            if (panelSuperior != null) panelSuperior.SetActive(true);
+            if (panelInferior != null) panelInferior.SetActive(true);
+            
             
             yield return new WaitForSeconds(tiempoDecision);
 
             if (marcoSuperior != null) marcoSuperior.SetActive(false);
             if (marcoInferior != null) marcoInferior.SetActive(false);
+            if (panelSuperior != null) panelSuperior.SetActive(false);
+            if (panelInferior != null) panelInferior.SetActive(false);
 
             textoZonaSuperior.text = "";
             textoZonaInferior.text = "";
