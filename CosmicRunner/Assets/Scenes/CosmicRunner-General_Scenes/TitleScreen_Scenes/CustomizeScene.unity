@@ -1756,6 +1756,8 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: aa1899bc9c524e66bab37821775b857b, type: 3}
   - assetId: 4
     sprite: {fileID: 21300000, guid: f9cdc9420d784e58bfd021946386f9a1, type: 3}
+  - assetId: 0
+    sprite: {fileID: 21300000, guid: ce7b3baa5bac4c5f908f345eea062c67, type: 3}
   iconSprites:
   - assetId: 5
     sprite: {fileID: 21300000, guid: ae38ac5a9e2bab44c9f68cc8d28228ca, type: 3}
