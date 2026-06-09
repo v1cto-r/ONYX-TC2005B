@@ -32,7 +32,7 @@ def obtener_perfil_usuario(user_id):
 def obtener_departamentos():
     conexion = get_db_connection()
     cursor = conexion.cursor(dictionary=True)
-    cursor.execute("SELECT department_id, name FROM Departments")
+    cursor.execute("SELECT department_id, name FROM departments")
     resultados = cursor.fetchall()
     cursor.close()
     conexion.close()
