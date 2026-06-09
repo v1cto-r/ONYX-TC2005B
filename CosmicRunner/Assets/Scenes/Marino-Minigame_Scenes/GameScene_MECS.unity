@@ -8788,6 +8788,11 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 3.96, y: 7}
   m_EdgeRadius: 0
+--- !u!1 &1674677755 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8615933802089481712, guid: 4e26fae17fb37463cba07a7e914dc69d, type: 3}
+  m_PrefabInstance: {fileID: 1228552754938000018}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1691785280
 GameObject:
   m_ObjectHideFlags: 0
@@ -10444,6 +10449,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 335112819957284952, guid: 4e26fae17fb37463cba07a7e914dc69d, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: b07b296981ea548d9956fc1c17dfeeae, type: 2}
     - target: {fileID: 1637019315690879527, guid: 4e26fae17fb37463cba07a7e914dc69d, type: 3}
       propertyPath: groundTilemap
       value: 
@@ -10499,19 +10508,42 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8615933802089481712, guid: 4e26fae17fb37463cba07a7e914dc69d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1228552754938000028}
   m_SourcePrefab: {fileID: 100100000, guid: 4e26fae17fb37463cba07a7e914dc69d, type: 3}
 --- !u!114 &1228552754938000022 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1637019315690879527, guid: 4e26fae17fb37463cba07a7e914dc69d, type: 3}
   m_PrefabInstance: {fileID: 1228552754938000018}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1674677755}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0c991fc7a4a2b41b98967d907e0044b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerControl
+--- !u!114 &1228552754938000028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1674677755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e0911e598fb64dfb9857e376d3562ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MECS.MarinoPlayerSkinLoader
+  loadFromApi: 1
+  apiBaseUrl: https://jorge.onyx.14082006.xyz
+  defaultUserId: 1
+  defaultBlueController: {fileID: 9100000, guid: b07b296981ea548d9956fc1c17dfeeae, type: 2}
+  yellowController: {fileID: 9100000, guid: 1352b70f4c8894c90a5f91fcb378e621, type: 2}
+  redController: {fileID: 9100000, guid: bf6a2d744b01240a5bd111ca59a03cab, type: 2}
+  pinkController: {fileID: 9100000, guid: 651e0d960a8494e7596774db6a89deed, type: 2}
+  greenController: {fileID: 9100000, guid: eb756161c72bd4a3bb236cf8c3f1ad5a, type: 2}
 --- !u!1001 &1466399841484500291
 PrefabInstance:
   m_ObjectHideFlags: 0
