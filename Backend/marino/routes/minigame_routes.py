@@ -47,4 +47,5 @@ def post_agregar_creditos_marinominigame():
         return jsonify(mensaje), 201
 
     except Exception as e:
+        print(str(e))
         return jsonify({"error": str(e)}), 500
