@@ -7,7 +7,7 @@ def obtener_productos_tienda(usuario_id):
 
     consulta_usuario = """
         SELECT user_id, username, credits
-        FROM Users
+        FROM users
         WHERE user_id = %s
     """
 
@@ -34,10 +34,10 @@ def obtener_productos_tienda(usuario_id):
                 WHEN ua.asset_id IS NULL THEN FALSE
                 ELSE TRUE
             END AS purchased
-        FROM Assets a
-        INNER JOIN Assets_Type at ON a.asset_type_id = at.asset_type_id
-        INNER JOIN Jorge_Store_AssetDetails d ON a.asset_id = d.asset_id
-        LEFT JOIN Users_Assets ua
+        FROM assets a
+        INNER JOIN assets_type at ON a.asset_type_id = at.asset_type_id
+        INNER JOIN jorge_store_assetdetails d ON a.asset_id = d.asset_id
+        LEFT JOIN users_assets ua
             ON a.asset_id = ua.asset_id
             AND ua.user_id = %s
         WHERE d.available = TRUE
@@ -81,7 +81,7 @@ def comprar_producto(usuario_id, asset_id):
     try:
         consulta_usuario = """
             SELECT user_id, username, credits
-            FROM Users
+            FROM users
             WHERE user_id = %s
         """
 
@@ -100,8 +100,8 @@ def comprar_producto(usuario_id, asset_id):
                 a.name,
                 a.cost,
                 d.available
-            FROM Assets a
-            INNER JOIN Jorge_Store_AssetDetails d ON a.asset_id = d.asset_id
+            FROM assets a
+            INNER JOIN jorge_store_assetdetails d ON a.asset_id = d.asset_id
             WHERE a.asset_id = %s
         """
 
@@ -122,7 +122,7 @@ def comprar_producto(usuario_id, asset_id):
 
         consulta_compra = """
             SELECT user_id, asset_id
-            FROM Users_Assets
+            FROM users_assets
             WHERE user_id = %s AND asset_id = %s
         """
 
@@ -146,18 +146,18 @@ def comprar_producto(usuario_id, asset_id):
         nuevos_creditos = usuario["credits"] - producto["cost"]
 
         actualizar_creditos = """
-            UPDATE Users
+            UPDATE users
             SET credits = %s
             WHERE user_id = %s
         """
 
         insertar_asset_usuario = """
-            INSERT INTO Users_Assets (user_id, asset_id, equipped)
+            INSERT INTO users_assets (user_id, asset_id, equipped)
             VALUES (%s, %s, FALSE)
         """
 
         insertar_transaccion = """
-            INSERT INTO Transactions (amount, user_id)
+            INSERT INTO transactions (amount, user_id)
             VALUES (%s, %s)
         """
 

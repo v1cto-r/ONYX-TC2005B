@@ -7,7 +7,7 @@ def obtener_pregunta_aleatoria():
 
     consulta_pregunta = """
         SELECT question_id, question_text
-        FROM Jorge_Questions
+        FROM jorge_questions
         WHERE active = TRUE
         ORDER BY RAND()
         LIMIT 1
@@ -23,7 +23,7 @@ def obtener_pregunta_aleatoria():
 
     consulta_respuestas = """
         SELECT answer_id, answer_text, is_correct
-        FROM Jorge_Answers
+        FROM jorge_answers
         WHERE question_id = %s
         ORDER BY RAND()
     """
