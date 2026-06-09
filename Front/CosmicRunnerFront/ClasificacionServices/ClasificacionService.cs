@@ -15,6 +15,9 @@ namespace Front.Services
 
         public async Task<List<UsuarioRanking>> ObtenerClasificacionGlobal()
         {
+            try
+        {
+     
             var url = "https://nicte.onyx.14082006.xyz/clasificacion/global";
             var response = await _httpClient.GetAsync(url);
 
@@ -36,8 +39,22 @@ namespace Front.Services
                 Posicion   = u.Posicion
             }).ToList();
         }
+        catch (HttpRequestException)
+        {
+            return new List<UsuarioRanking>();
+        }
+        catch (TaskCanceledException)
+        {
+            return new List<UsuarioRanking>();
+        }
+
+        }
+
+
 
         public async Task<List<UsuarioRanking>> ObtenerClasificacionDepartamental(string departamento)
+        {
+            try
         {
             var url = $"https://nicte.onyx.14082006.xyz/clasificacion/departamental/{departamento}";
             var response = await _httpClient.GetAsync(url);
@@ -58,6 +75,15 @@ namespace Front.Services
                 Picture    = u.Picture,
                 Posicion   = u.Posicion
             }).ToList();
+        }
+        catch (HttpRequestException)
+        {
+            return new List<UsuarioRanking>();
+        }
+        catch (TaskCanceledException)
+        {
+            return new List<UsuarioRanking>();
+        }
         }
 
         private class ApiUsuario
