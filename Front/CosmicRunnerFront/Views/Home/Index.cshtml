@@ -1,9 +1,17 @@
-﻿@{
+﻿@model CosmicRunnerFront.Models.LoginViewModel
+
+@{
     ViewData["Title"] = "Login";
+    
 }
 
 <div class="d-flex justify-content-center align-items-center" style="min-height: 60vh;">
     <form asp-controller="Home" asp-action="Login" method="post">
-        <button type="submit">LogIn</button>
+        <label>Correo</label>
+        <input placeholder="juan@whirlpool.com" asp-for="email" type="email"/>
+        <label>Contraseña</label>
+        <input placeholder="Contraseña" asp-for="password" type="password"/>
+        
+        <button type="submit">Iniciar Sesión</button>
     </form>
 </div>

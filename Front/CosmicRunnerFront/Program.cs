@@ -1,4 +1,5 @@
 using CosmicRunnerFront.Services;
+using CosmicRunnerFront.Services.Login;
 using CosmicRunnerFront.Services.Tienda;
 using CosmicRunnerFront.Services.Usuario;
 using CosmicRunnerFront.Services.Prompts;
@@ -60,6 +61,13 @@ builder.Services.AddHttpClient<IPromptService, PromptService>()
     {
         ServerCertificateCustomValidationCallback =
         HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+    });
+
+builder.Services.AddHttpClient<ILoginService, LoginService>()
+    .ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler
+    {
+        ServerCertificateCustomValidationCallback =
+            HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
     });
 
 var app = builder.Build();
