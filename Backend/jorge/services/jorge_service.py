@@ -52,7 +52,7 @@ def agregar_creditos_jorge_minigame(user_id, credits_earned):
     conexion = obtener_conexion()
     cursor = conexion.cursor(dictionary=True)
 
-    cursor.callproc("AgregarCreditosJorgeMinigame", [user_id, credits_earned])
+    cursor.callproc("AgregarCreditosMarinoMinigame", [user_id, credits_earned])
 
     conexion.commit()
 
