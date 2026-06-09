@@ -1931,7 +1931,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93b0c7b3b60dfbd429027067d82adf73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::JorgeGame.JorgeCreditsApi
-  apiUrl: https://127.0.0.1:5057/api/jorge/minigame/creditos
+  apiUrl: https://jorge.onyx.14082006.xyz/api/jorge/minigame/creditos
   userId: 1
 --- !u!4 &1804003336
 Transform:

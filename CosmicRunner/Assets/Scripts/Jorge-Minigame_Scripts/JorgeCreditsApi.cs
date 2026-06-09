@@ -11,7 +11,7 @@ namespace JorgeGame
         public string apiUrl = "https://jorge.onyx.14082006.xyz/api/jorge/minigame/creditos";
 
         [Header("Usuario")]
-        public int userId = 1;
+        public int userId;
 
         private bool creditsSent;
 
@@ -23,6 +23,7 @@ namespace JorgeGame
             }
 
             creditsSent = true;
+            userId = PlayerPrefs.GetInt("UserId", 1);
             StartCoroutine(PostCredits(creditsEarned));
         }
 

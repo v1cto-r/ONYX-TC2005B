@@ -22,7 +22,7 @@ public class WinUI : MonoBehaviour
     {
         SFXManager.Instance.WinSound();
         finalWinScoreText.text = GeneralUI.currentCredits.ToString();
-        int userId = PlayerPrefs.GetInt("UserId");
+        int userId = PlayerPrefs.GetInt("UserId", 1);
         StartCoroutine(AddCredits(userId, GeneralUI.currentCredits));
     }
 

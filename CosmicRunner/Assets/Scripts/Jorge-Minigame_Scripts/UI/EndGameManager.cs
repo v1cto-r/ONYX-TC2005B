@@ -23,6 +23,7 @@ namespace JorgeGame
             if (isVictory)
             {
                 SFXManager.instance.PlaySFX(SFXManager.instance.winSound, 0.2f);
+                MinigameProgress.MarkBeaten(MinigameProgress.JorgeId);
 
                 int coins = GameControl.Instance.coins;
 

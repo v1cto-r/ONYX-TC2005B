@@ -42,6 +42,7 @@ namespace MECS
                 // Mensaje de victoria cuando se completo el objetivo
                 resultText.text = "VICTORIA";
                 sfxManager.PlayWinSound();
+                MinigameProgress.MarkBeaten(MinigameProgress.MarinoId);
                 
             }
 

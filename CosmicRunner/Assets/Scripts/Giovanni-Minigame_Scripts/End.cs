@@ -26,6 +26,7 @@ public class End : MonoBehaviour
         {
             resultado.text = "VICTORIA";
             if (SFXManager.Instance != null) SFXManager.Instance.PlayWinSound();
+            MinigameProgress.MarkBeaten(MinigameProgress.GiovanniId);
         }
         else
         {
@@ -35,7 +36,7 @@ public class End : MonoBehaviour
         int creditosObtenidos = PlayerPrefs.GetInt("credits");
         creditsText.text = "+" + PlayerPrefs.GetInt("credits");
 
-        int userId = PlayerPrefs.GetInt("UserId");
+        int userId = PlayerPrefs.GetInt("UserId", 1);
         StartCoroutine(AddCredits(userId, creditosObtenidos));
     }
 

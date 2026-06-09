@@ -19,6 +19,7 @@ public class EndGameController : MonoBehaviour
         if (PlayerPrefs.GetInt("result") == 1)
         {
             resultText.text = "VICTORIA";
+            MinigameProgress.MarkBeaten(MinigameProgress.VictorId);
         }
         else
         {

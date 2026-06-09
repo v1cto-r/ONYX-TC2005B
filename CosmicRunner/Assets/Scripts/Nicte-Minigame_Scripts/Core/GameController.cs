@@ -93,6 +93,7 @@ public class GameController : MonoBehaviour
     void WinGame()
     {
         Time.timeScale=1f;
+        MinigameProgress.MarkBeaten(MinigameProgress.NicteId);
         SceneManager.LoadScene(VictoryScene);
     }
 
