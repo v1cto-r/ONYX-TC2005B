@@ -24,11 +24,20 @@
 <section class="usuario-panel" aria-label="Panel de perfil">
     @if (Model.EsPerfilPropio)
     {
-        <a class="usuario-panel-action" asp-controller="Usuario" asp-action="Configuracion" aria-label="Configuración">
-            <img src="~/assets/icons/gear.svg" alt="" />
-            <span>Configuración</span>
-        </a>
+        <div class="usuario-panel-action-parent">
+            <a class="usuario-panel-action" asp-controller="Usuario" asp-action="Configuracion" aria-label="Configuración">
+                <img src="~/assets/icons/gear.svg" alt="" />
+                <span>Configuración</span>
+            </a>
+        
+            <a class="usuario-panel-action-2" asp-controller="Usuario" asp-action="Logout" aria-label="Salir">
+                <img src="~/assets/icons/log-out.svg" alt="" />
+                <span>Salir</span>
+            </a>
+        </div>
     }
+    
+    
 
     <div class="usuario-top">
         <div class="usuario-avatar-shell">

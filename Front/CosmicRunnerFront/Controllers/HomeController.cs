@@ -34,7 +34,8 @@ public class HomeController : Controller
 
         if (userId == -1)
         {
-            return RedirectToAction("Index", "Home");
+            ModelState.AddModelError(string.Empty, "Credenciales inválidas.");
+            return View("Index", model);
         }
         Console.WriteLine("User id after login is: "+userId);
         

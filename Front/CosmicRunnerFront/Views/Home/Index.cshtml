@@ -1,17 +1,38 @@
-﻿@model CosmicRunnerFront.Models.LoginViewModel
-
+@model CosmicRunnerFront.Models.LoginViewModel
 @{
-    ViewData["Title"] = "Login";
-    
+    Layout = null;
+    ViewData["Title"] = "Iniciar Sesión";
 }
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Cosmic Runner</title>
+    <link rel="stylesheet" href="~/css/login.css" asp-append-version="true" />
+</head>
+<body class="login-page">
+    <div class="login-card">
+        <img src="~/assets/logos/whirlpool.webp" alt="Whirlpool" class="login-logo" />
+        <h1 class="login-title">Iniciar Sesión</h1>
 
-<div class="d-flex justify-content-center align-items-center" style="min-height: 60vh;">
-    <form asp-controller="Home" asp-action="Login" method="post">
-        <label>Correo</label>
-        <input placeholder="juan@whirlpool.com" asp-for="email" type="email"/>
-        <label>Contraseña</label>
-        <input placeholder="Contraseña" asp-for="password" type="password"/>
-        
-        <button type="submit">Iniciar Sesión</button>
-    </form>
-</div>
+        <form asp-controller="Home" asp-action="Login" method="post" class="login-form">
+            <div asp-validation-summary="ModelOnly" class="login-error"></div>
+
+            <div class="login-field">
+                <label asp-for="email">Correo</label>
+                <input asp-for="email" type="email" placeholder="juan@whirlpool.com" />
+                <span asp-validation-for="email" class="field-error"></span>
+            </div>
+
+            <div class="login-field">
+                <label asp-for="password">Contraseña</label>
+                <input asp-for="password" type="password" placeholder="Contraseña" />
+                <span asp-validation-for="password" class="field-error"></span>
+            </div>
+
+            <button type="submit" class="login-button">Entrar</button>
+        </form>
+    </div>
+</body>
+</html>
