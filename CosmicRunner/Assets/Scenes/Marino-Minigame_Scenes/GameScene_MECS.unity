@@ -9872,10 +9872,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ce4e2e268c544517b8c4e11814c1ae2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameControl
-  promptsToWin: 8
+  promptsToWin: 2
   currentPrompts: 0
   currentScore: 0
-  totalGameTime: 150
+  totalGameTime: 25
   remainingTime: 0
   uiControl: {fileID: 1439094378}
   sfxManager: {fileID: 611414052}
