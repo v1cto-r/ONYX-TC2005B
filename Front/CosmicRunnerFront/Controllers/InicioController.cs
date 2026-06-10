@@ -24,7 +24,6 @@ public class InicioController : Controller
 
         var viewModel = new InicioViewModel();
         
-        // Pasamos el ID dinámico con .Value ya que garantizamos que no es nulo
         viewModel.UsuarioActual = await _inicioApiService.GetUsuarioByIdAsync(currentUserId.Value);
         viewModel.ListaIdeas = await _inicioApiService.GetIdeasAsync(currentUserId.Value);
 

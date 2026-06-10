@@ -15,7 +15,7 @@
         <form method="post" action="/Inicio/CrearIdea">
             <div class="mb-4">
                 <label class="form-label fw-bold text-muted small">Título del Proyecto</label>
-                <input type="text" class="form-control form-control-lg border border-secondary rounded-3 fs-6" asp-for="titulo" placeholder="Ej. Optimización de Planta...">
+                <input type="text" class="form-control form-control-lg border border-secondary rounded-3 fs-6" asp-for="titulo" placeholder="Optimización de Planta...">
                 <span asp-validation-for="titulo" class="text-danger small fw-bold"></span>
             </div>
             
@@ -23,14 +23,14 @@
                 <div class="col-md-6">
                     <label class="form-label fw-bold text-muted small">Departamento de Origen</label>
                     <select class="form-select border border-secondary rounded-3 text-dark" asp-for="departamento_id" asp-items="Model.CatalogoDepartamentos">
-                        <option value="">-- Selecciona un departamento --</option>
+                        <option value="">- Selecciona un departamento -</option>
                     </select>
                     <span asp-validation-for="departamento_id" class="text-danger small fw-bold"></span>
                 </div>
                 <div class="col-md-6 mt-3 mt-md-0">
                     <label class="form-label fw-bold text-muted small">Área de Impacto</label>
                     <select class="form-select border border-secondary rounded-3 text-dark" asp-for="area_impacto_id" asp-items="Model.CatalogoAreasImpacto">
-                        <option value="">-- Selecciona un area --</option>
+                        <option value="">- Selecciona un área -</option>
                     </select>
                     <span asp-validation-for="area_impacto_id" class="text-danger small fw-bold"></span>
                 </div>
@@ -38,17 +38,17 @@
 
             <div class="mb-4">
                 <label class="form-label fw-bold text-muted small">Resumen de la Idea (3 puntos)</label>
-                <input type="text" class="form-control border border-secondary mb-2 rounded-3" asp-for="punto_1" placeholder="1. Punto clave...">
+                <input type="text" class="form-control border border-secondary mb-2 rounded-3" asp-for="punto_1" placeholder="1. La necesidad...">
                 <span asp-validation-for="punto_1" class="text-danger small fw-bold d-block mb-2"></span>
                 
-                <input type="text" class="form-control border border-secondary mb-2 rounded-3" asp-for="punto_2" placeholder="2. Punto clave...">
+                <input type="text" class="form-control border border-secondary mb-2 rounded-3" asp-for="punto_2" placeholder="2. La solución...">
                 <span asp-validation-for="punto_2" class="text-danger small fw-bold d-block mb-2"></span>
                 
-                <input type="text" class="form-control border border-secondary mb-3 rounded-3" asp-for="punto_3" placeholder="3. Punto clave...">
+                <input type="text" class="form-control border border-secondary mb-3 rounded-3" asp-for="punto_3" placeholder="3. El impacto...">
                 <span asp-validation-for="punto_3" class="text-danger small fw-bold d-block mb-3"></span>
                 
                 <label class="form-label fw-bold text-muted small mt-2">Descripción Detallada</label>
-                <textarea class="form-control border border-secondary rounded-3" asp-for="descripcion" rows="4" placeholder="Explica tu propuesta..."></textarea>
+                <textarea class="form-control border border-secondary rounded-3" asp-for="descripcion" rows="4" placeholder="La propuesta consiste en..."></textarea>
                 <span asp-validation-for="descripcion" class="text-danger small fw-bold"></span>
             </div>
             
