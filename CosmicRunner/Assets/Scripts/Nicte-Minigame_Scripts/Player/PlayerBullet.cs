@@ -28,7 +28,7 @@ public class PlayerBullet : MonoBehaviour
         {
             Destroy(gameObject);
             SFXManager.Instance.DamageSound();
-            collision.gameObject.GetComponent<EnemyHealth>().TakeDamage(1);
+            collision.gameObject.GetComponent<EnemyHealth>().TakeDamage(5);
             comboUI.UpdateCombo(comboUI.currentCombo + 1);
             generalUI.UpdateCredits(100);
         }else{
