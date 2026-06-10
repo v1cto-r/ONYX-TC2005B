@@ -2048,9 +2048,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01b6941cfde902b4387baa380a8c62c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DeadZone
-  damageCooldown: 0.5
-  allowSafeTop: 1
-  safeTopMargin: 0.15
 --- !u!61 &192044200
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3755,9 +3752,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01b6941cfde902b4387baa380a8c62c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DeadZone
-  damageCooldown: 0.5
-  allowSafeTop: 1
-  safeTopMargin: 0.15
 --- !u!61 &358751898
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4602,9 +4596,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01b6941cfde902b4387baa380a8c62c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DeadZone
-  damageCooldown: 0.5
-  allowSafeTop: 1
-  safeTopMargin: 0.15
 --- !u!61 &503594129
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -6246,9 +6237,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01b6941cfde902b4387baa380a8c62c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DeadZone
-  damageCooldown: 0.5
-  allowSafeTop: 1
-  safeTopMargin: 0.15
 --- !u!61 &715348203
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -7634,7 +7622,7 @@ Transform:
   m_GameObject: {fileID: 831957252}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 33.22493, y: 4.68777, z: 0}
+  m_LocalPosition: {x: 24.57, y: 0.37, z: 0}
   m_LocalScale: {x: 0.31568438, y: 0.31568438, z: 0.31568438}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8519,9 +8507,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01b6941cfde902b4387baa380a8c62c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DeadZone
-  damageCooldown: 0.5
-  allowSafeTop: 1
-  safeTopMargin: 0.15
 --- !u!61 &972292133
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -9128,9 +9113,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01b6941cfde902b4387baa380a8c62c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DeadZone
-  damageCooldown: 0.5
-  allowSafeTop: 1
-  safeTopMargin: 0.15
 --- !u!61 &1000755035
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -9854,9 +9836,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01b6941cfde902b4387baa380a8c62c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DeadZone
-  damageCooldown: 0.5
-  allowSafeTop: 1
-  safeTopMargin: 0.15
 --- !u!61 &1063890668
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -12117,9 +12096,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01b6941cfde902b4387baa380a8c62c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DeadZone
-  damageCooldown: 0.5
-  allowSafeTop: 1
-  safeTopMargin: 0.15
 --- !u!61 &1497555818
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -13019,9 +12995,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01b6941cfde902b4387baa380a8c62c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DeadZone
-  damageCooldown: 0.5
-  allowSafeTop: 1
-  safeTopMargin: 0.15
 --- !u!61 &1573968376
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -13647,9 +13620,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01b6941cfde902b4387baa380a8c62c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DeadZone
-  damageCooldown: 0.5
-  allowSafeTop: 1
-  safeTopMargin: 0.15
 --- !u!61 &1660656915
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -14445,9 +14415,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01b6941cfde902b4387baa380a8c62c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DeadZone
-  damageCooldown: 0.5
-  allowSafeTop: 0
-  safeTopMargin: 0.15
 --- !u!61 &1776016887
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -14614,9 +14581,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01b6941cfde902b4387baa380a8c62c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DeadZone
-  damageCooldown: 0.5
-  allowSafeTop: 1
-  safeTopMargin: 0.15
 --- !u!61 &1784930868
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -14752,11 +14716,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6780372324027429252, guid: a8fb6ccd4e3489a4b9fcbb80e156d376, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 137.98
+      value: 28.48
       objectReference: {fileID: 0}
     - target: {fileID: 6780372324027429252, guid: a8fb6ccd4e3489a4b9fcbb80e156d376, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 16.9
+      value: 9.6
       objectReference: {fileID: 0}
     - target: {fileID: 6780372324027429252, guid: a8fb6ccd4e3489a4b9fcbb80e156d376, type: 3}
       propertyPath: m_LocalPosition.z
@@ -16862,9 +16826,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01b6941cfde902b4387baa380a8c62c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DeadZone
-  damageCooldown: 0.5
-  allowSafeTop: 1
-  safeTopMargin: 0.15
 --- !u!61 &2130005404
 BoxCollider2D:
   m_ObjectHideFlags: 0
