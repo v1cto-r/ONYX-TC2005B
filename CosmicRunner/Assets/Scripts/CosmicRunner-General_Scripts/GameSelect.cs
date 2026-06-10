@@ -3,78 +3,24 @@ using UnityEngine.UI;
 
 public class GameSelect : MonoBehaviour
 {
-    private Button gioButton;
-    private Button victorButton;
-    private Button marinoButton;
-    private Button jorgeButton;
-    private Button nicteButton;
+    [Header("Buttons")]
+    [SerializeField] private Button gioButton;
+    [SerializeField] private Button victorButton;
+    [SerializeField] private Button marinoButton;
+    [SerializeField] private Button jorgeButton;
+    [SerializeField] private Button nicteButton;
 
-    private Image gioImage;
-    private Image victorImage;
-    private Image marinoImage;
-    private Image jorgeImage;
-    private Image nicteImage;
-
-    private Sprite lockedSprite;
-    private Sprite unlockedSprite;
+    [Header("Sprites")]
+    [SerializeField] private Sprite lockedSprite;
+    [SerializeField] private Sprite gioBeatenSprite;
+    [SerializeField] private Sprite victorBeatenSprite;
+    [SerializeField] private Sprite marinoBeatenSprite;
+    [SerializeField] private Sprite jorgeBeatenSprite;
+    [SerializeField] private Sprite nicteBeatenSprite;
 
     private void Start()
     {
-        CacheReferences();
         RefreshButtons();
-    }
-
-    private void CacheReferences()
-    {
-        gioButton = FindButton("Gio Button");
-        victorButton = FindButton("Victor Button");
-        marinoButton = FindButton("Marino Button");
-        jorgeButton = FindButton("Jorge Button");
-        nicteButton = FindButton("Nicte Button");
-
-        gioImage = GetButtonImage(gioButton);
-        victorImage = GetButtonImage(victorButton);
-        marinoImage = GetButtonImage(marinoButton);
-        jorgeImage = GetButtonImage(jorgeButton);
-        nicteImage = GetButtonImage(nicteButton);
-
-        lockedSprite = FindSprite("minigames_0");
-        unlockedSprite = FindSprite("minigames_1");
-    }
-
-    private Button FindButton(string objectName)
-    {
-        GameObject buttonObject = GameObject.Find(objectName);
-        if (buttonObject == null)
-        {
-            return null;
-        }
-
-        return buttonObject.GetComponent<Button>();
-    }
-
-    private Image GetButtonImage(Button button)
-    {
-        if (button == null)
-        {
-            return null;
-        }
-
-        return button.GetComponent<Image>();
-    }
-
-    private Sprite FindSprite(string spriteName)
-    {
-        Sprite[] sprites = Resources.FindObjectsOfTypeAll<Sprite>();
-        for (int i = 0; i < sprites.Length; i++)
-        {
-            if (sprites[i] != null && sprites[i].name == spriteName)
-            {
-                return sprites[i];
-            }
-        }
-
-        return null;
     }
 
     private void RefreshButtons()
@@ -85,33 +31,79 @@ public class GameSelect : MonoBehaviour
         bool jorgeBeaten = MinigameProgress.IsBeaten(MinigameProgress.JorgeId);
         bool nicteBeaten = MinigameProgress.IsBeaten(MinigameProgress.NicteId);
 
-        SetButtonState(gioButton, gioImage, true, gioBeaten);
-        SetButtonState(victorButton, victorImage, gioBeaten, victorBeaten);
-        SetButtonState(marinoButton, marinoImage, victorBeaten, marinoBeaten);
-        SetButtonState(jorgeButton, jorgeImage, marinoBeaten, jorgeBeaten);
-        SetButtonState(nicteButton, nicteImage, jorgeBeaten, nicteBeaten);
+        SetButtonState(gioButton, true, gioBeaten, gioBeatenSprite);
+        SetButtonState(victorButton, gioBeaten, victorBeaten, victorBeatenSprite);
+        SetButtonState(marinoButton, victorBeaten, marinoBeaten, marinoBeatenSprite);
+        SetButtonState(jorgeButton, marinoBeaten, jorgeBeaten, jorgeBeatenSprite);
+        SetButtonState(nicteButton, jorgeBeaten, nicteBeaten, nicteBeatenSprite);
     }
 
-    private void SetButtonState(Button button, Image image, bool isUnlocked, bool isBeaten)
+    private void SetButtonState(Button button, bool isUnlocked, bool isBeaten, Sprite beatenSprite)
     {
         if (button != null)
         {
             button.interactable = isUnlocked;
         }
 
+        Image image = GetSourceImage(button);
         if (image == null)
         {
             return;
         }
 
-        if (isBeaten && unlockedSprite != null)
+        if (isBeaten && beatenSprite != null)
         {
-            image.sprite = unlockedSprite;
+            image.sprite = beatenSprite;
         }
         else if (!isBeaten && lockedSprite != null)
         {
             image.sprite = lockedSprite;
         }
+    }
+
+    private Image GetSourceImage(Button button)
+    {
+        if (button == null)
+        {
+            return null;
+        }
+
+        return button.targetGraphic as Image;
+    }
+
+    private Sprite GetBeatenSprite(Image image)
+    {
+        if (image == null)
+        {
+            return null;
+        }
+
+        if (image == GetSourceImage(gioButton))
+        {
+            return gioBeatenSprite;
+        }
+
+        if (image == GetSourceImage(victorButton))
+        {
+            return victorBeatenSprite;
+        }
+
+        if (image == GetSourceImage(marinoButton))
+        {
+            return marinoBeatenSprite;
+        }
+
+        if (image == GetSourceImage(jorgeButton))
+        {
+            return jorgeBeatenSprite;
+        }
+
+        if (image == GetSourceImage(nicteButton))
+        {
+            return nicteBeatenSprite;
+        }
+
+        return null;
     }
 
     public void NicteMinigameButton()

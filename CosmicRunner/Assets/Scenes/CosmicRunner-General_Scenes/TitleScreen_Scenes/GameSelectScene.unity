@@ -1306,6 +1306,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d325d471fdb91483ba43cbb4bab52ae8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameSelect
+  gioButton: {fileID: 1972315444}
+  victorButton: {fileID: 1623172730}
+  marinoButton: {fileID: 2019738876}
+  jorgeButton: {fileID: 632693250}
+  nicteButton: {fileID: 1737952744}
+  lockedSprite: {fileID: 8805377049403718622, guid: 12a9d67dc543d4f07ac9229f35c2418e, type: 3}
+  gioBeatenSprite: {fileID: 6827942721731354850, guid: 12a9d67dc543d4f07ac9229f35c2418e, type: 3}
+  victorBeatenSprite: {fileID: 6827942721731354850, guid: 12a9d67dc543d4f07ac9229f35c2418e, type: 3}
+  marinoBeatenSprite: {fileID: 6827942721731354850, guid: 12a9d67dc543d4f07ac9229f35c2418e, type: 3}
+  jorgeBeatenSprite: {fileID: 6827942721731354850, guid: 12a9d67dc543d4f07ac9229f35c2418e, type: 3}
+  nicteBeatenSprite: {fileID: 6827942721731354850, guid: 12a9d67dc543d4f07ac9229f35c2418e, type: 3}
 --- !u!1 &1573506244
 GameObject:
   m_ObjectHideFlags: 0
