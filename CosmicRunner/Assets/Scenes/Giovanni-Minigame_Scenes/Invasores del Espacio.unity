@@ -2951,7 +2951,7 @@ MonoBehaviour:
   - {fileID: 1832452283}
   - {fileID: 1052338597}
   - {fileID: 38494623}
-  tiempoDePartidaMinutos: 3
+  tiempoDePartidaMinutos: 0.4
   textoTemporizador: {fileID: 1322904180}
   textoCreditosUI: {fileID: 1076690977}
   panelPausa: {fileID: 1133781929}
@@ -3523,8 +3523,8 @@ MonoBehaviour:
   prefabEnemigo: {fileID: 752732491456775513, guid: a7e7775fdb0884045a9a47872c182f14, type: 3}
   puntoAparicionSuperior: {fileID: 751379184}
   puntoAparicionInferior: {fileID: 1838459621}
-  tiempoDecision: 10
-  intervaloEntreAtaques: 13
+  tiempoDecision: 17
+  intervaloEntreAtaques: 3
   marcoSuperior: {fileID: 1288038057}
   marcoInferior: {fileID: 1451236235}
   panelSuperior: {fileID: 1684298583}
